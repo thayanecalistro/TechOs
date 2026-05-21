@@ -1,6 +1,6 @@
 # 🛠️ TechOs - Sistema de Ordem de Serviço
 
-Este é um projeto acadêmico desenvolvido em grupo para gerenciamento de ordens de serviço.
+Este é um projeto acadêmico de sistema Web, desenvolvido em grupo para gerenciamento de ordens de serviço.
 
 ## 👥 Integrantes do Grupo
 [Lovenita Roseme](lovenitaroseme)
