@@ -1,0 +1,55 @@
+/* style.css */
+body {
+    overflow-x: hidden;
+    background-color: #f8f9fa;
+}
+
+/* Estrutura da Sidebar */
+#sidebar-wrapper {
+    min-height: 100vh;
+    width: 250px;
+    margin-left: -250px; /* Começa escondida */
+    transition: margin 0.25s ease-out;
+    background-color: #212529; /* Cor escura estilosa */
+}
+
+#sidebar-wrapper .sidebar-heading {
+    padding: 0.875rem 1.25rem;
+    font-size: 1.2rem;
+    color: #fff;
+    border-bottom: 1px solid #343a40;
+}
+
+#sidebar-wrapper .list-group-item {
+    border: none;
+    padding: 12px 20px;
+    background-color: transparent;
+    color: #adbbc7;
+    transition: all 0.2s;
+}
+
+#sidebar-wrapper .list-group-item:hover {
+    background-color: #343a40;
+    color: #fff;
+}
+
+/* Quando a classe 'toggled' for ativada pelo JS, o menu aparece */
+#wrapper.toggled #sidebar-wrapper {
+    margin-left: 0;
+}
+
+/* Responsividade: Telas grandes mostram o menu por padrão */
+@media (min-width: 768px) {
+    #sidebar-wrapper {
+        margin-left: 0;
+    }
+    #wrapper.toggled #sidebar-wrapper {
+        margin-left: -250px;
+    }
+}
+
+/* Ajuste sutil nas setas dos submenus */
+.dropdown-toggle::after {
+    float: right;
+    margin-top: 8px;
+}

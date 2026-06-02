@@ -1,79 +1,105 @@
 <!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Dashboard com Sidebar PHP</title>
+    <!-- Bootstrap 5 CDN -->
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css" rel="stylesheet">
+    <!-- Ícones do Bootstrap -->
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.11.0/font/bootstrap-icons.css" rel="stylesheet">
+    <!-- Seu CSS Externo -->
+    <link rel="stylesheet" href="style.css">
+</head>
+<body>
 
-
-<html lang="pt-br">
-    <head>
-        <title>Menu lateral com submenus</title>
-        <meta charsed="UTF-8">
-
-        <link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet">
- 
-        <!--ICONES-->
-        <link rel="stylesheet" 
-        href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:opsz,wght,FILL,GRAD@24,400,0,0&icon_names=menu" />
+<div class="d-flex" id="wrapper">
+    
+    <!-- Sidebar -->
+    <div id="sidebar-wrapper">
+        <div class="sidebar-heading fw-bold">Meu App PHP</div>
         
-        
-        <!--JQUERY-->
-        <script src="https://code.jquery.com/jquery-3.7.1.js" integrity="sha256-eKhayi8LEQwp4NKxN+CfCh+3qOVUtJn3QNZ0TciWLP4=" crossorigin="anonymous"></script>
-        
-        <!--MEU ESTILO-->
-        <link rel="stylesheet" type="text/css" href="css/styles.css">
-    </head>
+        <div class="list-group list-group-flush">
+            <!-- Link Simples -->
+            <a href="#" class="list-group-item list-group-item-action">
+                <i class="bi bi-house-door me-2"></i> Início
+            </a>
 
-    <body>
-        <div class="btnAbre"><span class="material-symbols-outlined">menu</span>
+            <!-- Menu com Submenu 1 (Cadastros) -->
+            <a href="#submenuCadastros" data-bs-toggle="collapse" class="list-group-item list-group-item-action dropdown-toggle">
+                <i class="bi bi-pencil-square me-2"></i> Cadastros
+            </a>
+            <div class="collapse bg-dark" id="submenuCadastros">
+                <a href="?page=clientes" class="list-group-item list-group-item-action ps-4 text-white-50">Clientes</a>
+                <a href="?page=produtos" class="list-group-item list-group-item-action ps-4 text-white-50">Produtos</a>
+            </div>
+
+            <!-- Menu com Submenu 2 (Relatórios) -->
+            <a href="#submenuRelatorios" data-bs-toggle="collapse" class="list-group-item list-group-item-action dropdown-toggle">
+                <i class="bi bi-bar-chart-fill me-2"></i> Relatórios
+            </a>
+            <div class="collapse bg-dark" id="submenuRelatorios">
+                <a href="?page=vendas" class="list-group-item list-group-item-action ps-4 text-white-50">Vendas Mensais</a>
+                <a href="?page=estoque" class="list-group-item list-group-item-action ps-4 text-white-50">Giro de Estoque</a>
+            </div>
+
+            <!-- Outro Link Simples -->
+            <a href="#" class="list-group-item list-group-item-action">
+                <i class="bi bi-gear me-2"></i> Configurações
+            </a>
         </div>
-        <!--<script src="js/novo.js"></script>-->
-        <nav class="menuLateral">
-            <div class="titulo">Meu site <span class="material-icons btnFecha">close</span></div>
-            <ul>
-                <li><a href="#" class="link-menu" data-file="dashboard.html">Dashboard</a></li>
-                <li><a href="#" class="link-menu" data-file="os.html">Ordem de Servico</a></li>
-                <li><a href="#" class="link-menu" data-file="orcamento.html">Orcamento</a></li>
-                <li><a href="#" class="sudeste">Cliente<span class="material-icons seta1">arrow_right</span></a>
-                    <ul class="itensSudeste">
-                        <li><a href="#" class="link-menu" data-tela="tela-clientes">Gerenciar Lista</a></li>
-                        <li><a href="#">Aparelho</a></li>
-                    </ul>
-                </li>
-                <li><a href="#" class="nordeste">Funcionario<span class="material-icons seta2">arrow_right</span> </a>
-                    <!--PARA SUBMENU-->
-                    <ul class="itensNordeste">
-                        <li><a href="#">Pernambuco</a></li>
-                        <li><a href="#">Maranhão</a></li>
-                        <li><a href="#">Sergipe</a></li>
-                        <li><a href="#">Bahia</a></li>
-                    </ul>             
-                </li>
-                <li><a href="#" class="link-menu" data-tela="tela-estoque">Estoque</a></li>
-            </ul>           
+    </div>
+    <!-- /Sidebar -->
+
+    <!-- Conteúdo da Página -->
+    <div id="page-content-wrapper" class="w-100">
+        <!-- Navbar Superior com o botão de toggle -->
+        <nav class="navbar navbar-expand-lg navbar-light bg-white border-bottom px-4 py-3">
+            <button class="btn btn-outline-dark" id="menu-toggle">
+                <i class="bi bi-list fs-5"></i>
+            </button>
         </nav>
 
-        <main class="conteudo-principal" id="conteudo">
-            
-<!--            <section id="tela-dashboard" class="tela ativa">
-                <h1>Bem-vindo ao Dashboard</h1>
-                <div class="cards">
-                    <div class="card"><h3>Vendas</h3><p>R$ 15.000</p></div>
-                    <div class="card"><h3>Clientes</h3><p>120</p></div>
-                    <div class="card"><h3>Alertas</h3><p>3 pendentes</p></div>
-                </div>
-            </section>
-    
-            <section id="tela-orcamento" class="tela">
-                <h1>Orçamentos</h1>
-                <p>Gerencie aqui seus orçamentos pendentes e aprovados.</p>
-            </section>
-    
-            <section id="tela-os" class="tela">
-                <h1>Ordens de Serviço</h1>
-                <p>Lista de serviços em execução.</p>
-            </section>-->
-    
-        </main>
+        <!-- Área Central Dinâmica em PHP -->
+        <div class="container-fluid p-4">
+            <?php
+                // Um exemplo simples de como carregar as páginas dinamicamente no PHP
+                $page = isset($_GET['page']) ? $_GET['page'] : 'home';
+                
+                switch ($page) {
+                    case 'clientes':
+                        echo "<h2>Gestão de Clientes</h2><p>Aqui você lista os clientes do banco de dados.</p>";
+                        break;
+                    case 'produtos':
+                        echo "<h2>Lista de Produtos</h2><p>Gerencie seu estoque aqui.</p>";
+                        break;
+                    case 'vendas':
+                        echo "<h2>Relatório de Vendas</h2><p>Gráficos e tabelas de faturamento.</p>";
+                        break;
+                    default:
+                        echo "<h2>Bem-vindo ao Painel!</h2><p>Use o menu lateral para navegar pelo sistema.</p>";
+                        break;
+                }
+            ?>
+        </div>
+    </div>
+    <!-- /Conteúdo da Página -->
 
-        <script type="text/javascript" src="js/menu.js"></script>
-          
-    </body>
+</div>
 
+<!-- Bootstrap Bundle com Popper.js (Obrigatório para os submenus funcionarem) -->
+<script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js"></script>
+
+<!-- Script simples para abrir/fechar a barra lateral -->
+<script>
+    const menuToggle = document.getElementById('menu-toggle');
+    const wrapper = document.getElementById('wrapper');
+
+    menuToggle.addEventListener('click', event => {
+        event.preventDefault();
+        wrapper.classList.toggle('toggled');
+    });
+</script>
+
+</body>
 </html>
