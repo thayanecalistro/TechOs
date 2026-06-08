@@ -1,0 +1,134 @@
+/* Reset básico e Fontes */
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+    font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+}
+
+/* Container que envolve o conteúdo da página para dar espaçamento */
+.page-content {
+    display: flex;
+    flex-direction: column;
+    width: 100%;
+    padding: 20px;
+    min-height: 100vh;
+}
+
+/* Título Principal */
+.main-title {
+    text-align: center;
+    font-family: 'Georgia', serif;
+    font-size: 32px;
+    font-weight: normal;
+    letter-spacing: 1px;
+    margin-bottom: 25px;
+}
+
+/* Seção de Pesquisa */
+.search-fieldset {
+    border: 1px solid #334e68;
+    border-radius: 4px;
+    padding: 15px;
+    margin-bottom: 20px;
+    width: 100%;
+}
+
+.search-fieldset legend {
+    padding: 0 10px;
+    font-size: 14px;
+    color: #9fb3c8;
+}
+
+.search-box {
+    display: flex;
+    align-items: center;
+    gap: 15px;
+}
+
+.search-box label {
+    font-size: 14px;
+}
+
+.search-box input[type="text"] {
+    background-color: #102a43;
+    border: 1px solid #334e68;
+    color: white;
+    padding: 6px 10px;
+    border-radius: 4px;
+    width: 200px;
+    outline: none;
+}
+
+/* Botões Gerais */
+.btn {
+    padding: 6px 18px;
+    border: none;
+    border-radius: 3px;
+    cursor: pointer;
+    font-size: 14px;
+    transition: background 0.2s;
+}
+
+.btn-blue { background-color: #486581; color: white; }
+.btn-blue:hover { background-color: #627d98; }
+
+.btn-cyan { background-color: #2cb1bc; color: #102a43; font-weight: 500; }
+.btn-cyan:hover { background-color: #4ed0dc; }
+
+.btn-red { background-color: #d9534f; color: white; }
+.btn-red:hover { background-color: #e66d6a; }
+
+.btn-light-blue { background-color: #3b82f6; color: white; }
+.btn-light-blue:hover { background-color: #60a5fa; }
+
+/* Container da tabela fluído */
+.table-container {
+    border: 1px solid #486581;
+    border-radius: 4px;
+    background-color: #1a304a;
+    overflow-x: auto;
+    margin-bottom: 25px;
+    width: 100%;
+    flex-grow: 1;
+}
+
+/* Estilização da Tabela */
+.os-table {
+    width: 100%;
+    border-collapse: collapse;
+    text-align: center;
+    font-size: 13px;
+}
+
+.os-table th {
+    background-color: #62b6cb;
+    color: #102a43;
+    padding: 10px;
+    font-weight: 600;
+}
+
+.os-table td {
+    padding: 10px;
+    border-bottom: 1px solid #243b53;
+}
+
+/* Cores Alternadas das Linhas */
+.os-table tr:nth-child(odd) td {
+    background-color: #3b4f66;
+    color: #ffffff;
+}
+
+.os-table tr:nth-child(even) td {
+    background-color: #fffbc8;
+    color: #333333;
+}
+
+/* Rodapé com botões de ação */
+.footer-actions {
+    display: flex;
+    justify-content: center;
+    gap: 15px;
+    width: 100%;
+    margin-top: auto;
+}
