@@ -5,7 +5,7 @@ $clientes = [];
 $marcas   = [];
 
 // 2. Chama o seu arquivo de conexão
-require_once('php/conexao.php');
+require_once('includes/conexao.php');
 
 // 3. Busca os Clientes
 $resultadoClientes = mysqli_query($conn, "SELECT idCliente, nomeCliente FROM cliente ORDER BY nomeCliente ASC");
