@@ -69,27 +69,31 @@ body.collapsed {
 
 /* Logo Brand */
 .sidebar-brand {
-    padding: 15px;
-    font-size: 18px;
-    font-weight: 400;
-    border-bottom: 1px solid #4b545c;
     display: flex;
     align-items: center;
     gap: 10px;
-    color: #fff;
-    white-space: nowrap;
+    padding: 15px;
 }
 .brand-icon {
-    background: #fff;
-    color: var(--sidebar-bg);
-    border-radius: 50%;
-    width: 30px;
-    height: 30px;
+    width: 35px;
+    height: 35px;
     display: flex;
     align-items: center;
     justify-content: center;
+    overflow: hidden;
+}
+
+.brand-icon img {
+    width: 35px !important;
+    height: 35px !important;
+    object-fit: contain !important; /*ajustar a imagem sem distorcer ou esticar*/
+}
+
+.sidebar-brand span {
+    font-size: 1.1rem;
     font-weight: bold;
-    min-width: 30px;
+    color: #62b6cb;
+    white-space: nowrap; /*evita que o teto quebre linha se o menu encolher*/
 }
 
 /* Perfil do Usuário */
