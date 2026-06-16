@@ -73,7 +73,7 @@ CREATE TABLE `cliente` (
 
 CREATE TABLE `clientes` (
   `idCliente` int(11) NOT NULL COMMENT 'Número de identificação do cliente',
-  `nomeCliente` varchar(50) NOT NULL COMMENT 'Nome do cliente que será cadastrado ',
+  `nomeCliente` varchar(150) NOT NULL COMMENT 'Nome do cliente que será cadastrado ',
   `cpfCliente` varchar(15) NOT NULL COMMENT 'CPF completo do cliente',
   `telefoneCliente` varchar(20) NOT NULL COMMENT 'O número para contato com o cliente',
   `cepCliente` varchar(10) NOT NULL COMMENT 'O CEP para identificar o endereço do cliente',
