@@ -5,6 +5,7 @@ ini_set('display_errors', 1);
 ini_set('display_startup_errors', 1);
 error_reporting(E_ALL);
 
+$currentPage = 'estoque';
 // 1. CONEXÃO COM O BANCO DE DADOS
 require_once('includes/conexao.php');
 
@@ -88,6 +89,9 @@ if ($resultado && mysqli_num_rows($resultado) > 0) {
     </script>
 </head>
 <body>
+
+    <?php include('sidebar.php'); ?>
+    
     <div class="container">
         <h2>Listagem de Estoque</h2>
 
