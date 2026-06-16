@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Host: 127.0.0.1
--- Tempo de geração: 20/05/2026 às 01:33
+-- Tempo de geração: 16/06/2026 às 02:57
 -- Versão do servidor: 10.4.32-MariaDB
 -- Versão do PHP: 8.2.12
 
@@ -53,17 +53,33 @@ CREATE TABLE `atividade` (
 -- --------------------------------------------------------
 
 --
--- Estrutura para tabela `cliente`
+-- Estrutura para tabela `clientes`
 --
 
-CREATE TABLE `cliente` (
-  `idCliente` int(11) NOT NULL COMMENT 'Chave primária de identificação do cliente',
-  `nomeCliente` varchar(150) NOT NULL COMMENT 'Nome completo do cliente',
-  `cpfCliente` varchar(20) NOT NULL COMMENT 'CPF do cliente',
+CREATE TABLE `clientes` (
+  `idCliente` int(11) NOT NULL COMMENT 'Número de identificação do cliente',
+  `nomeCliente` varchar(150) NOT NULL COMMENT 'Nome do cliente que será cadastrado ',
+  `cpfCliente` varchar(15) NOT NULL COMMENT 'CPF completo do cliente',
   `emailCliente` varchar(150) NOT NULL COMMENT 'Endereço de email principal para contato e notificações',
-  `telefoneCliente` varchar(30) NOT NULL COMMENT 'Telefone de contato',
-  `enderecoCliente` varchar(255) NOT NULL COMMENT 'Endereço residencial completo do cliente(rua, bairro, número, cidade)'
+  `telefoneCliente` varchar(20) NOT NULL COMMENT 'O número para contato com o cliente',
+  `cepCliente` varchar(10) NOT NULL COMMENT 'O CEP para identificar o endereço do cliente',
+  `enderecoCliente` varchar(30) NOT NULL COMMENT 'O nome da rua em que mora',
+  `numeroCliente` varchar(20) NOT NULL COMMENT 'Número da residência',
+  `complementoCliente` varchar(50) NOT NULL COMMENT 'O complemento opcional para identificar onde o cliente mora',
+  `bairroCliente` varchar(40) NOT NULL COMMENT 'O bome do Bairro do cliente',
+  `cidadeCliente` varchar(30) NOT NULL COMMENT 'O nome da cidade em que reside',
+  `estadoCliente` varchar(30) NOT NULL COMMENT 'O nome do Estado em que mora'
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
+
+--
+-- Despejando dados para a tabela `clientes`
+--
+
+INSERT INTO `clientes` (`idCliente`, `nomeCliente`, `cpfCliente`, `telefoneCliente`, `cepCliente`, `enderecoCliente`, `numeroCliente`, `complementoCliente`, `bairroCliente`, `cidadeCliente`, `estadoCliente`) VALUES
+(1, 'Nicolly Fernanda', '09657885454', '999999999', '77777777', 'Rua jacupiranga', '1343', 'Sobrado', 'Aventureiro', 'Joinville', 'Santa catarina'),
+(2, 'Nicolly Fernanda Aureliano Pereira', '054900', '999437521', '054289', 'Rua jacupiranga', '55555555', 'sobrado', 'Morro do meio', 'Itajaí', 'SC'),
+(3, 'Dérik Patrik ', '1444521', '1548789', '159458', 'Rua Marilnada', '1254', 'De frente ao posto', 'Aventureiro', 'Joinville', 'SC'),
+(4, '', '', '', '', '', '', '', '', '', '');
 
 -- --------------------------------------------------------
 
@@ -97,6 +113,13 @@ CREATE TABLE `funcionario` (
   `login` varchar(100) DEFAULT NULL COMMENT 'Nome do usuário utilizado para autentificação no sistema',
   `senha` varchar(255) DEFAULT NULL COMMENT 'Senha de acesso criptografada do funcionário para login no sistema'
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
+
+--
+-- Despejando dados para a tabela `funcionario`
+--
+
+INSERT INTO `funcionario` (`idFuncionario`, `tipoFuncionario`, `nomeFuncionario`, `cpfFuncionario`, `emailFuncionario`, `telefoneFuncionario`, `enderecoFuncionario`, `login`, `senha`) VALUES
+(1, '1', 'Nicolly Fernanda', '05490056165', 'Nico@gmail ', '37999567564', 'Rua jacupiranga', 'nicolly.pereira', '123');
 
 -- --------------------------------------------------------
 
@@ -228,6 +251,12 @@ ALTER TABLE `cliente`
   ADD PRIMARY KEY (`idCliente`);
 
 --
+-- Índices de tabela `clientes`
+--
+ALTER TABLE `clientes`
+  ADD PRIMARY KEY (`idCliente`);
+
+--
 -- Índices de tabela `estoque`
 --
 ALTER TABLE `estoque`
@@ -307,6 +336,12 @@ ALTER TABLE `cliente`
   MODIFY `idCliente` int(11) NOT NULL AUTO_INCREMENT COMMENT 'Chave primária de identificação do cliente';
 
 --
+-- AUTO_INCREMENT de tabela `clientes`
+--
+ALTER TABLE `clientes`
+  MODIFY `idCliente` int(11) NOT NULL AUTO_INCREMENT COMMENT 'Número de identificação do cliente', AUTO_INCREMENT=5;
+
+--
 -- AUTO_INCREMENT de tabela `estoque`
 --
 ALTER TABLE `estoque`
@@ -316,7 +351,7 @@ ALTER TABLE `estoque`
 -- AUTO_INCREMENT de tabela `funcionario`
 --
 ALTER TABLE `funcionario`
-  MODIFY `idFuncionario` int(11) NOT NULL AUTO_INCREMENT COMMENT 'Chave primária de identificação do funcionário';
+  MODIFY `idFuncionario` int(11) NOT NULL AUTO_INCREMENT COMMENT 'Chave primária de identificação do funcionário', AUTO_INCREMENT=2;
 
 --
 -- AUTO_INCREMENT de tabela `gastos`
