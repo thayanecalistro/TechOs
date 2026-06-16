@@ -20,7 +20,7 @@ mysqli_close($conn);
 
 //Tratar o retorno
 if (mysqli_num_rows($result)> 0 ){
-    header("location:../menu.php");
+    header("location:../sidebar.php");
 } else {
     header("location:../");
 }
