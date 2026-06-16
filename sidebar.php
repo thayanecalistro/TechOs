@@ -38,7 +38,7 @@
                 <i class="arrow"></i>
             </div>
             <ul class="submenu">
-                <li class="menu-item"><a href="gerenciar_clientes.php"><i class="far fa-circle"></i> <span>Gerenciar</span></a></li>
+                <li class="menu-item"><a href="cadastroCliente.php"><i class="far fa-circle"></i> <span>Gerenciar</span></a></li>
             </ul>
         </li>
 
