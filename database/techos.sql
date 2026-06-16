@@ -186,7 +186,7 @@ CREATE TABLE `orcamento` (
   `valorTotal` decimal(10,2) DEFAULT 0.00 COMMENT 'Valor total do orçamento',
   `status` varchar(50) DEFAULT 'aberto' COMMENT 'Situação atual do orçamento(aberto,aprovado, reprovado, finalizado).',
   `OS_idOS` int(11) DEFAULT NULL COMMENT 'Chave estrangeira.Vincula este orçamento à Ordem de Serviço correspondente, se houver.',
-  `Cliente_idCliente` int(11) NOT NULL COMMENT 'Chave estrangeira. Identifica o cliente que solicitou o orçamento',
+  `Clientes_idCliente` int(11) NOT NULL COMMENT 'Chave estrangeira. Identifica o cliente que solicitou o orçamento',
   `Aparelho_idAparelho` int(11) NOT NULL COMMENT 'Chave estrangeira. Vincula o orçamento ao aparelho que passará pelo serviço',
   `dataOrcamento` datetime DEFAULT current_timestamp() COMMENT 'Data e hora de criação ou registro do orçamento no sistema'
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
@@ -224,7 +224,7 @@ CREATE TABLE `os` (
   `status` varchar(50) DEFAULT 'aberto' COMMENT 'Situação atual da OS',
   `Aparelho_idAparelho` int(11) NOT NULL COMMENT 'Chave estrangeira. Vincula a OS ao aparelho que receberá a manutenção',
   `Funcionario_idFuncionario` int(11) DEFAULT NULL COMMENT 'Chave estrangeira. Identifica o funcionário responsável por executar o serviço',
-  `Cliente_idCliente` int(11) NOT NULL COMMENT 'Chave estrangeira. Identifica o cliente que solicitou a Ordem de Serviço'
+  `Clientes_idCliente` int(11) NOT NULL COMMENT 'Chave estrangeira. Identifica o cliente que solicitou a Ordem de Serviço'
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
 
 --
@@ -244,11 +244,6 @@ ALTER TABLE `atividade`
   ADD PRIMARY KEY (`idAtividade`),
   ADD KEY `idx_Atividade_OS` (`OS_idOS`);
 
---
--- Índices de tabela `cliente`
---
-ALTER TABLE `cliente`
-  ADD PRIMARY KEY (`idCliente`);
 
 --
 -- Índices de tabela `clientes`
@@ -318,22 +313,10 @@ ALTER TABLE `os`
 --
 
 --
--- AUTO_INCREMENT de tabela `aparelho`
---
-ALTER TABLE `aparelho`
-  MODIFY `idAparelho` int(11) NOT NULL AUTO_INCREMENT COMMENT 'Número identificador do aparelho dentro do sistema';
-
---
 -- AUTO_INCREMENT de tabela `atividade`
 --
 ALTER TABLE `atividade`
   MODIFY `idAtividade` int(11) NOT NULL AUTO_INCREMENT COMMENT 'chave primária de identificação da atividade';
-
---
--- AUTO_INCREMENT de tabela `cliente`
---
-ALTER TABLE `cliente`
-  MODIFY `idCliente` int(11) NOT NULL AUTO_INCREMENT COMMENT 'Chave primária de identificação do cliente';
 
 --
 -- AUTO_INCREMENT de tabela `clientes`
@@ -410,7 +393,7 @@ ALTER TABLE `gastos`
 --
 ALTER TABLE `orcamento`
   ADD CONSTRAINT `fk_Orcamento_Aparelho` FOREIGN KEY (`Aparelho_idAparelho`) REFERENCES `aparelho` (`idAparelho`) ON UPDATE CASCADE,
-  ADD CONSTRAINT `fk_Orcamento_Cliente` FOREIGN KEY (`Cliente_idCliente`) REFERENCES `cliente` (`idCliente`) ON UPDATE CASCADE,
+  ADD CONSTRAINT `fk_Orcamento_Cliente` FOREIGN KEY (`Clientes_idCliente`) REFERENCES `cliente` (`idCliente`) ON UPDATE CASCADE,
   ADD CONSTRAINT `fk_Orcamento_OS` FOREIGN KEY (`OS_idOS`) REFERENCES `os` (`idOS`) ON DELETE CASCADE ON UPDATE CASCADE;
 
 --
@@ -425,7 +408,7 @@ ALTER TABLE `orcamento_peca`
 --
 ALTER TABLE `os`
   ADD CONSTRAINT `fk_OS_Aparelho` FOREIGN KEY (`Aparelho_idAparelho`) REFERENCES `aparelho` (`idAparelho`) ON UPDATE CASCADE,
-  ADD CONSTRAINT `fk_OS_Cliente` FOREIGN KEY (`Cliente_idCliente`) REFERENCES `cliente` (`idCliente`) ON UPDATE CASCADE,
+  ADD CONSTRAINT `fk_OS_Cliente` FOREIGN KEY (`Clientes_idCliente`) REFERENCES `cliente` (`idCliente`) ON UPDATE CASCADE,
   ADD CONSTRAINT `fk_OS_Funcionario` FOREIGN KEY (`Funcionario_idFuncionario`) REFERENCES `funcionario` (`idFuncionario`) ON DELETE SET NULL ON UPDATE CASCADE;
 COMMIT;
 
