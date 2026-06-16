@@ -1,0 +1,129 @@
+/*Estilo de botão*/
+body{
+    color: white;
+    background-color: #1a304a;
+    font-family: Arial, Helvetica, sans-serif;
+}
+#botaoAbrir {
+    padding: 6px 18px;
+    border: none;
+    border-radius: 3px;
+    cursor: pointer;
+    font-size: 14px;
+    transition: background 0.2s;
+    background-color: rgb(18, 77, 18);
+    color: white;
+}
+#botaoSalvar{
+    padding: 6px 18px;
+    border: none;
+    border-radius: 3px;
+    cursor: pointer;
+    font-size: 14px;
+    transition: background 0.2s;
+    background-color: rgb(18, 77, 18);
+    color: white;
+}
+
+.modal{
+    display: none;
+    position: fixed;
+    z-index: 1000;
+    left: 0;
+    top: 0;
+    width: 100%;
+    height: 100%;
+    background-color: rgba(0, 0, 0, 0.5);
+}
+
+.modal-conteudo {
+    background-color: #1a304a;
+    margin: 5% auto;
+    padding: 20px;
+    border-radius: 8px;
+    width: 500px;
+    position: relative;
+    box-shadow: 0px 4px 8px rgba(0, 0, 0, 0.2);
+    color: white;
+}
+
+.botaoFechar {
+    position: absolute;
+    right: 15px;
+    top: 10px;
+    font-size: 24px;
+    cursor: pointer;
+    color: #aaa;
+}
+
+.botaoFechar:hover{
+    color: black;
+}
+
+form {
+    display: flex;
+    flex-direction: column;
+}
+
+label{
+    margin-top: 10px;
+}
+
+input {
+    padding: 10px;
+    margin-top: 5px;
+    border: 1px solid #ccc;
+    border-radius: 4px;
+}
+
+.linhaformulario {
+    display: flex;
+    gap: 15px;
+}
+
+.linhaformulario input {
+   flex: 1;
+}
+
+.botaoContainer{
+    display: flex;
+    justify-content: flex-end;
+    width: 100%;
+}
+
+.tabelas{
+    background-color: #3b4f66;
+    color: #ffffff;
+    border-collapse: collapse;
+    margin: 25px 0;
+    font-size: 13px;
+    text-align: center;
+    font-family: Arial, Helvetica, sans-serif;
+    width: 100%;
+    min-width: 400px; 
+    box-shadow: 0 0 20px rgba(0, 0, 0, 0.15);
+    border-radius: 5px 5px 0 0;
+    overflow: hidden;
+    border:1px solid #486581;
+}
+
+.tabelas th, 
+.tabelas td{
+    padding: 12px 15px ;
+}
+
+.tabelas tbody tr:nth-of-type(even){
+    background-color:#fffbc8;  /*Esse é o efeito "zebra"*/
+    color: #333333;
+}
+
+.tabelas tbody tr{
+    border-bottom:1px solid #486581; /*Adiciona uma linha fina em cada linha*/
+}
+
+.tabelas tbody tr:hover{
+    background-color: #00000010; /*Adiciona o efeito que ao passar o mouse por cima da linha, a mesma muda de cor e o cursor de formato */
+    cursor: pointer;
+}
+
+
