@@ -1,5 +1,7 @@
 <?php
-include("php/funcoes.php")
+include("php/funcoes.php");
+
+$currentPage = 'cliente';
 ?>
 
 <!DOCTYPE html>
@@ -11,6 +13,9 @@ include("php/funcoes.php")
     <title>Cadastro de Clientes</title>
 </head>
 <body>
+
+    <?php include('sidebar.php'); ?>
+    
     <h1> Cadastro de Clientes</h1>
 
    <h3>Clientes</h3>

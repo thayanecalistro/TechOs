@@ -16,7 +16,7 @@ $total_orcamento = ($valor_peca * $qtd_peca) + $mao_obra;
         <title>Orcamento</title>
         <meta charset="UTF-8">
     
-        <link rel="stylesheet" href="../css/orcamento.css">
+        <link rel="stylesheet" href="css/orcamento.css">
     </head>
 
     <body>
