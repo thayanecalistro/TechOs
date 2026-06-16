@@ -1,0 +1,181 @@
+
+/* VARIÁVEIS DE COR */
+:root {
+    --bg-principal: #2c3e50;   /* Fundo do body */
+    --bg-card: #2f4257;        /* Fundo dos cards (card-custom) */
+    --border-card: #4d647d;    /* Borda dos cards */
+    --bg-input: #1b2838;       /* Fundo escuro dos inputs (cor do seu menu) */
+    --texto-branco: #ffffff;
+    
+    /* Cores dos Botões (Padrão Bootstrap que estava no seu código) */
+    --btn-success: #198754;    /* Verde Cadastrar */
+    --btn-warning: #ffc107;    /* Amarelo Alterar */
+    --btn-info: #0dcaf0;       /* Azul Piscina Pesquisar */
+    --btn-danger: #dc3545;     /* Vermelho Excluir */
+    --btn-secondary: #6c757d;  /* Cinza Limpar */
+}
+
+/* RESET E CONFIGURAÇÃO GLOBAL */
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+    font-family: 'Segoe UI', system-ui, sans-serif;
+}
+
+body {
+    background-color: var(--bg-principal);
+    color: var(--texto-branco);
+    padding: 40px 20px;
+}
+
+.container {
+    max-width: 1100px;
+    margin: 0 auto;
+}
+
+h2 {
+    color: var(--texto-branco);
+    text-align: center;
+    margin-bottom: 30px;
+    font-size: 2rem;
+}
+
+/* ESTILIZAÇÃO DOS CARDS */
+.card-custom {
+    background-color: var(--bg-card);
+    border: 1px solid var(--border-card);
+    border-radius: 6px; /* Borda levemente arredondada como a do Bootstrap */
+    padding: 24px;
+    margin-bottom: 25px;
+}
+
+.card-title {
+    color: var(--texto-branco);
+    font-size: 1.25rem;
+    margin-bottom: 20px;
+    font-weight: 500;
+}
+
+/* GRID DOS FORMULÁRIOS */
+.form-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(220px, 1fr));
+    gap: 20px;
+    margin-bottom: 20px;
+}
+
+.form-group {
+    display: flex;
+    flex-direction: column;
+    gap: 8px;
+}
+
+label {
+    color: var(--texto-branco);
+    font-size: 1rem;
+}
+
+/* INPUTS DO ESTILO TECHOS */
+.form-control-custom {
+    width: 100%;
+    padding: 8px 12px;
+    background-color: var(--bg-input);
+    border: 1px solid var(--border-card);
+    border-radius: 6px;
+    color: var(--texto-branco);
+    font-size: 1rem;
+    outline: none;
+    transition: border-color 0.15s ease-in-out;
+}
+
+.form-control-custom:focus {
+    border-color: var(--btn-info);
+    box-shadow: 0 0 0 0.25rem rgba(13, 202, 240, 0.25);
+}
+
+/* ESTRUTURA DA PESQUISA */
+.search-container {
+    display: flex;
+    align-items: flex-end;
+    gap: 15px;
+    flex-wrap: wrap;
+}
+
+.search-input-group {
+    flex: 1;
+    min-width: 250px;
+}
+
+/* TABELA REAL */
+.table-responsive {
+    width: 100%;
+    overflow-x: auto;
+    margin-bottom: 15px;
+}
+
+.table-custom {
+    width: 100%;
+    border-collapse: collapse;
+    color: var(--texto-branco);
+    text-align: left;
+    font-size: 1rem;
+}
+
+.table-custom th, 
+.table-custom td {
+    padding: 12px 16px;
+    border-bottom: 1px solid var(--border-card);
+}
+
+/* Estilo Dark Table do Bootstrap */
+.table-custom th {
+    background-color: #1c232b; 
+    color: var(--texto-branco);
+    font-weight: 600;
+}
+
+/* Linhas alternadas (Striped) */
+.table-custom tbody tr:nth-of-type(odd) {
+    background-color: rgba(0, 0, 0, 0.05);
+}
+
+.table-custom tbody tr:nth-of-type(even) {
+    background-color: rgba(0, 0, 0, 0.15);
+}
+
+/* Efeito Hover na tabela */
+.table-custom tbody tr:hover {
+    background-color: rgba(255, 255, 255, 0.07);
+}
+
+/* GRUPO DE BOTÕES E ESTILOS */
+.btn-group {
+    display: flex;
+    gap: 10px;
+    flex-wrap: wrap;
+}
+
+.btn-custom {
+    padding: 8px 16px;
+    border: 1px solid transparent;
+    border-radius: 6px;
+    font-size: 1rem;
+    cursor: pointer;
+    transition: filter 0.15s ease;
+}
+
+.btn-custom:hover {
+    filter: brightness(85%); /* Escurece levemente no hover, igual ao Bootstrap */
+}
+
+.btn-custom:active {
+    filter: brightness(70%);
+}
+
+/* Classes de cores dos botões 
+.btn-success-custom { background-color: var(--btn-success); color: var(--texto-branco); }
+.btn-warning-custom { background-color: var(--btn-warning); color: #000000; }
+.btn-info-custom { background-color: var(--btn-info); color: #000000; }
+.btn-danger-custom { background-color: var(--btn-danger); color: var(--texto-branco); }
+.btn-secondary-custom { background-color: var(--btn-secondary); color: var(--texto-branco); }*/

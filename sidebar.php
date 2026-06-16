@@ -1,4 +1,4 @@
-<link rel= "stylesheet" href="css/sidebar.css">
+<link rel= "stylesheet" href="../css/sidebar.css">
 
 <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
 
@@ -43,7 +43,7 @@
         </li>
 
         <li class="menu-item <?= ($currentPage == 'aparelho') ? 'active' : ''; ?>">
-            <a href="aparelho.php"><i class="fas fa-laptop"></i> <span>Aparelho</span></a>
+            <a href="cadastro_aparelho.php"><i class="fas fa-laptop"></i> <span>Aparelho</span></a>
         </li>
 
         <li class="menu-item <?= ($currentPage == 'funcionario') ? 'active' : ''; ?>">
@@ -66,4 +66,4 @@
     </div>
 </div>
 
-<script src="js/sidebar.js"></script>
+<script src="../js/sidebar.js"></script>

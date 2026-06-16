@@ -1,56 +1,65 @@
 <?php
+// TEMPORARIAMENTE PARA VER O ERRO REAL
+// Força o PHP a mostrar os erros na tela
+ini_set('display_errors', 1);
+ini_set('display_startup_errors', 1);
+error_reporting(E_ALL);
+
 // 1. CONEXÃO COM O BANCO DE DADOS
 require_once('includes/conexao.php');
 
-// Inicializa a variável de pesquisa para não dar erro na tela
-$pesquisa = isset($_POST['busca']) ? mysqli_real_escape_string($conexao, $_POST['busca']) : '';
+// Inicializa a variável de pesquisa com segurança
+$pesquisa = '';
+if (isset($_POST['busca']) && !empty(trim($_POST['busca']))) {
+    $pesquisa = mysqli_real_escape_string($conn, trim($_POST['busca']));
+}
 
 // 2. PROCESSA O CADASTRO (Quando o usuário clica em "Cadastrar")
 if ($_SERVER['REQUEST_METHOD'] == 'POST' && isset($_POST['NomeFornecedor'])) {
-    $NomeFornecedor = mysqli_real_escape_string($conexao, $_POST['NomeFornecedor']);
-    $peca = mysqli_real_escape_string($conexao, $_POST['peca']);
+    $NomeFornecedor = mysqli_real_escape_string($conn, $_POST['NomeFornecedor']);
+    $peca = mysqli_real_escape_string($conn, $_POST['peca']);
     $valor = floatval($_POST['valor']);
     $quantidade = intval($_POST['quantidade']);
 
     // Calcula o total no PHP antes de salvar no banco
     $total = $valor * $quantidade;
 
-    // Insere os dados na tabela 'Estoque' (o idEstoque é gerado automaticamente)
+    // Insere os dados na tabela 'estoque'
     $sql_insert = "INSERT INTO estoque (NomeFornecedor, peca, valor, quantidade, total) 
                    VALUES ('$NomeFornecedor', '$peca', '$valor', '$quantidade', '$total')";
     
-    if (mysqli_query($conexao, $sql_insert)) {
-        // Redireciona para si mesmo para evitar que o formulário seja reenviado ao atualizar a página
+    if (mysqli_query($conn, $sql_insert)) {
+        // Redireciona para si mesmo para evitar reenvio de formulário
         header("Location: estoque.php");
         exit;
     } else {
-        echo "Erro ao salvar no banco: " . mysqli_error($conexao);
+        echo "Erro ao salvar no banco: " . mysqli_error($conn);
     }
 }
 
-// 3. PROCESSA A EXCLUSÃO (Quando o usuário clica no botão Excluir de uma linha)
+// 3. PROCESSA A EXCLUSÃO (Quando o usuário clica no botão Excluir)
 if (isset($_GET['excluir'])) {
     $id_excluir = intval($_GET['excluir']);
-    $sql_delete = "DELETE FROM Estoque WHERE idEstoque = $id_excluir";
+    $sql_delete = "DELETE FROM estoque WHERE idEstoque = $id_excluir";
     
-    if (mysqli_query($conexao, $sql_delete)) {
+    if (mysqli_query($conn, $sql_delete)) {
         header("Location: estoque.php");
         exit;
     } else {
-        echo "Erro ao excluir item: " . mysqli_error($conexao);
+        echo "Erro ao excluir item: " . mysqli_error($conn);
     }
 }
 
-// 4. SISTEMA DE BUSCA / LISTAGEM (Traz os dados para a tabela)
+// 4. SISTEMA DE BUSCA / LISTAGEM
 if (!empty($pesquisa)) {
     // Se o usuário buscou algo, filtra por Fornecedor ou Peça
-    $sql_busca = "SELECT * FROM Estoque WHERE NomeFornecedor LIKE '%$pesquisa%' OR peca LIKE '%$pesquisa%' ORDER BY idEstoque DESC";
+    $sql_busca = "SELECT * FROM estoque WHERE NomeFornecedor LIKE '%$pesquisa%' OR peca LIKE '%$pesquisa%' ORDER BY idEstoque DESC";
 } else {
-    // Se não buscou nada, traz todos os produtos organizados pelo mais recente
-    $sql_busca = "SELECT * FROM Estoque ORDER BY idEstoque DESC";
+    // Se não buscou nada, traz todos os produtos
+    $sql_busca = "SELECT * FROM estoque ORDER BY idEstoque DESC";
 }
 
-$resultado = mysqli_query($conexao, $sql_busca);
+$resultado = mysqli_query($conn, $sql_busca);
 
 $produtos = [];
 if ($resultado && mysqli_num_rows($resultado) > 0) {

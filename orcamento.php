@@ -16,7 +16,7 @@ $total_orcamento = ($valor_peca * $qtd_peca) + $mao_obra;
         <title>Orcamento</title>
         <meta charset="UTF-8">
     
-        <link rel="stylesheet" href="css/orcamento.css">
+        <link rel="stylesheet" href="../css/orcamento.css">
     </head>
 
     <body>
@@ -147,7 +147,7 @@ $total_orcamento = ($valor_peca * $qtd_peca) + $mao_obra;
                                 <td>20,99</td>
                                 <td>50,00</td>
                                 <td>70,99</td>
-                                <td>Aprovado</td>
+                                <td><span class=" badge badge-aprovado">APROVADO</span></td>
                             </tr>
                             <tr class="table-success-custom">
                                 <th scope="row">8</th>
