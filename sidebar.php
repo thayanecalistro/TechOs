@@ -17,10 +17,14 @@
     </div>
     
 
-    <div class="sidebar-user">
-        <img src="https://via.placeholder.com/150" alt="Avatar" class="user-avatar">
-        <span class="user-name">Thay</span>
-    </div>
+    <!--<div class="sidebar-user">
+        <div class="image">
+          <img src=" echo fotoUsuario($_SESSION['idFuncionario']); ?>" alt="Avatar" class="user-avatar">
+        </div>
+        <div class="info">
+          <a href="#" class="d-block"> echo nomeUsuario($_SESSION['idFuncionario']); ?></a>
+        </div>
+    </div>-->
 
     <ul class="sidebar-menu">
         <li class="menu-item <?= ($currentPage == 'dashboard') ? 'active' : ''; ?>">

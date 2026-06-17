@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Host: 127.0.0.1
--- Tempo de geração: 16/06/2026 às 02:57
+-- Tempo de geração: 17/06/2026 às 02:21
 -- Versão do servidor: 10.4.32-MariaDB
 -- Versão do PHP: 8.2.12
 
@@ -75,11 +75,11 @@ CREATE TABLE `clientes` (
 -- Despejando dados para a tabela `clientes`
 --
 
-INSERT INTO `clientes` (`idCliente`, `nomeCliente`, `cpfCliente`, `telefoneCliente`, `cepCliente`, `enderecoCliente`, `numeroCliente`, `complementoCliente`, `bairroCliente`, `cidadeCliente`, `estadoCliente`) VALUES
-(1, 'Nicolly Fernanda', '09657885454', '999999999', '77777777', 'Rua jacupiranga', '1343', 'Sobrado', 'Aventureiro', 'Joinville', 'Santa catarina'),
-(2, 'Nicolly Fernanda Aureliano Pereira', '054900', '999437521', '054289', 'Rua jacupiranga', '55555555', 'sobrado', 'Morro do meio', 'Itajaí', 'SC'),
-(3, 'Dérik Patrik ', '1444521', '1548789', '159458', 'Rua Marilnada', '1254', 'De frente ao posto', 'Aventureiro', 'Joinville', 'SC'),
-(4, '', '', '', '', '', '', '', '', '', '');
+INSERT INTO `clientes` (`idCliente`, `nomeCliente`, `cpfCliente`, `emailCliente`, `telefoneCliente`, `cepCliente`, `enderecoCliente`, `numeroCliente`, `complementoCliente`, `bairroCliente`, `cidadeCliente`, `estadoCliente`) VALUES
+(1, 'Nicolly Fernanda', '09657885454', '', '999999999', '77777777', 'Rua jacupiranga', '1343', 'Sobrado', 'Aventureiro', 'Joinville', 'Santa catarina'),
+(2, 'Nicolly Fernanda Aureliano Pereira', '054900', '', '999437521', '054289', 'Rua jacupiranga', '55555555', 'sobrado', 'Morro do meio', 'Itajaí', 'SC'),
+(3, 'Dérik Patrik ', '1444521', '', '1548789', '159458', 'Rua Marilnada', '1254', 'De frente ao posto', 'Aventureiro', 'Joinville', 'SC'),
+(4, '', '', '', '', '', '', '', '', '', '', '');
 
 -- --------------------------------------------------------
 
@@ -111,15 +111,16 @@ CREATE TABLE `funcionario` (
   `telefoneFuncionario` varchar(30) DEFAULT NULL COMMENT 'Telefone ou celular de contato do funcionário',
   `enderecoFuncionario` varchar(255) DEFAULT NULL COMMENT 'Endereço residencial completo do funcionário',
   `login` varchar(100) DEFAULT NULL COMMENT 'Nome do usuário utilizado para autentificação no sistema',
-  `senha` varchar(255) DEFAULT NULL COMMENT 'Senha de acesso criptografada do funcionário para login no sistema'
+  `senha` varchar(255) DEFAULT NULL COMMENT 'Senha de acesso criptografada do funcionário para login no sistema',
+  `foto` varchar(120) DEFAULT NULL COMMENT 'Foto do funcionário'
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
 
 --
 -- Despejando dados para a tabela `funcionario`
 --
 
-INSERT INTO `funcionario` (`idFuncionario`, `tipoFuncionario`, `nomeFuncionario`, `cpfFuncionario`, `emailFuncionario`, `telefoneFuncionario`, `enderecoFuncionario`, `login`, `senha`) VALUES
-(1, '1', 'Nicolly Fernanda', '05490056165', 'Nico@gmail ', '37999567564', 'Rua jacupiranga', 'nicolly.pereira', '123');
+INSERT INTO `funcionario` (`idFuncionario`, `tipoFuncionario`, `nomeFuncionario`, `cpfFuncionario`, `emailFuncionario`, `telefoneFuncionario`, `enderecoFuncionario`, `login`, `senha`, `foto`) VALUES
+(1, '1', 'Nicolly Fernanda', '05490056165', 'Nico@gmail ', '37999567564', 'Rua jacupiranga', 'nicolly.pereira', '123', NULL);
 
 -- --------------------------------------------------------
 
@@ -186,7 +187,7 @@ CREATE TABLE `orcamento` (
   `valorTotal` decimal(10,2) DEFAULT 0.00 COMMENT 'Valor total do orçamento',
   `status` varchar(50) DEFAULT 'aberto' COMMENT 'Situação atual do orçamento(aberto,aprovado, reprovado, finalizado).',
   `OS_idOS` int(11) DEFAULT NULL COMMENT 'Chave estrangeira.Vincula este orçamento à Ordem de Serviço correspondente, se houver.',
-  `Clientes_idCliente` int(11) NOT NULL COMMENT 'Chave estrangeira. Identifica o cliente que solicitou o orçamento',
+  `Cliente_idCliente` int(11) NOT NULL COMMENT 'Chave estrangeira. Identifica o cliente que solicitou o orçamento',
   `Aparelho_idAparelho` int(11) NOT NULL COMMENT 'Chave estrangeira. Vincula o orçamento ao aparelho que passará pelo serviço',
   `dataOrcamento` datetime DEFAULT current_timestamp() COMMENT 'Data e hora de criação ou registro do orçamento no sistema'
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
@@ -224,7 +225,7 @@ CREATE TABLE `os` (
   `status` varchar(50) DEFAULT 'aberto' COMMENT 'Situação atual da OS',
   `Aparelho_idAparelho` int(11) NOT NULL COMMENT 'Chave estrangeira. Vincula a OS ao aparelho que receberá a manutenção',
   `Funcionario_idFuncionario` int(11) DEFAULT NULL COMMENT 'Chave estrangeira. Identifica o funcionário responsável por executar o serviço',
-  `Clientes_idCliente` int(11) NOT NULL COMMENT 'Chave estrangeira. Identifica o cliente que solicitou a Ordem de Serviço'
+  `Cliente_idCliente` int(11) NOT NULL COMMENT 'Chave estrangeira. Identifica o cliente que solicitou a Ordem de Serviço'
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
 
 --
@@ -243,7 +244,6 @@ ALTER TABLE `aparelho`
 ALTER TABLE `atividade`
   ADD PRIMARY KEY (`idAtividade`),
   ADD KEY `idx_Atividade_OS` (`OS_idOS`);
-
 
 --
 -- Índices de tabela `clientes`
@@ -311,6 +311,12 @@ ALTER TABLE `os`
 --
 -- AUTO_INCREMENT para tabelas despejadas
 --
+
+--
+-- AUTO_INCREMENT de tabela `aparelho`
+--
+ALTER TABLE `aparelho`
+  MODIFY `idAparelho` int(11) NOT NULL AUTO_INCREMENT COMMENT 'Número identificador do aparelho dentro do sistema';
 
 --
 -- AUTO_INCREMENT de tabela `atividade`
@@ -389,27 +395,11 @@ ALTER TABLE `gastos`
   ADD CONSTRAINT `fk_Gastos_Orcamento` FOREIGN KEY (`Orcamento_idOrcamento`) REFERENCES `orcamento` (`idOrcamento`) ON DELETE CASCADE ON UPDATE CASCADE;
 
 --
--- Restrições para tabelas `orcamento`
---
-ALTER TABLE `orcamento`
-  ADD CONSTRAINT `fk_Orcamento_Aparelho` FOREIGN KEY (`Aparelho_idAparelho`) REFERENCES `aparelho` (`idAparelho`) ON UPDATE CASCADE,
-  ADD CONSTRAINT `fk_Orcamento_Cliente` FOREIGN KEY (`Clientes_idCliente`) REFERENCES `cliente` (`idCliente`) ON UPDATE CASCADE,
-  ADD CONSTRAINT `fk_Orcamento_OS` FOREIGN KEY (`OS_idOS`) REFERENCES `os` (`idOS`) ON DELETE CASCADE ON UPDATE CASCADE;
-
---
 -- Restrições para tabelas `orcamento_peca`
 --
 ALTER TABLE `orcamento_peca`
   ADD CONSTRAINT `fk_OP_Estoque` FOREIGN KEY (`Estoque_idEstoque`) REFERENCES `estoque` (`idEstoque`) ON UPDATE CASCADE,
   ADD CONSTRAINT `fk_OP_Orcamento` FOREIGN KEY (`Orcamento_idOrcamento`) REFERENCES `orcamento` (`idOrcamento`) ON DELETE CASCADE ON UPDATE CASCADE;
-
---
--- Restrições para tabelas `os`
---
-ALTER TABLE `os`
-  ADD CONSTRAINT `fk_OS_Aparelho` FOREIGN KEY (`Aparelho_idAparelho`) REFERENCES `aparelho` (`idAparelho`) ON UPDATE CASCADE,
-  ADD CONSTRAINT `fk_OS_Cliente` FOREIGN KEY (`Clientes_idCliente`) REFERENCES `cliente` (`idCliente`) ON UPDATE CASCADE,
-  ADD CONSTRAINT `fk_OS_Funcionario` FOREIGN KEY (`Funcionario_idFuncionario`) REFERENCES `funcionario` (`idFuncionario`) ON DELETE SET NULL ON UPDATE CASCADE;
 COMMIT;
 
 /*!40101 SET CHARACTER_SET_CLIENT=@OLD_CHARACTER_SET_CLIENT */;
