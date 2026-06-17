@@ -1,0 +1,124 @@
+/* Container principal com margem esquerda para não bater com o seu Sidebar */
+.main-content-container {
+    margin-left: 0; /* Zeramos a margem para remover o espaço extra */
+    padding: 20px;
+    font-family: Arial, sans-serif;
+    
+    width: 100%; /* Como tiramos a margem, podemos voltar a usar 100% do espaço disponível */
+    box-sizing: border-box; 
+    flex: 1; /* Garante que ocupe todo o resto da tela ao lado da sidebar */
+}
+
+.header-table-section {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    border-bottom: 1px solid #e0e0e0;
+    padding-bottom: 10px;
+    margin-bottom: 20px;
+}
+
+.header-table-section h2 {
+    color: #333;
+    margin: 0;
+}
+
+/* Botões baseados no seu layout */
+.btn-sucesso {
+    background-color: #28a745;
+    color: white;
+    border: none;
+    padding: 10px 15px;
+    border-radius: 4px;
+    cursor: pointer;
+    font-weight: bold;
+}
+
+.btn-sucesso:hover { background-color: #218838; }
+
+.btn-perigo {
+    background-color: #dc3545;
+    color: white;
+    border: none;
+    padding: 10px 15px;
+    border-radius: 4px;
+    cursor: pointer;
+    font-weight: bold;
+}
+
+.btn-perigo:hover { background-color: #c82333; }
+
+/* Tabela Customizada */
+.custom-data-table {
+    width: 100%;
+    border-collapse: collapse;
+    margin-top: 10px;
+}
+
+.custom-data-table th, .custom-data-table td {
+    border: 1px solid #e0e0e0;
+    padding: 12px;
+    text-align: left;
+}
+
+.custom-data-table th {
+    background-color: #f8f9fa;
+    color: #333;
+}
+
+.custom-data-table tr:nth-child(even) { background-color: #fafafa; }
+
+/* Modal Sem Bootstrap */
+.custom-modal-overlay {
+    display: none;
+    position: fixed;
+    top: 0; left: 0; width: 100%; height: 100%;
+    background-color: rgba(0,0,0,0.5);
+    z-index: 9999; /* Garante que fica na frente do sidebar */
+    justify-content: center;
+    align-items: center;
+}
+
+.custom-modal-box {
+    background: white;
+    width: 450px;
+    border-radius: 5px;
+    overflow: hidden;
+    box-shadow: 0 4px 15px rgba(0,0,0,0.2);
+}
+
+.modal-header {
+    background-color: #28a745;
+    color: white;
+    padding: 15px;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+}
+
+.modal-header h3 { margin: 0; }
+.close-icon { font-size: 24px; cursor: pointer; }
+
+.modal-form { padding: 20px; }
+.modal-form label {
+    display: block;
+    margin-top: 10px;
+    font-weight: bold;
+    color: #444;
+}
+
+.modal-form input {
+    width: 100%;
+    padding: 8px;
+    margin-top: 5px;
+    border: 1px solid #ccc;
+    border-radius: 4px;
+    box-sizing: border-box;
+}
+
+.form-actions {
+    display: flex;
+    justify-content: flex-end;
+    gap: 10px;
+    margin-top: 20px;
+}

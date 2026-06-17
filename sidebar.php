@@ -39,7 +39,11 @@
             <a href="orcamento.php"><i class="fas fa-calculator"></i> <span>Orçamento</span></a>
         </li>
 
-        <li class="menu-item dropdown <?= ($currentPage == 'cliente') ? 'open active' : ''; ?>" id="clienteMenu">
+        <li class="menu-item <?= ($currentPage == 'cliente') ? 'active' : ''; ?>">
+            <a href="cadastroCliente.php"><i class="fas fa-users"></i> <span>Cliente</span></a>
+        </li>
+
+    <!--<li class="menu-item dropdown = ($currentPage == 'cliente') ? 'open active' : ''; ?>" id="clienteMenu">
             <div class="menu-dropdown-toggle" onclick="toggleDropdown(event)">
                 <i class="fas fa-users"></i> <span>Cliente</span>
                 <i class="arrow"></i>
@@ -47,7 +51,7 @@
             <ul class="submenu">
                 <li class="menu-item"><a href="cadastroCliente.php"><i class="far fa-circle"></i> <span>Gerenciar</span></a></li>
             </ul>
-        </li>
+        </li>-->
 
         <li class="menu-item <?= ($currentPage == 'aparelho') ? 'active' : ''; ?>">
             <a href="cadastro_aparelho.php"><i class="fas fa-laptop"></i> <span>Aparelho</span></a>
@@ -67,7 +71,7 @@
     </ul>
 
     <div class="sidebar-footer">
-        <button class="btn-logout" onclick="window.location.href='logout.php'">
+        <button class="btn-logout" onclick="window.location.href='index.php'">
             <i class="fas fa-sign-out-alt"></i> <span>Sair</span>
         </button>
     </div>

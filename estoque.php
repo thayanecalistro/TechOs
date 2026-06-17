@@ -92,7 +92,7 @@ if ($resultado && mysqli_num_rows($resultado) > 0) {
 
     <?php include('sidebar.php'); ?>
     
-    <div class="container">
+    <div class="page-content">
         <h2>Listagem de Estoque</h2>
 
         <div class="card-custom">
