@@ -1,41 +1,50 @@
 
 /* VARIÁVEIS DE COR */
 :root {
-    --bg-principal: #2c3e50;   /* Fundo do body */
-    --bg-card: #2f4257;        /* Fundo dos cards (card-custom) */
-    --border-card: #4d647d;    /* Borda dos cards */
-    --bg-input: #1b2838;       /* Fundo escuro dos inputs (cor do seu menu) */
+    --bg-principal: #243b55;   /* Fundo padrão unificado do TechOS */
+    --bg-card: #1a304a;        /* Fundo dos cards igual ao dashboard/orçamento */
+    --border-card: #4d647d;    
+    --bg-input: #102a43;       /* Fundo escuro dos inputs igual ao orçamento */
     --texto-branco: #ffffff;
     
-    /* Cores dos Botões (Padrão Bootstrap que estava no seu código) */
-    --btn-success: #198754;    /* Verde Cadastrar */
-    --btn-warning: #ffc107;    /* Amarelo Alterar */
-    --btn-info: #0dcaf0;       /* Azul Piscina Pesquisar */
-    --btn-danger: #dc3545;     /* Vermelho Excluir */
-    --btn-secondary: #6c757d;  /* Cinza Limpar */
+    /* Cores dos Botões */
+    --btn-success: #2cb1bc;    /* Ciano padrão */
+    --btn-warning: #f1c40f;    /* Amarelo padrão */
+    --btn-info: #0dcaf0;       
+    --btn-danger: #d9534f;     /* Vermelho padrão */
+    --btn-secondary: #6c757d;  
 }
 
 /* RESET E CONFIGURAÇÃO GLOBAL */
 * {
-    margin: 0;
-    padding: 0;
+    margin: 5px;
+    padding: 5px;
     box-sizing: border-box;
-    font-family: 'Segoe UI', system-ui, sans-serif;
 }
 
-body {
-    background-color: var(--bg-principal);
-    color: var(--texto-branco);
-    padding: 40px 20px;
+/* Ajuste para o Estoque se comportar como as outras telas.
+   O wrapper principal no seu PHP deve usar a classe .page-content
+*/
+.page-content {
+    display: flex;
+    flex-direction: column;
+    width: 100%;
+    padding: 24px;
+    min-height: 100vh;
+    overflow-x: hidden;
+    background-color: #243b55; 
+    color: #ffffff;
+    font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
 }
 
 .container {
+    width: 100%;
     max-width: 1100px;
     margin: 0 auto;
 }
 
 h2 {
-    color: var(--texto-branco);
+    color: #62b6cb; /* Ciano de destaque padrão */
     text-align: center;
     margin-bottom: 30px;
     font-size: 2rem;
@@ -51,6 +60,7 @@ h2 {
 }
 
 .card-title {
+    text-align: center;
     color: var(--texto-branco);
     font-size: 1.25rem;
     margin-bottom: 20px;
