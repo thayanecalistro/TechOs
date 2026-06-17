@@ -3,7 +3,6 @@
     margin: 0;
     padding: 0;
     box-sizing: border-box;
-    font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
 }
 
 /* Container que envolve o conteúdo da página para dar espaçamento */
@@ -11,14 +10,18 @@
     display: flex;
     flex-direction: column;
     width: 100%;
-    padding: 20px;
+    padding: 24px;
     min-height: 100vh;
+    overflow-x: hidden;
+    background-color: #243b55; /* Corrigido: adicionado fundo padrão */
+    color: #ffffff;            /* Corrigido: texto padrão branco */
+    font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
 }
 
 /* Título Principal */
 .main-title {
     text-align: center;
-    font-family: 'Georgia', serif;
+    color: #62b6cb; /* Mudado para o ciano padrão das outras telas */
     font-size: 32px;
     font-weight: normal;
     letter-spacing: 1px;
