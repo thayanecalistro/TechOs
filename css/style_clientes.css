@@ -4,6 +4,14 @@ body{
     background-color: #1a304a;
     font-family: Arial, Helvetica, sans-serif;
 }
+.conteudo-principal{
+  display: flex;
+  flex-direction: column;
+  width: 100%;
+  box-sizing: border-box;
+  padding: 20px;
+}     
+
 #botaoAbrir {
     padding: 6px 18px;
     border: none;
@@ -76,12 +84,12 @@ input {
     border-radius: 4px;
 }
 
-.linhaformulario {
+.linhaFormulario {
     display: flex;
     gap: 15px;
 }
 
-.linhaformulario input {
+.linhaFormulario input {
    flex: 1;
 }
 
@@ -89,6 +97,7 @@ input {
     display: flex;
     justify-content: flex-end;
     width: 100%;
+    margin-bottom: 15px;
 }
 
 .tabelas{
@@ -102,7 +111,6 @@ input {
     width: 100%;
     min-width: 400px; 
     box-shadow: 0 0 20px rgba(0, 0, 0, 0.15);
-    border-radius: 5px 5px 0 0;
     overflow: hidden;
     border:1px solid #486581;
 }
