@@ -13,15 +13,11 @@ $currentPage = 'cliente';
     <title>Cadastro de Clientes</title>
 </head>
 <body>
+   
+<?php include('sidebar.php'); ?>
 
-    <?php include('sidebar.php'); ?>
-    
-    <h1> Cadastro de Clientes</h1>
-
-   <h3>Clientes</h3>
-   <div class="botaoContainer">
-    <button id="botaoAbrir">Novo Cliente</button> 
-  </div>
+<div class="conteudo-principal">
+<!--<div style="flex: ; width: 100%;" >-->
 
 <div id="meuModal" class="modal">
   <div class="modal-conteudo">
@@ -67,6 +63,7 @@ $currentPage = 'cliente';
 
   </div>
 </div>
+</div>
 
    <table class="tabelas">
       <tr>
@@ -78,7 +75,6 @@ $currentPage = 'cliente';
       <?php echo listaClientes(); ?>
    </table>
    
-    
-   <script src="js/script.js"></script>
+   <script src="js/scriptCliente.js"></script>
 </body>
 </html>
