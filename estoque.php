@@ -1,10 +1,11 @@
 <?php
 // TEMPORARIAMENTE PARA VER O ERRO REAL
 // Força o PHP a mostrar os erros na tela
-ini_set('display_errors', 1);
-ini_set('display_startup_errors', 1);
-error_reporting(E_ALL);
+//ini_set('display_errors', 1);
+//ini_set('display_startup_errors', 1);
+//error_reporting(E_ALL);
 
+//Para aparecer o Menu
 $currentPage = 'estoque';
 // 1. CONEXÃO COM O BANCO DE DADOS
 require_once('includes/conexao.php');
@@ -89,7 +90,7 @@ if ($resultado && mysqli_num_rows($resultado) > 0) {
     </script>
 </head>
 <body>
-
+    <!--Para aparecer Menu-->
     <?php include('sidebar.php'); ?>
     
     <div class="page-content">
@@ -155,7 +156,6 @@ if ($resultado && mysqli_num_rows($resultado) > 0) {
                     <th>Preço Unitário</th>
                     <th>Quantidade</th>
                     <th>Total (R$)</th>
-                    <th>Ações</th>
                 </tr>
             </thead>
             <tbody>
