@@ -101,23 +101,23 @@ input {
 }
 
 .tabelas{
-    background-color: #3b4f66;
-    color: #ffffff;
-    border-collapse: collapse;
-    margin: 25px 0;
-    font-size: 13px;
-    text-align: center;
-    font-family: Arial, Helvetica, sans-serif;
     width: 100%;
-    min-width: 400px; 
-    box-shadow: 0 0 20px rgba(0, 0, 0, 0.15);
-    overflow: hidden;
-    border:1px solid #486581;
+    border-collapse: collapse;
+    text-align: center;
+    font-size: 13px;
+    color: #ffffff;
 }
 
-.tabelas th, 
+.tabelas th{
+    background-color: #62b6cb;
+    color: #102a43;
+    font-weight: 600;
+}
+
 .tabelas td{
-    padding: 12px 15px ;
+    padding: 12px;
+    border: 1px solid #486581 !important;
+    vertical-align: middle;
 }
 
 .tabelas tbody tr:nth-of-type(even){

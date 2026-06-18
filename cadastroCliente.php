@@ -19,10 +19,6 @@ $currentPage = 'cliente';
 <div class="conteudo-principal">
 <!--<div style="flex: ; width: 100%;" >-->
 
-<div class="botaoContainer">
-    <button id="botaoAbrir">Novo Cliente</button> 
-</div>
-
 <div id="meuModal" class="modal">
   <div class="modal-conteudo">
    <span class="botaoFechar">&times;</span>

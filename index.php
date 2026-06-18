@@ -10,16 +10,15 @@
 </head>
 <body>
 
-<<<<<<< HEAD
   <div class="main-container">
     <div class="animacao-circulo"></div>
+
         <div class= "login-card">
           <h2 >Login</h2>
-=======
    <div class="d-flex justify-content-center align-items-center min-vh-100 p-3">
       <div class= "login-card">
+        
           <h2 class="fw-bold text-center mb-4 borda-titulo">Login</h2>
->>>>>>> 71f541f826af867ae73baa1acd069d92c4b22244
 
           <form method="POST" action="php/login_funcionario.php">
               
