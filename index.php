@@ -15,10 +15,6 @@
 
         <div class= "login-card">
           <h2 >Login</h2>
-   <div class="d-flex justify-content-center align-items-center min-vh-100 p-3">
-      <div class= "login-card">
-        
-          <h2 class="fw-bold text-center mb-4 borda-titulo">Login</h2>
 
           <form method="POST" action="php/login_funcionario.php">
               
