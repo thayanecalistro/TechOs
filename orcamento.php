@@ -1,11 +1,13 @@
 <?php
 
+include("php/funcoes.php");
+
 $currentPage = 'orcamento';
 
 // Lógica PHP para calcular o total dinamicamente com base nos dados informados
-$valor_peca = isset($_POST['valor_peca']) ? floatval($_POST['valor_peca']) : 0;
+$valor_peca = isset($_POST['valorUni']) ? floatval($_POST['valorUni']) : 0;
 $qtd_peca = isset($_POST['qtd']) ? intval($_POST['qtd']) : 1;
-$mao_obra = isset($_POST['mao_obra']) ? floatval($_POST['mao_obra']) : 0;
+$mao_obra = isset($_POST['maoObra']) ? floatval($_POST['maoObra']) : 0;
 
 // Cálculo do Total: (Valor da Peça * Quantidade) + Mão de Obra
 $total_orcamento = ($valor_peca * $qtd_peca) + $mao_obra;
@@ -35,7 +37,7 @@ $total_orcamento = ($valor_peca * $qtd_peca) + $mao_obra;
                             <div class="col-4">
                                 <label class="form-label">Cliente:</label>
                                 <input type="text" list="lista-clientes" id="cliente" name="cliente" class="form-control" 
-                                    placeholder="Carregando clientes..." value="<?php echo isset($_POST['cliente']) ? htmlspecialchars($_POST['cliente']) : ''; ?>">
+                                    placeholder="Carregando clientes..." value="<?php echo isset($_POST['clientes']) ? htmlspecialchars($_POST['clientes']) : ''; ?>">
                                 <datalist id="lista-clientes">
                                     </datalist>
                             </div>
@@ -105,7 +107,7 @@ $total_orcamento = ($valor_peca * $qtd_peca) + $mao_obra;
                     
                     <br>
                     <div class="table-container"> 
-                        <table  border= "1" class=" orcamento-table" >
+                        <table class=" orcamento-table" >
                             <thead>
                             <tr>
                                 <th scope="col">ID</th>
@@ -119,16 +121,8 @@ $total_orcamento = ($valor_peca * $qtd_peca) + $mao_obra;
                             </tr>
                             </thead>
                             <tbody>
-                            <tr>
-                                <th scope="row">1</th>
-                                <td>Mark</td>
-                                <td>Iphone</td>
-                                <td>Tela</td>
-                                <td>25,50</td>
-                                <td>50,00</td>
-                                <td>75,50</td>
-                                <td>Aberto</td>
-                            </tr>
+                            <?php echo listaOrcamento(); ?>
+                            </tbody>
                             <tr>
                                 <th scope="row">2</th>
                                 <td>Jacob</td>
@@ -159,18 +153,6 @@ $total_orcamento = ($valor_peca * $qtd_peca) + $mao_obra;
                                 <td>R$ 430.00</td>
                                 <td><span class=" badge badge-aprovado">APROVADO</span></td>
                             </tr>
-                            <!--EXEMPLO DE UMA LINHA SÓ---------------------
-                                <tr class="table-success text-dark">
-                                    <td>8</td>
-                                    <td>Luana</td>
-                                    <td>Apple 15</td>
-                                    <td>tela Iphone 15</td>
-                                    <td>R$ 350.00</td>
-                                    <td>R$ 80.00</td>
-                                    <td>R$ 430.00</td>
-                                    <td>APROVADO</td>
-                                </tr>-->
-                            </tbody>
                         </table>
                     </div>
                     

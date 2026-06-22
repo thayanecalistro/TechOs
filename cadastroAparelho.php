@@ -141,7 +141,7 @@ $currentPage = 'aparelho';
     </div>
 </div>
 
-        <script src="../js/aparelho.js"></script>
+        <script src="js/aparelho.js"></script>
         
 </body>
 </html>

@@ -54,7 +54,7 @@
         </li>-->
 
         <li class="menu-item <?= ($currentPage == 'aparelho') ? 'active' : ''; ?>">
-            <a href="cadastro_aparelho.php"><i class="fas fa-laptop"></i> <span>Aparelho</span></a>
+            <a href="cadastroAparelho.php"><i class="fas fa-laptop"></i> <span>Aparelho</span></a>
         </li>
 
         <li class="menu-item <?= ($currentPage == 'funcionario') ? 'active' : ''; ?>">
