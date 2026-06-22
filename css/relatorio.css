@@ -1,0 +1,16 @@
+
+/* VARIÁVEIS DE COR */
+:root {
+    --bg-principal: #243b55;   /* Fundo padrão unificado do TechOS */
+    --bg-card: #1a304a;        /* Fundo dos cards igual ao dashboard/orçamento */
+    --border-card: #4d647d;    
+    --bg-input: #102a43;       /* Fundo escuro dos inputs igual ao orçamento */
+    --texto-branco: #ffffff;
+    
+    /* Cores dos Botões */
+    --btn-success: #2cb1bc;    /* Ciano padrão */
+    --btn-warning: #f1c40f;    /* Amarelo padrão */
+    --btn-info: #0dcaf0;       
+    --btn-danger: #d9534f;     /* Vermelho padrão */
+    --btn-secondary: #6c757d;  
+}
