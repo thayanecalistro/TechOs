@@ -129,7 +129,7 @@ if ($resultado && mysqli_num_rows($resultado) > 0) {
                 </div>
 
                 <div class="btn-group">
-                    <button type="submit" class="btn-custom btn-success-custom">Cadastrar</button>
+                    <button type="submit" class="btn-custom btn-info-custom">Cadastrar</button>
                     <button type="button" class="btn-custom btn-warning-custom">Alterar</button>
                 </div>
             </form>
@@ -142,7 +142,8 @@ if ($resultado && mysqli_num_rows($resultado) > 0) {
                         <label>Pesquisar</label>
                         <input type="text" name="busca" value="<?php echo htmlspecialchars($pesquisa); ?>" placeholder="Digite o fornecedor ou peça...">
                     </div>
-                    <button type="submit" class="btn-custom btn-info-custom" style="height: 41px; width: 120px;">Pesquisar</button>
+                    <button type="submit" class="btn-custom btn-info-custom">Pesquisar</button>
+                    <button type="submit" class="btn-custom btn-secondary-custom">Limpar pesquisa </button>
                 </div>
             </form>
         </div>
@@ -184,10 +185,6 @@ if ($resultado && mysqli_num_rows($resultado) > 0) {
                 <?php endif; ?>
             </tbody>
         </table>
-
-        <div class="btn-group" style="margin-top: 15px;">
-            <a href="estoque.php" class="btn-custom btn-secondary-custom" style="text-decoration: none; text-align: center; line-height: 41px;">Limpar Pesquisa</a>
-        </div>
     </div>
 </body>
 </html>
