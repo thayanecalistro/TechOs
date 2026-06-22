@@ -11,8 +11,9 @@
     padding: 24px;
     min-height: 100vh;
     overflow-x: hidden;
-    background-color: #243b55; /* Fundo padrão unificado do TechOS */
+    background-color: #243b55; /* Fundo escuro padrão */
     color: #ffffff;
+    font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
 }
 
 /* ==========================================================================

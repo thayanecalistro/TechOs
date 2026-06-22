@@ -66,14 +66,26 @@ $currentPage = 'cliente';
 </div>
 
 <!--   TABELAS DOS CLIENTES                                                          -->
-<div class="table-section">
-      <div class="search-container">
-             <input type="text" class="form-control search-input" placeholder="Pesquisar...">
-             <button class="btn btn-blue search-btn">Buscar</button>
-      </div>
-       <div class="botaoContainer">
+<div class="table-section">        
+
+       <fieldset class="search-container">
+            <legend>Pesquisar Cliente</legend>
+            <div class="search-box">
+                <label for="pesquisar">Pesquisar:</label>
+                <input type="text" id="pesquisar" class="form-control search-input" name="pesquisar" placeholder="ID ou Nome do Cliente...">
+                <button type="button" class="btn btn-blue search-btn" id="btnBuscar">Buscar</button>
+                <select id="ordenarSelect" class="btn btn-cyan" style="color: #102a43; cursor: pointer; height: 31px; padding: 0 10px;">
+                    <option value="" style="color: black;">Ordenar</option>
+                    <option value="id" style="color: black;">ID</option>
+                    <option value="nome" style="color: black;">Nome (Cliente)</option>
+                </select>
+            </div>
+        </fieldset>
+
+        <div class="botaoContainer">
         <input type="submit" value="Novo Cliente" id="botaoAbrir" >
-       </div>             
+       </div> 
+       
       <br>
       <div calss="tela-fundo">
         <h3>Clientes</h3>

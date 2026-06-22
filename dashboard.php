@@ -29,7 +29,7 @@ $atividades_recentes = [
     <div class="page-content">
         
         <div class="dashboard-header">
-            <h2>Olá, Thay!</h2>
+            <h2>Olá, Administrador!</h2>
             <p>Aqui está o resumo do seu sistema hoje.</p>
         </div>
 
@@ -119,5 +119,6 @@ $atividades_recentes = [
             </div>
         </div>
 
-    </div> </body>
+    </div> 
+</body>
 </html>

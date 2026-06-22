@@ -41,7 +41,8 @@ $ordens_servico = [
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>TechOS - Menu</title>
     
-    <link rel="stylesheet" href="css/os.css">
+    <link rel="stylesheet" href="css/ordemServico.css">
+
 </head>
 <body>
 
@@ -50,20 +51,29 @@ $ordens_servico = [
 
     <div class="page-content">
 
-            <h1 class="main-title">Controle de Serviço</h1>
+        <h1 class="main-title">Controle de OS</h1>
 
         <fieldset class="search-fieldset">
             <legend>Pesquisar Aparelho</legend>
             <div class="search-box">
                 <label for="pesquisar">Pesquisar:</label>
-                <input type="text" id="pesquisar" name="pesquisar">
-                <button class="btn btn-blue">Buscar</button>
-                <button class="btn btn-cyan">Ordenar</button>
+                <input type="text" id="pesquisar" name="pesquisar" placeholder="ID ou Nome do Cliente...">
+                <button type="button" class="btn btn-blue" id="btnBuscar">Buscar</button>
+                <select id="ordenarSelect" class="btn btn-cyan" style="color: #102a43; cursor: pointer; height: 31px; padding: 0 10px;">
+                    <option value="" style="color: black;">Ordenar</option>
+                    <option value="id" style="color: black;">ID</option>
+                    <option value="nome" style="color: black;">Nome (Cliente)</option>
+                </select>
             </div>
         </fieldset>
 
+        <div class="footer-actions">
+            <button type="button" class="btn btn-red" id="btnExcluir">Excluir</button>
+            <button type="button" class="btn btn-light-blue" onclick="window.location.reload();">Atualizar Tabela</button>
+        </div>
+
         <div class="table-container">
-            <table class="os-table">
+            <table class="os-table" id="osTable">
                 <thead>
                     <tr>
                         <th>ID</th>
@@ -90,13 +100,20 @@ $ordens_servico = [
                 </tbody>
             </table>
         </div>
-
-        <div class="footer-actions">
-            <button class="btn btn-red">Excluir</button>
-            <button class="btn btn-light-blue">Atualizar Tabela</button>
-        </div>
-
     </div>
+
+    <div class="modal-overlay" id="confirmModal">
+        <div class="modal-content">
+            <h3>Confirmação de Exclusão</h3>
+            <p id="modalMessage">Tem certeza que deseja excluir o item selecionado?</p>
+            <div class="modal-buttons">
+                <button type="button" class="btn btn-red" id="confirmDelete">Sim, Excluir</button>
+                <button type="button" class="btn btn-blue" id="cancelDelete">Cancelar</button>
+            </div>
+        </div>
+    </div>
+
+    <script src="js/os.js"></script>
 
 </body>
 </html>
