@@ -91,4 +91,5 @@ function listaOpcoesClientes($idSelecionado = null) {
     }
     return $html;
 }
+
 ?>
