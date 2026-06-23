@@ -41,7 +41,7 @@ $ordens_servico = [
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>TechOS - Menu</title>
     
-    <link rel="stylesheet" href="css/ordemServico.css">
+    <link rel="stylesheet" href="css/os.css">
 
 </head>
 <body>
@@ -53,7 +53,6 @@ $ordens_servico = [
         
         <div class="os-header">
             <h2>Controle de OS</h2>
-            <p>Aqui está o resumo do seu sistema hoje.</p>
         </div>
 
 
@@ -70,38 +69,42 @@ $ordens_servico = [
             </div>
         </fieldset>
 
-        <div class="footer-actions">
-            <button type="button" class="btn btn-red" id="btnExcluir">Excluir</button>
-            <button type="button" class="btn btn-light-blue" onclick="window.location.reload();">Atualizar Tabela</button>
-        </div>
+        
 
-        <div class="table-container">
-            <table class="os-table" id="osTable">
-                <thead>
-                    <tr>
-                        <th>ID</th>
-                        <th>Abertura</th>
-                        <th>Fechamento</th>
-                        <th>Cliente</th>
-                        <th>Aparelho</th>
-                        <th>Status</th>
-                        <th>Valor (R$)</th>
-                    </tr>
-                </thead>
-                <tbody>
-                    <?php foreach ($ordens_servico as $os): ?>
+        <div class="section-card">
+            <div class="footer-actions">
+                <button type="button" class="btn btn-red" id="btnExcluir">Excluir</button>
+                <button type="button" class="btn btn-light-blue" onclick="window.location.reload();">Atualizar Tabela</button>
+            </div>
+
+            <div class="table-container">
+                <table class="os-table" id="osTable">
+                    <thead>
                         <tr>
-                            <td><?= $os['id']; ?></td>
-                            <td><?= $os['abertura']; ?></td>
-                            <td><?= $os['fechamento']; ?></td>
-                            <td><?= $os['cliente']; ?></td>
-                            <td><?= $os['aparelho']; ?></td>
-                            <td><?= $os['status']; ?></td>
-                            <td><?= $os['valor']; ?></td>
+                            <th>ID</th>
+                            <th>Abertura</th>
+                            <th>Fechamento</th>
+                            <th>Cliente</th>
+                            <th>Aparelho</th>
+                            <th>Status</th>
+                            <th>Valor (R$)</th>
                         </tr>
-                    <?php endforeach; ?>
-                </tbody>
-            </table>
+                    </thead>
+                    <tbody>
+                        <?php foreach ($ordens_servico as $os): ?>
+                            <tr>
+                                <td><?= $os['id']; ?></td>
+                                <td><?= $os['abertura']; ?></td>
+                                <td><?= $os['fechamento']; ?></td>
+                                <td><?= $os['cliente']; ?></td>
+                                <td><?= $os['aparelho']; ?></td>
+                                <td><?= $os['status']; ?></td>
+                                <td><?= $os['valor']; ?></td>
+                            </tr>
+                        <?php endforeach; ?>
+                    </tbody>
+                </table>
+            </div>
         </div>
     </div>
 
