@@ -2,10 +2,9 @@ document.addEventListener("DOMContentLoaded", function() {
     
     // --- LÓGICA DO MODAL: NOVO APARELHO ---
     const modalNovo = document.getElementById("modalAparelho");
-    // CORRIGIDO: Mudou de btnAbrirModal para btnAbrirNovo
-    const btnAbrirNovo = document.getElementById("btnAbrirNovo"); 
-    const btnFecharNovo = document.getElementById("btnFecharModal");
-    const btnCancelarNovo = document.getElementById("btnCancelar");
+    const btnAbrirNovo = document.getElementById("btnAbrirNovo");
+    const btnFecharNovo = document.getElementById("btnFecharNovo");
+    const btnCancelarNovo = document.getElementById("btnCancelarNovo");
 
     if (btnAbrirNovo && modalNovo) {
         btnAbrirNovo.addEventListener("click", () => modalNovo.style.display = "flex");
@@ -26,8 +25,8 @@ document.addEventListener("DOMContentLoaded", function() {
 
     // Fechar modais ao clicar fora da caixa branca
     window.addEventListener("click", (e) => {
-        if (modalNovo && e.target === modalNovo) fecharModalNovo();
-        if (modalAlterar && e.target === modalAlterar) fecharModalAlterar();
+        if (e.target === modalNovo) fecharModalNovo();
+        if (e.target === modalAlterar) fecharModalAlterar();
     });
 
     // --- BOTÕES DA TABELA: ALTERAR ---
@@ -63,5 +62,4 @@ document.addEventListener("DOMContentLoaded", function() {
             }
         });
     });
-
 });
