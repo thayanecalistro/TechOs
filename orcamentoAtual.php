@@ -24,6 +24,10 @@ $total_orcamento = ($valor_peca * $qtd_peca) + $mao_obra;
         <?php include('sidebar.php'); ?>
 
         <div class="page-content">
+
+            <div class="header-table-section">
+                <button id="btnAbrirNovo" class="btn-sucesso">Novo Orçamento</button>
+            </div>
                
                 <form method="POST" action="" id="form-orcamento">
                     <fieldset>
@@ -100,8 +104,10 @@ $total_orcamento = ($valor_peca * $qtd_peca) + $mao_obra;
                 </form>
                 <br><br>
 
+                
+
                 <div class="table-section">
-                    <div class="search-container">
+                <div class="search-container">
                         <input type="text" id="input-busca" class="form-control search-input" placeholder="Pesquisar por Cliente ou ID...">
                         <button type="button" id="btn-busca" class="btn btn-blue search-btn">Buscar</button>
                     </div>

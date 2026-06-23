@@ -19,6 +19,21 @@
     letter-spacing: 1px;
     margin-bottom: 25px;
 }
+.os-header {
+    margin-bottom: 25px;
+}
+
+.os-header h2 {
+    font-size: 1.8rem;
+    color: #62b6cb; /* Ciano de destaque */
+    margin: 0 0 5px 0;
+}
+
+.os-header p {
+    color: #9fb3c8;
+    margin: 0;
+    font-size: 0.95rem;
+}
 
 /* Seção de Pesquisa */
 .search-fieldset {

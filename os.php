@@ -50,13 +50,16 @@ $ordens_servico = [
     <?php include('sidebar.php'); ?>
 
     <div class="page-content">
+        
+        <div class="os-header">
+            <h2>Controle de OS</h2>
+            <p>Aqui está o resumo do seu sistema hoje.</p>
+        </div>
 
-        <h1 class="main-title">Controle de OS</h1>
 
         <fieldset class="search-fieldset">
-            <legend>Pesquisar Aparelho</legend>
+            <legend>Pesquisar</legend>
             <div class="search-box">
-                <label for="pesquisar">Pesquisar:</label>
                 <input type="text" id="pesquisar" name="pesquisar" placeholder="ID ou Nome do Cliente...">
                 <button type="button" class="btn btn-blue" id="btnBuscar">Buscar</button>
                 <select id="ordenarSelect" class="btn btn-cyan" style="color: #102a43; cursor: pointer; height: 31px; padding: 0 10px;">
