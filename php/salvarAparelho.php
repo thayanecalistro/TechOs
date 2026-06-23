@@ -1,46 +1,69 @@
 <?php
-
-    $opcao = $_GET['opcao'];/*recebe na url*/
+    // 1. Recebemos APENAS o que sempre vem na URL (Ação/Opção e ID)
+    $opcao = $_GET['opcao'] ?? null; /* Pode ser 'I' (Insert), 'U' (Update) ou 'D' (Delete) */
     $id = $_GET['id'] ?? null;
-    $cliente = $_POST['nCliente'];/*isset() */
-    $marca = $_POST['nMarca'];
-    $modelo = $_POST['nModelo'];
-    $imei = $_POST['nImei'];
 
-    include ('funcoes.php');
+    include('funcoes.php');
 
-   if ($_POST['nAtivo'] == 'on') $ativo = 'S'; else $ativo = 'N';
+    $sql = ""; // Inicializa a variável SQL para evitar erros
 
-    //montar sql
-    if($opcao == 'I'){
-        $id = proximoID('aparelho','idAparelho');
-
-        //echo "VAI RODAR UM INSERT";
-        $sql = "INSERT INTO aparelho(idAparelho, Cliente_idCliente, Marca_idMarca, Modelo_idModelo, imeiAparelho)
-                VALUES($id, $cliente, '$marca','$modelo','$imei');";
-
-    }elseif ($opcao == 'U') {
-        //echo "VAI RODAR UM UPDATE";
+    // 2. Verificamos qual é a ação ANTES de tentar pegar os dados do formulário ($_POST)
+    if ($opcao == 'I' || $opcao == 'U') {
         
-        $sql = "UPDATE aparelho SET Cliente_idCliente ='$cliente',
-                                   Marca_idMarca ='$marca',
-                                   Modelo_idModelo ='$modelo',
-                                   imeiAparelho = '$imei'
-                               WHERE idAparelho = $id;";
+        // Só entra aqui e pega esses dados se for CADASTRAR (I) ou ALTERAR (U)
+        // Usamos o '?? null' para garantir que se a variável não vier, não exiba aquele Warning chato
+        $cliente = $_POST['nCliente'] ?? null;
+        $marca   = $_POST['nMarca'] ?? null;
+        $modelo  = $_POST['nModelo'] ?? null;
+        $imei    = $_POST['nImei'] ?? null;
 
-    }elseif($opcao == 'D'){
-        //echo " VAI RODAR UM DELETE";
-        $sql ="DELETE FROM aparelho 
-               WHERE idAparelho= $id;";
+        // Trata o checkbox nAtivo
+        $nAtivo = $_POST['nAtivo'] ?? '';
+        if ($nAtivo == 'on') {
+            $ativo = 'S';
+        } else {
+            $ativo = 'N';
+        }
+
+        if ($opcao == 'I') {
+            // --- MODO INSERIR (I) ---
+            $id = proximoID('aparelho', 'idAparelho');
+
+            $sql = "INSERT INTO aparelho (idAparelho, Cliente_idCliente, Marca_idMarca, Modelo_idModelo, imeiAparelho)
+                    VALUES ($id, $cliente, '$marca', '$modelo', '$imei');";
+
+        } elseif ($opcao == 'U') {
+            // --- MODO ATUALIZAR/EDITAR (U) ---
+            $sql = "UPDATE aparelho SET 
+                        Cliente_idCliente = '$cliente',
+                        Marca_idMarca = '$marca',
+                        Modelo_idModelo = '$modelo',
+                        imeiAparelho = '$imei'
+                    WHERE idAparelho = $id;";
+        }
+
+    } elseif ($opcao == 'D') {
+        // --- MODO EXCLUIR (D) ---
+        // Aqui nós ignoramos o $_POST e SÓ usamos o $id que veio da URL. Zero erros!
+        $sql = "DELETE FROM aparelho WHERE idAparelho = $id;";
     }
 
-    	//Conectar
-	include("conexao.php");
-
-	//Executar
-	$result = mysqli_query($conn,$sql);
-	
-	//Encerro conexão
-	mysqli_close($conn);
-
+    // 3. Execução da instrução SQL no banco de dados
+    if ($sql != "") {
+        include('conexao.php'); // Chama sua conexão com o banco
+        
+        // Executa o comando SQL
+        if (mysqli_query($conn, $sql)) {
+            // Se deu tudo certo, redireciona o usuário de volta para a página de aparelhos
+            header("Location: ../cadastroAparelho.php");
+            exit();
+        } else {
+            // Se der erro no banco, ele te avisa
+            echo "Erro ao executar ação no banco de dados: " . mysqli_error($conn);
+        }
+        
+        mysqli_close($conn); // Fecha a conexão
+    } else {
+        echo "Nenhuma ação válida informada.";
+    }
 ?>
