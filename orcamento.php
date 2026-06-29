@@ -26,137 +26,80 @@ $total_orcamento = ($valor_peca * $qtd_peca) + $mao_obra;
         <!-- Inclui o menu lateral estruturado -->
         <?php include('sidebar.php'); ?>
 
-
         <div class="page-content">
-                
-                <form method="POST" action="">
-                    <fieldset>
-                        <legend>Novo Orçamento</legend>
 
-                        <div class="grid-form">
-                            <div class="col-4">
-                                <label class="form-label">Cliente:</label>
-                                <input type="text" list="lista-clientes" id="cliente" name="cliente" class="form-control" 
-                                    placeholder="Carregando clientes..." value="<?php echo isset($_POST['clientes']) ? htmlspecialchars($_POST['clientes']) : ''; ?>">
-                                <datalist id="lista-clientes">
-                                    </datalist>
-                            </div>
-                            <div class="col-4">
-                                <label class="form-label">Aparelho:</label>
-                                <input type="text" list="lista-aparelhos" id="aparelho" name="aparelho" class="form-control"
-                                    placeholder="Carregando clientes..." value="<?php echo isset($_POST['aparelho']) ? htmlspecialchars($_POST['aparelho']) : ''; ?>">
-                                <datalist id="lista-aparelhos">
-                                    </datalist>
-                            </div>
-                            <div class="col-12">
-                                <label class="form-label">Diagnóstico:</label>
-                                <input type="text" name="diagnostico" class="form-control" value="<?php echo isset($_POST['diagnostico']) ? htmlspecialchars($_POST['diagnostico']) : ''; ?>">
-                            </div>
-                            <div class="col-6">
-                                <label class="form-label">Peça necessária:</label>
-                                <select class="form-select" id="peca" name="peca">
-                                    <option selected>Selecione...</option>
-                                    <option value="Tela" <?php echo (isset($_POST['peca']) && $_POST['peca'] == 'Tela') ? 'selected' : ''; ?>>Tela</option>
-                                    <option value="Bateria" <?php echo (isset($_POST['peca']) && $_POST['peca'] == 'Bateria') ? 'selected' : ''; ?>>Bateria</option>
-                                </select>
-                            </div>
-                            <div class="col-4">
-                                <label class="form-label">Valor Peça (R$):</label>
-                                <input type="number" step="0.01" name="valor_peca" class="form-control" placeholder="0.00" value="<?php echo isset($_POST['valor_peca']) ? htmlspecialchars($_POST['valor_peca']) : ''; ?>">
-                            </div>
-                            <div class="col-2">
-                                <label class="form-label">Qtd:</label>
-                                <input type="number" name="qtd" class="form-control" value="<?php echo isset($_POST['qtd']) ? htmlspecialchars($_POST['qtd']) : '1'; ?>">
-                            </div>
-        
-                            <div class="col-12">
-                                <button type="button" class="btn btn-blue btn-sm">+ Peça</button>
-                            </div>
-        
-                            <div class="col-4">
-                                <label class="form-label">Mão de Obra (R$):</label>
-                                <input type="number" step="0.01" name="mao_obra" class="form-control" placeholder="0.00" value="<?php echo isset($_POST['mao_obra']) ? htmlspecialchars($_POST['mao_obra']) : ''; ?>">
-                            </div>
-                            <div class="col-4">
-                                <label class="form-label">Status:</label>
-                                <select class="form-select" id="status" name="status">
-                                    <option value="aberto" <?php echo (isset($_POST['status']) && $_POST['status'] == 'aberto') ? 'selected' : ''; ?>>Aberto</option>
-                                    <option value="aprovado" <?php echo (isset($_POST['status']) && $_POST['status'] == 'aprovado') ? 'selected' : ''; ?>>Aprovado</option>
-                                    <option value="recusado" <?php echo (isset($_POST['status']) && $_POST['status'] == 'recusado') ? 'selected' : ''; ?>>Recusado</option>
-                                </select>
-                            </div>
+            <div class="orcamento-header">
+            <h2>Orcamentos</h2>
+                <button id="btnAbrirNovo" class="btn-sucesso">Novo</button>
+            </div>
 
-                        </div>
-                        <br>
-                        <div class="mt-4">
-                            <button type="submit" class="btn btn-success">Salvar</button>
-                            <button type="button" class="btn btn-warning">Editar</button>
-                            <button type="button" class="btn btn-danger">Excluir</button>
-                        </div>
-                        <br>
-                        <label class="total-label">Total: R$ <?php echo number_format($total_orcamento, 2, ',', '.'); ?></label>
-                    </fieldset>
-                </form>
-                <br><br>
-                <div class="table-section">
-                    
-                        <div class="search-container">
-                            <input type="text" class="form-control search-input" placeholder="Pesquisar...">
-                            <button class="btn btn-blue search-btn">Buscar</button>
-                        </div>
-                    
-                    <br>
-                    <div class="table-container"> 
-                        <table class=" orcamento-table" >
-                            <thead>
-                            <tr>
-                                <th scope="col">ID</th>
-                                <th scope="col">Cliente</th>
-                                <th scope="col">Aparelho</th>
-                                <th scope="col">Peça</th>
-                                <th scope="col">Valor Unitário</th>
-                                <th scope="col">Mão de Obra</th>
-                                <th scope="col">Total(R$)</th>
-                                <th scope="col">Status</th>
-                            </tr>
-                            </thead>
-                            <tbody>
-                            <?php echo listaOrcamento(); ?>
-                            </tbody>
-                            <tr>
-                                <th scope="row">2</th>
-                                <td>Jacob</td>
-                                <td>Xiaomi</td>
-                                <td>Bateria</td>
-                                <td>69,99</td>
-                                <td>50,00</td>
-                                <td>119,99</td>
-                                <td>Aberto</td>
-                            </tr>
-                            <tr>
-                                <th scope="row">3</th>
-                                <td>Otto</td>
-                                <td>Samsung</td>
-                                <td>Tela</td>
-                                <td>20,99</td>
-                                <td>50,00</td>
-                                <td>70,99</td>
-                                <td><span class=" badge badge-aprovado">APROVADO</span></td>
-                            </tr>
-                            <tr class="table-success-custom">
-                                <th scope="row">8</th>
-                                <td>Luana</td>
-                                <td>Apple 15</td>
-                                <td>tela Iphone 15</td>
-                                <td>R$ 350.00</td>
-                                <td>R$ 80.00</td>
-                                <td>R$ 430.00</td>
-                                <td><span class=" badge badge-aprovado">APROVADO</span></td>
-                            </tr>
-                        </table>
-                    </div>
-                    
-                </div>
+            <fieldset class="search-fieldset">
+            <legend>Pesquisar</legend>
+            <div class="search-box">
+                <input type="text" id="pesquisar" name="pesquisar" placeholder="ID ou Nome do Cliente...">
+                <button type="button" class="btn btn-blue" id="btnBuscar">Buscar</button>
+                <select id="ordenarSelect" class="btn btn-cyan" style="color: #102a43; cursor: pointer; height: 31px; padding: 0 10px;">
+                    <option value="" style="color: black;">Ordenar</option>
+                    <option value="id" style="color: black;">ID</option>
+                    <option value="nome" style="color: black;">Nome (Cliente)</option>
+                </select>
+            </div>
+        </fieldset>
+
+        
+
+        <div class="section-card">
+
+            <div class="table-container">
+                <table class="orcamento-table" id="orcamentoTable">
+                    <thead>
+                        <tr>
+                            <th scope="col">ID</th>
+                            <th scope="col">Cliente</th>
+                            <th scope="col">Aparelho</th>
+                            <th scope="col">Peça</th>
+                            <th scope="col">Valor Unitário</th>
+                            <th scope="col">Mão de Obra</th>
+                            <th scope="col">Total(R$)</th>
+                            <th scope="col">Status</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                      <!-- ?php echo listaOrcamento(); ?>-->
+                      <tr>
+                            <td>2</td>
+                            <td>Jacob</td>
+                            <td>Xiaomi</td>
+                            <td>Bateria</td>
+                            <td>69,99</td>
+                            <td>50,00</td>
+                            <td>119,99</td>
+                            <td>Aberto</td>
+                        </tr>
+                        <tr>
+                            <td>3</td>
+                            <td>Otto</td>
+                            <td>Samsung</td>
+                            <td>Tela</td>
+                            <td>20,99</td>
+                            <td>50,00</td>
+                            <td>70,99</td>
+                            <td><span class=" badge badge-aprovado">APROVADO</span></td>
+                        </tr>
+                        <tr class="table-success-custom">
+                            <td>8</td>
+                            <td>Luana</td>
+                            <td>Apple 15</td>
+                            <td>tela Iphone 15</td>
+                            <td>R$ 350.00</td>
+                            <td>R$ 80.00</td>
+                            <td>R$ 430.00</td>
+                            <td><span class=" badge badge-aprovado">APROVADO</span></td>
+                        </tr>
+                    </tbody>
+                </table>
+            </div>
         </div>
+
     </body>
 </html>

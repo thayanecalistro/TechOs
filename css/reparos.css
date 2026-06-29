@@ -1,0 +1,223 @@
+/* ==========================================================================
+   CONFIGURAÇÕES GLOBAIS E INTEGRAÇÃO COM SIDEBAR
+   ========================================================================== */
+
+/* NÃO redefinimos o body aqui para deixar que o sidebar controle o layout flex */
+
+.page-content {
+    display: flex;
+    flex-direction: column;
+    width: 100%;
+    padding: 24px;
+    min-height: 100vh;
+    overflow-x: hidden;
+    background-color: #243b55; /* Fundo escuro padrão */
+    color: #ffffff;
+    font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+}
+
+/* ==========================================================================
+   FORMULÁRIO / FIELDSET / INPUTS
+   ========================================================================== */
+
+.form-fieldset {
+    border: 1px solid #334e68 !important; 
+    padding: 20px !important; 
+    border-radius: 6px; 
+    margin-bottom: 25px;
+    background-color: #1a304a; /* Caixa interna ligeiramente mais clara */
+}
+
+.form-fieldset legend { 
+    width: auto; 
+    padding: 0 10px; 
+    font-size: 1.1rem; 
+    color: #62b6cb; /* Ciano padrão do sistema */
+    font-weight: 500;
+}
+
+.form-label { 
+    margin-bottom: 6px; 
+    font-size: 0.9rem; 
+    display: block;
+    color: #9fb3c8;
+}
+
+.form-control, .form-select {
+    background-color: #102a43;
+    border: 1px solid #334e68;
+    color: white;
+    width: 100%;
+    padding: 8px 12px;
+    border-radius: 4px;
+    box-sizing: border-box;
+    outline: none;
+    transition: border-color 0.2s, background-color 0.2s;
+}
+
+.form-control:focus, .form-select:focus { 
+    background-color: #143150; 
+    border-color: #62b6cb; 
+}
+
+/* Grid do Formulário */
+.grid-form {
+    display: grid;
+    grid-template-columns: repeat(12, 1fr);
+    gap: 1rem;
+}
+
+.col-2 { grid-column: span 2; }
+.col-4 { grid-column: span 4; }
+.col-6 { grid-column: span 6; }
+.col-12 { grid-column: span 12; }
+
+/* Ações do Formulário (Alinhamento inferior) */
+.form-actions {
+    display: flex;
+    align-items: center;
+    gap: 10px;
+    margin-top: 20px;
+    flex-wrap: wrap;
+}
+
+.total-display { 
+    font-size: 1.3rem; 
+    font-weight: bold; 
+    color: #fffbc8; /* Amarelo de destaque para o preço */
+    margin-left: auto; /* Empurra o total para a extrema direita */
+}
+
+/* ==========================================================================
+   BOTÕES (Padronizados com a tela OS)
+   ========================================================================== */
+
+.btn {
+    display: inline-block;
+    font-weight: 500;
+    text-align: center;
+    vertical-align: middle;
+    cursor: pointer;
+    border: none;
+    padding: 8px 18px;
+    font-size: 0.9rem;
+    border-radius: 4px;
+    color: white;
+    text-decoration: none;
+    transition: background-color 0.2s;
+}
+
+.btn-sm { padding: 4px 10px; font-size: 0.8rem; }
+
+.btn-blue { background-color: #486581; color: white; }
+.btn-blue:hover { background-color: #627d98; }
+
+.btn-success { background-color: #2cb1bc; color: #102a43; } /* Ciano para sucesso/salvar */
+.btn-success:hover { background-color: #4ed0dc; }
+
+.btn-warning { background-color: #f1c40f; color: #102a43; }
+.btn-warning:hover { background-color: #f5d752; }
+
+.btn-danger { background-color: #d9534f; color: white; }
+.btn-danger:hover { background-color: #e66d6a; }
+
+/* ==========================================================================
+   SEÇÃO DA TABELA E PESQUISA (UNIFICADA COM O DASHBOARD)
+   ========================================================================== */
+
+   .table-section {
+    width: 100%;
+    display: flex;
+    flex-direction: column;
+    gap: 15px;
+    margin-top: 25px;
+}
+
+/* Grupo de entrada da pesquisa */
+.search-container {
+    display: flex;
+    width: 100%;
+    max-width: 400px;
+    align-items: center;
+}
+.search-container .search-input {
+    border-top-right-radius: 0;
+    border-bottom-right-radius: 0;
+}
+.search-container .search-btn {
+    border-top-left-radius: 0;
+    border-bottom-left-radius: 0;
+}
+
+/* Container da tabela fluído */
+.table-container {
+    width: 100%;
+    border: 1px solid #486581;
+    border-radius: 4px;
+    overflow-x: auto;
+}
+
+/* Estilização da Tabela Padrão TechOS */
+.dashboard-table {
+    width: 100%;
+    border-collapse: collapse;
+    text-align: left;
+    font-size: 13px;
+}
+
+.dashboard-table th {
+    background-color: #334e68;
+    color: #ffffff;
+    padding: 12px;
+    font-weight: 500;
+    border-bottom: 2px solid #486581;
+}
+
+.dashboard-table td {
+    padding: 12px;
+    border-bottom: 1px solid #243b53;
+    color: #e2e8f0;
+    background-color: transparent; /* Remove fundos alternados antigos */
+}
+
+/* Efeito de passar o mouse igual ao do Dashboard */
+.dashboard-table tbody tr:hover td {
+    background-color: #243b53 !important;
+    color: #ffffff !important;
+}
+
+/* Badges de Status do Dashboard */
+.badge {
+    padding: 3px 8px;
+    border-radius: 12px;
+    font-size: 0.75rem;
+    font-weight: bold;
+    text-transform: uppercase;
+    display: inline-block;
+}
+.badge-aberto { background-color: #f1c40f; color: #102a43; }
+.badge-aprovado { background-color: #2cb1bc; color: #102a43; }
+.badge-recusado { background-color: #d9534f; color: white; }
+/* ==========================================================================
+   RESPONSIVIDADE (Telas de Celular/Tablet)
+   ========================================================================== */
+@media (max-width: 768px) {
+    .col-4, .col-6, .col-2 { grid-column: span 12; }
+    .form-actions { flex-direction: column; align-items: stretch; }
+    .total-display { margin-left: 0; text-align: center; margin-top: 10px; }
+    .search-container { max-width: 100%; }
+}
+
+.header-table-section {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    border-bottom: 1px solid #e0e0e0;
+    padding-bottom: 10px;
+    margin-bottom: 20px;
+}
+
+.header-table-section h2 {
+    color: #333;
+    margin: 0;
+}

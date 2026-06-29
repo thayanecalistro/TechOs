@@ -1,10 +1,15 @@
 <?php
+
 include("php/funcoes.php");
+
 $currentPage = 'orcamento';
 
-$valor_peca = isset($_POST['valor_peca']) ? floatval($_POST['valor_peca']) : 0;
+// Lógica PHP para calcular o total dinamicamente com base nos dados informados
+$valor_peca = isset($_POST['valorUni']) ? floatval($_POST['valorUni']) : 0;
 $qtd_peca = isset($_POST['qtd']) ? intval($_POST['qtd']) : 1;
-$mao_obra = isset($_POST['mao_obra']) ? floatval($_POST['mao_obra']) : 0;
+$mao_obra = isset($_POST['maoObra']) ? floatval($_POST['maoObra']) : 0;
+
+// Cálculo do Total: (Valor da Peça * Quantidade) + Mão de Obra
 $total_orcamento = ($valor_peca * $qtd_peca) + $mao_obra;
 ?>
 <!DOCTYPE html>
@@ -12,130 +17,140 @@ $total_orcamento = ($valor_peca * $qtd_peca) + $mao_obra;
     <head>
         <title>Orcamento</title>
         <meta charset="UTF-8">
+    
         <link rel="stylesheet" href="css/orcamento.css">
-        <style>
-            dialog::backdrop { background: rgba(0, 0, 0, 0.6); }
-            dialog { border: none; border-radius: 8px; padding: 20px; background: #1a304a; color: white; text-align: center; }
-            dialog button { margin-top: 15px; }
-        </style>
     </head>
+
     <body>
 
+        <!-- Inclui o menu lateral estruturado -->
         <?php include('sidebar.php'); ?>
 
         <div class="page-content">
-               
-                <form method="POST" action="" id="form-orcamento">
-                    <fieldset>
-                        <legend>Novo Orçamento</legend>
 
-                        <div class="grid-form">
-                            <div class="col-4">
-                                <label class="form-label">Cliente:</label>
-                                <input type="text" list="lista-clientes" id="cliente" class="form-control" placeholder="Comece a digitar o nome..." autocomplete="off">
-                                <input type="hidden" name="Cliente_idCliente" id="cliente_id_hidden">
-                                <datalist id="lista-clientes"></datalist>
-                            </div>
+            <div class="orcamento-header">
+            <h2>Orcamentos</h2>
+                <button id="btnAbrirNovo" class="btn-sucesso">Novo</button>
+            </div>
 
-                            <div class="col-4">
-                                <label class="form-label">Aparelho:</label>
-                                <select id="aparelho" name="Aparelho_idAparelho" class="form-select">
-                                    <option value="" selected disabled>Selecione um cliente primeiro...</option>
-                                </select>
-                            </div>
-
-                            <div class="col-12">
-                                <label class="form-label">Diagnóstico:</label>
-                                <input type="text" name="diagnostico" class="form-control">
-                            </div>
-
-                            <div class="col-12 grid-form" id="container-pecas" style="padding:0; gap:1rem;">
-                                <div class="peca-row grid-form col-12" style="padding:0; gap:1rem; display:flex;">
-                                    <div class="col-6">
-                                        <label class="form-label">Peça necessária:</label>
-                                        <input type="text" list="lista-pecas" name="peca[]" class="form-control input-peca" placeholder="Digite o nome da peça..." autocomplete="off">
-                                    </div>
-                                    <div class="col-4">
-                                        <label class="form-label">Valor Peça (R$):</label>
-                                        <input type="number" step="0.01" name="valor_peca[]" class="form-control input-valor-peca" placeholder="0.00">
-                                    </div>
-                                    <div class="col-2">
-                                        <label class="form-label">Qtd:</label>
-                                        <input type="number" name="qtd[]" class="form-control input-qtd-peca" value="1">
-                                    </div>
-                                </div>
-                            </div>
-
-                            <datalist id="lista-pecas"></datalist>
-       
-                            <div class="col-12">
-                                <button type="button" id="btn-add-peca" class="btn btn-blue btn-sm">+ Peça</button>
-                            </div>
-       
-                            <div class="col-4">
-                                <label class="form-label">Mão de Obra (R$):</label>
-                                <input type="number" step="0.01" id="mao_obra" name="mao_obra" class="form-control" placeholder="0.00">
-                            </div>
-
-                            <div class="col-4">
-                                <label class="form-label">Status:</label>
-                                <select class="form-select" id="status" name="status" disabled>
-                                    <option value="aberto" selected>Aberto</option>
-                                    <option value="aprovado">Aprovado</option>
-                                    <option value="reprovado">Reprovado</option>
-                                </select>
-                                <input type="hidden" id="status_hidden" name="status" value="aberto">
-                            </div>
-
-                        </div>
-                        <br>
-                        <div class="mt-4">
-                            <button type="submit" class="btn btn-success">Salvar</button>
-                            <button type="button" id="btn-editar" class="btn btn-warning">Editar</button>
-                            <button type="button" class="btn btn-danger">Excluir</button>
-                        </div>
-                        <br>
-                        <label class="total-label" id="label-total">Total: R$ 0,00</label>
-                    </fieldset>
-                </form>
-                <br><br>
-
-                <div class="table-section">
-                    <div class="search-container">
-                        <input type="text" id="input-busca" class="form-control search-input" placeholder="Pesquisar por Cliente ou ID...">
-                        <button type="button" id="btn-busca" class="btn btn-blue search-btn">Buscar</button>
+            <div class="table-section">
+                
+                <fieldset class="search-fieldset">
+                    <legend>Pesquisar</legend>
+                    <div class="search-box">
+                        <input type="text" id="pesquisar" name="pesquisar" placeholder="ID ou Nome do Cliente...">
+                        <button type="button" class="btn btn-blue" id="btnBuscar">Buscar</button>
+                        <select id="ordenarSelect" class="btn btn-cyan" style="color: #102a43; cursor: pointer; height: 31px; padding: 0 10px;">
+                            <option value="" style="color: black;">Ordenar</option>
+                            <option value="id" style="color: black;">ID</option>
+                            <option value="nome" style="color: black;">Nome (Cliente)</option>
+                        </select>
                     </div>
-                   
-                    <br>
-                    <div class="table-container">
-                        <table border="1" class="orcamento-table">
+                </fieldset>
+                
+                <div class="section-card">
+                        <table class=" orcamento-table" >
                             <thead>
-                                <tr>
-                                    <th scope="col">ID</th>
-                                    <th scope="col">Cliente</th>
-                                    <th scope="col">Aparelho</th>
-                                    <th scope="col">Peça</th>
-                                    <th scope="col">Valor Unitário</th>
-                                    <th scope="col">Mão de Obra</th>
-                                    <th scope="col">Total(R$)</th>
-                                    <th scope="col">Status</th>
-                                </tr>
+                            <tr>
+                                <th scope="col">ID</th>
+                                <th scope="col">Cliente</th>
+                                <th scope="col">Aparelho</th>
+                                <th scope="col">Peça</th>
+                                <th scope="col">Valor Unitário</th>
+                                <th scope="col">Mão de Obra</th>
+                                <th scope="col">Total(R$)</th>
+                                <th scope="col">Status</th>
+                            </tr>
                             </thead>
-                            <tbody id="corpo-tabela">
-                                <?php echo listaOrcamento(); ?>
+                            <tbody>
+                            <?php echo listaOrcamento(); ?>
                             </tbody>
+                            <tr>
+                                <td>2</td>
+                                <td>Jacob</td>
+                                <td>Xiaomi</td>
+                                <td>Bateria</td>
+                                <td>69,99</td>
+                                <td>50,00</td>
+                                <td>119,99</td>
+                                <td>Aberto</td>
+                            </tr>
+                            <tr>
+                                
+                                <td>3</td>
+                                <td>Otto</td>
+                                <td>Samsung</td>
+                                <td>Tela</td>
+                                <td>20,99</td>
+                                <td>50,00</td>
+                                <td>70,99</td>
+                                <td><span class=" badge badge-aprovado">APROVADO</span></td>
+                            </tr>
+                            <tr class="table-success-custom">
+                                <td>8</td>
+                                <td>Luana</td>
+                                <td>Apple 15</td>
+                                <td>tela Iphone 15</td>
+                                <td>R$ 350.00</td>
+                                <td>R$ 80.00</td>
+                                <td>R$ 430.00</td>
+                                <td><span class=" badge badge-aprovado">APROVADO</span></td>
+                            </tr>
                         </table>
                     </div>
                 </div>
+            </div>
+
+            <div id="meuModal" class="modal">
+                <div class="modal-conteudo">
+                    <span class="botaoFechar">&times;</span>
+                        <h2>Novo Orçamento</h2>
+
+                    <form method="POST" action="php/salvarOrcamneto.php?opcao=I">
+
+                        <div class="linhaFormulario">
+                            <input type="text" placeholder="Nome do cliente" name="nNome">
+
+                            <input type="text" placeholder="Aparelho do cliente" name="nAparelho">
+                        </div>
+
+                        <div class="linhaFormulario">
+                            <input type="text" placeholder="Diagnóstico" name="nTelefone">
+                        </div>
+
+                        <div class="linhaFormulario">
+                            <input type="text" placeholder="Peça necessária" name="nPeça">
+                            <input type="text" placeholder="Valor Peça (R$):" name="nValorUni">
+                            <input type="text" placeholder="Qtd:" name="nQtd">
+                        </div>
+
+                        <div class="linhaFormulario">
+                            <button type="button" class="btn btn-blue btn-sm">+ Peça</button> 
+                        </div>
+
+                        <div class="linhaFormulario">
+                            <input type="text" placeholder="Mão de Obra (R$):" name="nMaoObra">
+                        </div>
+
+                        <div class="linhaFormulario">
+                            <label class="form-label">Status:</label>
+                                <select class="form-select" id="status" name="status">
+                                    <option value="aberto" ?php echo (isset($_POST['status']) && $_POST['status'] == 'aberto') ? 'selected' : ''; ?>>Aberto</option>
+                                    <option value="aprovado" ?php echo (isset($_POST['status']) && $_POST['status'] == 'aprovado') ? 'selected' : ''; ?>>Aprovado</option>
+                                    <option value="recusado" ?php echo (isset($_POST['status']) && $_POST['status'] == 'recusado') ? 'selected' : ''; ?>>Recusado</option>
+                                </select>                     
+                        </div>
+
+                        <div class="linhaFormulario">
+                            <label class="total-label">Total: R$ ?php echo number_format($total_orcamento, 2, ',', '.'); ?></label>
+                        </div>
+
+                        <div class="botaoContainer"> <input type="submit" value="Salvar" id="botaoSalvar" ></div>
+
+                    </form>
+
+                </div>
+            </div>
         </div>
-
-        <dialog id="modal-aviso">
-            <h3>Aviso do Sistema</h3>
-            <p>Novos orçamentos são registrados obrigatoriamente com o status inicial <strong>Aberto</strong>.</p>
-            <button class="btn btn-blue" onclick="document.getElementById('modal-aviso').close()">Ok</button>
-        </dialog>
-
-        <script src="js/orcamento.js"></script>
-        
     </body>
 </html>
