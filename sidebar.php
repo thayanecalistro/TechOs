@@ -58,7 +58,7 @@
         </li>
 
         <li class="menu-item <?= ($currentPage == 'funcionario') ? 'active' : ''; ?>">
-            <a href="funcionario.php"><i class="fas fa-user-tie"></i> <span>Funcionário</span></a>
+            <a href="funcionarios.php"><i class="fas fa-user-tie"></i> <span>Funcionário</span></a>
         </li>
 
         <li class="menu-item <?= ($currentPage == 'estoque') ? 'active' : ''; ?>">

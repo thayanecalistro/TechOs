@@ -146,6 +146,6 @@ $currentPage = 'funcionario';
 
     </div>
 
-    <script src="js/scriptFuncionario.js"></script>
+    <script src="js/funcionario.js"></script>
 </body>
 </html>
