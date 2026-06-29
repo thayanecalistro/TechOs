@@ -4,11 +4,11 @@
 <?php
 
 //Função para preencher a grid de usuários
-    function listaClientes(){
+    function listaFuncionarios(){
         $html = "";
 
     //SQL
-    $sql = "SELECT idCliente, nomeCliente, telefoneCliente from clientes";
+    $sql = "SELECT idFuncionario, nomeFuncionario, telefoneFuncionario from funcionarios";
 
     //Conectar
     include("conexao.php");
@@ -23,14 +23,15 @@
     if(mysqli_num_rows($result) > 0){
         $contador = 1; // Criamos um contador começando em 1
         foreach($result as $coluna){
+      // Modifique a linha do link Alterar para ficar assim:
 
-            $html .= "<tr>                         
-                          <td>".$coluna['idCliente']."</td>
-                          <td >".$coluna['nomeCliente']."</td>
+        $html .= "<tr>                         
+                          <td>".$coluna['idFuncionario']."</td>
+                          <td >".$coluna['nomeFuncionario']."</td>
                           <td >".$coluna['telefoneCliente']."</td>
-                          <td ><a href='visualizarCliente.php?id=".$coluna['idCliente']."'>Visualizar</a> |
+                          <td ><a href='javascript:void(0);' onclick='abrirModalAlterar(".$coluna['idCliente'].")'>Alterar</a> 
 
-                              <a href='alterarCliente.php?id=".$coluna['idCliente']."'>Alterar</a> | 
+                              <a href='alterarCliente.php?id=".$coluna['idCliente']."'>Vizu</a> | 
 
                               <a href='apagarCliente.php?id=".$coluna['idCliente']."'>Excluir</a></td>
 
