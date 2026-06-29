@@ -1,5 +1,9 @@
 <?php
-// include("php/funcoes_funcionarios.php"); // Descomente quando criar o arquivo de funções
+
+
+
+include("php/funcaoFuncionario.php"); // Descomente quando criar o arquivo de funções
+
 $currentPage = 'funcionario';
 ?>
 <!DOCTYPE html>
@@ -52,16 +56,10 @@ $currentPage = 'funcionario';
                         </thead>
                         <tbody>
                             <tr>
-                                <td>#1</td>
-                                <td><div class="user-avatar-blank"></div></td>
-                                <td>Thay</td>
-                                <td>Administrador</td>
-                                <td>(47) 99999-0000</td>
-                                <td style="text-align: center;">[Editar]</td>
-                            </tr>
                             <?php 
-                                // echo listaFuncionarios(); 
+                                 echo listaFuncionarios(); 
                             ?>
+                            </tr>
                         </tbody>
                     </table>
                 </div>

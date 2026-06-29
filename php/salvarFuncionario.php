@@ -25,19 +25,18 @@ if ($_SERVER["REQUEST_METHOD"] == "POST" && isset($_GET['opcao']) && $_GET['opca
         move_uploaded_file($_FILES['nFoto']['tmp_name'], "../img/funcionarios/" . $nome_foto);
     }
 
-    /* // Pronto para descomentar e rodar após adaptar à sua variável de conexão ($conexao)
+     // Pronto para descomentar e rodar após adaptar à sua variável de conexão ($conexao)
     $sql = "INSERT INTO funcionario (tipoFuncionario, nomeFuncionario, cpfFuncionario, emailFuncionario, telefoneFuncionario, enderecoFuncionario, login, senha, foto) 
-            VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?)";
-            
-    $stmt = $conexao->prepare($sql);
-    $stmt->bind_param("sssssssss", $tipo, $nome, $cpf, $email, $telefone, $endereco, $login, $senha_hash, $nome_foto);
+            VALUES ('$tipo', '$nome', '$cpf', '$email', '$telefone', '$endereco', '$login', '$senha_hash', '$nome_foto')";
     
-    if($stmt->execute()){
-        header("Location: ../funcionarios.php?sucesso=1");
-    } else {
-        echo "Erro ao cadastrar funcionário.";
-    }
-    */
+    include ("conexao.php");
+
+
+    $result = mysqli_query($conn,$sql);
+
+    //fechar banco 
+    mysqli_close($conn);
+    
     
     // Redirecionamento de teste temporário
     header("Location: ../funcionarios.php");

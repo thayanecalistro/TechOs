@@ -8,7 +8,7 @@
         $html = "";
 
     //SQL
-    $sql = "SELECT idFuncionario, nomeFuncionario, telefoneFuncionario from funcionarios";
+    $sql = "SELECT idFuncionario, nomeFuncionario, telefoneFuncionario from funcionario";
 
     //Conectar
     include("conexao.php");

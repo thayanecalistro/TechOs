@@ -99,6 +99,75 @@ $total_orcamento = ($valor_peca * $qtd_peca) + $mao_obra;
                     </tbody>
                 </table>
             </div>
+
+            <div id="meuModal" class="modal">
+                <div class="modal-conteudo">
+                    <span class="botaoFechar">&times;</span>
+                    <h2>Novo Orçamento</h2>
+                    <hr style="border: 1px solid #334e68; margin-bottom: 20px;">
+
+                    <form method="POST" action="php/salvarOrcamento.php?opcao=I">
+
+                        <div class="linhaFormulario">
+                            <div class="input-grupo">
+                                <label class="form-label">Nome do Cliente:</label>
+                                <input type="text" placeholder="Ex: Carlos Silva" name="nNome" required>
+                            </div>
+                            <div class="input-grupo">
+                                <label class="form-label">Aparelho:</label>
+                                <input type="text" placeholder="Ex: iPhone 13" name="nAparelho" required>
+                            </div>
+                        </div>
+
+                        <div class="linhaFormulario">
+                            <div class="input-grupo">
+                                <label class="form-label">Diagnóstico / Defeito Relatado:</label>
+                                <input type="text" placeholder="Ex: Não liga / Tela escura" name="nDefeito">
+                            </div>
+                        </div>
+
+                        <div class="linhaFormulario">
+                            <div class="input-grupo" style="flex: 2;">
+                                <label class="form-label">Peça Necessária:</label>
+                                <input type="text" placeholder="Nome do componente" name="nPeca">
+                            </div>
+                            <div class="input-grupo">
+                                <label class="form-label">Valor Peça (R$):</label>
+                                <input type="number" step="0.01" placeholder="0.00" name="nValorUni" id="modal-valor-peca">
+                            </div>
+                            <div class="input-grupo" style="flex: 0.5;">
+                                <label class="form-label">Qtd:</label>
+                                <input type="number" value="1" min="1" name="nQtd" id="modal-qtd-peca">
+                            </div>
+                        </div>
+
+                        <div class="linhaFormulario">
+                            <div class="input-grupo">
+                                <label class="form-label">Mão de Obra (R$):</label>
+                                <input type="number" step="0.01" placeholder="0.00" name="nMaoObra" id="modal-mao-obra">
+                            </div>
+                            <div class="input-grupo">
+                                <label class="form-label">Status Inicial:</label>
+                                <select class="form-select" id="status" name="status">
+                                    <option value="aberto" selected>Aberto</option>
+                                    <option value="aprovado">Aprovado</option>
+                                    <option value="recusado">Recusado</option>
+                                </select> 
+                            </div>
+                        </div>
+
+                        <div class="linhaFormulario" style="margin-top: 15px;">
+                            <label class="total-label" id="modal-label-total">Total: R$ 0,00</label>
+                        </div>
+
+                        <div class="botaoContainer"> 
+                            <input type="submit" value="Salvar Orçamento" id="botaoSalvar">
+                        </div>
+
+                    </form>
+                </div>
+            </div>
+
         </div>
 
     </body>
