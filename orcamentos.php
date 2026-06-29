@@ -38,7 +38,10 @@ $orcamentos = [
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>TechOS - Orçamentos</title>
-    <link rel="stylesheet" href="css/os.css"> <link rel="stylesheet" href="css/style_orcamento.css"> </head>
+
+    <link rel="stylesheet" href="css/os.css"> 
+    <link rel="stylesheet" href="css/style_orcamento.css"> 
+</head>
 <body>
 
     <?php include('sidebar.php'); ?>
@@ -49,7 +52,7 @@ $orcamentos = [
             <div>
                 <h2>Controle de Orçamentos</h2>
             </div>
-            <button type="button" class="btn btn-sucesso" id="btnNovoOrcamento">+ Novo Orçamento</button>
+            <button type="button" class="btn btn-sucesso" id="btnNovoOrcamento">+ Novo</button>
         </div>
 
         <fieldset class="search-fieldset">
