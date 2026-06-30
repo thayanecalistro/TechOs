@@ -1,5 +1,7 @@
 <?php
 include("php/funcoes.php");
+
+$currentPage = 'funcionario';
 ?>
 
 <!DOCTYPE html>
@@ -54,6 +56,17 @@ include("php/funcoes.php");
        <div class="linhaFormulario">
          <input type="text" placeholder="Estado" name="nEstado">                     
        </div>
+        
+         <h2>Tipo de Colaborador</h2>
+
+         <div class="linhaFormulario">
+           <select name="" id="">
+              <option value="">Selecione...</option>
+              <option value="">Administrador</option>
+              <option value="">Atendente</option>
+              <option value="">Técnico</option>
+           </select>
+         </div>
 
        <div class="botaoContainer"> <input type="submit" value="Salvar" id="botaoSalvar" ></div>
 
@@ -98,6 +111,6 @@ include("php/funcoes.php");
       </div>
       </div>
 </div>
-   <script src="js/scriptColaborador.js"></script>
+   <script src="js/scriptCadastro.js"></script>
 </body>
 </html>
