@@ -1,15 +1,3 @@
-/* Herda a base do layout */
-.page-content {
-    display: flex;
-    flex-direction: column;
-    width: 100%;
-    padding: 24px;
-    min-height: 100vh;
-    overflow-x: hidden;
-    background-color: #243b55; /* Mesmo fundo do dashboard */
-    color: #ffffff;
-    font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
-}
 
 /* Cabeçalho da página */
 .header-top {
@@ -43,7 +31,7 @@
 }
 
 .btn-sucesso {
-    background-color: #28a745;
+    background-color: #28a745 !important;
     color: white;
     border: none;
     padding: 10px 15px;
@@ -52,7 +40,7 @@
     font-weight: bold;
 }
 
-.btn-sucesso:hover { background-color: #218838; }
+.btn-sucesso:hover { background-color: #218838 !important; }
 
 hr {
     border: none;

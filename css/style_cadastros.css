@@ -11,27 +11,18 @@
   box-sizing: border-box;
   padding: 20px;
 }     */
-/*  BOTÕES */
-#botaoAbrir {
-    padding: 6px 18px;
-    border: none;
-    border-radius: 3px;
-    cursor: pointer;
-    font-size: 14px;
-    transition: background 0.2s;
-    background-color: rgb(18, 77, 18);
+
+.btn-sucesso {
+    background-color: #28a745;
     color: white;
-}
-#botaoSalvar{
-    padding: 6px 18px;
     border: none;
-    border-radius: 3px;
+    padding: 10px 15px;
+    border-radius: 4px;
     cursor: pointer;
-    font-size: 14px;
-    transition: background 0.2s;
-    background-color: rgb(18, 77, 18);
-    color: white;
+    font-weight: bold;
 }
+
+.btn-sucesso:hover { background-color: #218838; }
 
 .botaoFechar {
     position: absolute;

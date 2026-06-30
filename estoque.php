@@ -102,17 +102,18 @@ if ($resultado && mysqli_num_rows($resultado) > 0) {
         </div>
     </div>
 
-    <div class="modal fade" id="modalEstoque" tabindex="-1" aria-hidden="true">
+    <div class="modal fade" id="modalEstoque">
         <div class="modal-dialog">
             <div class="modal-content">
+                <h3>Novo Item no Estoque</h3>
                 <form id="formEstoque" method="POST" action="salvarEstoque.php">
-                    <div class="modal-header">
-                        <h5 class="modal-title" id="tituloModalEstoque">Novo Item no Estoque</h5>
-                        <button type="button" class="btn-close" data-bs-dismiss="modal"></button>
-                    </div>
                     <div class="modal-body">
                         <input type="hidden" name="idEstoque" id="idEstoque" value="">
                         
+                        <div class="form-group">
+                            <label for="Cliente_idCliente">Nome do Cliente *</label>
+                            <input type="number" id="Cliente_idCliente" name="Cliente_idCliente" required placeholder="Ex: 1">
+                        </div>
                         <div class="mb-3">
                             <label class="form-label">Fornecedor</label>
                             <input type="text" name="NomeFornecedor" id="NomeFornecedor" class="form-control" required>

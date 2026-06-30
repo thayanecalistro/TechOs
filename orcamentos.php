@@ -114,12 +114,12 @@ $orcamentos = [
                 <div class="form-grid">
                     <div class="form-group">
                         <label for="Cliente_idCliente">Nome do Cliente *</label>
-                        <input type="number" id="Cliente_idCliente" name="Cliente_idCliente" required placeholder="Ex: 1">
+                        <input type="text" id="Cliente_idCliente" name="Cliente_idCliente" required placeholder="Ex: 1">
                     </div>
 
                     <div class="form-group">
                         <label for="Aparelho_idAparelho">Aparelho *</label>
-                        <input type="number" id="Aparelho_idAparelho" name="Aparelho_idAparelho" required placeholder="Ex: 3">
+                        <input type="text" id="Aparelho_idAparelho" name="Aparelho_idAparelho" required placeholder="Ex: 3">
                     </div>
 
                     <div class="form-group full-width">

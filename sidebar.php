@@ -58,11 +58,7 @@
         </li>
 
         <li class="menu-item <?= ($currentPage == 'funcionario') ? 'active' : ''; ?>">
-<<<<<<< HEAD
-            <a href="cadastroFuncionario.php"><i class="fas fa-user-tie"></i> <span>Colaboradores</span></a>
-=======
             <a href="funcionarios.php"><i class="fas fa-user-tie"></i> <span>Funcionário</span></a>
->>>>>>> f38372e0b639dd02a0bd5748fc010b7d91742171
         </li>
 
         <li class="menu-item <?= ($currentPage == 'estoque') ? 'active' : ''; ?>">
