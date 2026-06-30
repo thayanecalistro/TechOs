@@ -23,12 +23,6 @@ document.addEventListener("DOMContentLoaded", function() {
     if (btnFecharAlterar) btnFecharAlterar.addEventListener("click", fecharModalAlterar);
     if (btnCancelarAlterar) btnCancelarAlterar.addEventListener("click", fecharModalAlterar);
 
-    // Fechar modais ao clicar fora da caixa branca
-    window.addEventListener("click", (e) => {
-        if (e.target === modalNovo) fecharModalNovo();
-        if (e.target === modalAlterar) fecharModalAlterar();
-    });
-
     // --- BOTÕES DA TABELA: ALTERAR ---
     const botoesAlterar = document.querySelectorAll(".btn-alterar");
     botoesAlterar.forEach(botao => {
@@ -46,7 +40,8 @@ document.addEventListener("DOMContentLoaded", function() {
                 document.getElementById("alt_modelo").value = modelo;
                 document.getElementById("alt_imei").value = imei;
 
-                document.getElementById("formAlterar").action = "php/salvarAparelho.php?opcao=U&id=" + id;
+                // CORREÇÃO: Removido o prefixo 'php/' do caminho do action
+                document.getElementById("formAlterar").action = "salvarAparelho.php?opcao=U&id=" + id;
                 modalAlterar.style.display = "flex";
             }
         });
@@ -58,7 +53,8 @@ document.addEventListener("DOMContentLoaded", function() {
         botao.addEventListener("click", function() {
             const id = this.getAttribute("data-id");
             if (confirm("Tem certeza que deseja excluir o aparelho ID " + id + "?")) {
-                window.location.href = "php/salvarAparelho.php?opcao=D&id=" + id;
+                // CORREÇÃO: Removido o prefixo 'php/' do caminho de redirecionamento
+                window.location.href = "salvarAparelho.php?opcao=D&id=" + id;
             }
         });
     });

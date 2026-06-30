@@ -2,5 +2,5 @@
   $conn = mysqli_connect("localhost", 
                           "root",
                           "",
-                 "techos");
+                        "techos");
 ?>
