@@ -1,6 +1,3 @@
-<head>
-    <link rel="stylesheet" href="css/style_clientes.css">
-</head>
 <?php
 
 //Função para preencher a grid de usuários
@@ -27,14 +24,18 @@
 
         $html .= "<tr>                         
                           <td>".$coluna['idFuncionario']."</td>
-                          <td >".$coluna['nomeFuncionario']."</td>
-                          <td >".$coluna['telefoneCliente']."</td>
-                          <td ><a href='javascript:void(0);' onclick='abrirModalAlterar(".$coluna['idCliente'].")'>Alterar</a> 
+                          <td>".$coluna['nomeFuncionario']."</td>
+                          <td>".$coluna['telefoneFuncionario']."</td>
+                          <td>
+                            <button class='btn-alterar-tabela btn-alterar' title='Alterar'>
+                            <i class='fas fa-pen'></i> Alterar
+                            </button> 
+                            
+                            <button class='btn-apagar-tabela btn-apagar' title='Apagar'>
+                            <i class='fas fa-pen'></i> Apagar
+                            </button>
 
-                              <a href='alterarCliente.php?id=".$coluna['idCliente']."'>Vizu</a> | 
-
-                              <a href='apagarCliente.php?id=".$coluna['idCliente']."'>Excluir</a></td>
-
+                            </td>
                      </tr>";
             $contador++; // Soma 1 para a próxima linha
         }

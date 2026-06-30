@@ -1,7 +1,7 @@
 <?php
  include('funcaoCliente.php');
  include('funcaoAparelho.php');
-
+ include ('funcaoFuncionario.php'); 
  include ('funcaoOrcamento.php');
 
  function listaAparelhosGeral(){
