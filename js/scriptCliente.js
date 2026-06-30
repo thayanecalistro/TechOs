@@ -19,3 +19,18 @@ window.addEventListener("click", (event) => {
         modal.style.display = "none"; 
     }
 }); 
+
+const modalAlterar = document.getElementById("meuModalAlterar"); 
+const botaoFecharAlterar = document.querySelector(".botaoFecharAlterar"); 
+
+  function abrirModalAlterar(idCliente){
+     
+    document.getElementById("alterarID").value= idCliente;
+
+    ModalAlterar.style.display = "block"; 
+
+  }
+
+botaoFecharAlterar.addEventListener("click", () => {
+    modal.style.display="none"; 
+})

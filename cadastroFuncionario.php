@@ -1,7 +1,5 @@
 <?php
 include("php/funcoes.php");
-
-$currentPage = 'cliente';
 ?>
 
 <!DOCTYPE html>
@@ -9,25 +7,25 @@ $currentPage = 'cliente';
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <link rel="stylesheet" href="css/style_clientes.css">
-    <title>Cadastro de Clientes</title>
+    <link rel="stylesheet" href="css/style_cadastros.css">
+    <title>Cadastro de Colaboradores</title>
 </head>
 <body>
    
 <?php include('sidebar.php'); ?>
 
 <div class="conteudo-principal">
-<!--<div style="flex: ; width: 100%;" >-->
+
 <!--                   TELA DE CADASTRO                                 -->
 <div id="meuModal" class="modal">
   <div class="modal-conteudo">
    <span class="botaoFechar">&times;</span>
-    <h2>Cadastro de Clientes</h2>
+    <h2>Cadastro de Colaboradores</h2>
 
-     <form method="POST" action="php/salvarCliente.php?opcao=I">
+     <form method="POST" action="php/salvarColaborador.php?opcao=I">
 
        <div class="linhaFormulario">
-         <input type="text" placeholder="Nome do cliente" name="nNome">
+         <input type="text" placeholder="Nome do Colaborador" name="nNome">
 
          <input type="text" placeholder="CPF" name="nCpf">
        </div>
@@ -65,33 +63,41 @@ $currentPage = 'cliente';
 </div>
 </div>
 
+
 <!--   TABELAS DOS CLIENTES                                                          -->
-<div class="table-section">
-      <div class="search-container">
-             <input type="text" class="form-control search-input" placeholder="Pesquisar...">
-             <button class="btn btn-blue search-btn">Buscar</button>
-      </div>
-       <div class="botaoContainer">
-        <input type="submit" value="Novo Cliente" id="botaoAbrir" >
-       </div>             
+<div class="table-section">        
+
+       <fieldset class="search-container">
+            <legend>Pesquisar Colaborador</legend>
+            <div class="search-box">
+                <label for="pesquisar">Pesquisar:</label>
+                <input type="text">
+                </select>
+            </div>
+        </fieldset>
+
+        <div class="botaoContainer">
+        <input type="submit" value="Novo Colaborador" id="botaoAbrir" >
+       </div> 
+       
       <br>
       <div calss="tela-fundo">
-        <h3>Clientes</h3>
+        <h3>Colaboradores</h3>
       <div class="table-container"> 
             <table  border= "1" class="tabelas" >
                 <thead>
                   <tr>
-                    <th>ID</th>
-                    <th>Nome do Cliente</th>
+                    <th>Matrícula</th>
+                    <th>Nome do Colaborador</th>
                     <th>Contato</th>
                     <th>Ações</th>
                   </tr>
-                  <?php echo listaClientes(); ?>
+                  <?php echo listaFuncionarios(); ?>
                 </thead>
             </table>
       </div>
       </div>
 </div>
-   <script src="js/scriptCliente.js"></script>
+   <script src="js/scriptColaborador.js"></script>
 </body>
 </html>
