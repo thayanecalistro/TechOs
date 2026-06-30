@@ -36,7 +36,7 @@
         </li>
 
         <li class="menu-item <?= ($currentPage == 'orcamento') ? 'active' : ''; ?>">
-            <a href="orcamento.php"><i class="fas fa-calculator"></i> <span>Orçamento</span></a>
+            <a href="orcamentos.php"><i class="fas fa-calculator"></i> <span>Orçamento</span></a>
         </li>
 
         <li class="menu-item <?= ($currentPage == 'cliente') ? 'active' : ''; ?>">
@@ -58,7 +58,11 @@
         </li>
 
         <li class="menu-item <?= ($currentPage == 'funcionario') ? 'active' : ''; ?>">
+<<<<<<< HEAD
             <a href="cadastroFuncionario.php"><i class="fas fa-user-tie"></i> <span>Colaboradores</span></a>
+=======
+            <a href="funcionarios.php"><i class="fas fa-user-tie"></i> <span>Funcionário</span></a>
+>>>>>>> f38372e0b639dd02a0bd5748fc010b7d91742171
         </li>
 
         <li class="menu-item <?= ($currentPage == 'estoque') ? 'active' : ''; ?>">

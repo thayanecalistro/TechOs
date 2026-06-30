@@ -1,30 +1,360 @@
+/* Herda a base do layout */
+.page-content {
+    display: flex;
+    flex-direction: column;
+    width: 100%;
+    padding: 24px;
+    min-height: 100vh;
+    overflow-x: hidden;
+    background-color: #243b55; /* Mesmo fundo do dashboard */
+    color: #ffffff;
+    font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+}
 
-/* VARIÁVEIS DE COR */
+/* Cabeçalho da página */
+.header-top {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    margin-bottom: 25px;
+}
+
+.header-top h2 {
+    font-size: 1.8rem;
+    color: #62b6cb; /* Mesmo ciano de destaque */
+    margin: 0;
+}
+
+/* Botão Novo */
+.btn-novo {
+    background-color: #2cb1bc; /* Cor padrão de ação */
+    border: none;
+    color: #ffffff;
+    padding: 9px 22px;
+    border-radius: 4px;
+    font-weight: 500;
+    font-size: 0.95rem;
+    cursor: pointer;
+    transition: background-color 0.2s;
+}
+
+.btn-novo:hover {
+    background-color: #2399a3;
+}
+
+hr {
+    border: none;
+    border-bottom: 1px solid #334e68;
+    margin: 0 0 25px 0;
+}
+
+/* Área de Pesquisa */
+.pesquisa-container {
+    background-color: #1a304a;
+    border-radius: 6px;
+    padding: 20px;
+    box-shadow: 0 4px 6px rgba(0, 0, 0, 0.15);
+    display: flex;
+    align-items: center;
+    gap: 12px;
+    margin-bottom: 25px;
+    flex-wrap: wrap;
+}
+
+.input-pesquisa {
+    background-color: #243b55;
+    border: 1px solid #486581;
+    border-radius: 4px;
+    color: #ffffff;
+    padding: 9px 12px;
+    min-width: 280px;
+    font-size: 0.95rem;
+}
+
+.input-pesquisa::placeholder {
+    color: #9fb3c8;
+}
+
+.input-pesquisa:focus {
+    outline: none;
+    border-color: #62b6cb;
+    box-shadow: 0 0 0 2px rgba(98, 182, 203, 0.2);
+}
+
+.btn-buscar {
+    background-color: #486581;
+    border: none;
+    color: #ffffff;
+    padding: 9px 18px;
+    border-radius: 4px;
+    cursor: pointer;
+    font-weight: 500;
+    transition: background-color 0.2s;
+}
+
+.btn-buscar:hover {
+    background-color: #3a526b;
+}
+
+.btn-ordenar {
+    background-color: #62b6cb;
+    border: none;
+    color: #102a43;
+    padding: 9px 18px;
+    border-radius: 4px;
+    cursor: pointer;
+    font-weight: 500;
+    transition: background-color 0.2s;
+}
+
+.btn-ordenar:hover {
+    background-color: #53a1b3;
+}
+
+.btn-limpar {
+    background-color: #334e68;
+    border: none;
+    color: #e2e8f0;
+    padding: 9px 18px;
+    border-radius: 4px;
+    text-decoration: none;
+    font-size: 0.95rem;
+    transition: background-color 0.2s;
+}
+
+.btn-limpar:hover {
+    background-color: #2b425a;
+    color: #ffffff;
+}
+
+/* Container da Tabela */
+.tabela-container {
+    background-color: #1a304a;
+    border-radius: 6px;
+    padding: 20px;
+    box-shadow: 0 4px 6px rgba(0, 0, 0, 0.15);
+    overflow-x: auto;
+}
+
+.tabela-estoque {
+    width: 100%;
+    border-collapse: collapse;
+    font-size: 13px;
+}
+
+.tabela-estoque th {
+    background-color: #334e68;
+    color: #ffffff;
+    padding: 12px;
+    font-weight: 500;
+    text-align: left;
+    border-bottom: 2px solid #486581;
+}
+
+.tabela-estoque td {
+    padding: 12px;
+    border-bottom: 1px solid #243b55;
+    color: #e2e8f0;
+}
+
+.tabela-estoque tbody tr:hover td {
+    background-color: #243b55;
+}
+
+.sem-dados {
+    text-align: center;
+    padding: 30px;
+    color: #9fb3c8;
+    font-style: italic;
+}
+
+/* Links de Ação */
+.acao-editar {
+    color: #f1c40f;
+    text-decoration: none;
+    font-weight: 500;
+    margin-right: 12px;
+    background: none;
+    border: none;
+    cursor: pointer;
+    font-size: inherit;
+}
+
+.acao-editar:hover {
+    text-decoration: underline;
+}
+
+.acao-excluir {
+    color: #d9534f;
+    text-decoration: none;
+    font-weight: 500;
+    background: none;
+    border: none;
+    cursor: pointer;
+    font-size: inherit;
+}
+
+.acao-excluir:hover {
+    text-decoration: underline;
+}
+
+/* ==========================================
+   ESTILOS DOS MODAIS
+========================================== */
+.modal-content {
+    background-color: #1a304a;
+    border: 1px solid #486581;
+    border-radius: 6px;
+    box-shadow: 0 10px 25px rgba(0, 0, 0, 0.3);
+    color: #ffffff;
+}
+
+.modal-header {
+    border-bottom: 1px solid #334e68;
+    padding: 16px 20px;
+}
+
+.modal-title {
+    color: #62b6cb;
+    font-size: 1.15rem;
+    font-weight: 500;
+}
+
+.btn-close {
+    filter: invert(1);
+    opacity: 0.7;
+}
+
+.btn-close:hover {
+    opacity: 1;
+}
+
+.modal-body {
+    padding: 20px;
+}
+
+.modal-footer {
+    border-top: 1px solid #334e68;
+    padding: 16px 20px;
+    display: flex;
+    justify-content: flex-end;
+    gap: 10px;
+}
+
+/* Campos do Formulário */
+.form-control {
+    background-color: #243b55;
+    border: 1px solid #486581;
+    border-radius: 4px;
+    color: #ffffff;
+    padding: 9px 12px;
+    font-size: 0.95rem;
+}
+
+.form-control:focus {
+    background-color: #243b55;
+    border-color: #62b6cb;
+    color: #ffffff;
+    outline: none;
+    box-shadow: 0 0 0 2px rgba(98, 182, 203, 0.2);
+}
+
+.form-control::placeholder {
+    color: #9fb3c8;
+}
+
+/* Grupo de input + botão */
+.input-com-botao {
+    display: flex;
+    gap: 8px;
+}
+
+.btn-sm-modal {
+    background-color: #62b6cb;
+    border: none;
+    color: #102a43;
+    width: 36px;
+    border-radius: 4px;
+    font-weight: bold;
+    cursor: pointer;
+    transition: background-color 0.2s;
+}
+
+.btn-sm-modal:hover {
+    background-color: #53a1b3;
+}
+
+/* Botões do modal */
+.btn-principal {
+    background-color: #2cb1bc;
+    border: none;
+    color: #ffffff;
+    padding: 8px 18px;
+    border-radius: 4px;
+    font-weight: 500;
+    cursor: pointer;
+    transition: background-color 0.2s;
+}
+
+.btn-principal:hover {
+    background-color: #2399a3;
+}
+
+.btn-secundario {
+    background-color: #334e68;
+    border: none;
+    color: #e2e8f0;
+    padding: 8px 18px;
+    border-radius: 4px;
+    font-weight: 500;
+    cursor: pointer;
+    transition: background-color 0.2s;
+}
+
+.btn-secundario:hover {
+    background-color: #2b425a;
+    color: #ffffff;
+}
+
+/* Responsividade */
+@media (max-width: 768px) {
+    .pesquisa-container {
+        flex-direction: column;
+        align-items: stretch;
+    }
+
+    .input-pesquisa {
+        width: 100%;
+    }
+
+    .btn-buscar, .btn-ordenar, .btn-limpar {
+        width: 100%;
+        text-align: center;
+    }
+}
+/* VARIÁVEIS DE COR 
 :root {
-    --bg-principal: #243b55;   /* Fundo padrão unificado do TechOS */
-    --bg-card: #1a304a;        /* Fundo dos cards igual ao dashboard/orçamento */
+    --bg-principal: #243b55;   
+    --bg-card: #1a304a;        
     --border-card: #4d647d;    
-    --bg-input: #102a43;       /* Fundo escuro dos inputs igual ao orçamento */
+    --bg-input: #102a43;     
     --texto-branco: #ffffff;
     
-    /* Cores dos Botões */
-    --btn-success: #2cb1bc;    /* Ciano padrão */
-    --btn-warning: #f1c40f;    /* Amarelo padrão */
+   
+    --btn-success: #2cb1bc;   
+    --btn-warning: #f1c40f;   
     --btn-info: #0dcaf0;       
-    --btn-danger: #d9534f;     /* Vermelho padrão */
+    --btn-danger: #d9534f;     
     --btn-secondary: #6c757d;  
 }
 
-/* RESET E CONFIGURAÇÃO GLOBAL */
 * {
     margin: 0;
     padding: 0;
     box-sizing: border-box;
 }
 
-/* Ajuste para o Estoque se comportar como as outras telas.
-   O wrapper principal no seu PHP deve usar a classe .page-content
-*/
+
 .page-content {
     display: flex;
     flex-direction: column;
@@ -44,17 +374,17 @@
 }
 
 h2 {
-    color: #62b6cb; /* Ciano de destaque padrão */
+    color: #62b6cb; 
     text-align: center;
     margin-bottom: 30px;
     font-size: 2rem;
 }
 
-/* ESTILIZAÇÃO DOS CARDS */
+
 .card-custom {
     background-color: var(--bg-card);
     border: 1px solid var(--border-card);
-    border-radius: 6px; /* Borda levemente arredondada como a do Bootstrap */
+    border-radius: 6px; /* Borda levemente arredondada como a do Bootstrap 
     padding: 24px;
     margin-bottom: 25px;
 }
@@ -67,7 +397,7 @@ h2 {
     font-weight: 500;
 }
 
-/* GRID DOS FORMULÁRIOS */
+
 .form-grid {
     display: grid;
     grid-template-columns: repeat(auto-fit, minmax(220px, 1fr));
@@ -86,7 +416,7 @@ label {
     font-size: 1rem;
 }
 
-/* INPUTS DO ESTILO TECHOS */
+
 .form-control-custom {
     width: 100%;
     padding: 8px 12px;
@@ -104,7 +434,7 @@ label {
     box-shadow: 0 0 0 0.25rem rgba(13, 202, 240, 0.25);
 }
 
-/* ESTRUTURA DA PESQUISA */
+
 .search-container {
     display: flex;
     align-items: flex-end;
@@ -117,7 +447,7 @@ label {
     min-width: 250px;
 }
 
-/* TABELA REAL */
+
 .table-responsive {
     width: 100%;
     overflow-x: auto;
@@ -138,14 +468,14 @@ label {
     border-bottom: 1px solid var(--border-card);
 }
 
-/* Estilo Dark Table do Bootstrap */
+
 .table-custom th {
     background-color: #1c232b; 
     color: var(--texto-branco);
     font-weight: 600;
 }
 
-/* Linhas alternadas (Striped) */
+
 .table-custom tbody tr:nth-of-type(odd) {
     background-color: rgba(0, 0, 0, 0.05);
 }
@@ -154,12 +484,12 @@ label {
     background-color: rgba(0, 0, 0, 0.15);
 }
 
-/* Efeito Hover na tabela */
+
 .table-custom tbody tr:hover {
     background-color: rgba(255, 255, 255, 0.07);
 }
 
-/* GRUPO DE BOTÕES E ESTILOS */
+
 .btn-group {
     display: flex;
     gap: 10px;
@@ -176,16 +506,207 @@ label {
 }
 
 .btn-custom:hover {
-    filter: brightness(85%); /* Escurece levemente no hover, igual ao Bootstrap */
+    filter: brightness(85%); 
 }
 
 .btn-custom:active {
     filter: brightness(70%);
 }
 
-/* Classes de cores dos botões 
+ Classes de cores dos botões 
 .btn-success-custom { background-color: var(--btn-success); color: var(--texto-branco); }
 .btn-warning-custom { background-color: var(--btn-warning); color: #000000; }
 .btn-info-custom { background-color: var(--btn-info); color: #000000; }
 .btn-danger-custom { background-color: var(--btn-danger); color: var(--texto-branco); }
-.btn-secondary-custom { background-color: var(--btn-secondary); color: var(--texto-branco); }*/
+.btn-secondary-custom { background-color: var(--btn-secondary); color: var(--texto-branco); }
+
+
+.page-content {
+    background-color: #1e3a5f;
+    color: #ffffff;
+    padding: 25px;
+    font-family: Arial, sans-serif;
+}
+
+.header-top {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    margin-bottom: 15px;
+}
+
+.header-top h2 {
+    margin: 0;
+    font-size: 24px;
+    font-weight: bold;
+}
+
+.btn-novo {
+    background-color: #28a745;
+    border: none;
+    color: white;
+    padding: 8px 20px;
+    border-radius: 4px;
+    font-weight: bold;
+    cursor: pointer;
+}
+
+.btn-novo:hover {
+    background-color: #218838;
+}
+
+hr {
+    border: 1px solid #2c5282;
+    margin: 15px 0;
+}
+
+Área de pesquisa
+.pesquisa-container {
+    display: flex;
+    align-items: center;
+    gap: 10px;
+    margin-bottom: 25px;
+    flex-wrap: wrap;
+}
+
+.input-pesquisa {
+    background-color: #2c5282;
+    border: 1px solid #4a78b8;
+    color: white;
+    padding: 8px 12px;
+    border-radius: 4px;
+    min-width: 280px;
+}
+
+.input-pesquisa::placeholder {
+    color: #b0c4de;
+}
+
+.btn-buscar {
+    background-color: #2385bb;
+    border: none;
+    color: white;
+    padding: 8px 16px;
+    border-radius: 4px;
+    cursor: pointer;
+}
+
+.btn-ordenar {
+    background-color: #20b2aa;
+    border: none;
+    color: white;
+    padding: 8px 16px;
+    border-radius: 4px;
+    cursor: pointer;
+}
+
+.btn-limpar {
+    background-color: #6c757d;
+    border: none;
+    color: white;
+    padding: 8px 16px;
+    border-radius: 4px;
+    text-decoration: none;
+    font-size: 14px;
+}
+
+
+.tabela-container {
+    background-color: #2c5282;
+    border-radius: 6px;
+    overflow: hidden;
+}
+
+.tabela-estoque {
+    width: 100%;
+    border-collapse: collapse;
+}
+
+.tabela-estoque thead tr {
+    background-color: #36649e;
+}
+
+.tabela-estoque th,
+.tabela-estoque td {
+    padding: 12px 15px;
+    text-align: left;
+    border-bottom: 1px solid #4a78b8;
+}
+
+.tabela-estoque tbody tr:hover {
+    background-color: #325a96;
+}
+
+.sem-dados {
+    text-align: center;
+    padding: 20px;
+    color: #b0c4de;
+}
+
+
+.acao-editar {
+    color: #ffc107;
+    text-decoration: none;
+    margin-right: 12px;
+    font-weight: bold;
+}
+
+.acao-excluir {
+    color: #ff4444;
+    text-decoration: none;
+    font-weight: bold;
+}
+
+
+.modal-content {
+    background-color: #2c5282;
+    color: white;
+    border: 1px solid #4a78b8;
+}
+
+.modal-header, .modal-footer {
+    border-color: #4a78b8;
+}
+
+.form-control {
+    background-color: #1e3a5f;
+    border: 1px solid #4a78b8;
+    color: white;
+}
+
+.form-control:focus {
+    background-color: #1e3a5f;
+    border-color: #20b2aa;
+    color: white;
+    box-shadow: none;
+}
+
+.input-com-botao {
+    display: flex;
+    gap: 8px;
+}
+
+.btn-sm-modal {
+    background-color: #20b2aa;
+    border: none;
+    color: white;
+    width: 36px;
+    border-radius: 4px;
+    font-weight: bold;
+}
+
+.btn-principal {
+    background-color: #2385bb;
+    border: none;
+}
+
+.btn-principal:hover {
+    background-color: #1a6a94;
+}
+
+.btn-secundario {
+    background-color: #6c757d;
+    border: none;
+
+    */
+

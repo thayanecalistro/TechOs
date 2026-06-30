@@ -1,76 +1,32 @@
 <?php
-// TEMPORARIAMENTE PARA VER O ERRO REAL
-// Força o PHP a mostrar os erros na tela
-//ini_set('display_errors', 1);
-//ini_set('display_startup_errors', 1);
-//error_reporting(E_ALL);
-
-//Para aparecer o Menu
+// estoque.php
 $currentPage = 'estoque';
-// 1. CONEXÃO COM O BANCO DE DADOS
 require_once('includes/conexao.php');
 
-// Inicializa a variável de pesquisa com segurança
 $pesquisa = '';
 if (isset($_POST['busca']) && !empty(trim($_POST['busca']))) {
-    $pesquisa = mysqli_real_escape_string($conn, trim($_POST['busca']));
+    $pesquisa = trim($_POST['busca']);
 }
-
-// 2. PROCESSA O CADASTRO (Quando o usuário clica em "Cadastrar")
-if ($_SERVER['REQUEST_METHOD'] == 'POST' && isset($_POST['NomeFornecedor'])) {
-    $NomeFornecedor = mysqli_real_escape_string($conn, $_POST['NomeFornecedor']);
-    $peca = mysqli_real_escape_string($conn, $_POST['peca']);
-    $valor = floatval($_POST['valor']);
-    $quantidade = intval($_POST['quantidade']);
-
-    // Calcula o total no PHP antes de salvar no banco
-    $total = $valor * $quantidade;
-
-    // Insere os dados na tabela 'estoque'
-    $sql_insert = "INSERT INTO estoque (NomeFornecedor, peca, valor, quantidade, total) 
-                   VALUES ('$NomeFornecedor', '$peca', '$valor', '$quantidade', '$total')";
-    
-    if (mysqli_query($conn, $sql_insert)) {
-        // Redireciona para si mesmo para evitar reenvio de formulário
-        header("Location: estoque.php");
-        exit;
-    } else {
-        echo "Erro ao salvar no banco: " . mysqli_error($conn);
-    }
-}
-
-// 3. PROCESSA A EXCLUSÃO (Quando o usuário clica no botão Excluir)
-if (isset($_GET['excluir'])) {
-    $id_excluir = intval($_GET['excluir']);
-    $sql_delete = "DELETE FROM estoque WHERE idEstoque = $id_excluir";
-    
-    if (mysqli_query($conn, $sql_delete)) {
-        header("Location: estoque.php");
-        exit;
-    } else {
-        echo "Erro ao excluir item: " . mysqli_error($conn);
-    }
-}
-
-// 4. SISTEMA DE BUSCA / LISTAGEM
-if (!empty($pesquisa)) {
-    // Se o usuário buscou algo, filtra por Fornecedor ou Peça
-    $sql_busca = "SELECT * FROM estoque WHERE NomeFornecedor LIKE '%$pesquisa%' OR peca LIKE '%$pesquisa%' ORDER BY idEstoque DESC";
-} else {
-    // Se não buscou nada, traz todos os produtos
-    $sql_busca = "SELECT * FROM estoque ORDER BY idEstoque DESC";
-}
-
-$resultado = mysqli_query($conn, $sql_busca);
 
 $produtos = [];
+if (!empty($pesquisa)) {
+    $sql_busca = "SELECT * FROM estoque WHERE NomeFornecedor LIKE ? OR peca LIKE ? ORDER BY idEstoque DESC";
+    $stmt = mysqli_prepare($conn, $sql_busca);
+    $param = "%" . $pesquisa . "%";
+    mysqli_stmt_bind_param($stmt, "ss", $param, $param);
+    mysqli_stmt_execute($stmt);
+    $resultado = mysqli_stmt_get_result($stmt);
+} else {
+    $sql_busca = "SELECT * FROM estoque ORDER BY idEstoque DESC";
+    $resultado = mysqli_query($conn, $sql_busca);
+}
+
 if ($resultado && mysqli_num_rows($resultado) > 0) {
     while ($linha = mysqli_fetch_assoc($resultado)) {
         $produtos[] = $linha;
     }
 }
 ?>
-
 <!DOCTYPE html>
 <html lang="pt-br">
 <head>
@@ -78,113 +34,112 @@ if ($resultado && mysqli_num_rows($resultado) > 0) {
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Controle de Estoque</title>
     <link rel="stylesheet" href="css/estoque.css">
-    
-    <script>
-        // Função Javascript que calcula o total em tempo real na tela
-        function calcularTotal() {
-            var valor = parseFloat(document.getElementById('valor').value) || 0;
-            var qtd = parseInt(document.getElementById('qtd').value) || 0;
-            var total = valor * qtd;
-            document.getElementById('total').value = total.toFixed(2);
-        }
-    </script>
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css">
 </head>
 <body>
-    <!--Para aparecer Menu-->
     <?php include('sidebar.php'); ?>
-    
+
     <div class="page-content">
-        <h2>Listagem de Estoque</h2>
-
-        <div class="card-custom">
-            <h5 class="card-title">Cadastrar Item no Estoque</h5>
-
-            <form action="estoque.php" method="POST">
-                <div class="form-grid">
-
-                    <div class="form-group">
-                        <label>Fornecedor: </label>
-                        <input type="text" name="NomeFornecedor" class="form-control-custom" required>
-                    </div>
-
-                    <div class="form-group">
-                        <label>Peça: </label>
-                        <input type="text" name="peca" class="form-control-custom" required>
-                    </div>
-
-                    <div class="form-group">
-                        <label>Preço Unitário (R$): </label>
-                        <input type="number" step="0.01" id="valor" name="valor" class="form-control-custom" oninput="calcularTotal()" required>
-                    </div>
-
-                    <div class="form-group">
-                        <label>Quantidade: </label>
-                        <input type="number" id="qtd" name="quantidade" class="form-control-custom" oninput="calcularTotal()" required>
-                    </div>
-
-                    <div class="form-group">
-                        <label>Total: </label>
-                        <input type="number" step="0.01" name="total" id="total" class="form-control-custom" readonly>
-                    </div>
-                </div>
-
-                <div class="btn-group">
-                    <button type="submit" class="btn-custom btn-info-custom">Cadastrar</button>
-                    <button type="button" class="btn-custom btn-warning-custom">Alterar</button>
-                </div>
-            </form>
+        <div class="header-top">
+            <h2>Estoque</h2>
+            <button type="button" class="btn-novo btn btn-primary" data-bs-toggle="modal" data-bs-target="#modalEstoque">Novo</button>
         </div>
+        <hr>
 
-        <div class="card-custom">
+        <div class="pesquisa-container">
             <form method="POST" action="estoque.php">
-                <div class="search-container">
-                    <div class="form-group search-input-group">
-                        <label>Pesquisar</label>
-                        <input type="text" name="busca" value="<?php echo htmlspecialchars($pesquisa); ?>" placeholder="Digite o fornecedor ou peça...">
-                    </div>
-                    <button type="submit" class="btn-custom btn-info-custom">Pesquisar</button>
-                    <button type="submit" class="btn-custom btn-secondary-custom">Limpar pesquisa </button>
-                </div>
+                <input type="text" name="busca" value="<?= htmlspecialchars($pesquisa) ?>" placeholder="ID, Fornecedor ou Peça..." class="input-pesquisa">
+                <button type="submit" class="btn-buscar">Buscar</button>
+                <a href="estoque.php" class="btn-limpar">Limpar</a>
             </form>
         </div>
 
-        <table class="table-custom">
-            <thead>
-                <tr>
-                    <th>ID</th>
-                    <th>Fornecedor</th>
-                    <th>Peça</th>
-                    <th>Preço Unitário</th>
-                    <th>Quantidade</th>
-                    <th>Total (R$)</th>
-                </tr>
-            </thead>
-            <tbody>
-                <?php if (!empty($produtos)): ?>
-                    <?php foreach ($produtos as $prod): ?>
-                        <tr>
-                            <td><?php echo $prod['idEstoque']; ?></td>
-                            <td><?php echo htmlspecialchars($prod['NomeFornecedor']); ?></td>
-                            <td><?php echo htmlspecialchars($prod['peca']); ?></td>
-                            <td>R$ <?php echo number_format($prod['valor'], 2, ',', '.'); ?></td>
-                            <td><?php echo $prod['quantidade']; ?></td>
-                            <td>R$ <?php echo number_format($prod['total'], 2, ',', '.'); ?></td>
-                            <td>
-                                <a href="estoque.php?excluir=<?php echo $prod['idEstoque']; ?>" 
-                                   onclick="return confirm('Tem certeza que deseja excluir este item do estoque?')" 
-                                   style="color: red; text-decoration: none; font-weight: bold;">
-                                   Excluir
-                                </a>
-                            </td>
-                        </tr>
-                    <?php endforeach; ?>
-                <?php else: ?>
+        <div class="tabela-container mt-4">
+            <table class="tabela-estoque table table-striped">
+                <thead>
                     <tr>
-                        <td colspan="7" style="text-align:center;">Nenhum produto encontrado no estoque.</td>
+                        <th>ID</th>
+                        <th>Fornecedor</th>
+                        <th>Peça</th>
+                        <th>Valor Unitário</th>
+                        <th>Quantidade</th>
+                        <th>Total (R$)</th>
+                        <th>Ações</th>
                     </tr>
-                <?php endif; ?>
-            </tbody>
-        </table>
+                </thead>
+                <tbody>
+                    <?php if (!empty($produtos)): ?>
+                        <?php foreach ($produtos as $prod): ?>
+                            <tr>
+                                <td><?= $prod['idEstoque'] ?></td>
+                                <td><?= htmlspecialchars($prod['NomeFornecedor']) ?></td>
+                                <td><?= htmlspecialchars($prod['peca']) ?></td>
+                                <td>R$ <?= number_format($prod['valor'], 2, ',', '.') ?></td>
+                                <td><?= $prod['quantidade'] ?></td>
+                                <td>R$ <?= number_format($prod['total'], 2, ',', '.') ?></td>
+                                <td>
+                                    <button type="button" class="acao-editar btn btn-sm btn-warning" 
+                                        data-id="<?= $prod['idEstoque'] ?>"
+                                        data-fornecedor="<?= htmlspecialchars($prod['NomeFornecedor']) ?>"
+                                        data-peca="<?= htmlspecialchars($prod['peca']) ?>"
+                                        data-valor="<?= $prod['valor'] ?>"
+                                        data-quantidade="<?= $prod['quantidade'] ?>"
+                                        data-total="<?= $prod['total'] ?>">Editar</button>
+                                    
+                                    <a href="salvarEstoque.php?excluir_id=<?= $prod['idEstoque'] ?>" class="btn btn-sm btn-danger" onclick="return confirm('Deseja realmente excluir?')">Excluir</a>
+                                </td>
+                            </tr>
+                        <?php endforeach; ?>
+                    <?php else: ?>
+                        <tr><td colspan="7" class="sem-dados text-center">Nenhum item em estoque.</td></tr>
+                    <?php endif; ?>
+                </tbody>
+            </table>
+        </div>
     </div>
+
+    <div class="modal fade" id="modalEstoque" tabindex="-1" aria-hidden="true">
+        <div class="modal-dialog">
+            <div class="modal-content">
+                <form id="formEstoque" method="POST" action="salvarEstoque.php">
+                    <div class="modal-header">
+                        <h5 class="modal-title" id="tituloModalEstoque">Novo Item no Estoque</h5>
+                        <button type="button" class="btn-close" data-bs-dismiss="modal"></button>
+                    </div>
+                    <div class="modal-body">
+                        <input type="hidden" name="idEstoque" id="idEstoque" value="">
+                        
+                        <div class="mb-3">
+                            <label class="form-label">Fornecedor</label>
+                            <input type="text" name="NomeFornecedor" id="NomeFornecedor" class="form-control" required>
+                        </div>
+                        <div class="mb-3">
+                            <label class="form-label">Peça</label>
+                            <input type="text" name="peca" id="peca" class="form-control" required>
+                        </div>
+                        <div class="mb-3">
+                            <label class="form-label">Valor Unitário (R$)</label>
+                            <input type="number" step="0.01" id="valor" name="valor" class="form-control" oninput="calcularTotal()" required>
+                        </div>
+                        <div class="mb-3">
+                            <label class="form-label">Quantidade</label>
+                            <input type="number" id="qtd" name="quantidade" class="form-control" oninput="calcularTotal()" required>
+                        </div>
+                        <div class="mb-3">
+                            <label class="form-label">Total (R$)</label>
+                            <input type="number" step="0.01" id="total" name="total" class="form-control" readonly>
+                        </div>
+                    </div>
+                    <div class="modal-footer">
+                        <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Cancelar</button>
+                        <button type="submit" class="btn btn-primary">Salvar</button>
+                    </div>
+                </form>
+            </div>
+        </div>
+    </div>
+
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js"></script>
+    <script src="js/estoque.js"></script>
 </body>
 </html>
