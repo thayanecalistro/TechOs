@@ -1,0 +1,220 @@
+.relatorio-header {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    border-bottom: 1px solid #486581;
+    padding-bottom: 10px;
+    margin-bottom: 25px;
+    width: 100%; 
+}
+
+.relatorio-header h2 {
+    font-size: 1.8rem;
+    color: #62b6cb;
+    margin: 0;
+}
+
+/* ==========================================================================
+   FILTROS DO RELATÓRIO
+   ========================================================================== */
+.table-section {
+    width: 100%;
+    display: flex;
+    flex-direction: column;
+    gap: 15px;
+}
+
+.search-fieldset {
+    border: 1px solid #334e68;
+    border-radius: 4px;
+    padding: 15px;
+    margin-bottom: 20px;
+    width: 100%;
+    box-sizing: border-box;
+}
+
+.search-fieldset legend {
+    padding: 0 10px;
+    font-size: 14px;
+    color: #9fb3c8;
+}
+
+.search-box-relatorio {
+    display: flex;
+    align-items: flex-end;
+    gap: 20px;
+    flex-wrap: wrap;
+}
+
+.filter-group {
+    display: flex;
+    flex-direction: column;
+    gap: 5px;
+}
+
+.filter-label {
+    font-size: 0.85rem;
+    color: #9fb3c8;
+}
+
+.btn-select, .input-data {
+    background-color: #102a43;
+    border: 1px solid #334e68;
+    color: white;
+    padding: 6px 12px;
+    border-radius: 4px;
+    height: 34px;
+    outline: none;
+    cursor: pointer;
+}
+
+.input-data {
+    width: 160px;
+}
+
+.btn-align {
+    height: 34px;
+}
+
+/* Botões */
+.btn-sucesso {
+    background-color: #28a745;
+    color: white;
+    border: none;
+    padding: 10px 15px;
+    border-radius: 4px;
+    cursor: pointer;
+    font-weight: bold;
+}
+.btn-sucesso:hover { background-color: #218838; }
+
+.btn {
+    padding: 0 20px;
+    border: none;
+    border-radius: 4px;
+    cursor: pointer;
+    font-size: 14px;
+    height: 34px;
+}
+.btn-blue { background-color: #486581; color: white; }
+.btn-blue:hover { background-color: #627d98; }
+
+/* ==========================================================================
+   TABELA MASTER ALINHADA MILIMETRICAMENTE
+   ========================================================================== */
+.table-card-fundo {
+    background-color: #1a304a;
+    border-radius: 6px;
+    padding: 20px;
+    box-shadow: 0 4px 15px rgba(0, 0, 0, 0.3);
+    border: 1px solid #334e68;
+    width: 100%; 
+}
+
+.table-container {
+    width: 100%;
+    overflow-x: auto;
+}
+
+.dashboard-table {
+    width: 100%;
+    border-collapse: collapse;
+    text-align: left;
+    font-size: 13px;
+}
+
+.dashboard-table th {
+    background-color: #334e68;
+    color: #ffffff;
+    padding: 12px;
+    font-weight: 500;
+    border-bottom: 2px solid #486581;
+}
+
+.dashboard-table td {
+    padding: 12px;
+    border-bottom: 1px solid #243b53;
+    color: #e2e8f0;
+}
+
+.dashboard-table tbody tr:hover td {
+    background-color: #243b53 !important;
+}
+
+/* Badges */
+.badge-modulo {
+    padding: 3px 8px;
+    border-radius: 4px;
+    font-size: 0.75rem;
+    font-weight: 500;
+    display: inline-block;
+}
+.mod-orcamento { background-color: #3b82f6; color: white; }
+.mod-cliente { background-color: #2cb1bc; color: #102a43; }
+.mod-funcionario { background-color: #a855f7; color: white; }
+
+.badge {
+    padding: 2px 6px;
+    border-radius: 12px;
+    font-size: 0.7rem;
+    font-weight: bold;
+}
+.badge-aprovado { background-color: #2cb1bc; color: #102a43; }
+
+/* ==========================================================================
+   GRID DE CARDS (MÉTRICAS)
+   ========================================================================== */
+.cards-grid {
+    display: grid;
+    grid-template-columns: repeat(4, 1fr);
+    gap: 20px;
+    margin-bottom: 30px;
+}
+
+.card {
+    background-color: #1a304a;
+    border-radius: 6px;
+    padding: 20px;
+    display: flex;
+    align-items: center;
+    gap: 15px;
+    box-shadow: 0 4px 6px rgba(0, 0, 0, 0.15);
+    border-bottom: 4px solid transparent;
+}
+
+.card-icon {
+    font-size: 2rem;
+    width: 50px;
+    height: 50px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    border-radius: 4px;
+}
+
+.card-info h3 {
+    margin: 0;
+    font-size: 1.5rem;
+    font-weight: bold;
+}
+
+.card-info p {
+    margin: 2px 0 0 0;
+    color: #9fb3c8;
+    font-size: 0.85rem;
+    text-transform: uppercase;
+    letter-spacing: 0.5px;
+}
+
+/* Cores específicas de cada Card */
+.card-blue { border-color: #486581; }
+.card-blue .card-icon { color: #486581; background-color: rgba(72, 101, 129, 0.1); }
+
+.card-yellow { border-color: #f1c40f; }
+.card-yellow .card-icon { color: #f1c40f; background-color: rgba(241, 196, 15, 0.1); }
+
+.card-teal { border-color: #62b6cb; }
+.card-teal .card-icon { color: #62b6cb; background-color: rgba(98, 182, 203, 0.1); }
+
+.card-green { border-color: #2cb1bc; }
+.card-green .card-icon { color: #2cb1bc; background-color: rgba(44, 177, 188, 0.1); }

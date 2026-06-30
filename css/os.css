@@ -98,6 +98,17 @@
 .btn-light-blue { background-color: #3b82f6; color: white; }
 .btn-light-blue:hover { background-color: #60a5fa; }
 
+.btn-sucesso {
+    background-color: #28a745;
+    color: white;
+    border: none;
+    padding: 10px 15px;
+    border-radius: 4px;
+    cursor: pointer;
+    font-weight: bold;
+}
+
+.btn-sucesso:hover { background-color: #218838; }
 .section-card {
     background-color: #1a304a;
     border-radius: 6px;
