@@ -13,7 +13,7 @@ $currentPage = 'cliente';
     <title>TechOS - Cadastro de Clientes</title>
 
     <link rel="stylesheet" href="css/os.css"> 
-    <link rel="stylesheet" href="css/style_cadastros.css"> 
+    <link rel="stylesheet" href="css/style_cliente.css"> 
 </head>
 <body>
 

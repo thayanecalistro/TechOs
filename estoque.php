@@ -110,10 +110,6 @@ if ($resultado && mysqli_num_rows($resultado) > 0) {
                     <div class="modal-body">
                         <input type="hidden" name="idEstoque" id="idEstoque" value="">
                         
-                        <div class="form-group">
-                            <label for="Cliente_idCliente">Nome do Cliente *</label>
-                            <input type="number" id="Cliente_idCliente" name="Cliente_idCliente" required placeholder="Ex: 1">
-                        </div>
                         <div class="mb-3">
                             <label class="form-label">Fornecedor</label>
                             <input type="text" name="NomeFornecedor" id="NomeFornecedor" class="form-control" required>

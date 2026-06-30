@@ -67,7 +67,7 @@
     cursor: pointer;
     font-size: 14px;
     transition: background 0.2s;
-    background-color: rgb(18, 77, 18); /* Verde do botão do NICO */
+    background-color: #28a745; /* Verde do botão do NICO */
     color: white;
 }
 .btn-novo:hover { background-color: rgb(13, 58, 13); }

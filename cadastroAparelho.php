@@ -8,7 +8,8 @@ $currentPage = 'aparelho';
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <link rel="stylesheet" href="css/aparelho.css">
+    <link rel="stylesheet" href="css/os.css">
+    <link rel="stylesheet" href="css/aparelhos.css">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
     <title>Cadastro de Aparelho</title>
 </head>
@@ -17,9 +18,10 @@ $currentPage = 'aparelho';
    <?php include('sidebar.php'); ?>
     
    <div class="main-content-container">
+
         <div class="header-table-section">
-            <h2>Aparelhos</h2>
-            <button id="btnAbrirNovo" class="btn-novo">Novo Aparelho</button>
+            <h2>Gerenciar Aparelhos</h2>
+            <button id="btnAbrirNovo" class="btn-novo">+ Novo</button>
         </div>
 
         <div class="table-container">
