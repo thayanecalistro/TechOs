@@ -147,6 +147,6 @@ $currentPage = 'cliente';
       </div>
       </div>
 </div>
-   <script src="js/scriptCliente.js"></script>
+   <script src="js/scriptCadastro.js"></script>
 </body>
 </html>

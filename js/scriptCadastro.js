@@ -20,17 +20,5 @@ window.addEventListener("click", (event) => {
     }
 }); 
 
-const modalAlterar = document.getElementById("meuModalAlterar"); 
-const botaoFecharAlterar = document.querySelector(".botaoFecharAlterar"); 
+// ----------------------  PARA A SUBTELA PARA ALTERAÇÃO ---------------
 
-  function abrirModalAlterar(idCliente){
-     
-    document.getElementById("alterarID").value= idCliente;
-
-    ModalAlterar.style.display = "block"; 
-
-  }
-
-botaoFecharAlterar.addEventListener("click", () => {
-    modal.style.display="none"; 
-})
