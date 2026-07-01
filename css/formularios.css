@@ -1,0 +1,79 @@
+/* Estilos para Modais de Cadastro de Alta Densidade (Clientes / Orçamentos) */
+
+.modal-large {
+    max-width: 600px !important;
+    width: 95% !important;
+    text-align: left !important;
+}
+
+.modal-large h3 {
+    text-align: center;
+    margin-bottom: 20px;
+}
+
+/* Título de subseções dentro do formulário (Ex: Endereço) */
+.form-section-title {
+    grid-column: span 2;
+    font-size: 14px;
+    font-weight: bold;
+    color: #62b6cb;
+    margin-top: 10px;
+    border-bottom: 1px solid #334e68;
+    padding-bottom: 5px;
+}
+
+/* Grid do Formulário Responsivo */
+.form-grid {
+    display: grid;
+    grid-template-columns: repeat(2, 1fr);
+    gap: 12px;
+    margin-bottom: 20px;
+}
+
+.full-width {
+    grid-column: span 2;
+}
+
+/* Elemento de Input agrupado com Label */
+.form-group {
+    display: flex;
+    flex-direction: column;
+    gap: 4px;
+}
+
+.form-group label {
+    font-size: 12px;
+    color: #9fb3c8;
+}
+
+/* Inputs Padronizados TechOS */
+.form-group input[type="text"],
+.form-group input[type="number"],
+.form-group select,
+.form-group textarea {
+    background-color: #102a43;
+    border: 1px solid #334e68;
+    color: #ffffff;
+    padding: 8px 10px;
+    border-radius: 4px;
+    outline: none;
+    font-family: inherit;
+    font-size: 13.5px;
+    transition: border-color 0.2s;
+}
+
+.form-group input:focus,
+.form-group select:focus,
+.form-group textarea:focus {
+    border-color: #2cb1bc;
+}
+
+/* Ajustes para telas pequenas */
+@media (max-width: 580px) {
+    .form-grid {
+        grid-template-columns: 1fr;
+    }
+    .full-width, .form-section-title {
+        grid-column: span 1;
+    }
+}
