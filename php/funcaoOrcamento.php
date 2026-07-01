@@ -1,5 +1,5 @@
 <?php
-function listaOrcamento(){
+function listarOrcamentos(){
     $html = "";
 
     // INNER JOIN robusto associando as chaves estrangeiras reais das suas tabelas
@@ -39,4 +39,24 @@ function listaOrcamento(){
 
     return $html;
 }
+
+function comboClientes() {
+    $html = "<option value=''>Selecione um Cliente...</option>";
+    // Query para buscar o ID e o Nome de todos os clientes
+    $sql = "SELECT idCliente, nomeCliente FROM clientes ORDER BY nomeCliente ASC";
+    
+    include("includes/conexao.php"); // caminho da sua conexão
+    $result = mysqli_query($conn, $sql);
+    mysqli_close($conn);
+
+    if ($result && mysqli_num_rows($result) > 0) {
+        while ($coluna = mysqli_fetch_assoc($result)) {
+            // O valor enviado no formulário será o ID, mas o usuário verá o Nome
+            $html .= "<option value='" . $coluna['nomeCliente'] . "' data-id='" . $coluna['idCliente'] . "'></option>";
+        }
+    }
+    
+    return $html;
+}
+
 ?>

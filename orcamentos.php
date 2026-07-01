@@ -1,4 +1,7 @@
 <?php
+
+include("php/funcoes.php");
+
 $currentPage = 'orcamento';
 
 // Simulação de dados vindos do banco de dados (Baseado na sua tabela 'orcamento')
@@ -89,18 +92,7 @@ $orcamentos = [
                         </tr>
                     </thead>
                     <tbody>
-                        <?php foreach ($orcamentos as $orc): ?>
-                            <tr>
-                                <td><?= $orc['idOrcamento']; ?></td>
-                                <td><?= $orc['Cliente_idCliente']; ?></td>
-                                <td><?= $orc['Aparelho_idAparelho']; ?></td>
-                                <td><?= $orc['peca']; ?></td>
-                                <td><?= $orc['valorUni']; ?></td>
-                                <td><?= $orc['maoObra']; ?></td>
-                                <td><strong><?= $orc['valorTotal']; ?></strong></td>
-                                <td><span class="badge badge-<?= $orc['status']; ?>"><?= $orc['status']; ?></span></td>
-                            </tr>
-                        <?php endforeach; ?>
+                        <?php echo listarOrcamentos(); ?>
                     </tbody>
                 </table>
             </div>
@@ -112,9 +104,21 @@ $orcamentos = [
             <h3>Cadastrar Novo Orçamento</h3>
             <form id="formOrcamento" action="#" method="POST">
                 <div class="form-grid">
+
                     <div class="form-group">
-                        <label for="Cliente_idCliente">Nome do Cliente *</label>
-                        <input type="text" id="Cliente_idCliente" name="Cliente_idCliente" required placeholder="Ex: 1">
+                        <label for="cliente_busca">Nome do Cliente *</label>
+                        <input type="text" id="cliente_busca" list="listaClientes" required placeholder="Digite o nome do cliente..." autocomplete="off">
+                        <input type="hidden" id="Clientes_idCliente" name="Clientes_idCliente" required>
+                        <datalist id="listaClientes">
+                            <?php echo comboClientes(); ?>
+                        </datalist>
+                    </div>
+
+                    <div class="form-group">
+                        <label for="Aparelho_idAparelho">Aparelho *</label>
+                        <select id="Aparelho_idAparelho" name="Aparelho_idAparelho" required style="width: 100%; height: 35px; border-radius: 4px; background-color: #0c1f32; color: white; border: 1px solid #2cb1bc;">
+                            <option value="">Selecione primeiro o cliente...</option>
+                        </select>
                     </div>
 
                     <div class="form-group">
@@ -173,4 +177,26 @@ $orcamentos = [
 
     <script src="js/orcamentos.js"></script>
 </body>
+
+<!--?php foreach ($orcamentos as $orc): ?>
+                            <tr>
+                                <td>?= $orc['idOrcamento']; ?></td>
+                                <td>?= $orc['Cliente_idCliente']; ?></td>
+                                <td>?= $orc['Aparelho_idAparelho']; ?></td>
+                                <td>?= $orc['peca']; ?></td>
+                                <td>?= $orc['valorUni']; ?></td>
+                                <td>?= $orc['maoObra']; ?></td>
+                                <td><strong>?= $orc['valorTotal']; ?></strong></td>
+                                <td><span class="badge badge-?= $orc['status']; ?>">?= $orc['status']; ?></span></td>
+                            </tr>
+                        ?php endforeach; ?>
+                        
+                        <div class="form-group">
+                        <label for="Clientes_idCliente">Nome do Cliente *</label>
+                        <select name="Clientes_idCliente" id="Clientes_idCliente" required style="width: 100%; 
+                                      height: 35px; border-radius: 4px; background-color: #0c1f32; color: white; 
+                                      border: 1px solid #2cb1bc;">
+                                      ?php echo comboClientes(); ?>
+                        </select>
+                    </div>-->
 </html>

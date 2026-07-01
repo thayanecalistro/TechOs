@@ -34,5 +34,5 @@ $result = mysqli_query($conn,$sql);
 mysqli_close($conn); 
 
 //tratar o retorno
-header("location:../cadastroCliente.php");
+header("location:../cliente.php");
 ?>

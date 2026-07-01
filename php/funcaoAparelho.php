@@ -4,10 +4,10 @@ function listaAparelho(){
     $html = "";
 
     // Query unindo as tabelas de clientes, marcas e modelos cadastrados
-    $sql = "SELECT a.idAparelho, a.Cliente_idCliente, a.Marca_idMarca, a.Modelo_idModelo, a.imeiAparelho,
+    $sql = "SELECT a.idAparelho, a.Clientes_idCliente, a.Marca_idMarca, a.Modelo_idModelo, a.imeiAparelho,
                    c.nomeCliente, m.nomeMarca, mo.nomeModelo
             FROM aparelho a
-            LEFT JOIN cliente c ON a.Cliente_idCliente = c.idCliente
+            LEFT JOIN clientes c ON a.Clientes_idCliente = c.idCliente
             LEFT JOIN marca m ON a.Marca_idMarca = m.idMarca
             LEFT JOIN modelo mo ON a.Modelo_idModelo = mo.idModelo";
             
@@ -76,7 +76,7 @@ function listaOpcoesMarcas($idSelecionado = null) {
 function listaOpcoesClientes($idSelecionado = null) {
     $html = "";
     // CORREÇÃO: Alterado de 'clientes' para 'cliente' conforme definido no techos.sql
-    $sql = "SELECT idCliente, nomeCliente FROM cliente ORDER BY nomeCliente ASC";
+    $sql = "SELECT idCliente, nomeCliente FROM clientes ORDER BY nomeCliente ASC";
     
     include("conexao.php");
     $result = mysqli_query($conn, $sql);
