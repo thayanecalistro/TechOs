@@ -11,7 +11,7 @@ $currentPage = 'cliente';
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
 
     <link rel="stylesheet" href="css/os.css">
-    <link rel="stylesheet" href="css/style_cadastros.css">
+    <link rel="stylesheet" href="css/style_cliente.css">
     <title>Cadastro de Clientes</title>
 </head>
 <body>
@@ -27,37 +27,35 @@ $currentPage = 'cliente';
         <button type="button" class="btn btn-sucesso" id="botaoAbrir">+ Novo</button>
       </div>
 
-      <!--   TABELAS DOS CLIENTES                                                          -->
-      <div class="table-section">        
-
+      <!--   TABELAS DOS CLIENTES                                                          -->  
       <fieldset class="search-fieldset">
-          <legend>Pesquisar Cliente</legend>
-          <div class="search-box">
-              <label for="pesquisar">Pesquisar:</label>
-              <input type="text">
+          <legend>Pesquisar</legend>
+          <div class="search-box"> 
+              <input type="text" id="pesquisar" name="pesquisar" placeholder="ID ou Nome...">
+              <button type="button" class="btn btn-blue" id="btnBuscar">Buscar</button>
               </select>
           </div>
       </fieldset>
 
-      <br>
-      <div calss="tela-fundo">
-      <h3>Clientes</h3>
-      <div class="table-container"> 
-          <table  border= "1" class="tabelas" >
-              <thead>
-                <tr>
-                  <th>ID</th>
-                  <th>Nome do Cliente</th>
-                  <th>Contato</th>
-                  <th>Ações</th>
-                </tr>
-                <?php echo listaClientes(); ?>
-              </thead>
-          </table>
+      <div class="section-card">
+        
+        <div class="table-container"> 
+            <table  class="os-table" id="clienteTable">
+                <thead>
+                  <tr>
+                    <th>ID</th>
+                    <th>Nome do Cliente</th>
+                    <th>Contato</th>
+                    <th>Ações</th>
+                  </tr>
+                </thead>
+                <tbody>
+                  <?php echo listaClientes(); ?>
+                </tbody>
+            </table>
+        </div>
       </div>
-      </div>
-      </div>
-
+    </div>
     <!--                   TELA DE CADASTRO                                 -->
       <div id="meuModal" class="modal">
         <div class="modal-conteudo">
@@ -103,7 +101,6 @@ $currentPage = 'cliente';
 
         </div>
       </div>
-    </div>
 
 <!--         MODAL PARA ALTERAÇÃO DE DADOS DO COLABORADOR -->
 <div id="meuModalAlterar" class="modal">
@@ -153,44 +150,8 @@ $currentPage = 'cliente';
   </div>
 </div>
 
-<<<<<<< Updated upstream
 <!--   TABELAS DOS CLIENTES                                                          -->
-<div class="table-section">        
 
-       <fieldset class="search-container">
-            <legend>Pesquisar Cliente</legend>
-            <div class="search-box">
-                <label for="pesquisar">Pesquisar:</label>
-                <input type="text">
-                </select>
-            </div>
-        </fieldset>
-
-        <div class="botaoContainer">
-        <input type="submit" value="Novo Cliente" id="botaoAbrir" >
-       </div> 
-       
-      <br>
-      <div calss="tela-fundo">
-        <h3>Clientes</h3>
-      <div class="table-container"> 
-            <table  border= "1" class="tabelas" >
-                <thead>
-                  <tr>
-                    <th>ID</th>
-                    <th>Nome do Cliente</th>
-                    <th>Contato</th>
-                    <th>Ações</th>
-                  </tr>
-                  <?php echo listaClientes(); ?>
-                </thead>
-            </table>
-      </div>
-      </div>
-</div>
    <script src="js/scriptCadastro.js"></script>
-=======
-   <script src="js/scriptCliente.js"></script>
->>>>>>> Stashed changes
 </body>
 </html>

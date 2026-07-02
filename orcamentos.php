@@ -3,36 +3,6 @@
 include("php/funcoes.php");
 
 $currentPage = 'orcamento';
-
-// Simulação de dados vindos do banco de dados (Baseado na sua tabela 'orcamento')
-$orcamentos = [
-    [
-        "idOrcamento" => 1,
-        "diagnostico" => "Tela quebrada após queda",
-        "peca" => "Tela Frontal Samsung A22",
-        "valorUni" => "120.00",
-        "maoObra" => "80.00",
-        "valorTotal" => "200.00",
-        "status" => "aprovado",
-        "OS_idOS" => 1,
-        "Cliente_idCliente" => 1,
-        "Aparelho_idAparelho" => 1,
-        "dataOrcamento" => "2025-12-03 21:40:53"
-    ],
-    [
-        "idOrcamento" => 2,
-        "diagnostico" => "Conector de carga danificado",
-        "peca" => "Conector Tipo-C Apple 15",
-        "valorUni" => "150.00",
-        "maoObra" => "280.00",
-        "valorTotal" => "430.00",
-        "status" => "aberto",
-        "OS_idOS" => "None",
-        "Cliente_idCliente" => 2,
-        "Aparelho_idAparelho" => 2,
-        "dataOrcamento" => "2025-12-03 21:42:15"
-    ]
-];
 ?>
 
 <!DOCTYPE html>

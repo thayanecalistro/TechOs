@@ -4,7 +4,7 @@
  include ('funcaoFuncionario.php'); 
  include ('funcaoOrcamento.php');
 
- function listaAparelhosGeral(){
+/*function listaAparelhosGeral(){
     $html = "";
 
     // SQL com INNER JOIN usando as chaves estrangeiras exatas das suas imagens
@@ -34,5 +34,5 @@
     }
 
     return $html;
-}
+}*/
 ?>

@@ -40,7 +40,7 @@
         </li>
 
         <li class="menu-item <?= ($currentPage == 'cliente') ? 'active' : ''; ?>">
-            <a href="cliente.php"><i class="fas fa-users"></i> <span>Cliente</span></a>
+            <a href="cadastroCliente.php"><i class="fas fa-users"></i> <span>Cliente</span></a>
         </li>
 
     <!--<li class="menu-item dropdown = ($currentPage == 'cliente') ? 'open active' : ''; ?>" id="clienteMenu">

@@ -124,7 +124,7 @@
 
 /* Container da tabela fluído */
 .table-container {
-    border: 1px solid #486581;
+    border: 1px solid #486581 !important;
     border-radius: 4px;
     background-color: #1a304a;
     overflow-x: auto;
