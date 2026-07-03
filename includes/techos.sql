@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Host: 127.0.0.1
--- Tempo de geração: 01/07/2026 às 02:56
+-- Tempo de geração: 03/07/2026 às 03:06
 -- Versão do servidor: 10.4.32-MariaDB
 -- Versão do PHP: 8.2.12
 
@@ -32,16 +32,16 @@ CREATE TABLE `aparelho` (
   `historicoAparelho` varchar(500) NOT NULL COMMENT 'histórico do aparelho',
   `Cliente_idCliente` int(11) NOT NULL COMMENT 'identificador do cliente cadastrado com esse aparelho',
   `imeiAparelho` varchar(50) NOT NULL COMMENT 'número do identificador do aparelho',
-  `Marca_idMarca` int(11) NOT NULL COMMENT 'identificador da marca cadastrada deste aparelho',
-  `Modelo_idModelo` int(11) NOT NULL COMMENT 'identificador do modelo cadastrado deste aparelho'
+  `Modelo_idModelo` varchar(25) NOT NULL COMMENT 'identificador do modelo cadastrado deste aparelho'
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
 
 --
 -- Despejando dados para a tabela `aparelho`
 --
 
-INSERT INTO `aparelho` (`idAparelho`, `historicoAparelho`, `Cliente_idCliente`, `imeiAparelho`, `Marca_idMarca`, `Modelo_idModelo`) VALUES
-(0, '', 3, '123456789012345', 2, 1);
+INSERT INTO `aparelho` (`idAparelho`, `historicoAparelho`, `Cliente_idCliente`, `imeiAparelho`, `Modelo_idModelo`) VALUES
+(1, 'tela quebrada 3 vezes. peça original', 2, '987654321234567', 'S26'),
+(2, '', 3, '1231435462462462', '2');
 
 -- --------------------------------------------------------
 
@@ -86,7 +86,8 @@ INSERT INTO `clientes` (`idCliente`, `nomeCliente`, `cpfCliente`, `emailCliente`
 (1, 'Nicolly Fernanda', '09657885454', '', '999999999', '77777777', 'Rua jacupiranga', '1343', 'Sobrado', 'Aventureiro', 'Joinville', 'Santa catarina'),
 (2, 'Nicolly Fernanda Aureliano Pereira', '054900', '', '999437521', '054289', 'Rua jacupiranga', '55555555', 'sobrado', 'Morro do meio', 'Itajaí', 'SC'),
 (3, 'Dérik Patrik ', '1444521', '', '1548789', '159458', 'Rua Marilnada', '1254', 'De frente ao posto', 'Aventureiro', 'Joinville', 'SC'),
-(4, '', '', '', '', '', '', '', '', '', '', '');
+(8, '', '', '', '', '', '', '', '', '', '', ''),
+(9, '', '', '', '', '', '', '', '', '', '', '');
 
 -- --------------------------------------------------------
 
@@ -103,13 +104,6 @@ CREATE TABLE `estoque` (
   `total` decimal(10,2) DEFAULT NULL COMMENT 'valor total acumulado(cauculado  multiplicando valor unitário por quantidade)'
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
 
---
--- Despejando dados para a tabela `estoque`
---
-
-INSERT INTO `estoque` (`idEstoque`, `NomeFornecedor`, `peca`, `valor`, `quantidade`, `total`) VALUES
-(4, 'Maria Fabiana', 'Iphone 16 Pro max', 550.00, 8, 4400.00);
-
 -- --------------------------------------------------------
 
 --
@@ -125,15 +119,16 @@ CREATE TABLE `funcionario` (
   `telefoneFuncionario` varchar(30) DEFAULT NULL COMMENT 'Telefone ou celular de contato do funcionário',
   `enderecoFuncionario` varchar(255) DEFAULT NULL COMMENT 'Endereço residencial completo do funcionário',
   `login` varchar(100) DEFAULT NULL COMMENT 'Nome do usuário utilizado para autentificação no sistema',
-  `senha` varchar(255) DEFAULT NULL COMMENT 'Senha de acesso criptografada do funcionário para login no sistema'
+  `senha` varchar(255) DEFAULT NULL COMMENT 'Senha de acesso criptografada do funcionário para login no sistema',
+  `foto` varchar(120) DEFAULT NULL COMMENT 'Foto do funcionário'
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
 
 --
 -- Despejando dados para a tabela `funcionario`
 --
 
-INSERT INTO `funcionario` (`idFuncionario`, `tipoFuncionario`, `nomeFuncionario`, `cpfFuncionario`, `emailFuncionario`, `telefoneFuncionario`, `enderecoFuncionario`, `login`, `senha`) VALUES
-(1, '1', 'Nicolly Fernanda', '05490056165', 'Nico@gmail ', '37999567564', 'Rua jacupiranga', 'nicolly.pereira', '123');
+INSERT INTO `funcionario` (`idFuncionario`, `tipoFuncionario`, `nomeFuncionario`, `cpfFuncionario`, `emailFuncionario`, `telefoneFuncionario`, `enderecoFuncionario`, `login`, `senha`, `foto`) VALUES
+(1, '1', 'Nicolly Fernanda', '05490056165', 'Nico@gmail ', '37999567564', 'Rua jacupiranga', 'nicolly.pereira', '123', NULL);
 
 -- --------------------------------------------------------
 
@@ -157,22 +152,21 @@ CREATE TABLE `gastos` (
 
 CREATE TABLE `marca` (
   `idMarca` int(11) NOT NULL COMMENT 'Chave primária de identificação da marca',
-  `nomeMarca` varchar(100) NOT NULL COMMENT 'Marca do produto',
-  `Modelo_idModelo` int(11) DEFAULT NULL COMMENT 'Chave estrangeira. Vincula a marca a um modelo específico cadastrado no sistema'
+  `nomeMarca` varchar(100) NOT NULL COMMENT 'Marca do produto'
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
 
 --
 -- Despejando dados para a tabela `marca`
 --
 
-INSERT INTO `marca` (`idMarca`, `nomeMarca`, `Modelo_idModelo`) VALUES
-(1, 'Samsung', NULL),
-(2, 'Apple', NULL),
-(3, 'Xiaomi', NULL),
-(4, 'Motorola', NULL),
-(5, 'LG', NULL),
-(6, 'Asus', NULL),
-(7, 'Realme', NULL);
+INSERT INTO `marca` (`idMarca`, `nomeMarca`) VALUES
+(1, 'Samsung'),
+(2, 'Apple'),
+(3, 'Xiaomi'),
+(4, 'Motorola'),
+(5, 'LG'),
+(6, 'Asus'),
+(7, 'Realme');
 
 -- --------------------------------------------------------
 
@@ -182,15 +176,17 @@ INSERT INTO `marca` (`idMarca`, `nomeMarca`, `Modelo_idModelo`) VALUES
 
 CREATE TABLE `modelo` (
   `idModelo` int(11) NOT NULL COMMENT 'Chave primária de identificação do modelo do aparelho',
-  `nomeModelo` varchar(100) NOT NULL COMMENT 'nome do modelo do aparelho'
+  `nomeModelo` varchar(100) NOT NULL COMMENT 'nome do modelo do aparelho',
+  `Marca_idMarca` int(11) NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
 
 --
 -- Despejando dados para a tabela `modelo`
 --
 
-INSERT INTO `modelo` (`idModelo`, `nomeModelo`) VALUES
-(1, '16 pro max');
+INSERT INTO `modelo` (`idModelo`, `nomeModelo`, `Marca_idMarca`) VALUES
+(1, 'Galaxy S26', 1),
+(2, '16', 2);
 
 -- --------------------------------------------------------
 
@@ -207,7 +203,7 @@ CREATE TABLE `orcamento` (
   `valorTotal` decimal(10,2) DEFAULT 0.00 COMMENT 'Valor total do orçamento',
   `status` varchar(50) DEFAULT 'aberto' COMMENT 'Situação atual do orçamento(aberto,aprovado, reprovado, finalizado).',
   `OS_idOS` int(11) DEFAULT NULL COMMENT 'Chave estrangeira.Vincula este orçamento à Ordem de Serviço correspondente, se houver.',
-  `Clientes_idCliente` int(11) NOT NULL COMMENT 'Chave estrangeira. Identifica o cliente que solicitou o orçamento',
+  `Cliente_idCliente` int(11) NOT NULL COMMENT 'Chave estrangeira. Identifica o cliente que solicitou o orçamento',
   `Aparelho_idAparelho` int(11) NOT NULL COMMENT 'Chave estrangeira. Vincula o orçamento ao aparelho que passará pelo serviço',
   `dataOrcamento` datetime DEFAULT current_timestamp() COMMENT 'Data e hora de criação ou registro do orçamento no sistema'
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
@@ -245,7 +241,7 @@ CREATE TABLE `os` (
   `status` varchar(50) DEFAULT 'aberto' COMMENT 'Situação atual da OS',
   `Aparelho_idAparelho` int(11) NOT NULL COMMENT 'Chave estrangeira. Vincula a OS ao aparelho que receberá a manutenção',
   `Funcionario_idFuncionario` int(11) DEFAULT NULL COMMENT 'Chave estrangeira. Identifica o funcionário responsável por executar o serviço',
-  `Clientes_idCliente` int(11) NOT NULL COMMENT 'Chave estrangeira. Identifica o cliente que solicitou a Ordem de Serviço'
+  `Cliente_idCliente` int(11) NOT NULL COMMENT 'Chave estrangeira. Identifica o cliente que solicitou a Ordem de Serviço'
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
 
 --
@@ -256,8 +252,7 @@ CREATE TABLE `os` (
 -- Índices de tabela `aparelho`
 --
 ALTER TABLE `aparelho`
-  ADD PRIMARY KEY (`idAparelho`),
-  ADD KEY `idx_Aparelho_Modelo` (`Modelo_idModelo`);
+  ADD PRIMARY KEY (`idAparelho`);
 
 --
 -- Índices de tabela `atividade`
@@ -304,6 +299,15 @@ ALTER TABLE `modelo`
   ADD PRIMARY KEY (`idModelo`);
 
 --
+-- Índices de tabela `orcamento`
+--
+ALTER TABLE `orcamento`
+  ADD PRIMARY KEY (`idOrcamento`),
+  ADD KEY `idx_Orcamento_OS` (`OS_idOS`),
+  ADD KEY `idx_Orcamento_Cliente` (`Cliente_idCliente`),
+  ADD KEY `idx_Orcamento_Aparelho` (`Aparelho_idAparelho`);
+
+--
 -- Índices de tabela `orcamento_peca`
 --
 ALTER TABLE `orcamento_peca`
@@ -312,8 +316,23 @@ ALTER TABLE `orcamento_peca`
   ADD KEY `idx_OP_Estoque` (`Estoque_idEstoque`);
 
 --
+-- Índices de tabela `os`
+--
+ALTER TABLE `os`
+  ADD PRIMARY KEY (`idOS`),
+  ADD KEY `idx_OS_Aparelho` (`Aparelho_idAparelho`),
+  ADD KEY `idx_OS_Funcionario` (`Funcionario_idFuncionario`),
+  ADD KEY `idx_OS_Cliente` (`Cliente_idCliente`);
+
+--
 -- AUTO_INCREMENT para tabelas despejadas
 --
+
+--
+-- AUTO_INCREMENT de tabela `aparelho`
+--
+ALTER TABLE `aparelho`
+  MODIFY `idAparelho` int(11) NOT NULL AUTO_INCREMENT COMMENT 'Número identificador do aparelho dentro do sistema', AUTO_INCREMENT=3;
 
 --
 -- AUTO_INCREMENT de tabela `atividade`
@@ -325,13 +344,13 @@ ALTER TABLE `atividade`
 -- AUTO_INCREMENT de tabela `clientes`
 --
 ALTER TABLE `clientes`
-  MODIFY `idCliente` int(11) NOT NULL AUTO_INCREMENT COMMENT 'Número de identificação do cliente', AUTO_INCREMENT=5;
+  MODIFY `idCliente` int(11) NOT NULL AUTO_INCREMENT COMMENT 'Número de identificação do cliente', AUTO_INCREMENT=10;
 
 --
 -- AUTO_INCREMENT de tabela `estoque`
 --
 ALTER TABLE `estoque`
-  MODIFY `idEstoque` int(11) NOT NULL AUTO_INCREMENT COMMENT 'Chave primária de identificaçãodo registro de estoque', AUTO_INCREMENT=5;
+  MODIFY `idEstoque` int(11) NOT NULL AUTO_INCREMENT COMMENT 'Chave primária de identificaçãodo registro de estoque';
 
 --
 -- AUTO_INCREMENT de tabela `funcionario`
@@ -355,7 +374,13 @@ ALTER TABLE `marca`
 -- AUTO_INCREMENT de tabela `modelo`
 --
 ALTER TABLE `modelo`
-  MODIFY `idModelo` int(11) NOT NULL AUTO_INCREMENT COMMENT 'Chave primária de identificação do modelo do aparelho', AUTO_INCREMENT=2;
+  MODIFY `idModelo` int(11) NOT NULL AUTO_INCREMENT COMMENT 'Chave primária de identificação do modelo do aparelho', AUTO_INCREMENT=3;
+
+--
+-- AUTO_INCREMENT de tabela `orcamento`
+--
+ALTER TABLE `orcamento`
+  MODIFY `idOrcamento` int(11) NOT NULL AUTO_INCREMENT COMMENT 'Chave primária de identificação do orçamento';
 
 --
 -- AUTO_INCREMENT de tabela `orcamento_peca`
@@ -364,17 +389,34 @@ ALTER TABLE `orcamento_peca`
   MODIFY `idOrcamentoPeca` int(11) NOT NULL AUTO_INCREMENT COMMENT 'Chave primária de identificação do item do orçamento';
 
 --
+-- AUTO_INCREMENT de tabela `os`
+--
+ALTER TABLE `os`
+  MODIFY `idOS` int(11) NOT NULL AUTO_INCREMENT COMMENT 'Chave primária de identificação da Ordem de Serviço';
+
+--
 -- Restrições para tabelas despejadas
 --
 
 --
--- Restrições para tabelas `aparelho`
+-- Restrições para tabelas `atividade`
 --
-ALTER TABLE `aparelho`
-  ADD CONSTRAINT `fk_Aparelho_Modelo` FOREIGN KEY (`Modelo_idModelo`) REFERENCES `modelo` (`idModelo`) ON UPDATE CASCADE;
+ALTER TABLE `atividade`
+  ADD CONSTRAINT `fk_Atividade_OS` FOREIGN KEY (`OS_idOS`) REFERENCES `os` (`idOS`) ON DELETE CASCADE ON UPDATE CASCADE;
+
+--
+-- Restrições para tabelas `gastos`
+--
+ALTER TABLE `gastos`
+  ADD CONSTRAINT `fk_Gastos_Orcamento` FOREIGN KEY (`Orcamento_idOrcamento`) REFERENCES `orcamento` (`idOrcamento`) ON DELETE CASCADE ON UPDATE CASCADE;
+
+--
+-- Restrições para tabelas `orcamento_peca`
+--
+ALTER TABLE `orcamento_peca`
+  ADD CONSTRAINT `fk_OP_Estoque` FOREIGN KEY (`Estoque_idEstoque`) REFERENCES `estoque` (`idEstoque`) ON UPDATE CASCADE,
+  ADD CONSTRAINT `fk_OP_Orcamento` FOREIGN KEY (`Orcamento_idOrcamento`) REFERENCES `orcamento` (`idOrcamento`) ON DELETE CASCADE ON UPDATE CASCADE;
 COMMIT;
-
-
 
 /*!40101 SET CHARACTER_SET_CLIENT=@OLD_CHARACTER_SET_CLIENT */;
 /*!40101 SET CHARACTER_SET_RESULTS=@OLD_CHARACTER_SET_RESULTS */;

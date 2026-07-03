@@ -78,7 +78,7 @@ $currentPage = 'orcamento';
                     <div class="form-group">
                         <label for="cliente_busca">Nome do Cliente *</label>
                         <input type="text" id="cliente_busca" list="listaClientes" required placeholder="Digite o nome do cliente..." autocomplete="off">
-                        <input type="hidden" id="Clientes_idCliente" name="Clientes_idCliente" required>
+                        <input type="hidden" id="Cliente_idCliente" name="Cliente_idCliente" required>
                         <datalist id="listaClientes">
                             <?php echo comboClientes(); ?>
                         </datalist>
@@ -89,16 +89,6 @@ $currentPage = 'orcamento';
                         <select id="Aparelho_idAparelho" name="Aparelho_idAparelho" required style="width: 100%; height: 35px; border-radius: 4px; background-color: #0c1f32; color: white; border: 1px solid #2cb1bc;">
                             <option value="">Selecione primeiro o cliente...</option>
                         </select>
-                    </div>
-
-                    <div class="form-group">
-                        <label for="Aparelho_idAparelho">Aparelho *</label>
-                        <input type="text" id="Aparelho_idAparelho" name="Aparelho_idAparelho" required placeholder="Ex: 3">
-                    </div>
-
-                    <div class="form-group full-width">
-                        <label for="diagnostico">Diagnóstico Técnico</label>
-                        <textarea id="diagnostico" name="diagnostico" rows="2" placeholder="Avaliação técnica inicial..."></textarea>
                     </div>
 
                     <div class="form-group full-width">
@@ -168,5 +158,10 @@ $currentPage = 'orcamento';
                                       border: 1px solid #2cb1bc;">
                                       ?php echo comboClientes(); ?>
                         </select>
+                    </div>
+                    
+                    <div class="form-group full-width">
+                        <label for="diagnostico">Diagnóstico Técnico</label>
+                        <textarea id="diagnostico" name="diagnostico" rows="2" placeholder="Avaliação técnica inicial..."></textarea>
                     </div>-->
 </html>

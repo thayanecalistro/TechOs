@@ -45,6 +45,7 @@ document.getElementById('cliente_busca').addEventListener('input', function() {
     var inputVisivel = this;
     var inputEscondido = document.getElementById('Cliente_idCliente');
     var datalist = document.getElementById('listaClientes');
+    var selectAparelho = document.getElementById('Aparelho_idAparelho');
     
     // Procura na datalist se o texto digitado bate com alguma opção
     var opcaoSelecionada = Array.from(datalist.options).find(function(option) {
@@ -53,48 +54,28 @@ document.getElementById('cliente_busca').addEventListener('input', function() {
 
     if (opcaoSelecionada) {
         // Se achou o nome, joga o ID correspondente no input oculto
-        inputEscondido.value = opcaoSelecionada.getAttribute('data-id');
+        var idCliente = opcaoSelecionada.getAttribute('data-id');
+        inputEscondido.value = idCliente;
+
+        // Avisa o usuário que os dados estão sendo buscados
+        selectAparelho.innerHTML = "<option value=''>Carregando aparelhos...</option>";
+
+        // Faz a requisição AJAX para buscar os aparelhos do cliente selecionado
+        fetch('php/buscar_aparelhos.php?cliente_id=' + idCliente)
+            .then(response => response.text())
+            .then(html => {
+                selectAparelho.innerHTML = html; // Preenche o <select> com o resultado do PHP
+            })
+            .catch(error => {
+                console.error('Erro ao buscar aparelhos:', error);
+                selectAparelho.innerHTML = "<option value=''>Erro ao carregar aparelhos</option>";
+            });
+
     } else {
-        // Se o usuário apagar ou digitar algo que não existe, limpa o ID
+        // Se o usuário apagar o nome ou digitar algo inválido, limpa tudo
         inputEscondido.value = "";
-    }
-});
-
-// Monitora as mudanças no input oculto do ID do cliente (que criamos no passo anterior)
-const inputClienteId = document.getElementById('Clientes_idCliente');
-const selectAparelho = document.getElementById('Aparelho_idAparelho');
-
-// Criamos um observador para detectar quando o valor do ID mudar via script
-const observer = new MutationObserver(function(mutations) {
-    mutations.forEach(function(mutation) {
-        if (mutation.attributeName === 'value') {
-            carregarAparelhosDoCliente(inputClienteId.value);
-        }
-    });
-});
-
-// Ativa o observador no input do ID do cliente
-if (inputClienteId) {
-    observer.observe(inputClienteId, { attributes: true });
-}
-
-// Função que faz a requisição Ajax (Fetch API) para buscar os aparelhos
-function carregarAparelhosDoCliente(idCliente) {
-    if (!idCliente) {
         selectAparelho.innerHTML = "<option value=''>Selecione primeiro o cliente...</option>";
-        return;
     }
+});
 
-    selectAparelho.innerHTML = "<option value=''>Carregando aparelhos...</option>";
 
-    // Faz a chamada assíncrona para o arquivo PHP
-    fetch('buscar_aparelhos.php?idCliente=' + idCliente)
-        .then(response => response.text())
-        .then(html => {
-            selectAparelho.innerHTML = html;
-        })
-        .catch(error => {
-            console.error('Erro ao buscar aparelhos:', error);
-            selectAparelho.innerHTML = "<option value=''>Erro ao carregar aparelhos</option>";
-        });
-}

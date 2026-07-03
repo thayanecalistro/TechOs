@@ -20,9 +20,18 @@ $currentPage = 'aparelho';
    <div class="main-content-container">
 
         <div class="header-table-section">
-            <h2>Gerenciar Aparelhos</h2>
+            <h2>Gerenciamento de Aparelhos</h2>
             <button id="btnAbrirNovo" class="btn-novo">+ Novo</button>
         </div>
+
+        <fieldset class="search-fieldset">
+            <legend>Pesquisar</legend>
+            <div class="search-box"> 
+                <input type="text" id="pesquisar" name="pesquisar" placeholder="ID ou Nome...">
+                <button type="button" class="btn btn-blue" id="btnBuscar">Buscar</button>
+                </select>
+            </div>
+        </fieldset>
 
         <div class="table-container">
             <table class="dashboard-table">
@@ -65,7 +74,7 @@ $currentPage = 'aparelho';
                 <input type="text" name="nModelo" placeholder="Digite o nome do modelo" required>
 
                 
-                <input type="number" name="nImei" placeholder="Somente números" required>
+                <input type="text" name="nImei" placeholder="Somente números" required>
 
                 <div class="form-actions">
                     <button type="button" id="btnCancelarNovo" class="btn-perigo">Cancelar</button>

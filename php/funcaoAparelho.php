@@ -4,25 +4,24 @@ function listaAparelho(){
     $html = "";
 
     // Query unindo as tabelas de clientes, marcas e modelos cadastrados
-    $sql = "SELECT a.idAparelho, a.Clientes_idCliente, a.Marca_idMarca, a.Modelo_idModelo, a.imeiAparelho,
+    $sql = "SELECT a.idAparelho, a.Cliente_idCliente, mo.Marca_idMarca, a.Modelo_idModelo, a.imeiAparelho,
                    c.nomeCliente, m.nomeMarca, mo.nomeModelo
             FROM aparelho a
-            LEFT JOIN clientes c ON a.Clientes_idCliente = c.idCliente
-            LEFT JOIN marca m ON a.Marca_idMarca = m.idMarca
-            LEFT JOIN modelo mo ON a.Modelo_idModelo = mo.idModelo";
+            LEFT JOIN clientes c ON a.Cliente_idCliente = c.idCliente
+            LEFT JOIN modelo mo ON a.Modelo_idModelo = mo.idModelo
+            LEFT JOIN marca m ON mo.Marca_idMarca = m.idMarca";
             
     include("conexao.php");
     $result = mysqli_query($conn, $sql);
-    mysqli_close($conn);
     
     if($result && mysqli_num_rows($result) > 0){
         foreach($result as $coluna){
             $id = $coluna['idAparelho'];
-            $idCliente = $coluna['Cliente_idCliente'];
-            $idMarca = $coluna['Marca_idMarca'];
+            $idCliente = $coluna['Cliente_idCliente'] ?? 0;
+            $idMarca = $coluna['Marca_idMarca'] ?? 0;
             
             $nomeCliente = $coluna['nomeCliente'] ?? 'Cliente Deletado';
-            $nomeMarca = $coluna['nomeMarca'] ?? 'Marca Deletada';
+            $nomeMarca = $coluna['nomeMarca'] ?? 'Marca Não Associada';
             $modelo = $coluna['nomeModelo'] ?? 'Não informado';
             $imei = $coluna['imeiAparelho'];
     
@@ -51,6 +50,7 @@ function listaAparelho(){
             </tr>";
         }
     }
+    mysqli_close($conn);
     return $html;
 }
 

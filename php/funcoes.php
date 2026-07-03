@@ -4,13 +4,13 @@
  include ('funcaoFuncionario.php'); 
  include ('funcaoOrcamento.php');
 
-/*function listaAparelhosGeral(){
+function listaAparelhosGeral(){
     $html = "";
 
     // SQL com INNER JOIN usando as chaves estrangeiras exatas das suas imagens
     $sql = "SELECT a.idAparelho, c.nomeCliente, m.nomeMarca, a.Modelo_idModelo, a.imeiAparelho, a.historicoAparelho 
             FROM aparelho a
-            INNER JOIN cliente c ON a.Cliente_idCliente = c.idCliente
+            INNER JOIN clientes c ON a.Cliente_idCliente = c.idCliente
             INNER JOIN marca m ON a.Marca_idMarca = m.idMarca
             ORDER BY a.idAparelho DESC";
 
@@ -34,5 +34,5 @@
     }
 
     return $html;
-}*/
+}
 ?>

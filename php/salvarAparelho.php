@@ -1,21 +1,21 @@
 <?php
+
     $opcao = $_GET['opcao'] ?? null;
-    $id = $_GET['id'] ?? null;
+    $id = $_POST['idAparelho'] ?? $_GET['id'] ?? null; // Ajustado para pegar do formulário de Alterar também
     $cliente = $_POST['nCliente'] ?? null;
     $marca = $_POST['nMarca'] ?? null;
     $modeloNome = $_POST['nModelo'] ?? null;
     $imei = $_POST['nImei'] ?? null;
-
-    include("funcoes.php");
-    // CORREÇÃO: Ajustado caminho do include para a mesma pasta
-    include("php/conexao.php"); 
+    
+    include("conexao.php"); 
 
     $idModelo = null;
 
     if (($opcao == 'I' || $opcao == 'U') && !empty($modeloNome)) {
         $modeloNomeClean = mysqli_real_escape_string($conn, trim($modeloNome));
+        $marcaClean = intval($marca);
         
-        $sqlCheck = "SELECT idModelo FROM modelo WHERE nomeModelo = '$modeloNomeClean'";
+        $sqlCheck = "SELECT idModelo FROM modelo WHERE nomeModelo = '$modeloNomeClean' AND Marca_idMarca = $marcaClean";
         $resCheck = mysqli_query($conn, $sqlCheck);
 
         if ($resCheck && mysqli_num_rows($resCheck) > 0) {
@@ -23,7 +23,7 @@
             $idModelo = $row['idModelo'];
         } else {
             // Se o modelo não existir, tenta inserir baseado na estrutura da tabela modelo
-            $sqlInsModelo = "INSERT INTO modelo (nomeModelo, Marca_idMarca) VALUES ('$modeloNomeClean', '$marca')";
+            $sqlInsModelo = "INSERT INTO modelo (nomeModelo, Marca_idMarca) VALUES ('$modeloNomeClean', $marcaClean)";
             mysqli_query($conn, $sqlInsModelo);
             $idModelo = mysqli_insert_id($conn);
         }
@@ -31,19 +31,23 @@
 
     $sql = "";
 
-    if($opcao == 'I'){
-        $sql = "INSERT INTO aparelho(Cliente_idCliente, Marca_idMarca, Modelo_idModelo, imeiAparelho, historicoAparelho)
-                VALUES($cliente, '$marca', '$idModelo', '$imei', '');";
+    // Certifica-se de que as variáveis numéricas não vão vazias para o SQL
+    $cliente = intval($cliente);
+    $idModelo = intval($idModelo);
+    $id = intval($id);
 
-    } elseif ($opcao == 'U') {
+    if($opcao == 'I'){
+        $sql = "INSERT INTO aparelho(Cliente_idCliente, Modelo_idModelo, imeiAparelho, historicoAparelho)
+                VALUES($cliente, '$idModelo', '$imei', '');";
+
+    } elseif ($opcao == 'U' && $id > 0) {
         $sql = "UPDATE aparelho SET Cliente_idCliente = '$cliente',
-                                   Marca_idMarca = '$marca',
                                    Modelo_idModelo = '$idModelo',
                                    imeiAparelho = '$imei'
                                WHERE idAparelho = $id;";
 
-    } elseif($opcao == 'D'){    
-        $sql = "DELETE FROM aparelho WHERE idAparelho = $id;"; }
+    } elseif($opcao == 'D' && $id > 0){    
+        $sql = "DELETE FROM aparelho WHERE idAparelho = $id";}
 
     if (!empty($sql)) {
         $result = mysqli_query($conn, $sql);
@@ -52,6 +56,6 @@
     mysqli_close($conn);
 
     // CORREÇÃO: Redireciona o usuário de volta para a tela de listagem de aparelhos
-    header("Location: cadastroAparelho.php");
+    header("Location: ../cadastroAparelho.php");
     exit();
 ?>
