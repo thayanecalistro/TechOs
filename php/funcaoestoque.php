@@ -13,7 +13,7 @@ function funcaoestoque($conn, $acao, $dados) {
         case 'inserir':
             $sql = "INSERT INTO estoque (NomeFornecedor, peca, valor, quantidade, total) VALUES (?, ?, ?, ?, ?)";
             $stmt = mysqli_prepare($conn, $sql);
-            mysqli_stmt_bind_param($stmt, "ssdii", $nomeFornecedor, $peca, $valor, $quantidade, $total);
+            mysqli_stmt_bind_param($stmt, "ssdid", $nomeFornecedor, $peca, $valor, $quantidade, $total);
             break;
 
         case 'editar':
