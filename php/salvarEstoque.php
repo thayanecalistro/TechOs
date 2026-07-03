@@ -4,23 +4,34 @@ require_once('includes/conexao.php');
 require_once('funcao_estoque.php'); 
 
 // Se for envio do formulário do Modal (Inserir ou Editar)
-if ($_SERVER['REQUEST_METHOD'] === 'POST' && isset($_POST['NomeFornecedor'])) {
-    $acao = (!empty($_POST['idEstoque'])) ? 'editar' : 'inserir';
-    $resposta = funcaoestoque($conn, $acao, $_POST);
-    
-    echo "<script>alert('".$resposta['mensagem']."'); window.location.href='estoque.php';</script>";
+if (isset($_GET['excluir_id'])){
+    $dados = [
+        'idEstoque' => $_GET[excluir_id]
+    ];
+    $resposta = funcaoestoque($conn, 'excluir', $dados);
+    if($resposta['status'] == 'sucesso'){
+        header("Location: estoque.php?sucesso=excluido");
+    }else{
+        echo "Erro ao Excluir: ". $resposta['mensagem'];
+    }
     exit;
 }
 
-// Se for clique no botão Excluir (via GET)
-if (isset($_GET['excluir_id'])) {
-    $resposta = funcaoestoque($conn, 'excluir', ['idEstoque' => $_GET['excluir_id']]);
-    
-    echo "<script>alert('".$resposta['mensagem']."'); window.location.href='estoque.php';</script>";
-    exit;
-}
 
-// Segurança: Se tentarem acessar este arquivo de fora, joga pro estoque
-header("Location: estoque.php");
-exit;
-?>
+if ($_SERVER['REQUEST_METHOD'] === 'POST') {
+    $idEstoque = isset($_POST['idEstoque']) ? trim($_POST['idEstoque']) : '';
+
+    if(!empty($idEstoque)){
+        $acao = 'Editar'
+    }else{
+        $acao = 'inserir';
+    }
+    resposta = funcaoestoque($conn, $acao, $_POST);
+    if ($resposta['status'] == 'sucesso') {
+        header("Location: estoque.php?sucesso=" .$acao);
+
+    }else {
+        echo "Erro ao salvar dados: " .$resposta['mensagem'];
+    }
+    exit;    
+}

@@ -39,7 +39,7 @@ document.addEventListener('DOMContentLoaded', function() {
     });
 
     // Garante o comportamento correto ao clicar em "Novo Item"
-    const btnNovo = document.querySelector('.btn-novo');
+    const btnNovo = document.querySelector('[data-bs-target="#modalEstoque]');
     if (btnNovo) {
         btnNovo.addEventListener('click', function() {
             const titulo = document.getElementById('tituloModalEstoque');

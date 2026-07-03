@@ -34,9 +34,10 @@ if ($resultado && mysqli_num_rows($resultado) > 0) {
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Controle de Estoque</title>
 
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css">
     <link rel="stylesheet" href="css/os.css">
     <link rel="stylesheet" href="css/estoque.css">
-    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css">
+
 </head>
 <body>
     <?php include('sidebar.php'); ?>
@@ -105,7 +106,10 @@ if ($resultado && mysqli_num_rows($resultado) > 0) {
     <div class="modal fade" id="modalEstoque">
         <div class="modal-dialog">
             <div class="modal-content">
-                <h3>Novo Item no Estoque</h3>
+                <div class="modal-header">
+                    <h3 class="modal-title" id="tituloModalEstoque">Novo Item no Estoque</h3>
+                    <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="close"></button>
+                </div>
                 <form id="formEstoque" method="POST" action="salvarEstoque.php">
                     <div class="modal-body">
                         <input type="hidden" name="idEstoque" id="idEstoque" value="">

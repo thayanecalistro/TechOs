@@ -62,7 +62,8 @@
         </li>
 
         <li class="menu-item <?= ($currentPage == 'estoque') ? 'active' : ''; ?>">
-            <a href="cadastroEstoque.php"><i class="fas fa-boxes"></i> <span>Estoque</span></a>
+    
+            <a href="estoque.php"><i class="fas fa-boxes"></i> <span>Estoque</span></a>
         </li>
 
         <li class="menu-item <?= ($currentPage == 'relatorios') ? 'active' : ''; ?>">
