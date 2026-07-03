@@ -1,7 +1,7 @@
 <?php
 // salvarEstoque.php
-require_once('includes/conexao.php');
-require_once('funcao_estoque.php'); 
+include('php/conexao.php');
+include('php/funcoes.php'); 
 
 // Se for envio do formulário do Modal (Inserir ou Editar)
 if (isset($_GET['excluir_id'])){
@@ -10,7 +10,7 @@ if (isset($_GET['excluir_id'])){
     ];
     $resposta = funcaoestoque($conn, 'excluir', $dados);
     if($resposta['status'] == 'sucesso'){
-        header("Location: estoque.php?sucesso=excluido");
+        header("Location:../estoque.php?sucesso=excluido");
     }else{
         echo "Erro ao Excluir: ". $resposta['mensagem'];
     }
@@ -28,7 +28,7 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
     }
     resposta = funcaoestoque($conn, $acao, $_POST);
     if ($resposta['status'] == 'sucesso') {
-        header("Location: estoque.php?sucesso=" .$acao);
+        header("Location:../estoque.php?sucesso=" .$acao);
 
     }else {
         echo "Erro ao salvar dados: " .$resposta['mensagem'];

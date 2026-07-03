@@ -72,7 +72,7 @@ $currentPage = 'orcamento';
     <div class="modal-overlay" id="cadastroModal">
         <div class="modal-content modal-large">
             <h3>Cadastrar Novo Orçamento</h3>
-            <form id="formOrcamento" action="#" method="POST">
+            <form id="formOrcamento" action="php/salvarOrcamento.php?opcao=I" method="POST">
                 <div class="form-grid">
 
                     <div class="form-group">
@@ -91,29 +91,39 @@ $currentPage = 'orcamento';
                         </select>
                     </div>
 
-                    <div class="form-group full-width">
-                        <label for="peca">Peças Necessárias</label>
-                        <input type="text" id="peca" name="peca" placeholder="Descrição das peças principais...">
+                    <div class="form-group full-width" style="border: 1px dashed #2cb1bc; padding: 15px; border-radius: 4px;">
+                        <label style="font-weight: bold; margin-bottom: 10px; display: block;">Peças Necessárias</label>
+                        <div id="container-pecas">
+                            <div class="peca-row" style="display: flex; gap: 10px; margin-bottom: 10px;">
+                                <input type="text" class="classe-busca-peca" list="listaPecasEstoque" placeholder="Busque a peça no estoque..." style="flex: 2;" required autocomplete="off">
+                                <input type="hidden" name="nIdEstoque[]" class="classe-id-estoque">
+                                
+                                <input type="number" name="nValorUni[]" class="classe-val-uni" step="0.01" value="0.00" style="flex: 1;" placeholder="Valor Unit." readonly style="background-color: #0c1f32; color: #2cb1bc;">
+                                <input type="number" name="nQtd[]" class="classe-qtd" value="1" min="1" style="width: 70px;">
+                            </div>
+                        </div>
+                        <button type="button" id="btnAdicionarPeca" class="btn btn-cyan" style="padding: 5px 10px; font-size: 12px; margin-top: 5px;">+ Adicionar Peça</button>
                     </div>
 
-                    <div class="form-group">
-                        <label for="valorUni">Valor Unitário Peças (R$)</label>
-                        <input type="number" id="valorUni" name="valorUni" step="0.01" value="0.00">
-                    </div>
-
-                    <div class="form-group" style="flex: 0.5;">
-                        <label class="form-label">Qtd:</label>
-                        <input type="number" value="1" min="1" name="nQtd" id="modal-qtd-peca">
-                    </div>
+                    <datalist id="listaPecasEstoque">
+                        <?php
+                        include("php/conexao.php");
+                        // Seleciona peças que tenham quantidade maior que zero no estoque
+                        $resEstoque = mysqli_query($conn, "SELECT idEstoque, peca, valor FROM estoque WHERE quantidade > 0");
+                        while($reg = mysqli_fetch_assoc($resEstoque)){
+                            echo "<option value='".htmlspecialchars($reg['peca'], ENT_QUOTES)."' data-id='".$reg['idEstoque']."' data-valor='".$reg['valor']."'>";
+                        }
+                        ?>
+                    </datalist>
 
                     <div class="form-group">
                         <label for="maoObra">Mão de Obra (R$)</label>
-                        <input type="number" id="maoObra" name="maoObra" step="0.01" value="0.00">
+                        <input type="number" id="maoObra" name="nMaoObra" step="0.01" value="0.00">
                     </div>
 
                     <div class="form-group">
                         <label for="status">Status</label>
-                        <select id="status" name="status">
+                        <select id="status" name="nStatus">
                             <option value="aberto" selected>Aberto</option>
                             <option value="aprovado">Aprovado</option>
                             <option value="reprovado">Reprovado</option>
@@ -123,7 +133,7 @@ $currentPage = 'orcamento';
 
                     <div class="form-group">
                         <label for="valorTotal">Valor Total (R$)</label>
-                        <input type="number" id="valorTotal" name="valorTotal" step="0.01" value="0.00" readonly style="background-color: #0c1f32; font-weight: bold; color: #2cb1bc;">
+                        <input type="number" id="valorTotal" name="nTotal" step="0.01" value="0.00" readonly style="background-color: #0c1f32; font-weight: bold; color: #2cb1bc;">
                     </div>
                 </div>
 
@@ -135,7 +145,7 @@ $currentPage = 'orcamento';
         </div>
     </div>
 
-    <script src="js/orcamentos.js"></script>
+    <script src="js/orcamento.js"></script>
 </body>
 
 <!--?php foreach ($orcamentos as $orc): ?>

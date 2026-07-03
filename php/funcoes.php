@@ -3,6 +3,7 @@
  include('funcaoAparelho.php');
  include ('funcaoFuncionario.php'); 
  include ('funcaoOrcamento.php');
+ include('funcaoEstoque.php');
 
 function listaAparelhosGeral(){
     $html = "";
@@ -35,4 +36,4 @@ function listaAparelhosGeral(){
 
     return $html;
 }
-?>
+

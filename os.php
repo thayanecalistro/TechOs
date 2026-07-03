@@ -2,36 +2,6 @@
 
 $currentPage = 'os';
 
-// Simulação de dados vindo do banco de dados
-$ordens_servico = [
-    [
-        "id" => 1,
-        "abertura" => "2025-12-03 21:40:53",
-        "fechamento" => "None",
-        "cliente" => "João",
-        "aparelho" => "Samsung A22",
-        "status" => "aberto",
-        "valor" => "200.00"
-    ],
-    [
-        "id" => 2,
-        "abertura" => "2025-12-03 21:42:15",
-        "fechamento" => "None",
-        "cliente" => "Luana",
-        "aparelho" => "Apple 15",
-        "status" => "aberto",
-        "valor" => "430.00"
-    ],
-    [
-        "id" => 3,
-        "abertura" => "2025-12-03 21:42:15",
-        "fechamento" => "None",
-        "cliente" => "Vitor",
-        "aparelho" => "Apple 16",
-        "status" => "aberto",
-        "valor" => "500.00"
-    ]
-];
 ?>
 
 <!DOCTYPE html>
@@ -86,22 +56,12 @@ $ordens_servico = [
                             <th>Fechamento</th>
                             <th>Cliente</th>
                             <th>Aparelho</th>
-                            <th>Status</th>
                             <th>Valor (R$)</th>
+                            <th>Status</th>
                         </tr>
                     </thead>
                     <tbody>
-                        <?php foreach ($ordens_servico as $os): ?>
-                            <tr>
-                                <td><?= $os['id']; ?></td>
-                                <td><?= $os['abertura']; ?></td>
-                                <td><?= $os['fechamento']; ?></td>
-                                <td><?= $os['cliente']; ?></td>
-                                <td><?= $os['aparelho']; ?></td>
-                                <td><?= $os['status']; ?></td>
-                                <td><?= $os['valor']; ?></td>
-                            </tr>
-                        <?php endforeach; ?>
+                       <!--?php echo ?>-->
                     </tbody>
                 </table>
             </div>

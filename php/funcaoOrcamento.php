@@ -3,39 +3,52 @@ function listarOrcamentos(){
     $html = "";
 
     // INNER JOIN robusto associando as chaves estrangeiras reais das suas tabelas
-    $sql = "SELECT o.idOrcamento, c.nomeCliente, m.nomeMarca, mo.nomeModelo, 
-                   o.peca, o.valorUni, o.maoObra, o.valorTotal, o.status 
-            FROM orcamento o
-            INNER JOIN clientes c ON o.Cliente_idCliente = c.idCliente
-            INNER JOIN aparelho a ON o.Aparelho_idAparelho = a.idAparelho
-            INNER JOIN modelo mo ON a.Modelo_idModelo = mo.idModelo
-            INNER JOIN marca m ON mo.Marca_idMarca = m.idMarca";
+        $sql = "SELECT o.idOrcamento, c.nomeCliente, m.nomeMarca, mo.nomeModelo, 
+                    o.peca, o.valorUni, o.maoObra, o.valorTotal, o.status 
+                FROM orcamento o
+                INNER JOIN clientes c ON o.Cliente_idCliente = c.idCliente
+                INNER JOIN aparelho a ON o.Aparelho_idAparelho = a.idAparelho
+                INNER JOIN modelo mo ON a.Modelo_idModelo = mo.idModelo
+                INNER JOIN marca m ON mo.Marca_idMarca = m.idMarca";
 
-    include("includes/conexao.php");
+    include("conexao.php");
     $result = mysqli_query($conn, $sql);
-
-    if(!$result){
-        die("Erro na consulta ao banco de dados". mysqli_error($conn));
-    }
 
     if($result && mysqli_num_rows($result) > 0){
         foreach($result as $coluna){
             $statusFormatado = ucfirst($coluna['status']);
             $classeBadge = 'badge-aberto';
-            
             if(strtolower($coluna['status']) == 'aprovado') $classeBadge = 'badge-aprovado';
             if(strtolower($coluna['status']) == 'recusado' || strtolower($coluna['status']) == 'reprovado') $classeBadge = 'badge-danger';
 
+            // Puxa as peças que estão salvas na tabela vinculada
+            $idO = $coluna['idOrcamento'];
+            $pecasResult = mysqli_query($conn, "SELECT peca, quantidade FROM orcamento_peca WHERE Orcamento_idOrcamento = $idO");
+            $listaPecas = [];
+            while($p = mysqli_fetch_assoc($pecasResult)){
+                $listaPecas[] = $p['peca'] . " (" . $p['quantidade'] . "x)";
+            }
+            $txtPecas = count($listaPecas) > 0 ? implode(", ", $listaPecas) : "Sem peças vinculadas";
+
             $html .= "<tr>
-                          <td>".$coluna['idOrcamento']."</td>
-                          <td>".$coluna['nomeCliente']."</td>
-                          <td>".$coluna['nomeMarca']." ".$coluna['nomeModelo']."</td>
-                          <td>".$coluna['peca']."</td>
-                          <td>R$ ".number_format($coluna['valorUni'], 2, ',', '.')."</td>
-                          <td>R$ ".number_format($coluna['maoObra'], 2, ',', '.')."</td>
-                          <td><strong>R$ ".number_format($coluna['valorTotal'], 2, ',', '.')."</strong></td>
-                          <td><span class='badge ".$classeBadge."'>".$statusFormatado."</span></td>
-                     </tr>";
+                        <td>".$coluna['idOrcamento']."</td>
+                        <td>".$coluna['nomeCliente']."</td>
+                        <td>".$coluna['nomeMarca']." ".$coluna['nomeModelo']."</td>
+                        <td>".$txtPecas."</td>
+                        <td>-</td>
+                        <td>-</td>
+                        <td><strong>R$ ".number_format($coluna['valorTotal'], 2, ',', '.')."</strong></td>
+                        <td>";
+
+            // Se o status for aberto, exibe botões clicáveis no lugar de texto
+            if (strtolower($coluna['status']) == 'aberto') {
+                $html .= "<button class='btn btn-sucesso' onclick='alterarStatusOrcamento(".$coluna['idOrcamento'].", \"aprovado\")' style='padding:2px 6px; font-size:11px; margin-right:4px; cursor:pointer;'>Aprovar</button>";
+                $html .= "<button class='btn btn-red' onclick='alterarStatusOrcamento(".$coluna['idOrcamento'].", \"reprovado\")' style='padding:2px 6px; font-size:11px; cursor:pointer;'>Recusar</button>";
+            } else {
+                $html .= "<span class='badge ".$classeBadge."'>".$statusFormatado."</span>";
+            }
+
+            $html .= "</td></tr>";
         }
     } else {
         $html .= "<tr><td colspan='8' style='text-align:center;'>Nenhum orçamento cadastrado.</td></tr>";
@@ -76,3 +89,4 @@ function comboClientes() {
 }
 
 ?>
+
