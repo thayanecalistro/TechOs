@@ -1,33 +1,36 @@
-
 /* Cabeçalho da página */
 .header-top {
     display: flex;
     justify-content: space-between;
     align-items: center;
+    border-bottom: 1px solid #e0e0e0;
+    padding-bottom: 10px;
     margin-bottom: 25px;
 }
 
 .header-top h2 {
-    font-size: 1.8rem;
-    color: #62b6cb; /* Mesmo ciano de destaque */
-    margin: 0;
+    font-size: 32px; /* Padrão OS */
+    color: #62b6cb; /* Ciano de destaque */
+    margin: 0 0 5px 0;
+    font-weight: normal; /* Padrão OS */
+    letter-spacing: 1px;
 }
 
-/* Botão Novo */
+/* Botão Novo (Mantive sua classe, mas com visual OS) */
 .btn-novo {
-    background-color: #2cb1bc; /* Cor padrão de ação */
+    background-color: #2cb1bc;
     border: none;
-    color: #ffffff;
-    padding: 9px 22px;
-    border-radius: 4px;
+    color: #102a43; /* Padrão OS para botões ciano */
+    padding: 6px 18px;
+    border-radius: 3px;
     font-weight: 500;
-    font-size: 0.95rem;
+    font-size: 14px;
     cursor: pointer;
     transition: background-color 0.2s;
 }
 
 .btn-novo:hover {
-    background-color: #2399a3;
+    background-color: #4ed0dc;
 }
 
 .btn-sucesso {
@@ -40,7 +43,9 @@
     font-weight: bold;
 }
 
-.btn-sucesso:hover { background-color: #218838 !important; }
+.btn-sucesso:hover { 
+    background-color: #218838 !important; 
+}
 
 hr {
     border: none;
@@ -48,27 +53,30 @@ hr {
     margin: 0 0 25px 0;
 }
 
-/* Área de Pesquisa */
+/* Área de Pesquisa (Agora com a borda padrão do fieldset da OS) */
 .pesquisa-container {
     background-color: #1a304a;
-    border-radius: 6px;
-    padding: 20px;
+    border: 1px solid #334e68; /* Borda adicionada para igualar à OS */
+    border-radius: 4px;
+    padding: 15px;
     box-shadow: 0 4px 6px rgba(0, 0, 0, 0.15);
     display: flex;
     align-items: center;
     gap: 12px;
-    margin-bottom: 25px;
+    margin-bottom: 20px;
     flex-wrap: wrap;
 }
 
+/* Inputs padrão OS */
 .input-pesquisa {
-    background-color: #243b55;
-    border: 1px solid #486581;
+    background-color: #102a43;
+    border: 1px solid #334e68;
+    color: white;
+    padding: 6px 10px;
     border-radius: 4px;
-    color: #ffffff;
-    padding: 9px 12px;
-    min-width: 280px;
-    font-size: 0.95rem;
+    width: 200px;
+    outline: none;
+    font-size: 14px;
 }
 
 .input-pesquisa::placeholder {
@@ -78,48 +86,48 @@ hr {
 .input-pesquisa:focus {
     outline: none;
     border-color: #62b6cb;
-    box-shadow: 0 0 0 2px rgba(98, 182, 203, 0.2);
 }
 
+/* Botões da barra de pesquisa no estilo OS */
 .btn-buscar {
     background-color: #486581;
     border: none;
     color: #ffffff;
-    padding: 9px 18px;
-    border-radius: 4px;
+    padding: 6px 18px;
+    border-radius: 3px;
     cursor: pointer;
-    font-weight: 500;
-    transition: background-color 0.2s;
+    font-size: 14px;
+    transition: background 0.2s;
 }
 
 .btn-buscar:hover {
-    background-color: #3a526b;
+    background-color: #627d98;
 }
 
 .btn-ordenar {
-    background-color: #62b6cb;
+    background-color: #3b82f6;
     border: none;
-    color: #102a43;
-    padding: 9px 18px;
-    border-radius: 4px;
+    color: white;
+    padding: 6px 18px;
+    border-radius: 3px;
     cursor: pointer;
-    font-weight: 500;
-    transition: background-color 0.2s;
+    font-size: 14px;
+    transition: background 0.2s;
 }
 
 .btn-ordenar:hover {
-    background-color: #53a1b3;
+    background-color: #60a5fa;
 }
 
 .btn-limpar {
     background-color: #334e68;
     border: none;
     color: #e2e8f0;
-    padding: 9px 18px;
-    border-radius: 4px;
+    padding: 6px 18px;
+    border-radius: 3px;
     text-decoration: none;
-    font-size: 0.95rem;
-    transition: background-color 0.2s;
+    font-size: 14px;
+    transition: background 0.2s;
 }
 
 .btn-limpar:hover {
@@ -127,11 +135,12 @@ hr {
     color: #ffffff;
 }
 
-/* Container da Tabela */
+/* Container da Tabela com a borda da OS */
 .tabela-container {
     background-color: #1a304a;
-    border-radius: 6px;
-    padding: 20px;
+    border: 1px solid #486581 !important; /* Padrão OS */
+    border-radius: 4px;
+    padding: 0; /* Removido para colar a tabela na borda como na OS */
     box-shadow: 0 4px 6px rgba(0, 0, 0, 0.15);
     overflow-x: auto;
 }
@@ -140,6 +149,7 @@ hr {
     width: 100%;
     border-collapse: collapse;
     font-size: 13px;
+    text-align: left;
 }
 
 .tabela-estoque th {
@@ -147,18 +157,17 @@ hr {
     color: #ffffff;
     padding: 12px;
     font-weight: 500;
-    text-align: left;
     border-bottom: 2px solid #486581;
 }
 
 .tabela-estoque td {
     padding: 12px;
-    border-bottom: 1px solid #243b55;
+    border-bottom: 1px solid #243b53; /* Cor exata da OS */
     color: #e2e8f0;
 }
 
 .tabela-estoque tbody tr:hover td {
-    background-color: #243b55;
+    background-color: #243b53; /* Fundo do hover da OS */
 }
 
 .sem-dados {
@@ -199,13 +208,13 @@ hr {
 }
 
 /* ==========================================
-   ESTILOS DOS MODAIS
+   ESTILOS DOS MODAIS (No padrão OS)
 ========================================== */
 .modal-content {
     background-color: #1a304a;
-    border: 1px solid #486581;
+    border: 2px solid #486581; /* Borda grossa da OS */
     border-radius: 6px;
-    box-shadow: 0 10px 25px rgba(0, 0, 0, 0.3);
+    box-shadow: 0 4px 20px rgba(0,0,0,0.5); /* Sombra escura da OS */
     color: #ffffff;
 }
 
@@ -217,7 +226,7 @@ hr {
 .modal-title {
     color: #62b6cb;
     font-size: 1.15rem;
-    font-weight: 500;
+    font-weight: normal; /* Padrão OS */
 }
 
 .btn-close {
@@ -238,29 +247,34 @@ hr {
     padding: 16px 20px;
     display: flex;
     justify-content: flex-end;
-    gap: 10px;
+    gap: 15px; /* Distanciamento dos botões da OS */
 }
 
-/* Campos do Formulário */
+/* Campos do Formulário escuros (Padrão OS) */
 .form-control {
-    background-color: #243b55;
-    border: 1px solid #486581;
+    background-color: #102a43; /* Fundo escuro */
+    border: 1px solid #334e68;
     border-radius: 4px;
     color: #ffffff;
     padding: 9px 12px;
-    font-size: 0.95rem;
+    font-size: 14px;
 }
 
 .form-control:focus {
-    background-color: #243b55;
+    background-color: #102a43;
     border-color: #62b6cb;
     color: #ffffff;
     outline: none;
-    box-shadow: 0 0 0 2px rgba(98, 182, 203, 0.2);
+    box-shadow: none;
 }
 
 .form-control::placeholder {
     color: #9fb3c8;
+}
+
+/* Textos das Labels no modal para contrastar bem */
+.form-label {
+    color: #e2e8f0;
 }
 
 /* Grupo de input + botão */
@@ -270,50 +284,51 @@ hr {
 }
 
 .btn-sm-modal {
-    background-color: #62b6cb;
+    background-color: #486581;
     border: none;
-    color: #102a43;
+    color: #ffffff;
     width: 36px;
-    border-radius: 4px;
+    border-radius: 3px;
     font-weight: bold;
     cursor: pointer;
-    transition: background-color 0.2s;
+    transition: background 0.2s;
 }
 
 .btn-sm-modal:hover {
-    background-color: #53a1b3;
+    background-color: #627d98;
 }
 
-/* Botões do modal */
+/* Botões do modal - Padronizados com as cores da OS */
 .btn-principal {
     background-color: #2cb1bc;
     border: none;
-    color: #ffffff;
-    padding: 8px 18px;
-    border-radius: 4px;
+    color: #102a43;
+    padding: 6px 18px;
+    border-radius: 3px;
     font-weight: 500;
     cursor: pointer;
-    transition: background-color 0.2s;
+    font-size: 14px;
+    transition: background 0.2s;
 }
 
 .btn-principal:hover {
-    background-color: #2399a3;
+    background-color: #4ed0dc;
 }
 
 .btn-secundario {
-    background-color: #334e68;
+    background-color: #d9534f; /* Corrigido para vermelho padrão botão cancelar */
     border: none;
-    color: #e2e8f0;
-    padding: 8px 18px;
-    border-radius: 4px;
+    color: white;
+    padding: 6px 18px;
+    border-radius: 3px;
     font-weight: 500;
+    font-size: 14px;
     cursor: pointer;
-    transition: background-color 0.2s;
+    transition: background 0.2s;
 }
 
 .btn-secundario:hover {
-    background-color: #2b425a;
-    color: #ffffff;
+    background-color: #e66d6a;
 }
 
 /* Responsividade */
