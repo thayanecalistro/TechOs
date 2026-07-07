@@ -1,8 +1,6 @@
 <?php
 
-
-
-include("php/funcaoFuncionario.php"); // Descomente quando criar o arquivo de funções
+include("php/funcoes.php");
 
 $currentPage = 'funcionario';
 ?>
@@ -11,7 +9,7 @@ $currentPage = 'funcionario';
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>TechOS - Cadastro de Funcionários</title>
+    <title>TechOS - Cadastro de Colaboradores</title>
     <link rel="stylesheet" href="css/style_funcionarios.css">
 </head>
 <body>
@@ -69,7 +67,7 @@ $currentPage = 'funcionario';
         <div id="meuModal" class="modal">
             <div class="modal-conteudo">
                 <span class="botaoFechar">&times;</span>
-                <h2>Cadastro de Funcionário</h2>
+                <h2>Cadastro de Colaboradores</h2>
                 <hr style="border: 1px solid #334e68; margin-bottom: 20px;">
 
                 <form method="POST" action="php/salvarFuncionario.php?opcao=I" enctype="multipart/form-data">

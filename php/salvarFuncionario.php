@@ -1,17 +1,17 @@
 <?php
-// Exemplo de backend de salvamento: php/salvarFuncionario.php
-include("funcoes.php"); // Altere se sua conexão com o banco estiver em outro arquivo
+
+include("funcoes.php"); 
 
 if ($_SERVER["REQUEST_METHOD"] == "POST" && isset($_GET['opcao']) && $_GET['opcao'] == 'I') {
     
-    // Captura os dados limpando entradas contra falhas básicas
-    $tipo        = $_POST['nTipo'];
-    $nome        = $_POST['nNome'];
-    $cpf         = $_POST['nCpf'];
-    $email       = $_POST['nEmail'];
-    $telefone    = $_POST['nTelefone'];
-    $endereco    = $_POST['nEndereco'];
-    $login       = $_POST['nLogin'];
+    
+    $tipo= $_POST['nTipo'];
+    $nome= $_POST['nNome'];
+    $cpf= $_POST['nCpf'];
+    $email= $_POST['nEmail'];
+    $telefone= $_POST['nTelefone'];
+    $endereco= $_POST['nEndereco'];
+    $login= $_POST['nLogin'];
     
     // Segurança: Criptografa a senha antes de enviar ao Banco de dados
     $senha_limpa = $_POST['nSenha'];
