@@ -40,7 +40,7 @@
         </li>
 
         <li class="menu-item <?= ($currentPage == 'cliente') ? 'active' : ''; ?>">
-            <a href="cadastroCliente.php"><i class="fas fa-users"></i> <span>Cliente</span></a>
+            <a href="cliente.php"><i class="fas fa-users"></i> <span>Cliente</span></a>
         </li>
 
     <!--<li class="menu-item dropdown = ($currentPage == 'cliente') ? 'open active' : ''; ?>" id="clienteMenu">
@@ -54,11 +54,11 @@
         </li>-->
 
         <li class="menu-item <?= ($currentPage == 'aparelho') ? 'active' : ''; ?>">
-            <a href="cadastroAparelho.php"><i class="fas fa-laptop"></i> <span>Aparelho</span></a>
+            <a href="aparelho.php"><i class="fas fa-laptop"></i> <span>Aparelho</span></a>
         </li>
 
         <li class="menu-item <?= ($currentPage == 'funcionario') ? 'active' : ''; ?>">
-            <a href="funcionarios.php"><i class="fas fa-user-tie"></i> <span>Funcionário</span></a>
+            <a href="funcionario.php"><i class="fas fa-user-tie"></i> <span>Funcionário</span></a>
         </li>
 
         <li class="menu-item <?= ($currentPage == 'estoque') ? 'active' : ''; ?>">
