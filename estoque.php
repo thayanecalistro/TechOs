@@ -23,6 +23,7 @@ $linhasTabelaEstoque = listarProdutosEstoque($conn, $pesquisa);
     <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css">
     <link rel="stylesheet" href="css/os.css">
     <link rel="stylesheet" href="css/style_orcamento.css">
+    <link rel="stylesheet" href="css/estoque.css">
 
 </head>
 <body>
@@ -46,7 +47,7 @@ $linhasTabelaEstoque = listarProdutosEstoque($conn, $pesquisa);
         </div>
 
         <div class="tabela-container mt-4">
-            <table class="tabela-estoque table table-striped">
+            <table class="tabela-estoque">
                 <thead>
                     <tr>
                         <th>ID</th>
