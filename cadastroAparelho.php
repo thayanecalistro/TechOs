@@ -58,22 +58,22 @@ $currentPage = 'aparelho';
             <h3>Cadastrar Novo Aparelho</h3>
 
             <form action="php/salvarAparelho.php?opcao=I" method="POST" class="modal-form">
-                
+                <label>Nome:</label> <!---->
                 <select name="nCliente" required>
                     <option value="">Selecione o Cliente</option>
                     <?php echo listaOpcoesClientes(); ?>
                 </select>
 
-                
+                <label>Marca:</label> <!---->
                 <select name="nMarca" required>
                     <option value="">Selecione a Marca</option>
                     <?php echo listaOpcoesMarcas(); ?>
                 </select>
 
-                
+                <label>Modelo:</label> <!---->
                 <input type="text" name="nModelo" placeholder="Digite o nome do modelo" required>
 
-                
+                <label>IMEI:</label> <!---->
                 <input type="text" name="nImei" placeholder="Somente números" required>
 
                 <div class="form-actions">
@@ -92,22 +92,22 @@ $currentPage = 'aparelho';
             <form id="formAlterar" method="POST" class="modal-form">
                 <input type="hidden" name="idAparelho" id="alt_id">
                 
-                
+                <label>Nome:</label> <!---->
                 <select name="nCliente" id="alt_cliente" required>
                     <option value="">Selecione o Cliente</option>
                     <?php echo listaOpcoesClientes(); ?>
                 </select>
 
-                
+                <label>Marca:</label> <!---->
                 <select name="nMarca" id="alt_marca" required>
                     <option value="">Selecione a Marca</option>
                     <?php echo listaOpcoesMarcas(); ?>
                 </select>
 
-                
+                <label>Modelo:</label> <!---->
                 <input type="text" name="nModelo" id="alt_modelo" placeholder="Digite o nome do modelo" required>
 
-                
+                <label>IMEI:</label> <!---->
                 <input type="number" name="nImei" id="alt_imei" required>
 
                 <div class="form-actions">
@@ -118,6 +118,6 @@ $currentPage = 'aparelho';
         </div>
     </div>
 
-    <script src="js/aparelho.js"></script>
+    <script src="js/aparelho.js?v=1"></script>
 </body>
 </html>

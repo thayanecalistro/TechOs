@@ -31,7 +31,6 @@
 
     $sql = "";
 
-    // Certifica-se de que as variáveis numéricas não vão vazias para o SQL
     $cliente = intval($cliente);
     $idModelo = intval($idModelo);
     $id = intval($id);
@@ -55,7 +54,6 @@
 	
     mysqli_close($conn);
 
-    // CORREÇÃO: Redireciona o usuário de volta para a tela de listagem de aparelhos
     header("Location: ../cadastroAparelho.php");
     exit();
 ?>

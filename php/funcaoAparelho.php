@@ -25,7 +25,6 @@ function listaAparelho(){
             $modelo = $coluna['nomeModelo'] ?? 'Não informado';
             $imei = $coluna['imeiAparelho'];
     
-            // CORREÇÃO: Adicionado os atributos data-* necessários para o preenchimento do modal via JS
             $html .= "<tr>
                 <td>{$id}</td>
                 <td>{$nomeCliente}</td>

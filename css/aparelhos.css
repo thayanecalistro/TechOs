@@ -90,6 +90,13 @@
     align-items: center;
 }
 
+#modalAparelho .modal-form label {
+    color: white;
+}
+
+#modalAlterarAparelho .modal-form label {
+    color: white;
+}
 .modal-conteudo {
     background-color: #1a304a;
     color: white; 
