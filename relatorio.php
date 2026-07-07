@@ -14,7 +14,7 @@ $funcionarios_ativos = 23;
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>TechOS - Relatórios Gerais</title>
-    <link rel="stylesheet" href="css/os.css">
+    <link rel="stylesheet" href="css/style_geral.css">
     <link rel="stylesheet" href="css/relatorios.css">
     <script src="js/relatorio.js" defer></script>
 </head>

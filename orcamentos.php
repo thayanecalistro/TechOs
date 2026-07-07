@@ -12,7 +12,7 @@ $currentPage = 'orcamento';
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>TechOS - Orçamentos</title>
 
-    <link rel="stylesheet" href="css/os.css"> 
+    <link rel="stylesheet" href="css/style_geral.css"> 
     <link rel="stylesheet" href="css/style_orcamento.css"> 
 </head>
 <body>

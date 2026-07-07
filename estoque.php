@@ -21,7 +21,7 @@ $linhasTabelaEstoque = listarProdutosEstoque($conn, $pesquisa);
     <title>Controle de Estoque</title>
 
     <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css">
-    <link rel="stylesheet" href="css/os.css">
+    <link rel="stylesheet" href="css/style_geral.css">
     <link rel="stylesheet" href="css/style_orcamento.css">
     <link rel="stylesheet" href="css/estoque.css">
 
