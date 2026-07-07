@@ -5,7 +5,7 @@
         $html = "";
 
     //SQL
-    $sql = "SELECT idFuncionario, tipoFuncionario, nomeFuncionario, telefoneFuncionario, foto from funcionario";
+    $sql = "SELECT idFuncionario, tipoFuncionario, nomeFuncionario, telefoneFuncionario from funcionario";
 
     //Conectar
     include("conexao.php");
@@ -24,9 +24,8 @@
 
         $html .= "<tr>                         
                           <td>".$coluna['idFuncionario']."</td>
-                          <td>".$coluna['foto']."</td>
-                          <td>".$coluna['nomeFuncionario']."</td>
                           <td>".$coluna['tipoFuncionario']."</td>
+                          <td>".$coluna['nomeFuncionario']."</td>
                           <td>".$coluna['telefoneFuncionario']."</td>
                           <td>
                             <button class='btn-alterar-tabela btn-alterar' title='Alterar'>
