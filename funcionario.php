@@ -9,6 +9,8 @@ $currentPage = 'funcionario';
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+    <link rel="stylesheet" href="css/os.css">
     <link rel="stylesheet" href="css/style_cadastros.css">
     <title>Cadastro de Colaboradores</title>
 </head>
@@ -16,7 +18,47 @@ $currentPage = 'funcionario';
    
 <?php include('sidebar.php'); ?>
 
-<div class="conteudo-principal">
+<div class="page-content">
+
+<div class="os-header">
+        <div>
+            <h2>Gerenciamento de Colaboradores</h2>
+        </div>
+      </div>
+
+
+<!--   TABELAS DOS CLIENTES                                                          -->
+
+       <fieldset class="search-fieldset">
+            <legend>Pesquisar Colaborador</legend>
+            <div class="search-box">
+                <input type="text" id="pesquisar" name="pesquisar" placeholder="ID ou Nome...">
+                <button type="button" class="btn btn-blue" id="btnBuscar">Buscar</button>
+                <input type="submit" class="btn btn-sucesso" value="Novo Colaborador" id="botaoAbrir" >
+                </select>
+            </div>
+        </fieldset>
+       
+      
+      <div class="section-card">
+
+      <div class="table-container"> 
+            <table  class="os-table">
+                <thead>
+                  <tr>
+                    <th>Matrícula</th>
+                    <th>Tipo De Acesso</th>
+                    <th>Nome do Colaborador</th>
+                    <th>Contato</th>
+                    <th>Ações</th>
+                  </tr>
+                  <?php echo listaFuncionarios(); ?>
+                </thead>
+            </table>
+      </div>
+      </div>
+</div>
+
 
 <!--                   TELA DE CADASTRO                                 -->
 <div id="meuModal" class="modal">
@@ -60,7 +102,7 @@ $currentPage = 'funcionario';
          <h2>Tipo de Colaborador</h2>
 
          <div class="linhaFormulario">
-           <select name="" id="">
+           <select name="" id="" >
               <option value="">Selecione...</option>
               <option value="">Administrador</option>
               <option value="">Atendente</option>
@@ -76,41 +118,6 @@ $currentPage = 'funcionario';
 </div>
 </div>
 
-
-<!--   TABELAS DOS CLIENTES                                                          -->
-<div class="table-section">        
-
-       <fieldset class="search-container">
-            <legend>Pesquisar Colaborador</legend>
-            <div class="search-box">
-                <label for="pesquisar">Pesquisar:</label>
-                <input type="text">
-                </select>
-            </div>
-        </fieldset>
-
-        <div class="botaoContainer">
-        <input type="submit" value="Novo Colaborador" id="botaoAbrir" >
-       </div> 
-       
-      <br>
-      <div calss="tela-fundo">
-        <h3>Colaboradores</h3>
-      <div class="table-container"> 
-            <table  border= "1" class="tabelas" >
-                <thead>
-                  <tr>
-                    <th>Matrícula</th>
-                    <th>Nome do Colaborador</th>
-                    <th>Contato</th>
-                    <th>Ações</th>
-                  </tr>
-                  <?php echo listaFuncionarios(); ?>
-                </thead>
-            </table>
-      </div>
-      </div>
-</div>
    <script src="js/scriptCadastro.js"></script>
 </body>
 </html>

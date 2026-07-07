@@ -11,7 +11,7 @@ $currentPage = 'cliente';
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
 
     <link rel="stylesheet" href="css/os.css">
-    <link rel="stylesheet" href="css/style_cliente.css">
+    <link rel="stylesheet" href="css/style_cadastros.css">
     <title>Cadastro de Clientes</title>
 </head>
 <body>
@@ -24,7 +24,6 @@ $currentPage = 'cliente';
         <div>
             <h2>Gerenciamento de Clientes</h2>
         </div>
-        <button type="button" class="btn btn-sucesso" id="botaoAbrir">+ Novo</button>
       </div>
 
       <!--   TABELAS DOS CLIENTES                                                          -->  
@@ -33,6 +32,7 @@ $currentPage = 'cliente';
           <div class="search-box"> 
               <input type="text" id="pesquisar" name="pesquisar" placeholder="ID ou Nome...">
               <button type="button" class="btn btn-blue" id="btnBuscar">Buscar</button>
+              <button type="button" class="btn btn-sucesso" id="botaoAbrir">Novo Cliente</button>
               </select>
           </div>
       </fieldset>
@@ -40,7 +40,7 @@ $currentPage = 'cliente';
       <div class="section-card">
         
         <div class="table-container"> 
-            <table  class="os-table" id="clienteTable">
+            <table  class="os-table" >
                 <thead>
                   <tr>
                     <th>ID</th>
@@ -56,6 +56,7 @@ $currentPage = 'cliente';
         </div>
       </div>
     </div>
+
     <!--                   TELA DE CADASTRO                                 -->
       <div id="meuModal" class="modal">
         <div class="modal-conteudo">
