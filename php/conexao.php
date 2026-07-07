@@ -1,5 +1,5 @@
 <?php
-  $conn = mysqli_connect("localhost:3307", 
+  $conn = mysqli_connect("localhost", 
                           "root",
                           "",
                         "techos");
