@@ -3,7 +3,7 @@
  include('funcaoAparelho.php');
  include ('funcaoFuncionario.php'); 
  include ('funcaoOrcamento.php');
- include('funcaoEstoque.php');
+ include_once("funcaoEstoque.php");
 
 function listaAparelhosGeral(){
     $html = "";

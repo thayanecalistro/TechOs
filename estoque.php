@@ -9,6 +9,7 @@ if (isset($_POST['busca']) && !empty(trim($_POST['busca']))) {
     $pesquisa = trim($_POST['busca']);
 }
 
+$linhasTabelaEstoque = listarProdutosEstoque($conn, $pesquisa);
 
 ?>
 
@@ -58,7 +59,7 @@ if (isset($_POST['busca']) && !empty(trim($_POST['busca']))) {
                     </tr>
                 </thead>
                 <tbody>
-                    <?php echo listarProdutosEstoque() ?>
+                    <?php echo $linhasTabelaEstoque; ?>
                 </tbody>
             </table>
         </div>
