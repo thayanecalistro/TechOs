@@ -1,5 +1,6 @@
 <?php
 
+include("php/funcoes.php");
 $currentPage = 'os';
 
 ?>
@@ -61,7 +62,7 @@ $currentPage = 'os';
                         </tr>
                     </thead>
                     <tbody>
-                       <!--?php echo ?>-->
+                       <?php echo listarOs() ?>
                     </tbody>
                 </table>
             </div>

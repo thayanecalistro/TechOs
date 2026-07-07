@@ -4,6 +4,7 @@
  include ('funcaoFuncionario.php'); 
  include ('funcaoOrcamento.php');
  include_once("funcaoEstoque.php");
+ include ('funcaoOs.php');
 
 function listaAparelhosGeral(){
     $html = "";

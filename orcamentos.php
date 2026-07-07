@@ -91,11 +91,16 @@ $currentPage = 'orcamento';
                         </select>
                     </div>
 
+                    <div class="form-group full-width">
+                        <label for="diagnostico">Diagnóstico Técnico</label>
+                        <textarea id="diagnostico" name="nDiagnostico" rows="2" placeholder="Avaliação técnica inicial..."></textarea>
+                    </div>
+
                     <div class="form-group full-width" style="border: 1px dashed #2cb1bc; padding: 15px; border-radius: 4px;">
                         <label style="font-weight: bold; margin-bottom: 10px; display: block;">Peças Necessárias</label>
                         <div id="container-pecas">
                             <div class="peca-row" style="display: flex; gap: 10px; margin-bottom: 10px;">
-                                <input type="text" class="classe-busca-peca" list="listaPecasEstoque" placeholder="Busque a peça no estoque..." style="flex: 2;" required autocomplete="off">
+                                <input type="text" name="nPeca[]" class="classe-busca-peca" list="listaPecasEstoque" placeholder="Busque a peça no estoque..." style="flex: 2;" required autocomplete="off">
                                 <input type="hidden" name="nIdEstoque[]" class="classe-id-estoque">
                                 
                                 <input type="number" name="nValorUni[]" class="classe-val-uni" step="0.01" value="0.00" style="flex: 1;" placeholder="Valor Unit." readonly style="background-color: #0c1f32; color: #2cb1bc;">

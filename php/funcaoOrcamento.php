@@ -35,8 +35,8 @@ function listarOrcamentos(){
                         <td>".$coluna['nomeCliente']."</td>
                         <td>".$coluna['nomeMarca']." ".$coluna['nomeModelo']."</td>
                         <td>".$txtPecas."</td>
-                        <td>-</td>
-                        <td>-</td>
+                        <td>".$coluna['valorUni']."</td>
+                        <td>".$coluna['maoObra']."</td>
                         <td><strong>R$ ".number_format($coluna['valorTotal'], 2, ',', '.')."</strong></td>
                         <td>";
 

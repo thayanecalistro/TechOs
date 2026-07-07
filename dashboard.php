@@ -1,18 +1,15 @@
 <?php
 $currentPage = 'dashboard';
 
-// Simulação de dados do banco de dados (futuramente você substituirá por consultas SQL)
-$total_OS_abertas = 12;
-$total_orcamentos_pendentes = 5;
-$total_clientes = 148;
-$faturamento_mes = 4520.50;
+include("php/funcaoDashboard.php");
 
-$atividades_recentes = [
-    ['id' => 102, 'cliente' => 'Carlos Silva', 'tipo' => 'Ordem de Serviço', 'status' => 'Aberta', 'data' => '16/06/2026'],
-    ['id' => 45, 'cliente' => 'Ana Souza', 'tipo' => 'Orçamento', 'status' => 'Aprovado', 'data' => '16/06/2026'],
-    ['id' => 101, 'cliente' => 'Marcos Lima', 'tipo' => 'Ordem de Serviço', 'status' => 'Concluída', 'data' => '15/06/2026'],
-    ['id' => 44, 'cliente' => 'Julia Rossi', 'tipo' => 'Orçamento', 'status' => 'Recusado', 'data' => '14/06/2026'],
-];
+
+$total_OS_abertas = d_totalOsAbertas();
+$total_orcamentos_pendentes = d_totalOrcamentosPendentes();
+$total_clientes = d_totalClientes();
+$faturamento_mes = d_faturamentoMes();
+
+$atividades_recentes = d_listarUltimasAtividades();
 ?>
 <!DOCTYPE html>
 <html lang="pt-BR">
@@ -93,26 +90,32 @@ $atividades_recentes = [
                             </tr>
                         </thead>
                         <tbody>
-                            <?php foreach ($atividades_recentes as $atividade): ?>
+                            <?php if(count($atividades_recentes) > 0): ?>
+                                <?php foreach ($atividades_recentes as $atividade): ?>
+                                    <tr>
+                                        <td>#<?php echo $atividade['id']; ?></td>
+                                        <td><?php echo htmlspecialchars($atividade['cliente'], ENT_QUOTES); ?></td>
+                                        <td><?php echo $atividade['tipo']; ?></td>
+                                        <td><?php echo $atividade['data']; ?></td>
+                                        <td>
+                                            <?php 
+                                                $statusClass = 'badge-aberto';
+                                                $status = strtolower($atividade['status']);
+                                                if ($status == 'aberta' || $status == 'aberto') $statusClass = 'badge-aberto';
+                                                elseif ($status == 'aprovado' || $status == 'concluída' || $status == 'concluido' || $status == 'finalizado') $statusClass = 'badge-aprovado';
+                                                elseif ($status == 'recusado' || $status == 'reprovado') $statusClass = 'badge-recusado';
+                                            ?>
+                                            <span class="badge <?php echo $statusClass; ?>">
+                                                <?php echo ucfirst($atividade['status']); ?>
+                                            </span>
+                                        </td>
+                                    </tr>
+                                <?php endforeach; ?>
+                            <?php else: ?>
                                 <tr>
-                                    <td>#<?php echo $atividade['id']; ?></td>
-                                    <td><?php echo $atividade['cliente']; ?></td>
-                                    <td><?php echo $atividade['tipo']; ?></td>
-                                    <td><?php echo $atividade['data']; ?></td>
-                                    <td>
-                                        <?php 
-                                            $statusClass = '';
-                                            $status = strtolower($atividade['status']);
-                                            if ($status == 'aberta') $statusClass = 'badge-aberto';
-                                            elseif ($status == 'aprovado' || $status == 'concluída') $statusClass = 'badge-aprovado';
-                                            elseif ($status == 'recusado') $statusClass = 'badge-recusado';
-                                        ?>
-                                        <span class="badge <?php echo $statusClass; ?>">
-                                            <?php echo $atividade['status']; ?>
-                                        </span>
-                                    </td>
+                                    <td colspan="5" style="text-align:center; color:#829ab1;">Nenhuma atividade recente registrada no banco de dados.</td>
                                 </tr>
-                            <?php endforeach; ?>
+                            <?php endif; ?>
                         </tbody>
                     </table>
                 </div>
