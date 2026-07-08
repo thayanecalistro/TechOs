@@ -58,4 +58,45 @@ document.addEventListener("DOMContentLoaded", function() {
             }
         });
     });
+
+// --- LÓGICA DE PESQUISA (FILTRO NA TABELA) ---
+const inputPesquisar = document.getElementById('pesquisar');
+const btnBuscar = document.getElementById('btnBuscar');
+
+function filtrarTabela() {
+    if (!inputPesquisar) return; // Proteção extra
+
+    const termoBusca = inputPesquisar.value.toLowerCase().trim().replace('#', '');
+    
+    const linhasTabela = document.querySelectorAll('table tr'); 
+
+    linhasTabela.forEach(linha => {
+        const colunas = linha.querySelectorAll('td');
+        
+        // Garante que a linha tem pelo menos 2 colunas (ignora o cabeçalho e linhas vazias)
+        if (colunas.length >= 2) {
+            // Pegamos a coluna 0 (ID) e a coluna 1 (Cliente)
+            const idDaLinha = colunas[0].textContent.toLowerCase().replace('#', '').trim();
+            const nomeCliente = colunas[1].textContent.toLowerCase();
+
+            // Se o campo estiver vazio, OU se o ID for exato, OU se o nome tiver o texto
+            if (termoBusca === "" || idDaLinha === termoBusca || nomeCliente.includes(termoBusca)) {
+                linha.style.display = ''; // Mostra a linha
+            } else {
+                linha.style.display = 'none'; // Esconde a linha
+            }
+        }
+    });
+}
+
+if (btnBuscar) {
+    btnBuscar.addEventListener('click', function(e) {
+        e.preventDefault(); // Evita recarregar a página
+        filtrarTabela();
+    });
+}
+
+if (inputPesquisar) {
+    inputPesquisar.addEventListener('keyup', filtrarTabela);
+}
 });

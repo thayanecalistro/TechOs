@@ -22,3 +22,5 @@ window.addEventListener("click", (event) => {
 
 // ----------------------  PARA A SUBTELA PARA ALTERAÇÃO ---------------
 
+
+

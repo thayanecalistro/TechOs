@@ -28,8 +28,7 @@ $currentPage = 'aparelho';
             <legend>Pesquisar</legend>
             <div class="search-box"> 
                 <input type="text" id="pesquisar" name="pesquisar" placeholder="ID ou Nome...">
-                <button type="button" class="btn btn-blue" id="btnBuscar">Buscar</button>
-                </select>
+                <button type="button" class="btn btn-blue" id="btnBuscar">Buscar</button>             
             </div>
         </fieldset>
 

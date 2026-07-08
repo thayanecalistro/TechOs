@@ -109,7 +109,7 @@ $currentPage = 'cliente';
    <span class="botaoFecharAlterar">&times;</span>
     <h2>Cadastro de Clientes</h2>
 
-     <form method="POST" action="php/salvarCliente.php?opcao=I">
+     <form method="POST" action="php/salvarCliente.php?opcao=U">
       
      <input type="hidden" id="alterarId" name="nIdCliente">
 
