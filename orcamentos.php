@@ -43,7 +43,6 @@ $currentPage = 'orcamento';
 
         <div class="section-card">
         <!--<div class="footer-actions">
-                <button type="button" class="btn btn-red" id="btnExcluir">Excluir</button>
                 <button type="button" class="btn btn-light-blue" onclick="window.location.reload();">Atualizar Tabela</button>
             </div>-->
 
@@ -130,9 +129,9 @@ $currentPage = 'orcamento';
                         <label for="status">Status</label>
                         <select id="status" name="nStatus">
                             <option value="aberto" selected>Aberto</option>
-                            <option value="aprovado">Aprovado</option>
+                        <!--<option value="aprovado">Aprovado</option>
                             <option value="reprovado">Reprovado</option>
-                            <option value="finalizado">Finalizado</option>
+                            <option value="finalizado">Finalizado</option>-->
                         </select>
                     </div>
 
@@ -150,33 +149,72 @@ $currentPage = 'orcamento';
         </div>
     </div>
 
+                    <!--MODAL DE STATUS-->
+    <div class="modal-overlay" id="statusModal" style="display: none; position: fixed; top: 0; left: 0; width: 100%; height: 100%; background: rgba(0,0,0,0.6); justify-content: center; align-items: center; z-index: 9999;">
+        <div class="modal-content" style="background: #0c1f32; padding: 20px; border-radius: 6px; width: 350px; border: 1px solid #2cb1bc; color: white;">
+            <h3 style="margin-top: 0; color: #62b6cb;">Alterar Status do Orçamento</h3>
+            <form action="php/atualizarStatus.php" method="GET">
+                <input type="hidden" id="statusIdOrcamento" name="id">
+                
+                <div class="form-group" style="margin: 20px 0;">
+                    <label for="modalNovoStatus" style="display: block; margin-bottom: 8px;">Selecione a opção:</label>
+                    <select id="modalNovoStatus" name="status" required style="width: 100%; height: 35px; border-radius: 4px; background-color: #102a43; color: white; border: 1px solid #2cb1bc; padding: 0 5px;">
+                        <option value="aprovado">Aprovado</option>
+                        <option value="reprovado">Recusado</option>
+                    </select>
+                </div>
+                <div class="modal-buttons" style="display: flex; gap: 10px; justify-content: flex-end;">
+                    <button type="submit" class="btn btn-sucesso">Confirmar</button>
+                    <button type="button" class="btn btn-red" id="btnFecharStatusModal">Cancelar</button>
+                </div>
+            </form>
+        </div>
+    </div>
+
+                    <!--MODAL DE VISUALIZAÇÃO-->
+    <div class="modal-overlay" id="detalhesModal" style="display: none; position: fixed; top: 0; left: 0; width: 100%; height: 100%; background: rgba(0,0,0,0.6); justify-content: center; align-items: center; z-index: 9998;">
+        <div class="modal-content" style="background: #1a304a; padding: 25px; border-radius: 6px; width: 500px; border: 1px solid #2cb1bc; color: white;">
+            <h3 style="margin-top: 0; color: #62b6cb; border-bottom: 1px solid #334e68; padding-bottom: 10px;">Detalhes do Orçamento <span id="viewIdOrcamento" style="color: white;"></span></h3>
+            
+            <div style="margin: 20px 0; display: flex; flex-direction: column; gap: 12px;">
+                <div class="form-group">
+                    <label style="display:block; margin-bottom:4px; font-weight:500;">Cliente:</label>
+                    <input type="text" id="viewCliente" readonly style="width:100%; height:35px; background:#0c1f32; color:#fff; border:1px solid #486581; border-radius:4px; padding:0 10px;">
+                </div>
+                <div class="form-group">
+                    <label style="display:block; margin-bottom:4px; font-weight:500;">Aparelho / Modelo:</label>
+                    <input type="text" id="viewAparelho" readonly style="width:100%; height:35px; background:#0c1f32; color:#fff; border:1px solid #486581; border-radius:4px; padding:0 10px;">
+                </div>
+                <div class="form-group">
+                    <label style="display:block; margin-bottom:4px; font-weight:500;">Peças Vinculadas:</label>
+                    <input type="text" id="viewPecas" readonly style="width:100%; height:35px; background:#0c1f32; color:#fff; border:1px solid #486581; border-radius:4px; padding:0 10px;">
+                </div>
+                <div style="display: flex; gap: 10px;">
+                    <div class="form-group" style="flex: 1;">
+                        <label style="display:block; margin-bottom:4px; font-weight:500;">Mão de Obra (R$):</label>
+                        <input type="text" id="viewMaoObra" readonly style="width:100%; height:35px; background:#0c1f32; color:#fff; border:1px solid #486581; border-radius:4px; padding:0 10px;">
+                    </div>
+                    <div class="form-group" style="flex: 1;">
+                        <label style="display:block; margin-bottom:4px; font-weight:500;">Valor Total (R$):</label>
+                        <input type="text" id="viewTotal" readonly style="width:100%; height:35px; background:#0c1f32; color:#fff; border:1px solid #486581; border-radius:4px; padding:0 10px; font-weight:bold;">
+                    </div>
+                </div>
+                <div class="form-group">
+                    <label style="display:block; margin-bottom:4px; font-weight:500;">Status Atual:</label>
+                    <input type="text" id="viewStatus" readonly style="width:100%; height:35px; background:#0c1f32; color:#fff; border:1px solid #486581; border-radius:4px; padding:0 10px;">
+                </div>
+            </div>
+
+            <div style="display: flex; gap: 10px; justify-content: space-between; margin-top: 20px; border-top: 1px solid #334e68; padding-top: 15px;">
+                <div>
+                    <button type="button" class="btn btn-cyan" id="btnAcaoEditar" style="padding: 8px 15px; margin-right: 5px;">Editar</button>
+                    <button type="button" class="btn btn-red" id="btnAcaoExcluir" style="padding: 8px 15px;">Excluir</button>
+                </div>
+                <button type="button" class="btn" id="btnFecharDetalhesModal" style="background: #486581; color: white; padding: 8px 15px;">Fechar</button>
+            </div>
+        </div>
+    </div>
+
     <script src="js/orcamento.js"></script>
 </body>
-
-<!--?php foreach ($orcamentos as $orc): ?>
-                            <tr>
-                                <td>?= $orc['idOrcamento']; ?></td>
-                                <td>?= $orc['Cliente_idCliente']; ?></td>
-                                <td>?= $orc['Aparelho_idAparelho']; ?></td>
-                                <td>?= $orc['peca']; ?></td>
-                                <td>?= $orc['valorUni']; ?></td>
-                                <td>?= $orc['maoObra']; ?></td>
-                                <td><strong>?= $orc['valorTotal']; ?></strong></td>
-                                <td><span class="badge badge-?= $orc['status']; ?>">?= $orc['status']; ?></span></td>
-                            </tr>
-                        ?php endforeach; ?>
-                        
-                        <div class="form-group">
-                        <label for="Clientes_idCliente">Nome do Cliente *</label>
-                        <select name="Clientes_idCliente" id="Clientes_idCliente" required style="width: 100%; 
-                                      height: 35px; border-radius: 4px; background-color: #0c1f32; color: white; 
-                                      border: 1px solid #2cb1bc;">
-                                      ?php echo comboClientes(); ?>
-                        </select>
-                    </div>
-                    
-                    <div class="form-group full-width">
-                        <label for="diagnostico">Diagnóstico Técnico</label>
-                        <textarea id="diagnostico" name="diagnostico" rows="2" placeholder="Avaliação técnica inicial..."></textarea>
-                    </div>-->
 </html>

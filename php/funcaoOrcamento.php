@@ -4,7 +4,8 @@ function listarOrcamentos(){
 
     // INNER JOIN robusto associando as chaves estrangeiras reais das suas tabelas
         $sql = "SELECT o.idOrcamento, c.nomeCliente, m.nomeMarca, mo.nomeModelo, 
-                    o.peca, o.valorUni, o.maoObra, o.valorTotal, o.status 
+                    o.peca, o.valorUni, o.maoObra, o.valorTotal, o.status,
+                    o.Cliente_idCliente, o.Aparelho_idAparelho 
                 FROM orcamento o
                 INNER JOIN clientes c ON o.Cliente_idCliente = c.idCliente
                 INNER JOIN aparelho a ON o.Aparelho_idAparelho = a.idAparelho
@@ -30,20 +31,26 @@ function listarOrcamentos(){
             }
             $txtPecas = count($listaPecas) > 0 ? implode(", ", $listaPecas) : "Sem peças vinculadas";
 
-            $html .= "<tr>
-                        <td>".$coluna['idOrcamento']."</td>
-                        <td>".$coluna['nomeCliente']."</td>
-                        <td>".$coluna['nomeMarca']." ".$coluna['nomeModelo']."</td>
-                        <td>".$txtPecas."</td>
-                        <td>".$coluna['valorUni']."</td>
-                        <td>".$coluna['maoObra']."</td>
-                        <td><strong>R$ ".number_format($coluna['valorTotal'], 2, ',', '.')."</strong></td>
-                        <td>";
+            $html .= "<tr class='orcamento-row' style='cursor: pointer;'
+                        data-id='".$coluna['idOrcamento']."' 
+                        data-cliente='".htmlspecialchars($coluna['nomeCliente'], ENT_QUOTES, 'UTF-8')."' 
+                        data-aparelho='".$coluna['nomeMarca']." ".$coluna['nomeModelo']."'
+                        data-pecas='".htmlspecialchars($txtPecas, ENT_QUOTES, 'UTF-8')."' 
+                        data-mao-obra='".$coluna['maoObra']."' 
+                        data-total='".$coluna['valorTotal']."' 
+                        data-status='".ucfirst($coluna['status'])."'>
+                    <td>".$coluna['idOrcamento']."</td>
+                    <td>".$coluna['nomeCliente']."</td>
+                    <td>".$coluna['nomeMarca']." ".$coluna['nomeModelo']."</td>
+                    <td>".$txtPecas."</td>
+                    <td>".$coluna['valorUni']."</td>
+                    <td>".$coluna['maoObra']."</td>
+                    <td><strong>R$ ".number_format($coluna['valorTotal'], 2, ',', '.')."</strong></td>
+                    <td>";
 
             // Se o status for aberto, exibe botões clicáveis no lugar de texto
             if (strtolower($coluna['status']) == 'aberto') {
-                $html .= "<button class='btn btn-sucesso' onclick='alterarStatusOrcamento(".$coluna['idOrcamento'].", \"aprovado\")' style='padding:2px 6px; font-size:11px; margin-right:4px; cursor:pointer;'>Aprovar</button>";
-                $html .= "<button class='btn btn-red' onclick='alterarStatusOrcamento(".$coluna['idOrcamento'].", \"reprovado\")' style='padding:2px 6px; font-size:11px; cursor:pointer;'>Recusar</button>";
+                $html .= "<button type= 'button' class='btn btn-cyan' onclick='abrirModalStatus(".$coluna['idOrcamento'].")' style='padding:4px 10px; font-size:12px; cursor:pointer; font-weight:bold;'>Aberto</button>";
             } else {
                 $html .= "<span class='badge ".$classeBadge."'>".$statusFormatado."</span>";
             }
@@ -86,6 +93,25 @@ function comboClientes() {
     
     mysqli_close($conn);
     return $html;
+}
+
+function excluirOrcamento($idOrcamento) {
+    include("conexao.php");
+
+    if (!$conn) {
+        return false;
+    }
+
+    // 1. Primeiro removemos os vínculos na tabela de peças (orcamento_peca) para não dar erro de Chave Estrangeira
+    $sqlPecas = "DELETE FROM orcamento_peca WHERE Orcamento_idOrcamento = " . intval($idOrcamento);
+    mysqli_query($conn, $sqlPecas);
+
+    // 2. Agora deletamos o orçamento principal
+    $sqlOrcamento = "DELETE FROM orcamento WHERE idOrcamento = " . intval($idOrcamento);
+    $resultado = mysqli_query($conn, $sqlOrcamento);
+
+    mysqli_close($conn);
+    return $resultado; // Retorna true se deu certo ou false se deu erro
 }
 
 ?>

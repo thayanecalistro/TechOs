@@ -3,28 +3,33 @@
 <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
 
 <div class="sidebar" id="mySidebar">
+
     <div class="sidebar-header">
+        <div class="sidebar-brand" style="display: flex; align-items: center; gap: 10px; padding: 15px;">
+            <div class="brand-icon">
+                <img src="img/techOs.png" alt="Logo TechOS" style="width: 35px !important; height: 35px !important; object-fit: contain !important; display: block;">
+            </div>
+            <span style="font-size: 1.1rem; font-weight: bold; color: #62b6cb; white-space: nowrap;">TECH OS</span>
+        </div>
+        
         <button class="btn-toggle-menu" onclick="toggleSidebar()">
             <i class="fas fa-bars"></i>
         </button>
     </div>
 
     <div class="sidebar-brand" style="display: flex; align-items: center; gap: 10px; padding: 15px;">
-        <div class="brand-icon">
-            <img src="img/techOs.png" alt="Logo TechOS" style="width: 35px !important; height: 35px !important; object-fit: contain !important; display: block;">
-        </div>
-        <span style="font-size: 1.1rem; font-weight: bold; color: #62b6cb; white-space: nowrap;">TECH OS</span>
+        <span style="font-size: 1.1rem; font-weight: bold; color: #62b6cb; white-space: nowrap;">Administrador </span>
     </div>
     
 
-    <!--<div class="sidebar-user">
+    <div class="sidebar-user">
         <div class="image">
-          <img src=" echo fotoUsuario($_SESSION['idFuncionario']); ?>" alt="Avatar" class="user-avatar">
+          <img src="  echo foto($_SESSION['idFuncionario']); ?>" alt="Avatar" class="user-avatar">
         </div>
         <div class="info">
-          <a href="#" class="d-block"> echo nomeUsuario($_SESSION['idFuncionario']); ?></a>
+          <a href="#" class="d-block">  echo nomeFuncionario($_SESSION['idFuncionario']); ?></a>
         </div>
-    </div>-->
+    </div>
 
     <ul class="sidebar-menu">
         <li class="menu-item <?= ($currentPage == 'dashboard') ? 'active' : ''; ?>">
@@ -54,7 +59,7 @@
         </li>-->
 
         <li class="menu-item <?= ($currentPage == 'aparelho') ? 'active' : ''; ?>">
-            <a href="aparelho.php"><i class="fas fa-laptop"></i> <span>Aparelho</span></a>
+            <a href="cadastroAparelho.php"><i class="fas fa-laptop"></i> <span>Aparelho</span></a>
         </li>
 
         <li class="menu-item <?= ($currentPage == 'funcionario') ? 'active' : ''; ?>">
