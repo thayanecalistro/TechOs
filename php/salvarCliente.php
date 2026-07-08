@@ -21,7 +21,20 @@ if ($opcao == 'I'){
 }elseif ($opcao == "D"){
 
 }elseif ($opcao == "U"){
-
+ $sql = "UPDATE clientes SET 
+            nomeCliente = '$nome', 
+            cpfCliente = '$cpf', 
+            telefoneCliente = '$telefone', 
+            cepCliente = '$cep', 
+            enderecoCliente = '$endereco', 
+            numeroCliente = '$numero', 
+            complementoCliente = '$complemento', 
+            bairroCliente = '$bairro', 
+            cidadeCliente = '$cidade', 
+            estadoCliente = '$estado', 
+            
+            WHERE idCliente = '$id';";
+         
 }
 
 //conectar banco 
