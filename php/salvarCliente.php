@@ -1,7 +1,7 @@
 <?php
 
 $opcao = $_GET['opcao'];
-//$id = $_GET['id']; 
+$id = $_POST['nIdCliente']; 
 $nome = $_POST['nNome'];
 $cpf = $_POST['nCpf'];
 $telefone = $_POST['nTelefone'];
@@ -20,7 +20,10 @@ if ($opcao == 'I'){
 
 }elseif ($opcao == "D"){
 
+$sql = "DELETE * FROM clientes WHERE idCliente = '$id';"; 
+
 }elseif ($opcao == "U"){
+
  $sql = "UPDATE clientes SET 
             nomeCliente = '$nome', 
             cpfCliente = '$cpf', 
@@ -31,8 +34,7 @@ if ($opcao == 'I'){
             complementoCliente = '$complemento', 
             bairroCliente = '$bairro', 
             cidadeCliente = '$cidade', 
-            estadoCliente = '$estado', 
-            
+            estadoCliente = '$estado' 
             WHERE idCliente = '$id';";
          
 }
@@ -47,5 +49,5 @@ $result = mysqli_query($conn,$sql);
 mysqli_close($conn); 
 
 //tratar o retorno
-header("location:../cadastroCliente.php");
+header("location:../cliente.php");
 ?>

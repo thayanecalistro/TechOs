@@ -114,34 +114,43 @@ $currentPage = 'cliente';
      <input type="hidden" id="alterarId" name="nIdCliente">
 
        <div class="linhaFormulario">
-         <input type="text" placeholder="Nome do cliente" name="nNome">
-
-         <input type="text" placeholder="CPF" name="nCpf">
+         <label for="">Nome</label>
+         <input type="text" name="nNome">
+         <label for="">CPF</label>
+         <input type="text" name="nCpf">
        </div>
 
        <div class="linhaFormulario">
-         <input type="text" placeholder="Telefone" name="nTelefone">
+         <label for="">Telefone</label>
+         <input type="text" name="nTelefone">
        </div>
 
          <h3>Endereço</h3>
 
        <div class="linhaFormulario">
-         <input type="text" placeholder="CEP" name="nCep">
-         <input type="text" placeholder="Endereço" name="nEndereco">
+         <label for="">Cep</label>
+         <input type="text" name="nCep">
+         <label for="">Endereco</label>
+         <input type="text" name="nEndereco">
        </div>
 
        <div class="linhaFormulario">
-         <input type="text" placeholder="Número" name="nNumero">
-         <input type="text" placeholder="Complemento" name="nComplemento">
+         <label for="">Número</label>
+         <input type="text" name="nNumero">
+         <label for="">Complemento</label>
+         <input type="text" name="nComplemento">
        </div>
 
        <div class="linhaFormulario">
-       <input type="text" placeholder="Bairro" name="nBairro">
-         <input type="text" placeholder="Cidade" name="nCidade">
+          <label for="">Bairro</label>
+          <input type="text" name="nBairro">
+          <label for="">Cidade</label>
+          <input type="text" name="nCidade">
        </div>
 
        <div class="linhaFormulario">
-         <input type="text" placeholder="Estado" name="nEstado">                     
+        <label for="">Estado</label>
+         <input type="text" name="nEstado">                     
        </div>
 
        <div class="botaoContainer"> <input type="submit" value="Salvar" id="botaoSalvar" ></div>
