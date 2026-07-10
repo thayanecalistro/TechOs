@@ -8,16 +8,15 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST' && isset($_GET['id'])) {
     // Captura os dados básicos do formulário
     $diagnostico = isset($_POST['nDiagnostico']) ? mysqli_real_escape_string($conn, $_POST['nDiagnostico']) : '';
     $maoObra = isset($_POST['nMaoObra']) ? floatval($_POST['nMaoObra']) : 0.0;
-    $valorUniRaw = isset($_POST['nValorUni']) ? $_POST['nValorUni'] : '0';
-    $valorUni = floatval(str_replace(',', '.', $valorUniRaw));
+    $valorUni =isset($_POST['nValorUni']) ? floatval($_POST['nValorUni']) : 0.0;
     $valorTotal = isset($_POST['nTotal']) ? floatval($_POST['nTotal']) : 0.0;
 
     // 1. Atualiza os dados principais na tabela 'orcamento'
     $sql = "UPDATE orcamento SET 
-                nDiagnostico = '$diagnostico', 
-                nMaoObra = '$maoObra', 
-                nTotal = '$valorTotal',
-                nValorUni = '$valorUni'
+                diagnostico = '$diagnostico', 
+                maoObra = '$maoObra', 
+                valorTotal = '$valorTotal',
+                ValorUni = '$valorUni'
             WHERE idOrcamento = $idOrcamento";
 
     $resultado = mysqli_query($conn, $sql);
