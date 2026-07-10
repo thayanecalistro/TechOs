@@ -11,6 +11,31 @@ document.addEventListener("DOMContentLoaded", function () {
     const inputValorTotal = document.getElementById("valorTotal");
 
     if (btnNovo) {
+        btnNovo.addEventListener("click", function() {
+            // Restaura o título original e o action de cadastro
+            if (cadastroModal) {
+                const tituloModal = cadastroModal.querySelector("h3");
+                if (tituloModal) tituloModal.innerText = "Cadastrar Novo Orçamento";
+            }
+            const formOrcamento = document.getElementById("formOrcamento");
+            if (formOrcamento) formOrcamento.action = "php/salvarOrcamento.php"; // Seu arquivo original de cadastro
+
+            // LIBERA os campos novamente para quando for um novo cadastro
+            const inputCliente = document.getElementById("cliente_busca") || document.getElementById("nCliente");
+            if (inputCliente) {
+                inputCliente.readOnly = false;
+                inputCliente.style.backgroundColor = "";
+            }
+
+            const selectAparelho = document.getElementById("Aparelho_idAparelho") || document.getElementById("nAparelho");
+            if (selectAparelho) {
+                selectAparelho.style.pointerEvents = "";
+                selectAparelho.style.backgroundColor = "";
+            }
+        });
+    }
+
+    if (btnNovo) {
         btnNovo.addEventListener("click", () => modal.style.display = "flex");
     }
 
@@ -247,6 +272,7 @@ document.addEventListener("DOMContentLoaded", function () {
             const id = linha.getAttribute("data-id");
             const cliente = linha.getAttribute("data-cliente");
             const aparelho = linha.getAttribute("data-aparelho");
+            const diagnostico = linha.getAttribute("data-diagnostico"); // Busca o atributo
             const pecas = linha.getAttribute("data-pecas");
             const maoObra = linha.getAttribute("data-mao-obra");
             const total = linha.getAttribute("data-total");
@@ -259,6 +285,7 @@ document.addEventListener("DOMContentLoaded", function () {
             document.getElementById("viewIdOrcamento").innerText = "#" + id;
             document.getElementById("viewCliente").value = cliente || "";
             document.getElementById("viewAparelho").value = aparelho || "";
+            document.getElementById("viewDiagnostico").value = diagnostico || ""; // Preenche o campo
             document.getElementById("viewPecas").value = pecas || "Sem peças vinculadas";
             document.getElementById("viewMaoObra").value = maoObra ? Number(maoObra).toFixed(2) : "0.00";
             document.getElementById("viewTotal").value = total ? Number(total).toFixed(2) : "0.00";
@@ -270,30 +297,180 @@ document.addEventListener("DOMContentLoaded", function () {
     }
 
     // =========================================================================
-    // AÇÃO DO BOTÃO EXCLUIR (DENTRO DO MODAL DE DETALHES)
+    // MODAL DE CONFIRMAÇÃO DE EXCLUSÃO PERSONALIZADO
     // =========================================================================
     const btnAcaoExcluir = document.getElementById("btnAcaoExcluir");
+    const confirmarExcluirModal = document.getElementById("confirmarExcluirModal");
+    const btnCancelarExclusao = document.getElementById("btnCancelarExclusao");
+    const btnConfirmarExclusaoDefinitiva = document.getElementById("btnConfirmarExclusaoDefinitiva");
+
+    let idParaExcluir = ""; // Variável temporária para guardar o ID ativo
 
     if (btnAcaoExcluir) {
         btnAcaoExcluir.addEventListener("click", function () {
-            // Pega o ID que está sendo exibido no título do modal (ex: "#15" -> "15")
+            // Pega o ID do orçamento aberto no momento
             const idTexto = document.getElementById("viewIdOrcamento").innerText;
-            const idOrcamento = idTexto.replace("#", "").trim();
+            idParaExcluir = idTexto.replace("#", "").trim();
 
-            if (!idOrcamento) {
+            if (!idParaExcluir) {
                 alert("Erro: ID do orçamento não encontrado.");
                 return;
             }
 
-            // Mensagem de confirmação solicitada
-            const confirmar = confirm("Deseja realmente excluir o orçamento #" + idOrcamento + "? Esta ação não poderá ser desfeita."); 
-            
-            if (confirmar) {
-                // Redireciona para o arquivo processador passando a ação e o ID por parâmetro
-                window.location.href = php/processarAcoes.php?acao=excluir&id=$idOrcamento;
+            // Injeta o ID no texto do modal de confirmação
+            document.getElementById("textoIdExcluir").innerText = "#" + idParaExcluir;
+
+            // Fecha o modal de detalhes e abre o modal de confirmação vermelho
+            detalhesModal.style.display = "none";
+            confirmarExcluirModal.style.display = "flex";
+        });
+    }
+
+    // Ação do botão Cancelar (fecha o modal vermelho e reabre o de detalhes se quiser)
+    if (btnCancelarExclusao) {
+        btnCancelarExclusao.addEventListener("click", function () {
+            confirmarExcluirModal.style.display = "none";
+            detalhesModal.style.display = "flex"; // Opcional: traz o usuário de volta aos detalhes
+        });
+    }
+
+    // Ação do botão "Sim, Excluir" (Confirmação Definitiva)
+    if (btnConfirmarExclusaoDefinitiva) {
+        btnConfirmarExclusaoDefinitiva.addEventListener("click", function () {
+            if (idParaExcluir) {
+                // Executa o redirecionamento para sua função PHP através do processador
+                window.location.href = "php/processarAcoes.php?acao=excluir&id=" + idParaExcluir;
             }
         });
     }
+
+    // =========================================================================
+    // AÇÃO DO BOTÃO EDITAR (PREENCHE TUDO E BLOQUEIA CAMPOS RESTRITOS)
+    // =========================================================================
+    const btnAcaoEditar = document.getElementById("btnAcaoEditar");
+    const cadastroModal = document.getElementById("cadastroModal");
+
+    if (btnAcaoEditar) {
+        btnAcaoEditar.addEventListener("click", function () {
+            // Encontra a linha original da tabela para pegar os IDs ocultos
+            const idTexto = document.getElementById("viewIdOrcamento").innerText;
+            const idOrcamento = idTexto.replace("#", "").trim();
+
+            if (!idOrcamento){
+                alert("Erro: ID do orçamento não identificado.");
+                return;
+            }
+
+            let linhaOriginal = null;
+            const linhas = document.querySelectorAll("#orcamentoTable tbody tr");
+            linhas.forEach(function(row) {
+                if (row.getAttribute("data-id") === idOrcamento) {
+                    linhaOriginal = row;
+                }
+            });
+
+            if (!linhaOriginal) {
+                console.error("Não foi possível encontrar a linha correspondente ao ID #" + idOrcamento);
+                alert("Erro ao carregar dados originais do orçamento.");
+                return;
+            }
+
+            // Fecha o modal de detalhes visual
+            if (detalhesModal) detalhesModal.style.display = "none";
+
+            // 2. Altera o action do form para modo edição
+            const formOrcamento = document.getElementById("formFormOrcamento") || document.getElementById("formOrcamento");
+            if (formOrcamento) {
+                formOrcamento.action = "php/editarOrcamento.php?id=" + idOrcamento;
+            }
+
+            // 3. Muda o título do modal
+            const tituloModal = cadastroModal ? cadastroModal.querySelector("h3") : null;
+            if (tituloModal) tituloModal.innerText = "Editar Orçamento #" + idOrcamento;
+
+            // =================================================================
+            // 3. PREENCHE E BLOQUEIA OS CAMPOS QUE NÃO PODEM SER EDITADOS
+            // =================================================================
+            
+            // Campo de Busca/Nome do Cliente
+            const inputCliente = document.getElementById("cliente_busca") || document.getElementById("nCliente") || document.getElementById("Cliente_idCliente");
+            if (inputCliente) {
+                inputCliente.value = linhaOriginal.getAttribute("data-cliente");
+                inputCliente.style.pointerEvents = "none";
+                inputCliente.style.backgroundColor = "#102a43"; // Deixa escurinho indicando bloqueio 
+            }
+
+            // Select/Input do Aparelho
+            const nomeAparelhoCompleto = linhaOriginal.getAttribute("data-aparelho");
+            const selectAparelho = document.getElementById("Aparelho_idAparelho") || document.getElementById("nAparelho") || document.getElementById("idAparelho");
+            if (selectAparelho) {
+                if (selectAparelho.tagName === "SELECT") {
+                    // Limpa opções anteriores para não duplicar
+                    selectAparelho.innerHTML = ""; 
+                    
+                    // Cria a opção com o texto correto ("Samsung Galaxy S20", etc.)
+                    const novaOpcao = document.createElement("option");
+                    novaOpcao.value = linhaOriginal.getAttribute("data-aparelho-id");
+                    novaOpcao.text = nomeAparelhoCompleto;
+                    novaOpcao.selected = true;
+                    
+                    selectAparelho.add(novaOpcao);
+                } else {
+                    // Se for um input de texto normal, apenas joga o valor
+                    selectAparelho.value = nomeAparelhoCompleto;
+                }
+
+                // Trava o campo para não ser editado de forma alguma
+                selectAparelho.style.pointerEvents = "none";
+                selectAparelho.style.backgroundColor = "#102a43";
+            }
+
+            // Campo Oculto do ID do Cliente (se houver no seu sistema)
+            const inputIdCliente = document.getElementById("Cliente_idCliente");
+            if (inputIdCliente) {
+                inputIdCliente.value = linhaOriginal.getAttribute("data-cliente-id");
+            }
+
+            // =================================================================
+            // 4. PREENCHE E LIBERA OS CAMPOS PERMITIDOS (DIAG_NÓSTICO, PEÇAS, MÃO DE OBRA)
+            // =================================================================
+            
+            // Diagnóstico
+            const campoDiag = document.getElementById("diagnostico") || document.getElementById("nDiagnostico");
+            if (campoDiag) {
+                campoDiag.value = linhaOriginal.getAttribute("data-diagnostico");
+                campoDiag.readOnly = false;
+                campoDiag.style.backgroundColor = ""; // Restaura a cor padrão de digitação
+            }
+
+            // Mão de Obra
+            const campoMaoObra = document.getElementById("maoObra") || document.getElementById("nMaoObra");
+            if (campoMaoObra) {
+                campoMaoObra.value = linhaOriginal.getAttribute("data-mao-obra");
+                campoMaoObra.readOnly = false;
+                campoMaoObra.style.backgroundColor = "";
+            }
+
+            // Peças
+            const campoPeca = document.getElementById("peca") || document.getElementById("nPeca");
+            if (campoPeca) {
+                campoPeca.value = linhaOriginal.getAttribute("data-pecas");
+                campoPeca.readOnly = false;
+                campoPeca.style.backgroundColor = "";
+            }
+
+            // Valor Total (Preenche, mas geralmente fica travado pois depende do cálculo automático via JS)
+            const campoTotal = document.getElementById("valorTotal") || document.getElementById("nValorTotal");
+            if (campoTotal) {
+                campoTotal.value = linhaOriginal.getAttribute("data-total");
+            }
+
+            // 5. Abre o modal
+            if (cadastroModal) cadastroModal.style.display = "flex";
+        });
+    }
+
+
 }); // FIM DO DOMCONTENTLOADED
 
 // Mantido escopo global para o botão da tabela principal chamar a função

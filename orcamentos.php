@@ -186,6 +186,10 @@ $currentPage = 'orcamento';
                     <input type="text" id="viewAparelho" readonly style="width:100%; height:35px; background:#0c1f32; color:#fff; border:1px solid #486581; border-radius:4px; padding:0 10px;">
                 </div>
                 <div class="form-group">
+                    <label style="display:block; margin-bottom:4px; font-weight:500;">Diagnóstico Técnico:</label>
+                    <textarea id="viewDiagnostico" readonly style="width:100%; height:60px; background:#0c1f32; color:#fff; border:1px solid #486581; border-radius:4px; padding:5px 10px; resize:none;"></textarea>
+                </div>
+                <div class="form-group">
                     <label style="display:block; margin-bottom:4px; font-weight:500;">Peças Vinculadas:</label>
                     <input type="text" id="viewPecas" readonly style="width:100%; height:35px; background:#0c1f32; color:#fff; border:1px solid #486581; border-radius:4px; padding:0 10px;">
                 </div>
@@ -211,6 +215,20 @@ $currentPage = 'orcamento';
                     <button type="button" class="btn btn-red" id="btnAcaoExcluir" style="padding: 8px 15px;">Excluir</button>
                 </div>
                 <button type="button" class="btn" id="btnFecharDetalhesModal" style="background: #486581; color: white; padding: 8px 15px;">Fechar</button>
+            </div>
+        </div>
+    </div>
+
+    <div class="modal-overlay" id="confirmarExcluirModal" style="display: none; position: fixed; top: 0; left: 0; width: 100%; height: 100%; background: rgba(0,0,0,0.75); justify-content: center; align-items: center; z-index: 9999;">
+        <div class="modal-content" style="background: #0c1f32; padding: 25px; border-radius: 6px; width: 380px; border: 1px solid #ff4d4d; color: white; text-align: center;">
+            <h3 style="margin-top: 0; color: #ff4d4d;">Atenção!</h3>
+            <p style="margin: 20px 0; font-size: 15px; line-height: 1.5;">
+                Deseja realmente excluir o orçamento <strong id="textoIdExcluir" style="color: #62b6cb;"></strong>?<br>
+                <span style="font-size: 12px; color: #ffb3b3;">Esta ação não poderá ser desfeita.</span>
+            </p>
+            <div style="display: flex; gap: 12px; justify-content: center; margin-top: 20px;">
+                <button type="button" class="btn btn-red" id="btnConfirmarExclusaoDefinitiva" style="padding: 8px 20px; font-weight: bold;">Sim, Excluir</button>
+                <button type="button" class="btn" id="btnCancelarExclusao" style="background: #486581; color: white; padding: 8px 20px;">Cancelar</button>
             </div>
         </div>
     </div>

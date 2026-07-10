@@ -3,8 +3,8 @@ function listarOrcamentos(){
     $html = "";
 
     // INNER JOIN robusto associando as chaves estrangeiras reais das suas tabelas
-        $sql = "SELECT o.idOrcamento, c.nomeCliente, m.nomeMarca, mo.nomeModelo, 
-                    o.peca, o.valorUni, o.maoObra, o.valorTotal, o.status,
+        $sql = "SELECT o.idOrcamento, c.nomeCliente, m.nomeMarca, mo.nomeModelo,  
+                    o.peca, o.valorUni, o.maoObra, o.valorTotal, o.status, o.diagnostico,
                     o.Cliente_idCliente, o.Aparelho_idAparelho 
                 FROM orcamento o
                 INNER JOIN clientes c ON o.Cliente_idCliente = c.idCliente
@@ -34,7 +34,10 @@ function listarOrcamentos(){
             $html .= "<tr class='orcamento-row' style='cursor: pointer;'
                         data-id='".$coluna['idOrcamento']."' 
                         data-cliente='".htmlspecialchars($coluna['nomeCliente'], ENT_QUOTES, 'UTF-8')."' 
+                        data-cliente-id='".$coluna['Cliente_idCliente']."'
+                        data-aparelho-id='".$coluna['Aparelho_idAparelho']."'
                         data-aparelho='".$coluna['nomeMarca']." ".$coluna['nomeModelo']."'
+                        data_diagnostico='".htmlspecialchars($coluna['diagnostico'] ?? '', ENT_QUOTES, 'UTF-8')."'
                         data-pecas='".htmlspecialchars($txtPecas, ENT_QUOTES, 'UTF-8')."' 
                         data-mao-obra='".$coluna['maoObra']."' 
                         data-total='".$coluna['valorTotal']."' 

@@ -26,7 +26,7 @@ if ($opcao == 'I') {
 
     // 1. Grava o cabeçalho do orçamento na tabela principal
     $sqlOrcamento = "INSERT INTO orcamento (diagnostico, peca, valorUni, maoObra, valorTotal, status, Cliente_idCliente, Aparelho_idAparelho, dataOrcamento) 
-                     VALUES ('$diagnostico', 'Múltiplas Peças', '$somaValoresPecas', '$maoObra', '$total', '$status', '$cliente', '$aparelho', NOW())";
+                     VALUES ('$diagnostico', '$arrPecas', '$somaValoresPecas', '$maoObra', '$total', '$status', '$cliente', '$aparelho', NOW())";
     
     // ... (Código anterior de gravação do orçamento pai permanece idêntico)
 
