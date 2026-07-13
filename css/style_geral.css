@@ -89,6 +89,9 @@
 .btn-blue { background-color: #486581; color: white; }
 .btn-blue:hover { background-color: #627d98; }
 
+.btn-orange { background-color: #f0ad4e; color: white; }
+.btn-orange:hover { background-color:#f8a838; }
+
 .btn-cyan { background-color: #2cb1bc; color: #102a43; font-weight: 500; }
 .btn-cyan:hover { background-color: #4ed0dc; }
 

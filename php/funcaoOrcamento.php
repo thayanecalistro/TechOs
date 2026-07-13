@@ -18,9 +18,10 @@ function listarOrcamentos(){
     if($result && mysqli_num_rows($result) > 0){
         foreach($result as $coluna){
             $statusFormatado = ucfirst($coluna['status']);
-            $classeBadge = 'badge-aberto';
+            
+            if(strtolower($coluna['status']) == 'aberto') $classeBadge = 'badge-aberto';
             if(strtolower($coluna['status']) == 'aprovado') $classeBadge = 'badge-aprovado';
-            if(strtolower($coluna['status']) == 'recusado' || strtolower($coluna['status']) == 'reprovado') $classeBadge = 'badge-danger';
+            if(strtolower($coluna['status']) == 'recusado' || strtolower($coluna['status']) == 'reprovado') $classeBadge = 'badge-reprovado';
 
             // Puxa as peças que estão salvas na tabela vinculada
             $idO = $coluna['idOrcamento'];
@@ -53,7 +54,7 @@ function listarOrcamentos(){
 
             // Se o status for aberto, exibe botões clicáveis no lugar de texto
             if (strtolower($coluna['status']) == 'aberto') {
-                $html .= "<button type= 'button' class='btn btn-cyan' onclick='abrirModalStatus(".$coluna['idOrcamento'].")' style='padding:4px 10px; font-size:12px; cursor:pointer; font-weight:bold;'>Aberto</button>";
+                $html .= "<button type= 'button' class='badge badge-aberto' onclick='abrirModalStatus(".$coluna['idOrcamento'].")' style='cursor:pointer; border: none;'>Aberto</button>";
             } else {
                 $html .= "<span class='badge ".$classeBadge."'>".$statusFormatado."</span>";
             }
