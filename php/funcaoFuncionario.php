@@ -8,7 +8,7 @@
     $sql = "SELECT idFuncionario, tipoFuncionario, nomeFuncionario, telefoneFuncionario from funcionario";
 
     //Conectar
-    include("conexao.php");
+    include("includes/conexao.php");
 
     //Executar
     $result = mysqli_query($conn,$sql);

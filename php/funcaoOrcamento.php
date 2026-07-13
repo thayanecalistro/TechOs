@@ -38,7 +38,7 @@ function listarOrcamentos(){
                         data-cliente-id='".$coluna['Cliente_idCliente']."'
                         data-aparelho-id='".$coluna['Aparelho_idAparelho']."'
                         data-aparelho='".$coluna['nomeMarca']." ".$coluna['nomeModelo']."'
-                        data_diagnostico='".htmlspecialchars($coluna['diagnostico'] ?? '', ENT_QUOTES, 'UTF-8')."'
+                        data-diagnostico='".htmlspecialchars($coluna['diagnostico'] ?? '', ENT_QUOTES, 'UTF-8')."'
                         data-pecas='".htmlspecialchars($txtPecas, ENT_QUOTES, 'UTF-8')."' 
                         data-mao-obra='".$coluna['maoObra']."' 
                         data-total='".$coluna['valorTotal']."' 

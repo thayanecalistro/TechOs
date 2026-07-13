@@ -1,5 +1,5 @@
 <?php
-include("conexao.php");
+include("includes/conexao.php");
 
 if ($_SERVER['REQUEST_METHOD'] == 'POST') {
     $cliente = intval($_POST['Cliente_idCliente']);

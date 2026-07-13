@@ -1,5 +1,5 @@
 <?php
-include("../includes/conexao.php");
+include("/includes/conexao.php");
 
 $acao = isset($_GET['acao']) ? $_GET['acao'] : '';
 

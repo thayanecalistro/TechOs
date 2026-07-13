@@ -1,6 +1,6 @@
 <?php
 // php/editarOrcamento.php
-include("conexao.php");
+include("includes/conexao.php");
 
 if ($_SERVER['REQUEST_METHOD'] == 'POST' && isset($_GET['id'])) {
     $idOrcamento = intval($_GET['id']);

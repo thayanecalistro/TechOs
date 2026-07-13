@@ -11,7 +11,7 @@ function listaAparelho(){
             LEFT JOIN modelo mo ON a.Modelo_idModelo = mo.idModelo
             LEFT JOIN marca m ON mo.Marca_idMarca = m.idMarca";
             
-    include("conexao.php");
+    include("includes/conexao.php");
     $result = mysqli_query($conn, $sql);
     
     if($result && mysqli_num_rows($result) > 0){

@@ -1,5 +1,5 @@
 <?php
-include("conexao.php"); // Certifique-se de que o caminho da conexão está correto
+include("includes/conexao.php"); // Certifique-se de que o caminho da conexão está correto
 
 if (isset($_GET['cliente_id']) && !empty($_GET['cliente_id'])) {
     $cliente_id = intval($_GET['cliente_id']);

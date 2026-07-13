@@ -4,7 +4,7 @@ function fotoUsuario($id){
 
 $resp = "";
 
-include("conexao.php");
+include("includes/conexao.php");
 $sql = "SELECT Foto FROM funcionario WHERE idFuncionario = $id;";        
 $result = mysqli_query($conn,$sql);
 mysqli_close($conn);
@@ -32,7 +32,7 @@ function nomeUsuario($id){
 
 $resp = "";
 
-include("conexao.php");
+include("includes/conexao.php");
 $sql = "SELECT nomeFuncionario FROM funcionario WHERE idFuncionario = $id;";        
 $result = mysqli_query($conn,$sql);
 mysqli_close($conn);
