@@ -24,7 +24,7 @@ include("funcoes.php");
     $sql = "INSERT INTO funcionario (tipoFuncionario, nomeFuncionario, cpfFuncionario, emailFuncionario, telefoneFuncionario, enderecoFuncionario, login, senha, foto) 
             VALUES ('$tipo', '$nome', '$cpf', '$email', '$telefone', '$endereco', '$login', '$senha_hash', '$nome_foto')";
     
-    include ("conexao.php");
+    include ("includes/conexao.php");
 
     $result = mysqli_query($conn,$sql);
     //fechar banco 

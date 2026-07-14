@@ -41,9 +41,13 @@ $sql = "DELETE FROM clientes WHERE idCliente = '$id';";
 }
 
 //conectar banco 
+<<<<<<< HEAD
 include ("conexao.php");
 if (mysqli_query($conn,$sql)){
   mysqli_close($conn);
+=======
+include ("includes/conexao.php");
+>>>>>>> d0380966289c05ce3f9192a210cfcc74da6cf0d3
 
   header("Location: ../cliente.php");
   exit();

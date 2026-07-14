@@ -8,7 +8,7 @@
     $sql = "SELECT idCliente, nomeCliente, cpfCliente, telefoneCliente, cepCliente, enderecoCliente, numeroCliente, complementoCliente, bairroCliente, cidadeCliente, estadoCliente  from clientes";
 
     //Conectar
-    include("conexao.php");
+    include("includes/conexao.php");
 
     //Executar
     $result = mysqli_query($conn,$sql);

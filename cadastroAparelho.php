@@ -117,6 +117,19 @@ $currentPage = 'aparelho';
         </div>
     </div>
 
-    <script src="js/aparelho.js?v=1"></script>
+    <div id="modalExcluirAparelho" class="modal">
+        <div class="modal-conteudo" style="text-align: center; width: 350px;">
+            <span id="btnFecharModalExcluir" class="botaoFechar">&times;</span>
+            <h3 style="border-bottom: none; margin-bottom: 10px;">Confirmar Exclusão</h3>
+            <p style="margin-bottom: 25px;">Você realmente deseja excluir este aparelho?</p>
+
+            <div class="form-actions" style="justify-content: center; gap: 15px;">
+                <button type="button" id="btnNaoExcluir" class="btn-novo" style="background-color: #6c757d;">Não, Voltar</button>
+                <a href="#" id="btnSimExcluir" class="btn-perigo" style="text-decoration: none; display: inline-block; padding: 6px 12px; border-radius: 3px; font-size: 14px; font-family: 'Segoe UI', sans-serif;">Sim, Excluir</a>
+            </div>
+        </div>
+    </div>
+    
+    <script src="js/aparelho.js?v=2"></script>
 </body>
 </html>

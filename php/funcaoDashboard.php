@@ -2,7 +2,7 @@
 
 // 1. CONTA AS OSs ABERTAS / EM ANDAMENTO
 function d_totalOsAbertas() {
-    include("conexao.php");
+    include("includes/conexao.php");
     $sql = "SELECT COUNT(*) AS total FROM os WHERE LOWER(status) IN ('aberta', 'aberto', 'em andamento')";
     $result = mysqli_query($conn, $sql);
     $row = mysqli_fetch_assoc($result);
@@ -12,7 +12,7 @@ function d_totalOsAbertas() {
 
 // 2. CONTA OS ORÇAMENTOS PENDENTES (STATUS ABERTO)
 function d_totalOrcamentosPendentes() {
-    include("conexao.php");
+    include("includes/conexao.php");
     $sql = "SELECT COUNT(*) AS total FROM orcamento WHERE LOWER(status) = 'aberto'";
     $result = mysqli_query($conn, $sql);
     $row = mysqli_fetch_assoc($result);
@@ -22,7 +22,7 @@ function d_totalOrcamentosPendentes() {
 
 // 3. CONTA TOTAL DE CLIENTES CADASTRADOS
 function d_totalClientes() {
-    include("conexao.php");
+    include("includes/conexao.php");
     $sql = "SELECT COUNT(*) AS total FROM clientes";
     $result = mysqli_query($conn, $sql);
     $row = mysqli_fetch_assoc($result);
@@ -32,7 +32,7 @@ function d_totalClientes() {
 
 // 4. SOMA O FATURAMENTO DO MÊS ATUAL (BASEADO NAS OSs CONCLUÍDAS)
 function d_faturamentoMes() {
-    include("conexao.php");
+    include("includes/conexao.php");
     // Soma valorOS de registros finalizados/concluídos
     $sql = "SELECT SUM(valorOS) AS total FROM os WHERE LOWER(status) IN ('finalizado', 'concluido')";
     $result = mysqli_query($conn, $sql);
@@ -43,7 +43,7 @@ function d_faturamentoMes() {
 
 // 5. RETORNA UM ARRAY UNIFICADO COM AS ÚLTIMAS ATIVIDADES REAIS DO BANCO
 function d_listarUltimasAtividades() {
-    include("conexao.php");
+    include("includes/conexao.php");
     $atividades = [];
 
     // Busca as últimas 3 OSs modificadas/criadas

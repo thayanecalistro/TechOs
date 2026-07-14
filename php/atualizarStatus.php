@@ -1,5 +1,5 @@
 <?php
-include("conexao.php");
+include("includes/conexao.php");
 
 $idOrcamento = intval($_GET['id']);
 $status = $_GET['status']; 

@@ -5,12 +5,12 @@
 <div class="sidebar" id="mySidebar">
 
     <div class="sidebar-header">
-        <div class="sidebar-brand" style="display: flex; align-items: center; gap: 10px; padding: 15px;">
+    <!--<div class="sidebar-brand" style="display: flex; align-items: center; gap: 10px; padding: 15px;">
             <div class="brand-icon">
                 <img src="img/techOs.png" alt="Logo TechOS" style="width: 35px !important; height: 35px !important; object-fit: contain !important; display: block;">
             </div>
             <span style="font-size: 1.1rem; font-weight: bold; color: #62b6cb; white-space: nowrap;">TECH OS</span>
-        </div>
+        </div>-->
         
         <button class="btn-toggle-menu" onclick="toggleSidebar()">
             <i class="fas fa-bars"></i>

@@ -1,51 +1,85 @@
 <?php
 // php/editarOrcamento.php
-include("conexao.php");
+include("includes/conexao.php");
 
 if ($_SERVER['REQUEST_METHOD'] == 'POST' && isset($_GET['id'])) {
     $idOrcamento = intval($_GET['id']);
     
-    // Captura os dados básicos do formulário
+    // Captura campos de texto
     $diagnostico = isset($_POST['nDiagnostico']) ? mysqli_real_escape_string($conn, $_POST['nDiagnostico']) : '';
+    
+    // Captura campos numéricos usando os 'names' corretos do orcamentos.php
     $maoObra = isset($_POST['nMaoObra']) ? floatval($_POST['nMaoObra']) : 0.0;
-    $valorUni =isset($_POST['nValorUni']) ? floatval($_POST['nValorUni']) : 0.0;
-    $valorTotal = isset($_POST['nTotal']) ? floatval($_POST['nTotal']) : 0.0;
+    
+    // Recebe as informações do array de peças para calcular os totais
+    $arrPecas = $_POST['nPeca'] ?? [];
+    $arrIdsEstoque = $_POST['nIdEstoque'] ?? [];
+    $arrValores = $_POST['nValorUni'] ?? [];
+    $arrQtds = $_POST['nQtd'] ?? [];
 
-    // 1. Atualiza os dados principais na tabela 'orcamento'
+    $somaValoresPecas = 0;
+    $nomesPecasArray = [];
+
+    for ($i = 0; $i < count($arrIdsEstoque); $i++) {
+        if (!empty($arrIdsEstoque[$i])) {
+            $qtd = intval($arrQtds[$i]);
+            $val = floatval($arrValores[$i]);
+            $somaValoresPecas += ($val * $qtd);
+
+            if (!empty($arrPecas[$i])) {
+                $nomesPecasArray[] = $arrPecas[$i];
+            }
+        }
+    }
+
+    // Calcula o valor total final (Mão de Obra + Peças)
+    $total = $somaValoresPecas + $maoObra;
+
+    // Define o texto amigável do campo 'peca' na tabela principal
+    if (count($nomesPecasArray) > 1) {
+        $textoPecaTabelaOrcamento = "Múltiplas Peças";
+    } elseif (count($nomesPecasArray) === 1) {
+        $textoPecaTabelaOrcamento = mysqli_real_escape_string($conn, $nomesPecasArray[0]);
+    } else {
+        $textoPecaTabelaOrcamento = "Nenhuma peça";
+    }
+
+    // 1. Executa o UPDATE na tabela principal 'orcamento'
     $sql = "UPDATE orcamento SET 
                 diagnostico = '$diagnostico', 
+                valorUni = '$somaValoresPecas',
                 maoObra = '$maoObra', 
-                valorTotal = '$valorTotal',
-                ValorUni = '$valorUni'
+                valorTotal = '$total',
+                peca = '$textoPecaTabelaOrcamento'
             WHERE idOrcamento = $idOrcamento";
 
     $resultado = mysqli_query($conn, $sql);
 
-
-    // 2. Processa o Array de Peças do Estoque (nIdEstoque[])
+    // 2. Reconstrói a tabela intermediária 'orcamento_peca'
     if ($resultado) {
-        
+        // Limpa os registros anteriores das peças deste orçamento
         mysqli_query($conn, "DELETE FROM orcamento_peca WHERE Orcamento_idOrcamento = $idOrcamento");
 
-        // Verifica se veio alguma peça selecionada no array
-        if (isset($_POST['nIdEstoque']) && is_array($_POST['nIdEstoque'])) {
+        // Insere as peças atualizadas
+        for ($i = 0; $i < count($arrIdsEstoque); $i++) {
+            $idEstoque = !empty($arrIdsEstoque[$i]) ? intval($arrIdsEstoque[$i]) : null;
             
-            foreach ($_POST['nIdEstoque'] as $idEstoque) {
-                $idEstoqueLimpo = intval($idEstoque);
-                // Se o ID for válido (maior que zero), insere o novo vínculo na tabela intermediária
-                if ($idEstoqueLimpo > 0) {
-                    $buscaEstoque = mysqli_query($conn, "SELECT peca FROM estoque WHERE idEstoque = $idEstoqueLimpo
-                                                        OR idEstoque = $idEstoqueLimpo LIMIT 1");
-                    $nomePecaPorExtenso = "";
+            if ($idEstoque) {
+                $valUnitario = floatval($arrValores[$i]);
+                $quantidade = intval($arrQtds[$i]);
+                $totalItem = $valUnitario * $quantidade;
 
-                    if ($buscaEstoque && $reg = mysqli_fetch_assoc($buscaEstoque)) {
-                        $nomePecaPorExtenso = mysqli_real_escape_string($conn, $reg['peca']);
-                    }
-                    // (Ajuste os nomes das colunas 'Estoque_idEstoque' e 'quantidade' conforme seu banco)
-                    $sqlPeca = "INSERT INTO orcamento_peca (Orcamento_idOrcamento, Estoque_idEstoque, peca, quantidade) 
-                                VALUES ($idOrcamento, $idEstoqueLimpo, '$nomePecaPorExtenso', 1)";
-                    mysqli_query($conn, $sqlPeca);
+                // Recupera o nome correto da peça no estoque
+                $nomePeca = "Peça não identificada";
+                $buscaNome = mysqli_query($conn, "SELECT peca FROM estoque WHERE idEstoque = $idEstoque");
+                if ($resNome = mysqli_fetch_assoc($buscaNome)) {
+                    $nomePeca = mysqli_real_escape_string($conn, $resNome['peca']);
                 }
+
+                $sqlPeca = "INSERT INTO orcamento_peca (Orcamento_idOrcamento, Estoque_idEstoque, peca, quantidade, valorUnitario, total) 
+                            VALUES ($idOrcamento, $idEstoque, '$nomePeca', $quantidade, $valUnitario, $totalItem)";
+                    
+                mysqli_query($conn, $sqlPeca);
             }
         }
     }
@@ -60,3 +94,4 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST' && isset($_GET['id'])) {
     }
     exit;
 }
+?>

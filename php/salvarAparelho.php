@@ -7,7 +7,7 @@
     $modeloNome = $_POST['nModelo'] ?? null;
     $imei = $_POST['nImei'] ?? null;
     
-    include("conexao.php"); 
+    include("includes/conexao.php"); 
 
     $idModelo = null;
 

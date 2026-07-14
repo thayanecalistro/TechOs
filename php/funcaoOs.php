@@ -20,7 +20,7 @@ function listarOS() {
             ORDER BY os.idOS DESC";
 
     // Inclui a conexão igualzinho à função de orçamentos
-    include("conexao.php");
+    include("includes/conexao.php");
     $result = mysqli_query($conn, $sql);
 
     if ($result && mysqli_num_rows($result) > 0) {

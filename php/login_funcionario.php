@@ -12,7 +12,7 @@ $sql = "SELECT * FROM funcionario
         AND senha = '$senha';";
 
 //conectar no banco
-include("conexao.php");
+include("includes/conexao.php");
 
 //executar o banco 
 $result = mysqli_query ($conn,$sql);
