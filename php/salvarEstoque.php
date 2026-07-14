@@ -1,6 +1,6 @@
 <?php
 // php/salvarEstoque.php
-require_once('conexao.php'); 
+require_once('includes/conexao.php'); 
 require_once('funcaoEstoque.php'); 
 
 // Se for envio do formulário via link (Excluir)

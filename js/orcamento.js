@@ -451,23 +451,74 @@ document.addEventListener("DOMContentLoaded", function () {
                 campoMaoObra.style.backgroundColor = "";
             }
 
-            // Peças
-            const campoPeca = document.getElementById("peca") || document.getElementById("nPeca");
-            if (campoPeca) {
-                campoPeca.value = linhaOriginal.getAttribute("data-pecas");
-                campoPeca.readOnly = false;
-                campoPeca.style.backgroundColor = "";
-            }
-
             // Valor Total (Preenche, mas geralmente fica travado pois depende do cálculo automático via JS)
             const campoTotal = document.getElementById("valorTotal") || document.getElementById("nValorTotal");
             if (campoTotal) {
                 campoTotal.value = linhaOriginal.getAttribute("data-total");
             }
 
-            // 5. Abre o modal
+            //status
+            const selectStatus =document.getElementById("status") || document.getElementById("nStatus");
+            if(selectStatus){
+                const statusOriginal = linhaOriginal.getAttribute("data-status");
+                selectStatus.value = statusOriginal ? statusOriginal.toLowerCase() : "aberto";
+            }
+
+            // =================================================================
+            // 5. CARREGA AS PEÇAS SALVAS NO BANCO VIA AJAX (DINÂMICO)
+            // =================================================================
+
+            const containerPecas = document.getElementById("container-pecas");
+            if (containerPecas) {
+                containerPecas.innerHTML = ""; // Limpa campos de peças anteriores
+
+                fetch('php/buscarPecasOrcamento.php?id=${idOrcamento}')
+                    .then(response => response.json())
+                    .then(pecas => {
+                        if (pecas && pecas.length > 0) {
+                            pecas.forEach(p => {
+                                const novaLinha = document.createElement("div");
+                                novaLinha.className = "peca-row";
+                                novaLinha.style = "display: flex; gap: 10px; margin-bottom: 10px;";
+                                
+                                novaLinha.innerHTML = `
+                                    <input type="text" name="nPeca[]" value="${p.peca}" class="classe-busca-peca" list="listaPecasEstoque" placeholder="Busque a peça..." style="flex: 2;" required autocomplete="off">
+                                    <input type="hidden" name="nIdEstoque[]" value="${p.Estoque_idEstoque}" class="classe-id-estoque">
+                                    <input type="number" name="nValorUni[]" value="${p.valorUnitario}" class="classe-val-uni" step="0.01" style="flex: 1;" readonly style="background-color: #0c1f32; color: #2cb1bc;">
+                                    <input type="number" name="nQtd[]" value="${p.quantidade}" class="classe-qtd" min="1" style="width: 70px;">
+                                `;
+                                containerPecas.appendChild(novaLinha);
+                            });
+                        } else {
+                            adicionarPecaVaziaNoModal();
+                        }
+                    })
+                    .catch(err => {
+                        console.error("Erro ao carregar peças no editar:", err);
+                        adicionarPecaVaziaNoModal();
+                    });
+            }
+
+
+            // 6. Abre o modal de cadastro/edição
             if (cadastroModal) cadastroModal.style.display = "flex";
         });
+    }
+
+    // Função auxiliar para inserir input vazio caso o orçamento não tenha peças vinculadas
+    function adicionarPecaVaziaNoModal() {
+        const container = document.getElementById("container-pecas");
+        if (!container) return;
+        const novaLinha = document.createElement("div");
+        novaLinha.className = "peca-row";
+        novaLinha.style = "display: flex; gap: 10px; margin-bottom: 10px;";
+        novaLinha.innerHTML = `
+            <input type="text" name="nPeca[]" class="classe-busca-peca" list="listaPecasEstoque" placeholder="Busque a peça no estoque..." style="flex: 2;" required autocomplete="off">
+            <input type="hidden" name="nIdEstoque[]" class="classe-id-estoque">
+            <input type="number" name="nValorUni[]" class="classe-val-uni" step="0.01" value="0.00" style="flex: 1;" readonly style="background-color: #0c1f32; color: #2cb1bc;">
+            <input type="number" name="nQtd[]" class="classe-qtd" value="1" min="1" style="width: 70px;">
+        `;
+        container.appendChild(novaLinha);
     }
 
 

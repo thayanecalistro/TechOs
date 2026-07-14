@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Host: 127.0.0.1
--- Tempo de geração: 17/06/2026 às 02:21
+-- Tempo de geração: 03/07/2026 às 03:06
 -- Versão do servidor: 10.4.32-MariaDB
 -- Versão do PHP: 8.2.12
 
@@ -32,9 +32,16 @@ CREATE TABLE `aparelho` (
   `historicoAparelho` varchar(500) NOT NULL COMMENT 'histórico do aparelho',
   `Cliente_idCliente` int(11) NOT NULL COMMENT 'identificador do cliente cadastrado com esse aparelho',
   `imeiAparelho` varchar(50) NOT NULL COMMENT 'número do identificador do aparelho',
-  `Marca_idMarca` int(11) NOT NULL COMMENT 'identificador da marca cadastrada deste aparelho',
-  `Modelo_idModelo` int(11) NOT NULL COMMENT 'identificador do modelo cadastrado deste aparelho'
+  `Modelo_idModelo` varchar(25) NOT NULL COMMENT 'identificador do modelo cadastrado deste aparelho'
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
+
+--
+-- Despejando dados para a tabela `aparelho`
+--
+
+INSERT INTO `aparelho` (`idAparelho`, `historicoAparelho`, `Cliente_idCliente`, `imeiAparelho`, `Modelo_idModelo`) VALUES
+(1, 'tela quebrada 3 vezes. peça original', 2, '987654321234567', 'S26'),
+(2, '', 3, '1231435462462462', '2');
 
 -- --------------------------------------------------------
 
@@ -79,7 +86,8 @@ INSERT INTO `clientes` (`idCliente`, `nomeCliente`, `cpfCliente`, `emailCliente`
 (1, 'Nicolly Fernanda', '09657885454', '', '999999999', '77777777', 'Rua jacupiranga', '1343', 'Sobrado', 'Aventureiro', 'Joinville', 'Santa catarina'),
 (2, 'Nicolly Fernanda Aureliano Pereira', '054900', '', '999437521', '054289', 'Rua jacupiranga', '55555555', 'sobrado', 'Morro do meio', 'Itajaí', 'SC'),
 (3, 'Dérik Patrik ', '1444521', '', '1548789', '159458', 'Rua Marilnada', '1254', 'De frente ao posto', 'Aventureiro', 'Joinville', 'SC'),
-(4, '', '', '', '', '', '', '', '', '', '', '');
+(8, '', '', '', '', '', '', '', '', '', '', ''),
+(9, '', '', '', '', '', '', '', '', '', '', '');
 
 -- --------------------------------------------------------
 
@@ -144,22 +152,21 @@ CREATE TABLE `gastos` (
 
 CREATE TABLE `marca` (
   `idMarca` int(11) NOT NULL COMMENT 'Chave primária de identificação da marca',
-  `nomeMarca` varchar(100) NOT NULL COMMENT 'Marca do produto',
-  `Modelo_idModelo` int(11) DEFAULT NULL COMMENT 'Chave estrangeira. Vincula a marca a um modelo específico cadastrado no sistema'
+  `nomeMarca` varchar(100) NOT NULL COMMENT 'Marca do produto'
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
 
 --
 -- Despejando dados para a tabela `marca`
 --
 
-INSERT INTO `marca` (`idMarca`, `nomeMarca`, `Modelo_idModelo`) VALUES
-(1, 'Samsung', NULL),
-(2, 'Apple', NULL),
-(3, 'Xiaomi', NULL),
-(4, 'Motorola', NULL),
-(5, 'LG', NULL),
-(6, 'Asus', NULL),
-(7, 'Realme', NULL);
+INSERT INTO `marca` (`idMarca`, `nomeMarca`) VALUES
+(1, 'Samsung'),
+(2, 'Apple'),
+(3, 'Xiaomi'),
+(4, 'Motorola'),
+(5, 'LG'),
+(6, 'Asus'),
+(7, 'Realme');
 
 -- --------------------------------------------------------
 
@@ -169,8 +176,17 @@ INSERT INTO `marca` (`idMarca`, `nomeMarca`, `Modelo_idModelo`) VALUES
 
 CREATE TABLE `modelo` (
   `idModelo` int(11) NOT NULL COMMENT 'Chave primária de identificação do modelo do aparelho',
-  `nomeModelo` varchar(100) NOT NULL COMMENT 'nome do modelo do aparelho'
+  `nomeModelo` varchar(100) NOT NULL COMMENT 'nome do modelo do aparelho',
+  `Marca_idMarca` int(11) NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
+
+--
+-- Despejando dados para a tabela `modelo`
+--
+
+INSERT INTO `modelo` (`idModelo`, `nomeModelo`, `Marca_idMarca`) VALUES
+(1, 'Galaxy S26', 1),
+(2, '16', 2);
 
 -- --------------------------------------------------------
 
@@ -316,7 +332,7 @@ ALTER TABLE `os`
 -- AUTO_INCREMENT de tabela `aparelho`
 --
 ALTER TABLE `aparelho`
-  MODIFY `idAparelho` int(11) NOT NULL AUTO_INCREMENT COMMENT 'Número identificador do aparelho dentro do sistema';
+  MODIFY `idAparelho` int(11) NOT NULL AUTO_INCREMENT COMMENT 'Número identificador do aparelho dentro do sistema', AUTO_INCREMENT=3;
 
 --
 -- AUTO_INCREMENT de tabela `atividade`
@@ -328,7 +344,7 @@ ALTER TABLE `atividade`
 -- AUTO_INCREMENT de tabela `clientes`
 --
 ALTER TABLE `clientes`
-  MODIFY `idCliente` int(11) NOT NULL AUTO_INCREMENT COMMENT 'Número de identificação do cliente', AUTO_INCREMENT=5;
+  MODIFY `idCliente` int(11) NOT NULL AUTO_INCREMENT COMMENT 'Número de identificação do cliente', AUTO_INCREMENT=10;
 
 --
 -- AUTO_INCREMENT de tabela `estoque`
@@ -358,7 +374,7 @@ ALTER TABLE `marca`
 -- AUTO_INCREMENT de tabela `modelo`
 --
 ALTER TABLE `modelo`
-  MODIFY `idModelo` int(11) NOT NULL AUTO_INCREMENT COMMENT 'Chave primária de identificação do modelo do aparelho';
+  MODIFY `idModelo` int(11) NOT NULL AUTO_INCREMENT COMMENT 'Chave primária de identificação do modelo do aparelho', AUTO_INCREMENT=3;
 
 --
 -- AUTO_INCREMENT de tabela `orcamento`

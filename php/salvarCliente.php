@@ -40,7 +40,7 @@ $sql = "DELETE * FROM clientes WHERE idCliente = '$id';";
 }
 
 //conectar banco 
-include ("conexao.php");
+include ("includes/conexao.php");
 
 // executar sql
 $result = mysqli_query($conn,$sql);
