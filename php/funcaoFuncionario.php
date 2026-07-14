@@ -5,7 +5,7 @@
         $html = "";
 
     //SQL
-    $sql = "SELECT idFuncionario, tipoFuncionario, nomeFuncionario, telefoneFuncionario from funcionario";
+    $sql = "SELECT idFuncionario, tipoFuncionario, nomeFuncionario, cpfFuncionario, emailFuncionario, telefoneFuncionario, cepFuncionario, enderecoFuncionario, numeroFuncionario, complementoFuncionario, bairroFuncionario, cidadeFuncionario, estadoFuncionario, login, senha from funcionario";
 
     //Conectar
     include("includes/conexao.php");
@@ -27,12 +27,32 @@
                           <td>".$coluna['tipoFuncionario']."</td>
                           <td>".$coluna['nomeFuncionario']."</td>
                           <td>
-                            <button class='btn-alterar-tabela btn-alterar' title='Alterar'>
-                            <i class='fas fa-pen'></i> Alterar
+                            <button class='btn-alterar-tabela btn-alterar' title='Alterar'
+
+                            data-id='".$coluna['idFuncionario']."'
+                            data-tipo='".htmlspecialchars($coluna['tipoFuncionario'], ENT_QUOTES)."'
+                            dta-nome='".htmlspecialchars($coluna['nomeFuncionario'], ENT_QUOTES)."'
+                            data-cpf='".htmlspecialchars($coluna['cpfFuncionario'], ENT_QUOTES)."'
+                            data-email='".htmlspecialchars($coluna['emailFuncionario'], ENT_QUOTES)."'
+                            data-telefone='".htmlspecialchars($coluna['telefoneFuncionario'], ENT_QUOTES)."'
+                            data-cep='".htmlspecialchars($coluna['cepFuncionario'], ENT_QUOTES)."'
+                            data-endereco='".htmlspecialchars($coluna['enderecoFuncionario'], ENT_QUOTES)."'
+                            data-numero='".htmlspecialchars($coluna['numeroFuncionario'], ENT_QUOTES)."'
+                            data-complemento='".htmlspecialchars($coluna['complementoFuncionario'], ENT_QUOTES)."'
+                            data-bairro='".htmlspecialchars($coluna['bairroFuncionario'], ENT_QUOTES)."'
+                            data-cidade='".htmlspecialchars($coluna['cidadeFuncionario'], ENT_QUOTES)."'
+                            data-estado='".htmlspecialchars($coluna['estadoFuncionario'], ENT_QUOTES)."'
+                            data-login='".htmlspecialchars($coluna['login'], ENT_QUOTES)."'
+                            data-senha='".htmlspecialchars($coluna['senha'], ENT_QUOTES)."'
+
+                            >
+                            Alterar
                             </button> 
                             
-                            <button class='btn-apagar-tabela btn-apagar' title='Apagar'>
-                            <i class='fas fa-pen'></i> Apagar
+                            <button class='btn-apagar-tabela btn-apagar' title='Apagar'
+                            data-id='".$coluna['idFuncionario']."'
+                            >
+                            Apagar
                             </button>
 
                             </td>

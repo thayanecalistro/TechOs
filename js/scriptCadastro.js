@@ -66,3 +66,76 @@ document.addEventListener("click", function(event) {
 
 });
 
+//  FUNÇÃO PAR BUSCA DE CEP 
+
+ function buscarCep(cepId, campos) {
+    const cepInput = document.getElementById(cepId); 
+
+    if(!cepInput) return;
+
+    cepInput.addEventListener("blur", function(){
+        //remove os traços e espaço vazios, deixansdo somente números
+        let cep = this.value.replace(/\D/g, '');
+
+        //valida se o cep possui exatamente 8 números
+        if(cep.length === 8){
+
+            //preenche os campos com "..." enquanto carrega
+            document.getElementById(campos.endereco).value = "..."; 
+            document.getElementById(campos.bairro).value = "...";
+            document.getElementById(campos.cidade).value = "..."; 
+            document.getElementById(campos.estado).value = "..."; 
+            
+            //faz a requisição AJAX para a API do viaCEP
+            fetch('https://viacep.com.br/ws/${cep}/json/')
+            .then(response => response.json())
+            .then(dados => {
+                if(!dados.erro){
+
+                    //preencheos inputs com as informações coletadas
+                    document.getElementById(campos.endereco).value = dados.logradouro;
+                    document.getElementById(campos.bairro).value = dados.bairro; 
+                    document.getElementById(campos.cidade).value = dados.localidade; 
+                    document.getElementById(campos.estado).value = dados.uf;
+
+                    //Foca no campo "número" para o usuário continuar o preenchimento
+                    document.getElementById(campos.numero).focus();
+                } else {
+                    alert("CEP não encontrado!");
+                    limparCamposEndereco(campos);
+                }
+            })
+            .catch(error => {
+                alert("Erro ao buscar o CEP. Verifique sua conexão.");
+                limparCamposEndereco(campos);
+            });
+        }
+    });
+ }
+// função para limpar os campos 
+  function limparCamposEndereco(campos) {
+    document.getElementById(campos.endereco).value = "";
+    document.getElementById(campos.bairro).value = "";
+    document.getElementById(campos.cidade).value = ""; 
+    document.getElementById(campos.estado).value = "";
+  }
+
+//ativa a busca de cep na subtela de cadastro 
+
+buscarCep("cep", {
+  endereco: "endereco",
+  bairro: "bairro", 
+  cidade: "cidade", 
+  estado: "estado",
+  numero: "numero"
+});
+
+//ativa o buscar cep na subtela de alteração 
+
+buscarCep ("alterarCep", {
+  endereco: "alterarEndereco", 
+  bairro: "alterarBairro",
+  cidade: "alterarCidade", 
+  estado: "alterarEstado", 
+  numero: "alterarNumero"
+});

@@ -68,7 +68,7 @@ $currentPage = 'cliente';
 
             <div class="linhaFormulario">
               <input type="text" placeholder="Nome do cliente" name="nNome">
-              <input type="text" placeholder="CPF" name="nCpf">
+              <input type="text" placeholder="CPF" name="nCpf" >
             </div>
 
             <div class="linhaFormulario">
@@ -78,22 +78,22 @@ $currentPage = 'cliente';
               <h3>Endereço</h3>
 
             <div class="linhaFormulario">
-              <input type="text" placeholder="CEP" name="nCep">
-              <input type="text" placeholder="Endereço" name="nEndereco">
+              <input type="text" placeholder="CEP" name="nCep" id="cep">
+              <input type="text" placeholder="Endereço" name="nEndereco" id="endereco">
             </div>
 
             <div class="linhaFormulario">
-              <input type="text" placeholder="Número" name="nNumero">
-              <input type="text" placeholder="Complemento" name="nComplemento">
+              <input type="text" placeholder="Número" name="nNumero" id="numero">
+              <input type="text" placeholder="Complemento" name="nComplemento" id="complemento">
             </div>
 
             <div class="linhaFormulario">
-            <input type="text" placeholder="Bairro" name="nBairro">
-              <input type="text" placeholder="Cidade" name="nCidade">
+            <input type="text" placeholder="Bairro" name="nBairro" id="bairro">
+              <input type="text" placeholder="Cidade" name="nCidade" id="cidade">
             </div>
 
             <div class="linhaFormulario">
-              <input type="text" placeholder="Estado" name="nEstado">                     
+              <input type="text" placeholder="Estado" name="nEstado" id="estado">                     
             </div>
 
             <div class="botaoContainer"> <input type="submit" value="Salvar" id="botaoSalvar" ></div>
@@ -139,12 +139,12 @@ $currentPage = 'cliente';
 
          <div class="grupo-input">
            <label for="">Cep</label>
-           <input type="text" name="nCep">
+           <input type="text" name="nCep" id="alterarCep">
          </div>
 
          <div class="grupo-input">
            <label for="">Endereco</label>
-           <input type="text" name="nEndereco">
+           <input type="text" name="nEndereco" id="AlterarEndereco">
          </div>
        </div>
 
@@ -152,12 +152,12 @@ $currentPage = 'cliente';
 
          <div class="grupo-input">
            <label for="">Número</label>
-           <input type="text" name="nNumero">
+           <input type="text" name="nNumero" id="alterarNumero">
          </div>
 
          <div class="grupo-input">
            <label for="">Complemento</label>
-           <input type="text" name="nComplemento">
+           <input type="text" name="nComplemento" id="alterarComplemento">
          </div>
        </div>
 
@@ -165,12 +165,12 @@ $currentPage = 'cliente';
 
           <div class="grupo-input">
             <label for="">Bairro</label>
-            <input type="text" name="nBairro">
+            <input type="text" name="nBairro" id="alterarBairro">
           </div>
 
           <div class="grupo-input">
             <label for="">Cidade</label>
-            <input type="text" name="nCidade">
+            <input type="text" name="nCidade" id="alterarCidade">
           </div>
        </div>
 
@@ -178,7 +178,7 @@ $currentPage = 'cliente';
 
         <div class="grupo-input">
           <label for="">Estado</label>
-           <input type="text" name="nEstado">
+           <input type="text" name="nEstado" id="alterarEstado">
         </div>
 
        </div>
