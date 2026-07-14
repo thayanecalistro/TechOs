@@ -37,12 +37,11 @@
                             data-bairro='".htmlspecialchars($coluna['bairroCliente'],ENT_QUOTES)."'
                             data-cidade='".htmlspecialchars($coluna['cidadeCliente'],ENT_QUOTES)."'
                             data-estado='".htmlspecialchars($coluna['estadoCliente'],ENT_QUOTES)."'
-                            <i class='fas fa-pen'></i>
                             > Alterar
                             </button> 
                             
-                            <button class='btn-apagar-tabela btn-apagar' title='Apagar'>
-                            <i class='fas fa-pen'></i> Apagar
+                            <button class='btn-apagar-tabela btn-apagar' title='Apagar' data-id='".$coluna['idCliente']."'>
+                            Apagar
                             </button>
 
                           </td>

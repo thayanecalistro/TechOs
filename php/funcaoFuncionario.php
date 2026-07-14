@@ -26,7 +26,6 @@
                           <td>".$coluna['idFuncionario']."</td>
                           <td>".$coluna['tipoFuncionario']."</td>
                           <td>".$coluna['nomeFuncionario']."</td>
-                          <td>".$coluna['telefoneFuncionario']."</td>
                           <td>
                             <button class='btn-alterar-tabela btn-alterar' title='Alterar'>
                             <i class='fas fa-pen'></i> Alterar

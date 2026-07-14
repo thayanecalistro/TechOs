@@ -1,17 +1,18 @@
 <?php
 
 $opcao = $_GET['opcao'];
-$id = $_POST['nIdCliente']; 
-$nome = $_POST['nNome'];
-$cpf = $_POST['nCpf'];
-$telefone = $_POST['nTelefone'];
-$cep = $_POST['nCep'];
-$endereco = $_POST['nEndereco'];
-$numero = $_POST['nNumero'];
-$complemento = $_POST['nComplemento'];
-$bairro = $_POST['nBairro'];
-$cidade = $_POST['nCidade'];
-$estado= $_POST['nEstado'];
+
+$id = isset( $_POST['nIdCliente']) ? $_POST['nIdCliente'] : (isset( $_GET['nIdCliente']) ? $_GET['nIdCliente'] : null) ; 
+$nome = isset($_POST['nNome']) ? $_POST['nNome'] : '' ;
+$cpf = isset($_POST['nCpf']) ? $_POST['nCpf'] : '';
+$telefone = isset($_POST['nTelefone']) ? $_POST['nTelefone'] : '';
+$cep = isset($_POST['nCep']) ? $_POST['nCep'] : '' ;
+$endereco =isset($_POST['nEndereco']) ? $_POST['nEndereco'] : '';
+$numero = isset($_POST['nNumero']) ? $_POST['nNumero'] : '';
+$complemento = isset($_POST['nComplemento']) ? $_POST['nComplemento'] : '';
+$bairro = isset($_POST['nBairro']) ? $_POST['nBairro'] : '' ;
+$cidade = isset($_POST['nCidade']) ? $_POST['nCidade'] :'' ;
+$estado= isset($_POST['nEstado']) ? $_POST['nEstado'] : '' ;
 
 if ($opcao == 'I'){
 
@@ -20,7 +21,7 @@ if ($opcao == 'I'){
 
 }elseif ($opcao == "D"){
 
-$sql = "DELETE * FROM clientes WHERE idCliente = '$id';"; 
+$sql = "DELETE FROM clientes WHERE idCliente = '$id';"; 
 
 }elseif ($opcao == "U"){
 
@@ -41,13 +42,14 @@ $sql = "DELETE * FROM clientes WHERE idCliente = '$id';";
 
 //conectar banco 
 include ("conexao.php");
+if (mysqli_query($conn,$sql)){
+  mysqli_close($conn);
 
-// executar sql
-$result = mysqli_query($conn,$sql);
+  header("Location: ../cliente.php");
+  exit();
 
-//fechar banco 
-mysqli_close($conn); 
-
-//tratar o retorno
-header("location:../cliente.php");
+}  else {
+   echo "Erro ao processar requisição: " . mysqli_error($conn);
+   mysqli_close($conn);
+}
 ?>

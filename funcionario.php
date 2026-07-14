@@ -49,7 +49,6 @@ $currentPage = 'funcionario';
                     <th>Matrícula</th>
                     <th>Tipo De Acesso</th>
                     <th>Nome do Colaborador</th>
-                    <th>Contato</th>
                     <th>Ações</th>
                   </tr>
                   <?php echo listaFuncionarios(); ?>
@@ -70,12 +69,12 @@ $currentPage = 'funcionario';
 
        <div class="linhaFormulario">
          <input type="text" placeholder="Nome do Colaborador" name="nNome">
-
          <input type="text" placeholder="CPF" name="nCpf">
        </div>
 
        <div class="linhaFormulario">
          <input type="text" placeholder="Telefone" name="nTelefone">
+         <input type="text" placeholder="E-mail" name="nEmail">
        </div>
 
          <h3>Endereço</h3>
@@ -102,14 +101,24 @@ $currentPage = 'funcionario';
          <h2>Tipo de Colaborador</h2>
 
          <div class="linhaFormulario">
-           <select name="" id="" >
-              <option value="">Selecione...</option>
-              <option value="">Administrador</option>
-              <option value="">Atendente</option>
-              <option value="">Técnico</option>
-           </select>
-         </div>
+        
+           <div class="grupo-input">
+             <select name="nTipo" id="" >
+                <option value="">Selecione...</option>
+                <option value="">Administrador</option>
+                <option value="">Atendente</option>
+                <option value="">Técnico</option>
+             </select>
+           </div>
 
+         </div>
+        
+         <h2>Acesso do colaborador</h2>
+
+         <div class="linhaFormulario">
+           <input type="text" placeholder="Login" name="nLogin">
+           <input type="text" placeholder="Senha" name="nSenha">
+         </div>
        <div class="botaoContainer"> <input type="submit" value="Salvar" id="botaoSalvar" ></div>
 
      </form>

@@ -1,10 +1,8 @@
 <?php
 
 include("funcoes.php"); 
-
-if ($_SERVER["REQUEST_METHOD"] == "POST" && isset($_GET['opcao']) && $_GET['opcao'] == 'I') {
     
-    
+    $opcao= $_GET['opcao']
     $tipo= $_POST['nTipo'];
     $nome= $_POST['nNome'];
     $cpf= $_POST['nCpf'];
@@ -12,10 +10,7 @@ if ($_SERVER["REQUEST_METHOD"] == "POST" && isset($_GET['opcao']) && $_GET['opca
     $telefone= $_POST['nTelefone'];
     $endereco= $_POST['nEndereco'];
     $login= $_POST['nLogin'];
-    
-    // Segurança: Criptografa a senha antes de enviar ao Banco de dados
-    $senha_limpa = $_POST['nSenha'];
-    $senha_hash  = password_hash($senha_limpa, PASSWORD_DEFAULT);
+    $senha= $_POST['nSenha'];
 
     // Trata o upload da foto se houver
     $nome_foto = NULL;
@@ -31,15 +26,11 @@ if ($_SERVER["REQUEST_METHOD"] == "POST" && isset($_GET['opcao']) && $_GET['opca
     
     include ("conexao.php");
 
-
     $result = mysqli_query($conn,$sql);
-
     //fechar banco 
     mysqli_close($conn);
-    
     
     // Redirecionamento de teste temporário
     header("Location: ../funcionarios.php");
     exit();
-}
 ?>

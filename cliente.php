@@ -32,13 +32,14 @@ $currentPage = 'cliente';
           <div class="search-box"> 
               <input type="text" id="pesquisar" name="pesquisar" placeholder="ID ou Nome...">
               <button type="button" class="btn btn-blue" id="btnBuscar">Buscar</button>
-              <button type="button" class="btn btn-sucesso" id="botaoAbrir">Novo Cliente</button>
               </select>
           </div>
       </fieldset>
 
-      <div class="section-card">
-        
+      <div class="section-card"> 
+
+      <button type="button" class="btn btn-sucesso" id="botaoAbrir">Novo Cliente</button>
+      
         <div class="table-container"> 
             <table  class="os-table" >
                 <thead>
@@ -67,7 +68,6 @@ $currentPage = 'cliente';
 
             <div class="linhaFormulario">
               <input type="text" placeholder="Nome do cliente" name="nNome">
-
               <input type="text" placeholder="CPF" name="nCpf">
             </div>
 
@@ -113,44 +113,74 @@ $currentPage = 'cliente';
       
      <input type="hidden" id="alterarId" name="nIdCliente">
 
-       <div class="linhaFormulario">
-         <label for="">Nome</label>
-         <input type="text" name="nNome">
-         <label for="">CPF</label>
-         <input type="text" name="nCpf">
-       </div>
+      <div class="linhaFormulario">
+        <div class="grupo-input">
+           <label for="">Nome</label>
+           <input type="text" name="nNome">
+        </div>
+        <div class="grupo-input">
+           <label for="">CPF</label>
+           <input type="text" name="nCpf">
+        </div>
+      </div>
 
        <div class="linhaFormulario">
-         <label for="">Telefone</label>
-         <input type="text" name="nTelefone">
+
+         <div class="grupo-input">
+           <label for="">Telefone</label>
+           <input type="text" name="nTelefone">
+         </div>
+
        </div>
 
          <h3>Endereço</h3>
 
        <div class="linhaFormulario">
-         <label for="">Cep</label>
-         <input type="text" name="nCep">
-         <label for="">Endereco</label>
-         <input type="text" name="nEndereco">
+
+         <div class="grupo-input">
+           <label for="">Cep</label>
+           <input type="text" name="nCep">
+         </div>
+
+         <div class="grupo-input">
+           <label for="">Endereco</label>
+           <input type="text" name="nEndereco">
+         </div>
        </div>
 
        <div class="linhaFormulario">
-         <label for="">Número</label>
-         <input type="text" name="nNumero">
-         <label for="">Complemento</label>
-         <input type="text" name="nComplemento">
+
+         <div class="grupo-input">
+           <label for="">Número</label>
+           <input type="text" name="nNumero">
+         </div>
+
+         <div class="grupo-input">
+           <label for="">Complemento</label>
+           <input type="text" name="nComplemento">
+         </div>
        </div>
 
        <div class="linhaFormulario">
-          <label for="">Bairro</label>
-          <input type="text" name="nBairro">
-          <label for="">Cidade</label>
-          <input type="text" name="nCidade">
+
+          <div class="grupo-input">
+            <label for="">Bairro</label>
+            <input type="text" name="nBairro">
+          </div>
+
+          <div class="grupo-input">
+            <label for="">Cidade</label>
+            <input type="text" name="nCidade">
+          </div>
        </div>
 
        <div class="linhaFormulario">
-        <label for="">Estado</label>
-         <input type="text" name="nEstado">                     
+
+        <div class="grupo-input">
+          <label for="">Estado</label>
+           <input type="text" name="nEstado">
+        </div>
+
        </div>
 
        <div class="botaoContainer"> <input type="submit" value="Salvar" id="botaoSalvar" ></div>

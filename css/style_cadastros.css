@@ -12,6 +12,7 @@
     background-color: #28a745 !important;
     color: white;
 }
+
 #botaoSalvar{
     padding: 6px 18px;
     border: none;
@@ -59,15 +60,41 @@
 .modal-conteudo {
     background-color: #1a304a;
     margin: 5% auto;
-    padding: 15px;
+    padding: 25px;
     border-radius: 8px;
-    width: 400px;
+    width: 95%;
+    max-width: 900px;
     position: relative;
     box-shadow: 0px 4px 8px rgba(0, 0, 0, 0.2);
     color: white;
 }
 
                                              /*FORMULARIO*/
+
+#meuModalAlterar .linhaFormulario{
+    display: flex;
+    gap: 15px;
+    margin-bottom: 15px;
+}
+                       
+#meuModalAlterar .linhaFormulario > div, 
+#meuModalAlterar .grupo-input{
+    display: flex;
+    flex-direction: column;
+    flex: 1;
+}
+
+#meuModalAlterar label{
+    margin-top: 0;
+    font-size: 14px;
+    font-weight: bold;
+    color: #a0aec0
+}
+
+.modal-conteudo form{
+  width: 100%;
+}
+
 form {
     display: flex;
     flex-direction: column;
@@ -82,15 +109,41 @@ input {
     margin-top: 5px;
     border: 1px solid #ccc;
     border-radius: 4px;
+    box-sizing: border-box;
 }
 
 .linhaFormulario {
     display: flex;
-    gap: 15px;
+    gap: 20px;
+    width: 100%;
+    margin-bottom: 15px;
 }
 
 .linhaFormulario input {
    flex: 1;
+}
+
+.linhaFormulario input,
+.linhaFormulario select, 
+.linhaFormulario .grupo-input{
+    flex: 1;
+    width: 100%;
+}
+
+.linhaFormulario select {
+    padding: 10px;
+    margin-top: 5px;
+    border: 1px solid #ccc;
+    border-radius: 4px;
+    box-sizing: border-box;
+    font-size: 14px;
+    height: 40px;
+    background-color: #1a304a;
+    color: white;
+}
+.linhaFormulario select:focus{
+    outline: none;
+    border-color: #62b6cb;
 }
 
                                         /*TABELA*/

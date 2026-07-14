@@ -52,4 +52,17 @@ botaoFecharAlterar.addEventListener("click", () => {
     modalAlterar.style.display = "none";
 });
 
+document.addEventListener("click", function(event) {
+   if (event.target.classList.contains("btn-apagar") || event.target.closest(".btn-apagar")){
+    const botao = event.target.classList.contains("btn-apagar") ? event.target : event.target.closest("btn-apagar");
+    const idCliente = botao.getAttribute("data-id"); 
+
+    const confirmou = confirm("Tem certeza que deseja excluir esse cliente? Esta ação não pode ser desfeita."); 
+
+    if (confirmou){
+        window.location.href = "php/salvarCliente.php?opcao=D&nIdCliente=" + idCliente; 
+    }
+   }
+
+});
 
