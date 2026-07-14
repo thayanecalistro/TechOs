@@ -7,6 +7,7 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST' && isset($_GET['id'])) {
     
     // Captura campos de texto
     $diagnostico = isset($_POST['nDiagnostico']) ? mysqli_real_escape_string($conn, $_POST['nDiagnostico']) : '';
+    $status = isset($_POST['nStatus']) ? mysqli_real_escape_string($conn, $_POST['nStatus']) : '';
     
     // Captura campos numéricos usando os 'names' corretos do orcamentos.php
     $maoObra = isset($_POST['nMaoObra']) ? floatval($_POST['nMaoObra']) : 0.0;
@@ -44,6 +45,11 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST' && isset($_GET['id'])) {
         $textoPecaTabelaOrcamento = "Nenhuma peça";
     }
 
+    $updateStatusSql = "";
+    if(!empty($status)) {
+        $updateStatusSql = ", status = '$status'";
+    }
+
     // 1. Executa o UPDATE na tabela principal 'orcamento'
     $sql = "UPDATE orcamento SET 
                 diagnostico = '$diagnostico', 
@@ -51,6 +57,7 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST' && isset($_GET['id'])) {
                 maoObra = '$maoObra', 
                 valorTotal = '$total',
                 peca = '$textoPecaTabelaOrcamento'
+                $updateStatusSql
             WHERE idOrcamento = $idOrcamento";
 
     $resultado = mysqli_query($conn, $sql);
@@ -80,6 +87,30 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST' && isset($_GET['id'])) {
                             VALUES ($idOrcamento, $idEstoque, '$nomePeca', $quantidade, $valUnitario, $totalItem)";
                     
                 mysqli_query($conn, $sqlPeca);
+            }
+        }
+
+        // =========================================================================
+        // 3. SINCRONIZAÇÃO AUTOMÁTICA DA ORDEM DE SERVIÇO (OS)
+        // =========================================================================
+        
+        // Verifica se esse orçamento já possui uma OS vinculada
+        $sqlVerificaOS = "SELECT OS_idOS FROM orcamento WHERE idOrcamento = $idOrcamento";
+        $buscaOS = mysqli_query($conn, $sqlVerificaOS);
+        
+        if ($resOS = mysqli_fetch_assoc($buscaOS)) {
+            $idOS = $resOS['OS_idOS'];
+
+            if (!empty($idOS)) {
+                // Se o orçamento já tem uma OS associada, atualizamos os valores nela
+                $novaDescricao = "OS automática gerada a partir do Orçamento número #$idOrcamento. Diagnóstico: " . $diagnostico;
+                
+                $sqlAtualizarOS = "UPDATE os SET 
+                                    descricaoOS = '$novaDescricao', 
+                                    valorOS = '$total' 
+                                   WHERE idOS = $idOS";
+                
+                mysqli_query($conn, $sqlAtualizarOS);
             }
         }
     }

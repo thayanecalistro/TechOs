@@ -2,7 +2,7 @@
 // estoque.php
 include("php/funcoes.php");
 $currentPage = 'estoque';
-require_once('php/conexao.php');
+require_once('includes/conexao.php');
 
 $pesquisa = '';
 if (isset($_POST['busca']) && !empty(trim($_POST['busca']))) {

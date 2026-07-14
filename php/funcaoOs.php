@@ -27,10 +27,13 @@ function listarOS() {
         foreach ($result as $coluna) {
             // Formatação do Status e as Badges visuais das OSs
             $statusFormatado = ucfirst($coluna['status']);
+            $statusValor = strtolower($coluna['status']);
+
             $classeBadge = 'badge-aberto'; 
-            if (strtolower($coluna['status']) == 'aprovado' || strtolower($coluna['status']) == 'em andamento') $classeBadge = 'badge-aprovado';
-            if (strtolower($coluna['status']) == 'finalizado' || strtolower($coluna['status']) == 'concluido') $classeBadge = 'badge-sucesso';
-            if (strtolower($coluna['status']) == 'cancelado') $classeBadge = 'badge-danger';
+            if ($statusValor == 'aprovado' || $statusValor == 'andamento') $classeBadge = 'badge-finalizado';//azul
+            if ($statusValor == 'pronto') $classeBadge = 'badge-aberto';//laranja
+            if ($statusValor == 'finalizado' || $statusValor == 'concluido') $classeBadge = 'badge-aprovado';//verde
+            if ($statusValor == 'devolvido' || $statusValor == 'cancelado') $classeBadge = 'badge-reprovado';//vermelho 
 
             // Formatação amigável das datas de Abertura e Fechamento
             $abertura = !empty($coluna['aberturaOS']) ? date('d/m/Y H:i', strtotime($coluna['aberturaOS'])) : "---";
@@ -39,14 +42,14 @@ function listarOS() {
                 : "---";
 
             // Monta a linha seguindo o cabeçalho exato do seu arquivo Os.php
-            $html .= "<tr>
+            $html .= "<tr data-id='" . $coluna['idOS'] . "' data-status='" . $statusValor . "'>
                         <td>" . $coluna['idOS'] . "</td>
                         <td>" . $abertura . "</td>
                         <td>" . $fechamento . "</td>
                         <td>" . htmlspecialchars($coluna['nomeCliente'], ENT_QUOTES) . "</td>
                         <td>" . htmlspecialchars($coluna['nomeMarca'] . " " . $coluna['nomeModelo'], ENT_QUOTES) . "</td>
                         <td><strong>R$ " . number_format($coluna['valorOS'], 2, ',', '.') . "</strong></td>
-                        <td><span class='badge " . $classeBadge . "'>" . $statusFormatado . "</span></td>
+                        <td><span class='badge " . $classeBadge . " badge-status-btn' style='cursor: pointer;'>" . $statusFormatado . "</span></td>
                       </tr>";
         }
     } else {

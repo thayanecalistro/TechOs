@@ -69,6 +69,29 @@ $currentPage = 'os';
         </div>
     </div>
 
+    <div class="modal-overlay" id="statusModal">
+        <div class="modal-content" >
+            <h3 >Alterar Status Ordem de Serviço</h3>
+            <form action="php/atualizarStatusOs.php" method="GET">
+                <input type="hidden" id="statusIdOs" name="id">
+                
+                <div class="form-group" style="margin: 20px 0;">
+                    <label for="modalNovoStatus" style="display: block; margin-bottom: 8px;">Selecione a opção:</label>
+                    <select id="modalNovoStatus" name="status" required style="width: 100%; height: 35px; border-radius: 4px; background-color: #102a43; color: white; border: 1px solid #2cb1bc; padding: 0 5px;">
+                        <option value="andamento">Em Andamento</option>
+                        <option value="pronto">Aguardando Retirada</option>
+                        <option value="finalizado">Finalizado</option>
+                        <option value="Devolvido">Sem conserto(devolvido)</option>
+                    </select>
+                </div>
+                <div class="modal-buttons" style="display: flex; gap: 10px; justify-content: flex-end;">
+                    <button type="submit" class="btn btn-sucesso">Confirmar</button>
+                    <button type="button" class="btn btn-red" id="btnFecharStatusModal">Cancelar</button>
+                </div>
+            </form>
+        </div>
+    </div>
+
     <div class="modal-overlay" id="confirmModal">
         <div class="modal-content">
             <h3>Confirmação de Exclusão</h3>

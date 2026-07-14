@@ -101,6 +101,19 @@
 .btn-light-blue { background-color: #3b82f6; color: white; }
 .btn-light-blue:hover { background-color: #60a5fa; }
 
+/* Badges de Status na Tabela */
+.badge {
+    padding: 3px 8px;
+    border-radius: 12px;
+    font-size: 11px;
+    text-transform: uppercase;
+    font-weight: bold;
+}
+.badge-aberto { background-color: #f0ad4e; color: #fff; }
+.badge-aprovado { background-color: #5cb85c; color: #fff; }
+.badge-reprovado { background-color: #d9534f; color: #fff; }
+.badge-finalizado { background-color: #0275d8; color: #fff; }
+
 .btn-sucesso {
     background-color: #28a745;
     color: white;
@@ -112,6 +125,7 @@
 }
 
 .btn-sucesso:hover { background-color: #218838; }
+
 .section-card {
     background-color: #1a304a;
     border-radius: 6px;
@@ -195,6 +209,7 @@
     color: #62b6cb;
     margin-bottom: 15px;
     font-weight: normal;
+    margin-top: 0;
 }
 
 .modal-content p {
@@ -208,4 +223,35 @@
     display: flex;
     justify-content: center;
     gap: 15px;
+}
+
+.form-group {
+    display: flex;
+    flex-direction: column;
+    gap: 5px;
+}
+
+.form-group label {
+    font-size: 13px;
+    color: #9fb3c8;
+}
+
+.form-group input[type="text"],
+.form-group input[type="number"],
+.form-group select,
+.form-group textarea {
+    background-color: #102a43;
+    border: 1px solid #334e68;
+    color: white;
+    padding: 8px 10px;
+    border-radius: 4px;
+    outline: none;
+    font-family: inherit;
+    font-size: 14px;
+}
+
+.form-group input:focus,
+.form-group select:focus,
+.form-group textarea:focus {
+    border-color: #2cb1bc;
 }

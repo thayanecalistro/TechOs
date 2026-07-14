@@ -5,6 +5,12 @@ document.addEventListener('DOMContentLoaded', () => {
     const tableBody = document.querySelector('#osTable tbody');
     const btnExcluir = document.getElementById('btnExcluir');
     
+    // Elementos do modal de status
+    const statusModal = document.getElementById('statusModal');
+    const btnFecharStatusModal = document.getElementById('btnFecharStatusModal');
+    const statusIdOs = document.getElementById('statusIdOs');
+    const modalNovoStatus = document.getElementById('modalNovoStatus');
+
     const confirmModal = document.getElementById('confirmModal');
     const confirmDelete = document.getElementById('confirmDelete');
     const cancelDelete = document.getElementById('cancelDelete');
@@ -57,6 +63,9 @@ document.addEventListener('DOMContentLoaded', () => {
 
     // 3. Duplo Clique para Seleção
     tableBody.addEventListener('dblclick', (e) => {
+        // Ignora se o duplo clique foi em cima do botão do status
+        if (e.target.classList.contains('badge-status-btn')) return;
+
         const targetRow = e.target.closest('tr');
         if (!targetRow) return;
 
@@ -70,6 +79,36 @@ document.addEventListener('DOMContentLoaded', () => {
         }
     });
 
+    // =========================================================================
+    // EVENTO DE CLIQUE NA BADGE DE STATUS PARA EXIBIÇÃO DO MODAL
+    // =========================================================================
+    tableBody.addEventListener('click', (e) => {
+        if (e.target.classList.contains('badge-status-btn')) {
+            const linha = e.target.closest('tr');
+            if (!linha) return;
+
+            const idOS = linha.getAttribute('data-id');
+            const statusAtual = linha.getAttribute('data-status');
+
+            if (idOS && statusModal) {
+                // Alimenta os campos ocultos do modal
+                statusIdOs.value = idOS;
+                if (modalNovoStatus) {
+                    modalNovoStatus.value = statusAtual;
+                }
+                // Exibe o modal na tela
+                statusModal.style.display = 'flex';
+            }
+        }
+    });
+
+    // Fecha o modal de alteração de status
+    if (btnFecharStatusModal) {
+        btnFecharStatusModal.addEventListener('click', () => {
+            statusModal.style.display = 'none';
+        });
+    }
+
     // 4. Modal de Confirmação e Exclusão
     btnExcluir.addEventListener('click', () => {
         if (!selectedRow) {
@@ -79,7 +118,7 @@ document.addEventListener('DOMContentLoaded', () => {
         const idOS = selectedRow.cells[0].textContent;
         const clienteOS = selectedRow.cells[3].textContent;
         
-        modalMessage.innerHTML = 
+        modalMessage.innerHTML = 'Tem certeza que deseja excluir a OS #${idOS} do cliente ${clienteOS}?';
         confirmModal.style.display = 'flex';
     });
 
