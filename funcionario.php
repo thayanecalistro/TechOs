@@ -81,22 +81,22 @@ $currentPage = 'funcionario';
          <h3>Endereço</h3>
 
        <div class="linhaFormulario">
-         <input type="text" placeholder="CEP" name="nCep">
-         <input type="text" placeholder="Endereço" name="nEndereco">
+         <input type="text" placeholder="CEP" name="nCep" id="cep">
+         <input type="text" placeholder="Endereço" name="nEndereco" id="endereco">
        </div>
 
        <div class="linhaFormulario">
-         <input type="text" placeholder="Número" name="nNumero">
-         <input type="text" placeholder="Complemento" name="nComplemento">
+         <input type="text" placeholder="Número" name="nNumero" id="numero">
+         <input type="text" placeholder="Complemento" name="nComplemento" id="complemento">
        </div>
 
        <div class="linhaFormulario">
-       <input type="text" placeholder="Bairro" name="nBairro">
-         <input type="text" placeholder="Cidade" name="nCidade">
+       <input type="text" placeholder="Bairro" name="nBairro" id="bairro">
+         <input type="text" placeholder="Cidade" name="nCidade" id="cidade">
        </div>
 
        <div class="linhaFormulario">
-         <input type="text" placeholder="Estado" name="nEstado">                     
+         <input type="text" placeholder="Estado" name="nEstado" id="estado">                     
        </div>
         
          <h2>Tipo de Colaborador</h2>
@@ -104,11 +104,11 @@ $currentPage = 'funcionario';
          <div class="linhaFormulario">
         
            <div class="grupo-input">
-             <select name="nTipo" id="" >
+             <select name="nTipo" id="tipo" >
                 <option value="">Selecione...</option>
-                <option value="">Administrador</option>
-                <option value="">Atendente</option>
-                <option value="">Técnico</option>
+                <option value="Administrador">Administrador</option>
+                <option value="Atendente">Atendente</option>
+                <option value="Técnico">Técnico</option>
              </select>
            </div>
 
@@ -129,7 +129,7 @@ $currentPage = 'funcionario';
 
 
 <!--         MODAL PARA ALTERAÇÃO DE DADOS DO COLABORADOR -->
-<div id="meuModal" class="modal">
+<div id="meuModalAlterar" class="modal">
   <div class="modal-conteudo">
    <span class="botaoFecharAlterar">&times;</span>
     <h2>Cadastro de Colaboradores</h2>
@@ -170,7 +170,7 @@ $currentPage = 'funcionario';
 
           <div class="grupo-input">
             <label for="">Endereco</label>
-            <input type="text" name="nEndereco" id="AlterarEndereco">
+            <input type="text" name="nEndereco" id="alterarEndereco">
           </div>
         </div>
 
@@ -214,11 +214,11 @@ $currentPage = 'funcionario';
          <div class="linhaFormulario">
         
            <div class="grupo-input">
-             <select name="nTipo" id="" >
+             <select name="nTipo" id="alterarTipo" >
                 <option value="">Selecione...</option>
-                <option value="">Administrador</option>
-                <option value="">Atendente</option>
-                <option value="">Técnico</option>
+                <option value="Administrador">Administrador</option>
+                <option value="Atendente">Atendente</option>
+                <option value="Técnico">Técnico</option>
              </select>
            </div>
 
@@ -229,12 +229,12 @@ $currentPage = 'funcionario';
          <div class="linhaFormulario">
            <div class="grupo-input">
              <label for="">login</label>
-             <input type="text" placeholder="Login" name="nLogin">
+             <input type="text" placeholder="Login" name="nLogin" id="alterarLogin">
            </div>
 
            <div class="grupo-input">
              <label for="">Senha</label>
-             <input type="text" placeholder="Senha" name="nSenha">
+             <input type="text" placeholder="Senha" name="nSenha" id="alterarSenha">
            </div>
          </div>
        <div class="botaoContainer"> <input type="submit" value="Salvar" id="botaoSalvar" ></div>

@@ -87,7 +87,7 @@ document.addEventListener("click", function(event) {
             document.getElementById(campos.estado).value = "..."; 
             
             //faz a requisição AJAX para a API do viaCEP
-            fetch('https://viacep.com.br/ws/${cep}/json/')
+            fetch(`https://viacep.com.br/ws/${cep}/json/`)
             .then(response => response.json())
             .then(dados => {
                 if(!dados.erro){

@@ -33,17 +33,21 @@ document.addEventListener("click", function(event){
 
     //preenche os campos com as informações cadastras antes
     document.getElementById("alterarId").value = btn.getAttribute("data-id");
-    modalAlterar.querySelector("input[name='nNome']").value = btn.getAttribute("data-nome"); 
-    modalAlterar.querySelector("input[name='nCpf']").value = btn.getAttribute("data-cpf");
-    modalAlterar.querySelector("input[name='nEmail']").value = btn.getAttribute("data-email");
-    modalAlterar.querySelector("input[name='nTelefone']").value = btn.getAttribute("data-telefone");
-    modalAlterar.querySelector("input[name='nCep']").value = btn.getAttribute("data-cep");
-    modalAlterar.querySelector("input[name='nEndereco']").value = btn.getAttribute("data-endereco"); 
-    modalAlterar.querySelector("input[name='nNumero']").value = btn.getAttribute("data-numero");
-    modalAlterar.querySelector("input[name='nComplemento']").value = btn.getAttribute("data-complemento");
-    modalAlterar.querySelector("input[name='nBairro']").value = btn.getAttribute("data-bairro");
-    modalAlterar.querySelector("input[name='nCidade']").value = btn.getAttribute("data-cidade"); 
-    modalAlterar.querySelector("input[name='nEstado']").value = btn.getAttribute("data-estado");
+    document.getElementById("alterarTipo").value = btn.getAttribute("data-tipo"); 
+    document.getElementById("alterarNome").value = btn.getAttribute("data-nome"); 
+    document.getElementById("alterarCpf").value = btn.getAttribute("data-cpf");
+    document.getElementById("alterarEmail").value = btn.getAttribute("data-email");
+    document.getElementById("alterarTelefone").value = btn.getAttribute("data-telefone");
+    document.getElementById("alterarCep").value = btn.getAttribute("data-cep");
+    document.getElementById("alterarEndereco").value = btn.getAttribute("data-endereco"); 
+    document.getElementById("alterarNumero").value = btn.getAttribute("data-numero");
+    document.getElementById("alterarComplemento").value = btn.getAttribute("data-complemento");
+    document.getElementById("alterarBairro").value = btn.getAttribute("data-bairro");
+    document.getElementById("alterarCidade").value = btn.getAttribute("data-cidade"); 
+    document.getElementById("alterarEstado").value = btn.getAttribute("data-estado");
+    document.getElementById("alterarLogin").value = btn.getAttribute("data-login");
+    document.getElementById("alterarSenha").value = btn.getAttribute("data-senha");
+
 
     modalAlterar.style.display="block"
     }
@@ -56,7 +60,7 @@ botaoFecharAlterar.addEventListener("click", () => {
 document.addEventListener("click", function(event) {
    if (event.target.classList.contains("btn-apagar") || event.target.closest(".btn-apagar")){
     const botao = event.target.classList.contains("btn-apagar") ? event.target : event.target.closest("btn-apagar");
-    const idCliente = botao.getAttribute("data-id"); 
+    const idFuncionario = botao.getAttribute("data-id"); 
 
     const confirmou = confirm("Tem certeza que deseja excluir esse cliente? Esta ação não pode ser desfeita."); 
 
@@ -88,7 +92,7 @@ document.addEventListener("click", function(event) {
             document.getElementById(campos.estado).value = "..."; 
             
             //faz a requisição AJAX para a API do viaCEP
-            fetch('https://viacep.com.br/ws/${cep}/json/')
+          fetch(`https://viacep.com.br/ws/${cep}/json/`)
             .then(response => response.json())
             .then(dados => {
                 if(!dados.erro){
