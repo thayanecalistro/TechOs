@@ -34,13 +34,14 @@ $currentPage = 'funcionario';
             <div class="search-box">
                 <input type="text" id="pesquisar" name="pesquisar" placeholder="ID ou Nome...">
                 <button type="button" class="btn btn-blue" id="btnBuscar">Buscar</button>
-                <input type="submit" class="btn btn-sucesso" value="Novo Colaborador" id="botaoAbrir" >
                 </select>
             </div>
         </fieldset>
        
       
       <div class="section-card">
+
+       <input type="submit" class="btn btn-sucesso" value="Novo Colaborador" id="botaoAbrir" >
 
       <div class="table-container"> 
             <table  class="os-table">
@@ -65,7 +66,7 @@ $currentPage = 'funcionario';
    <span class="botaoFechar">&times;</span>
     <h2>Cadastro de Colaboradores</h2>
 
-     <form method="POST" action="php/salvarColaborador.php?opcao=I">
+     <form method="POST" action="php/salvarFuncionario.php?opcao=I">
 
        <div class="linhaFormulario">
          <input type="text" placeholder="Nome do Colaborador" name="nNome">
@@ -125,8 +126,124 @@ $currentPage = 'funcionario';
 
   </div>
 </div>
+
+
+<!--         MODAL PARA ALTERAÇÃO DE DADOS DO COLABORADOR -->
+<div id="meuModal" class="modal">
+  <div class="modal-conteudo">
+   <span class="botaoFecharAlterar">&times;</span>
+    <h2>Cadastro de Colaboradores</h2>
+
+     <form method="POST" action="php/salvarFuncionario.php?opcao=U">
+       
+     <input type="hidden" name="idFuncionario" id="alterarId">
+
+     <div class="linhaFormulario">
+          <div class="grupo-input">
+            <label for="">Nome</label>
+            <input type="text" name="nNome" id="alterarNome">
+          </div>
+          <div class="grupo-input">
+            <label for="">CPF</label>
+            <input type="text" name="nCpf" id="alterarCpf">
+          </div>
+        </div>
+
+        <div class="linhaFormulario">
+        <div class="grupo-input">
+            <label for="">E-mail</label>
+            <input type="text" name="nEmail" id="alterarEmail">
+          </div>
+          <div class="grupo-input">
+            <label for="">Telefone</label>
+            <input type="text" name="nTelefone" id="alterarTelefone">
+          </div>
+        </div>
+
+         <h3>Endereço</h3>
+
+        <div class="linhaFormulario">
+          <div class="grupo-input">
+            <label for="">Cep</label>
+            <input type="text" name="nCep" id="alterarCep">
+          </div>
+
+          <div class="grupo-input">
+            <label for="">Endereco</label>
+            <input type="text" name="nEndereco" id="AlterarEndereco">
+          </div>
+        </div>
+
+        <div class="linhaFormulario">
+
+          <div class="grupo-input">
+            <label for="">Número</label>
+            <input type="text" name="nNumero" id="alterarNumero">
+          </div>
+
+          <div class="grupo-input">
+            <label for="">Complemento</label>
+            <input type="text" name="nComplemento" id="alterarComplemento">
+          </div>
+        </div>
+
+        <div class="linhaFormulario">
+
+          <div class="grupo-input">
+            <label for="">Bairro</label>
+            <input type="text" name="nBairro" id="alterarBairro">
+          </div>
+
+          <div class="grupo-input">
+            <label for="">Cidade</label>
+            <input type="text" name="nCidade" id="alterarCidade">
+          </div>
+        </div>
+
+        <div class="linhaFormulario">
+
+          <div class="grupo-input">
+            <label for="">Estado</label>
+            <input type="text" name="nEstado" id="alterarEstado">
+          </div>
+
+        </div>
+        
+         <h2>Tipo de Colaborador</h2>
+
+         <div class="linhaFormulario">
+        
+           <div class="grupo-input">
+             <select name="nTipo" id="" >
+                <option value="">Selecione...</option>
+                <option value="">Administrador</option>
+                <option value="">Atendente</option>
+                <option value="">Técnico</option>
+             </select>
+           </div>
+
+         </div>
+        
+         <h2>Acesso do colaborador</h2>
+
+         <div class="linhaFormulario">
+           <div class="grupo-input">
+             <label for="">login</label>
+             <input type="text" placeholder="Login" name="nLogin">
+           </div>
+
+           <div class="grupo-input">
+             <label for="">Senha</label>
+             <input type="text" placeholder="Senha" name="nSenha">
+           </div>
+         </div>
+       <div class="botaoContainer"> <input type="submit" value="Salvar" id="botaoSalvar" ></div>
+
+     </form>
+
+  </div>
 </div>
 
-   <script src="js/scriptCadastro.js"></script>
+   <script src="js/scriptFuncionario.js"></script>
 </body>
 </html>

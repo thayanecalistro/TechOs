@@ -77,7 +77,7 @@ function listaOpcoesClientes($idSelecionado = null) {
     // CORREÇÃO: Alterado de 'clientes' para 'cliente' conforme definido no techos.sql
     $sql = "SELECT idCliente, nomeCliente FROM clientes ORDER BY nomeCliente ASC";
     
-    include("conexao.php");
+    include("../includes/conexao.php");
     $result = mysqli_query($conn, $sql);
     mysqli_close($conn);
 

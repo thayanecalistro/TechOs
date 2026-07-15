@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Host: 127.0.0.1
--- Tempo de geração: 03/07/2026 às 03:06
+-- Tempo de geração: 15/07/2026 às 02:24
 -- Versão do servidor: 10.4.32-MariaDB
 -- Versão do PHP: 8.2.12
 
@@ -32,16 +32,18 @@ CREATE TABLE `aparelho` (
   `historicoAparelho` varchar(500) NOT NULL COMMENT 'histórico do aparelho',
   `Cliente_idCliente` int(11) NOT NULL COMMENT 'identificador do cliente cadastrado com esse aparelho',
   `imeiAparelho` varchar(50) NOT NULL COMMENT 'número do identificador do aparelho',
-  `Modelo_idModelo` varchar(25) NOT NULL COMMENT 'identificador do modelo cadastrado deste aparelho'
+  `Marca_idMarca` int(11) NOT NULL COMMENT 'identificador da marca cadastrada deste aparelho',
+  `Modelo_idModelo` int(11) NOT NULL COMMENT 'identificador do modelo cadastrado deste aparelho'
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
 
 --
 -- Despejando dados para a tabela `aparelho`
 --
 
-INSERT INTO `aparelho` (`idAparelho`, `historicoAparelho`, `Cliente_idCliente`, `imeiAparelho`, `Modelo_idModelo`) VALUES
-(1, 'tela quebrada 3 vezes. peça original', 2, '987654321234567', 'S26'),
-(2, '', 3, '1231435462462462', '2');
+INSERT INTO `aparelho` (`idAparelho`, `historicoAparelho`, `Cliente_idCliente`, `imeiAparelho`, `Marca_idMarca`, `Modelo_idModelo`) VALUES
+(2, '', 6, '123456789098765', 2, 0),
+(3, '', 1, '1546545', 2, 0),
+(4, '', 1, '1546545', 2, 0);
 
 -- --------------------------------------------------------
 
@@ -60,14 +62,28 @@ CREATE TABLE `atividade` (
 -- --------------------------------------------------------
 
 --
+-- Estrutura para tabela `cliente`
+--
+
+CREATE TABLE `cliente` (
+  `idCliente` int(11) NOT NULL COMMENT 'Chave primária de identificação do cliente',
+  `nomeCliente` varchar(150) NOT NULL COMMENT 'Nome completo do cliente',
+  `cpfCliente` varchar(20) NOT NULL COMMENT 'CPF do cliente',
+  `emailCliente` varchar(150) NOT NULL COMMENT 'Endereço de email principal para contato e notificações',
+  `telefoneCliente` varchar(30) NOT NULL COMMENT 'Telefone de contato',
+  `enderecoCliente` varchar(255) NOT NULL COMMENT 'Endereço residencial completo do cliente(rua, bairro, número, cidade)'
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
+
+-- --------------------------------------------------------
+
+--
 -- Estrutura para tabela `clientes`
 --
 
 CREATE TABLE `clientes` (
   `idCliente` int(11) NOT NULL COMMENT 'Número de identificação do cliente',
-  `nomeCliente` varchar(150) NOT NULL COMMENT 'Nome do cliente que será cadastrado ',
+  `nomeCliente` varchar(50) NOT NULL COMMENT 'Nome do cliente que será cadastrado ',
   `cpfCliente` varchar(15) NOT NULL COMMENT 'CPF completo do cliente',
-  `emailCliente` varchar(150) NOT NULL COMMENT 'Endereço de email principal para contato e notificações',
   `telefoneCliente` varchar(20) NOT NULL COMMENT 'O número para contato com o cliente',
   `cepCliente` varchar(10) NOT NULL COMMENT 'O CEP para identificar o endereço do cliente',
   `enderecoCliente` varchar(30) NOT NULL COMMENT 'O nome da rua em que mora',
@@ -82,12 +98,10 @@ CREATE TABLE `clientes` (
 -- Despejando dados para a tabela `clientes`
 --
 
-INSERT INTO `clientes` (`idCliente`, `nomeCliente`, `cpfCliente`, `emailCliente`, `telefoneCliente`, `cepCliente`, `enderecoCliente`, `numeroCliente`, `complementoCliente`, `bairroCliente`, `cidadeCliente`, `estadoCliente`) VALUES
-(1, 'Nicolly Fernanda', '09657885454', '', '999999999', '77777777', 'Rua jacupiranga', '1343', 'Sobrado', 'Aventureiro', 'Joinville', 'Santa catarina'),
-(2, 'Nicolly Fernanda Aureliano Pereira', '054900', '', '999437521', '054289', 'Rua jacupiranga', '55555555', 'sobrado', 'Morro do meio', 'Itajaí', 'SC'),
-(3, 'Dérik Patrik ', '1444521', '', '1548789', '159458', 'Rua Marilnada', '1254', 'De frente ao posto', 'Aventureiro', 'Joinville', 'SC'),
-(8, '', '', '', '', '', '', '', '', '', '', ''),
-(9, '', '', '', '', '', '', '', '', '', '', '');
+INSERT INTO `clientes` (`idCliente`, `nomeCliente`, `cpfCliente`, `telefoneCliente`, `cepCliente`, `enderecoCliente`, `numeroCliente`, `complementoCliente`, `bairroCliente`, `cidadeCliente`, `estadoCliente`) VALUES
+(1, 'Nicolly Fernanda', '09657885454', '999999999', '77777777', 'Rua jacupiranga', '77', 'Sobrado', 'Aventureiro', 'Joinville', 'Santa catarina'),
+(2, 'Nicolly Fernanda Aureliano Pereira', '054900', '999437521', '054289', 'Rua jacupiranga', '55555555', 'sobrado', 'Morro do meio', 'Itajaí', 'RJ'),
+(3, 'Dérik Patrik ', '1444521', '1548789', '159458', 'Rua Marilnada', '1254', 'De frente ao posto', 'Aventureiro', 'Joinville', 'SC');
 
 -- --------------------------------------------------------
 
@@ -115,20 +129,26 @@ CREATE TABLE `funcionario` (
   `tipoFuncionario` varchar(50) DEFAULT NULL COMMENT 'Cargo, nível de acesso ou perfil do funcionário',
   `nomeFuncionario` varchar(150) NOT NULL COMMENT 'Nome completo do funcionário',
   `cpfFuncionario` varchar(20) DEFAULT NULL COMMENT 'CPF do funcionário',
+  `telefoneFuncionario` varchar(20) NOT NULL,
   `emailFuncionario` varchar(150) DEFAULT NULL COMMENT 'E-mail para contato e comunicação interna',
-  `telefoneFuncionario` varchar(30) DEFAULT NULL COMMENT 'Telefone ou celular de contato do funcionário',
+  `cepfuncionario` int(11) NOT NULL,
   `enderecoFuncionario` varchar(255) DEFAULT NULL COMMENT 'Endereço residencial completo do funcionário',
+  `numeroFuncionario` int(11) NOT NULL COMMENT 'Número da casa do colaborador',
+  `complementoFuncionario` varchar(50) NOT NULL COMMENT 'Referência para o endereço cadastro',
+  `bairroFuncionario` varchar(30) NOT NULL COMMENT 'Bairro em que o colaborador mora',
+  `cidadeFuncionario` varchar(30) NOT NULL COMMENT 'Cidade que o colaborador reside',
+  `estadoFuncionario` int(30) NOT NULL COMMENT 'Estado em que o colaborador reside',
   `login` varchar(100) DEFAULT NULL COMMENT 'Nome do usuário utilizado para autentificação no sistema',
-  `senha` varchar(255) DEFAULT NULL COMMENT 'Senha de acesso criptografada do funcionário para login no sistema',
-  `foto` varchar(120) DEFAULT NULL COMMENT 'Foto do funcionário'
+  `senha` varchar(255) DEFAULT NULL COMMENT 'Senha de acesso criptografada do funcionário para login no sistema'
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
 
 --
 -- Despejando dados para a tabela `funcionario`
 --
 
-INSERT INTO `funcionario` (`idFuncionario`, `tipoFuncionario`, `nomeFuncionario`, `cpfFuncionario`, `emailFuncionario`, `telefoneFuncionario`, `enderecoFuncionario`, `login`, `senha`, `foto`) VALUES
-(1, '1', 'Nicolly Fernanda', '05490056165', 'Nico@gmail ', '37999567564', 'Rua jacupiranga', 'nicolly.pereira', '123', NULL);
+INSERT INTO `funcionario` (`idFuncionario`, `tipoFuncionario`, `nomeFuncionario`, `cpfFuncionario`, `telefoneFuncionario`, `emailFuncionario`, `cepfuncionario`, `enderecoFuncionario`, `numeroFuncionario`, `complementoFuncionario`, `bairroFuncionario`, `cidadeFuncionario`, `estadoFuncionario`, `login`, `senha`) VALUES
+(1, '1', 'Nicolly Fernanda', '05490056165', '', 'Nico@gmail ', 0, 'Rua jacupiranga', 0, '', '', '', 0, 'nicolly.pereira', '123'),
+(2, '', 'Nicolly Fernanda Aureliano Pereira', '', '', 'nicolly_f_pereira@estudante.sesisenai.org.br', 123654, 'rua ', 145, 'Sobrado', 'bairro', 'cidade', 0, 'nicolly.pereira', '123');
 
 -- --------------------------------------------------------
 
@@ -152,21 +172,22 @@ CREATE TABLE `gastos` (
 
 CREATE TABLE `marca` (
   `idMarca` int(11) NOT NULL COMMENT 'Chave primária de identificação da marca',
-  `nomeMarca` varchar(100) NOT NULL COMMENT 'Marca do produto'
+  `nomeMarca` varchar(100) NOT NULL COMMENT 'Marca do produto',
+  `Modelo_idModelo` int(11) DEFAULT NULL COMMENT 'Chave estrangeira. Vincula a marca a um modelo específico cadastrado no sistema'
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
 
 --
 -- Despejando dados para a tabela `marca`
 --
 
-INSERT INTO `marca` (`idMarca`, `nomeMarca`) VALUES
-(1, 'Samsung'),
-(2, 'Apple'),
-(3, 'Xiaomi'),
-(4, 'Motorola'),
-(5, 'LG'),
-(6, 'Asus'),
-(7, 'Realme');
+INSERT INTO `marca` (`idMarca`, `nomeMarca`, `Modelo_idModelo`) VALUES
+(1, 'Samsung', NULL),
+(2, 'Apple', NULL),
+(3, 'Xiaomi', NULL),
+(4, 'Motorola', NULL),
+(5, 'LG', NULL),
+(6, 'Asus', NULL),
+(7, 'Realme', NULL);
 
 -- --------------------------------------------------------
 
@@ -176,17 +197,16 @@ INSERT INTO `marca` (`idMarca`, `nomeMarca`) VALUES
 
 CREATE TABLE `modelo` (
   `idModelo` int(11) NOT NULL COMMENT 'Chave primária de identificação do modelo do aparelho',
-  `nomeModelo` varchar(100) NOT NULL COMMENT 'nome do modelo do aparelho',
-  `Marca_idMarca` int(11) NOT NULL
+  `nomeModelo` varchar(100) NOT NULL COMMENT 'nome do modelo do aparelho'
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
 
 --
 -- Despejando dados para a tabela `modelo`
 --
 
-INSERT INTO `modelo` (`idModelo`, `nomeModelo`, `Marca_idMarca`) VALUES
-(1, 'Galaxy S26', 1),
-(2, '16', 2);
+INSERT INTO `modelo` (`idModelo`, `nomeModelo`) VALUES
+(1, '16 pro max'),
+(2, '16');
 
 -- --------------------------------------------------------
 
@@ -262,6 +282,12 @@ ALTER TABLE `atividade`
   ADD KEY `idx_Atividade_OS` (`OS_idOS`);
 
 --
+-- Índices de tabela `cliente`
+--
+ALTER TABLE `cliente`
+  ADD PRIMARY KEY (`idCliente`);
+
+--
 -- Índices de tabela `clientes`
 --
 ALTER TABLE `clientes`
@@ -332,7 +358,7 @@ ALTER TABLE `os`
 -- AUTO_INCREMENT de tabela `aparelho`
 --
 ALTER TABLE `aparelho`
-  MODIFY `idAparelho` int(11) NOT NULL AUTO_INCREMENT COMMENT 'Número identificador do aparelho dentro do sistema', AUTO_INCREMENT=3;
+  MODIFY `idAparelho` int(11) NOT NULL AUTO_INCREMENT COMMENT 'Número identificador do aparelho dentro do sistema', AUTO_INCREMENT=5;
 
 --
 -- AUTO_INCREMENT de tabela `atividade`
@@ -341,10 +367,16 @@ ALTER TABLE `atividade`
   MODIFY `idAtividade` int(11) NOT NULL AUTO_INCREMENT COMMENT 'chave primária de identificação da atividade';
 
 --
+-- AUTO_INCREMENT de tabela `cliente`
+--
+ALTER TABLE `cliente`
+  MODIFY `idCliente` int(11) NOT NULL AUTO_INCREMENT COMMENT 'Chave primária de identificação do cliente';
+
+--
 -- AUTO_INCREMENT de tabela `clientes`
 --
 ALTER TABLE `clientes`
-  MODIFY `idCliente` int(11) NOT NULL AUTO_INCREMENT COMMENT 'Número de identificação do cliente', AUTO_INCREMENT=10;
+  MODIFY `idCliente` int(11) NOT NULL AUTO_INCREMENT COMMENT 'Número de identificação do cliente', AUTO_INCREMENT=8;
 
 --
 -- AUTO_INCREMENT de tabela `estoque`
@@ -356,7 +388,7 @@ ALTER TABLE `estoque`
 -- AUTO_INCREMENT de tabela `funcionario`
 --
 ALTER TABLE `funcionario`
-  MODIFY `idFuncionario` int(11) NOT NULL AUTO_INCREMENT COMMENT 'Chave primária de identificação do funcionário', AUTO_INCREMENT=2;
+  MODIFY `idFuncionario` int(11) NOT NULL AUTO_INCREMENT COMMENT 'Chave primária de identificação do funcionário', AUTO_INCREMENT=3;
 
 --
 -- AUTO_INCREMENT de tabela `gastos`
@@ -411,11 +443,27 @@ ALTER TABLE `gastos`
   ADD CONSTRAINT `fk_Gastos_Orcamento` FOREIGN KEY (`Orcamento_idOrcamento`) REFERENCES `orcamento` (`idOrcamento`) ON DELETE CASCADE ON UPDATE CASCADE;
 
 --
+-- Restrições para tabelas `orcamento`
+--
+ALTER TABLE `orcamento`
+  ADD CONSTRAINT `fk_Orcamento_Aparelho` FOREIGN KEY (`Aparelho_idAparelho`) REFERENCES `aparelho` (`idAparelho`) ON UPDATE CASCADE,
+  ADD CONSTRAINT `fk_Orcamento_Cliente` FOREIGN KEY (`Cliente_idCliente`) REFERENCES `cliente` (`idCliente`) ON UPDATE CASCADE,
+  ADD CONSTRAINT `fk_Orcamento_OS` FOREIGN KEY (`OS_idOS`) REFERENCES `os` (`idOS`) ON DELETE CASCADE ON UPDATE CASCADE;
+
+--
 -- Restrições para tabelas `orcamento_peca`
 --
 ALTER TABLE `orcamento_peca`
   ADD CONSTRAINT `fk_OP_Estoque` FOREIGN KEY (`Estoque_idEstoque`) REFERENCES `estoque` (`idEstoque`) ON UPDATE CASCADE,
   ADD CONSTRAINT `fk_OP_Orcamento` FOREIGN KEY (`Orcamento_idOrcamento`) REFERENCES `orcamento` (`idOrcamento`) ON DELETE CASCADE ON UPDATE CASCADE;
+
+--
+-- Restrições para tabelas `os`
+--
+ALTER TABLE `os`
+  ADD CONSTRAINT `fk_OS_Aparelho` FOREIGN KEY (`Aparelho_idAparelho`) REFERENCES `aparelho` (`idAparelho`) ON UPDATE CASCADE,
+  ADD CONSTRAINT `fk_OS_Cliente` FOREIGN KEY (`Cliente_idCliente`) REFERENCES `cliente` (`idCliente`) ON UPDATE CASCADE,
+  ADD CONSTRAINT `fk_OS_Funcionario` FOREIGN KEY (`Funcionario_idFuncionario`) REFERENCES `funcionario` (`idFuncionario`) ON DELETE SET NULL ON UPDATE CASCADE;
 COMMIT;
 
 /*!40101 SET CHARACTER_SET_CLIENT=@OLD_CHARACTER_SET_CLIENT */;

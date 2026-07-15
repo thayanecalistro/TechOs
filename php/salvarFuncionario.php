@@ -4,8 +4,7 @@ include("funcoes.php");
 
     $opcao= $_GET['opcao'];
 
-    $id= $_POST['idFuncionario'];
-
+    $id = isset($_POST['idFuncionario']) ? $_POST['idFuncionario'] : (isset($_GET['idFuncionario']) ? $_GET['idFuncionario'] : null);
     $tipo= isset($_POST['nTipo']) ? $_POST['nTipo'] : '';
     $nome= isset($_POST['nNome']) ? $_POST['nNome'] : '';
     $cpf= isset($_POST['nCpf']) ? $_POST['nCpf'] : '';
@@ -64,13 +63,15 @@ include("funcoes.php");
     $sql = "INSERT INTO funcionario (tipoFuncionario, nomeFuncionario, cpfFuncionario, emailFuncionario, telefoneFuncionario, enderecoFuncionario, login, senha, foto) 
             VALUES ('$tipo', '$nome', '$cpf', '$email', '$telefone', '$endereco', '$login', '$senha_hash', '$nome_foto')";*/
     
-    include ("../includes/conexao.php");
+include ("../includes/conexao.php");
+if (mysqli_query($conn,$sql)){
+mysqli_close($conn);
 
-    $result = mysqli_query($conn,$sql);
-    //fechar banco 
-    mysqli_close($conn);
-    
-    // Redirecionamento de teste temporário
-    header("Location: ../funcionarios.php");
-    exit();
+header("Location: ../funcionario.php");
+exit();
+
+}  else {
+echo "Erro ao processar requisição: " . mysqli_error($conn);
+mysqli_close($conn);
+}
 ?>

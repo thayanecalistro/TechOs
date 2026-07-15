@@ -192,6 +192,6 @@ $currentPage = 'cliente';
 
 <!--   TABELAS DOS CLIENTES                                                          -->
 
-   <script src="js/scriptCadastro.js"></script>
+   <script src="js/scriptCliente.js"></script>
 </body>
 </html>

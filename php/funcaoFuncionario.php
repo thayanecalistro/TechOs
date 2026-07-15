@@ -31,7 +31,7 @@
 
                             data-id='".$coluna['idFuncionario']."'
                             data-tipo='".htmlspecialchars($coluna['tipoFuncionario'], ENT_QUOTES)."'
-                            dta-nome='".htmlspecialchars($coluna['nomeFuncionario'], ENT_QUOTES)."'
+                            data-nome='".htmlspecialchars($coluna['nomeFuncionario'], ENT_QUOTES)."'
                             data-cpf='".htmlspecialchars($coluna['cpfFuncionario'], ENT_QUOTES)."'
                             data-email='".htmlspecialchars($coluna['emailFuncionario'], ENT_QUOTES)."'
                             data-telefone='".htmlspecialchars($coluna['telefoneFuncionario'], ENT_QUOTES)."'
