@@ -54,7 +54,26 @@
                             >
                             Apagar
                             </button>
+                            
+                            <button class='btn-visualizar-tabela btn-visualizar' title='Visualizar'
 
+                            data-id='".$coluna['idFuncionario']."'
+                            data-tipo='".htmlspecialchars($coluna['tipoFuncionario'], ENT_QUOTES)."'
+                            data-nome='".htmlspecialchars($coluna['nomeFuncionario'], ENT_QUOTES)."'
+                            data-cpf='".htmlspecialchars($coluna['cpfFuncionario'], ENT_QUOTES)."'
+                            data-email='".htmlspecialchars($coluna['emailFuncionario'], ENT_QUOTES)."'
+                            data-telefone='".htmlspecialchars($coluna['telefoneFuncionario'], ENT_QUOTES)."'
+                            data-cep='".htmlspecialchars($coluna['cepFuncionario'], ENT_QUOTES)."'
+                            data-endereco='".htmlspecialchars($coluna['enderecoFuncionario'], ENT_QUOTES)."'
+                            data-numero='".htmlspecialchars($coluna['numeroFuncionario'], ENT_QUOTES)."'
+                            data-complemento='".htmlspecialchars($coluna['complementoFuncionario'], ENT_QUOTES)."'
+                            data-bairro='".htmlspecialchars($coluna['bairroFuncionario'], ENT_QUOTES)."'
+                            data-cidade='".htmlspecialchars($coluna['cidadeFuncionario'], ENT_QUOTES)."'
+                            data-estado='".htmlspecialchars($coluna['estadoFuncionario'], ENT_QUOTES)."'
+                            data-login='".htmlspecialchars($coluna['login'], ENT_QUOTES)."'
+                            data-senha='".htmlspecialchars($coluna['senha'], ENT_QUOTES)."'
+
+                            >Visualizar</button>
                             </td>
                      </tr>";
             $contador++; // Soma 1 para a próxima linha

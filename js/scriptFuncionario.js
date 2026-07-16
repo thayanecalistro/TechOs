@@ -1,3 +1,4 @@
+// ---------------------- PARA ABRIR O MODAL --------------------------
 // Selecionando elementos em html 
 const modal = document.getElementById("meuModal"); 
 const botaoAbrir = document.getElementById("botaoAbrir"); 
@@ -56,6 +57,8 @@ document.addEventListener("click", function(event){
 botaoFecharAlterar.addEventListener("click", () => {
     modalAlterar.style.display = "none";
 });
+
+// ------------------------------------ PARA APAGAR O FUNCIONARIO SELECIOANDO
 
 document.addEventListener("click", function(event) {
    if (event.target.classList.contains("btn-apagar") || event.target.closest(".btn-apagar")){
@@ -143,4 +146,43 @@ buscarCep ("alterarCep", {
   cidade: "alterarCidade", 
   estado: "alterarEstado", 
   numero: "alterarNumero"
+});
+
+
+// -------------------------------------- PARA A SUBTELA DE ALTERAÇÃO ------------------------------
+
+const modalVisualizar = document.getElementById("meuModalVisualizar");
+const botaoFecharVisualizar = document.querySelector(".botaoFecharVisualizar");
+
+document.addEventListener("click", function(event) {
+      if(event.target.classList.contains("btn-visualizar")){
+        const btn = event.target;
+
+        document.getElementById("txtMatricula").textContent = btn.getAttribute("data-id") || "---";
+        document.getElementById("txtTipo").textContent = btn.getAttribute("data-tipo") || "---";
+        document.getElementById("txtNome").textContent = btn.getAttribute("data-nome") || "---";
+        document.getElementById("txtCpf").textContent = btn.getAttribute("data-cpf") || "---";
+        document.getElementById("txtEmail").textContent = btn.getAttribute("data-email") || "---";
+        document.getElementById("txtTelefone").textContent = btn.getAttribute("data-telefone") || "---";
+        document.getElementById("txtCep").textContent = btn.getAttribute("data-cep") || "---";
+        document.getElementById("txtEndereco").textContent = btn.getAttribute("data-endereco") || "---";
+        document.getElementById("txtNumero").textContent = btn.getAttribute("data-numero") || "---";
+        document.getElementById("txtComplemento").textContent = btn.getAttribute("data-complemento") || "---";
+        document.getElementById("txtBairro").textContent = btn.getAttribute("data-bairro") || "---";
+        document.getElementById("txtCidade").textContent = btn.getAttribute("data-cidade") || "---";
+        document.getElementById("txtEstado").textContent = btn.getAttribute("data-estado") || "---";
+        document.getElementById("txtLogin").textContent = btn.getAttribute("data-login") || "---";
+
+        modalVisualizar.style.display="block";
+      }
+});
+
+botaoFecharVisualizar.addEventListener("click", () => {
+     modalVisualizar.style.display="none";
+});
+
+window.addEventListener("click", (event) => {
+     if(event.target === modalVisualizar) {
+        modalVisualizar.style.display = "none";
+     }
 });

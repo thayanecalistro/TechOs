@@ -50,6 +50,20 @@
 .botaoFecharAlterar:hover{
     color: black;
 }
+
+.botaoFecharVisualizar{
+  position: absolute;
+    right: 15px;
+    top: 10px;
+    font-size: 24px;
+    cursor: pointer;
+    color: #aaa;
+}
+
+.botaoFecharVisualizar:hover{
+    color: black;
+}
+
 .botaoContainer{
     display: flex;
     justify-content: flex-end;

@@ -39,7 +39,7 @@ include("funcoes.php");
               complementoFuncionario = '$complemento',
               bairroFuncionario = '$bairro',
               cidadeFuncionario = '$cidade',
-              estadofuncionario = '$estado',
+              estadoFuncionario = '$estado',
               login = '$login',
               senha = '$senha'
               WHERE idFuncionario = '$id'; 
