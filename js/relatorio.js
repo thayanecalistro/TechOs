@@ -1,23 +1,19 @@
-document.addEventListener("DOMContentLoaded", function() {
-    const btnFiltrar = document.getElementById("btnFiltrar");
-    const btnExportar = document.getElementById("btnExportar");
-
-    // Lógica para clique no botão de filtragem (para futuras requisições Ajax)
-    if (btnFiltrar) {
-        btnFiltrar.addEventListener("click", function() {
-            const modulo = document.getElementById("filtroModulo").value;
-            const dataInicio = document.getElementById("dataInicio").value;
-            const dataFim = document.getElementById("dataFim").value;
-            
-            console.log('Filtrando por Módulo: ${modulo} | Período: ${dataInicio} até ${dataFim}');
-            // Aqui você poderá implementar seu carregamento assíncrono via fetch ou submit
+document.addEventListener('DOMContentLoaded', function() {
+    
+    // 1. Botão de Impressão (abre a caixa de diálogo do navegador para salvar PDF)
+    const btnPrint = document.querySelector('.btn-sucesso');
+    if (btnPrint) {
+        btnPrint.addEventListener('click', () => {
+            window.print();
         });
     }
 
-    // Ação simples de exportação (Abre o gerenciador de impressão nativo configurado para PDF)
-    if (btnExportar) {
-        btnExportar.addEventListener("click", function() {
-            window.print();
+    // 2. Limpar filtros com duplo clique no formulário
+    const form = document.querySelector('.search-fieldset');
+    if (form) {
+        form.addEventListener('dblclick', () => {
+            // Redireciona para a página limpa (sem filtros na URL)
+            window.location.href = 'relatorio.php';
         });
     }
 });
