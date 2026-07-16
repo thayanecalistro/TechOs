@@ -139,3 +139,36 @@ buscarCep ("alterarCep", {
   estado: "alterarEstado", 
   numero: "alterarNumero"
 });
+
+
+// ----------------------  PARA A SUBTELA DE VISUALIZAÇÃO ---------------
+const modalVisualizar = document.getElementById("meuModalVisualizar");
+const botaoFecharVisualizar = document.querySelector(".botaoFecharVisualizar"); 
+
+//quando o clique é em qualuqer lugar da tela
+document.addEventListener("click", function(event){
+
+    if (event.target.classList.contains("btn-visualizar")) {
+        const btn = event.target; 
+    
+
+    //preenche os campos com as informações cadastras antes
+    document.getElementById("txtId").textContent = btn.getAttribute("data-id") || "---";
+    document.getElementById("txtNome").textContent = btn.getAttribute("data-nome") || "---"; 
+    document.getElementById("txtCpf").textContent = btn.getAttribute("data-cpf") || "---";
+    document.getElementById("txtTelefone").textContent = btn.getAttribute("data-telefone") || "---";
+    document.getElementById("txtCep").textContent = btn.getAttribute("data-cep") || "---";
+    document.getElementById("txtEndereco").textContent = btn.getAttribute("data-endereco") || "---"; 
+    document.getElementById("txtNumero").textContent = btn.getAttribute("data-numero") || "---";
+    document.getElementById("txtComplemento").textContent = btn.getAttribute("data-complemento") || "---";
+    document.getElementById("txtBairro").textContent = btn.getAttribute("data-bairro") || "---";
+    document.getElementById("txtCidade").textContent = btn.getAttribute("data-cidade") || "---"; 
+    document.getElementById("txtEstado").textContent = btn.getAttribute("data-estado") || "---";
+
+    modalVisualizar.style.display="block"
+    }
+});
+
+botaoFecharVisualizar.addEventListener("click", () => {
+    modalVisualizar.style.display = "none";
+});
