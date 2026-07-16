@@ -96,4 +96,31 @@ function d_listarUltimasAtividades() {
     // Retorna apenas as 5 atividades mais recentes no total
     return array_slice($atividades, 0, 5);
 }
+//Função para trazer dados para o relatório
+function d_buscarOS($status = '', $data_inicio = '', $data_fim = '') {
+    include("includes/conexao.php");
+    $sql = "SELECT os.idOS, os.aberturaOS, os.status, c.nomeCliente 
+            FROM os 
+            INNER JOIN clientes c ON os.Cliente_idCliente = c.idCliente 
+            WHERE 1=1";
+
+
+    if (!empty($status)) {
+        $sql .= " AND os.status LIKE '%" . mysqli_real_escape_string($conn, $status) . "%'";
+    }
+    if (!empty($data_inicio)) {
+        $sql .= " AND os.aberturaOS >= '" . mysqli_real_escape_string($conn, $data_inicio) . "'";
+    }
+    if (!empty($data_fim)) {
+        $sql .= " AND os.aberturaOS <= '" . mysqli_real_escape_string($conn, $data_fim) . "'";
+    }
+    
+    $result = mysqli_query($conn, $sql);
+    $dados = [];
+    while ($row = mysqli_fetch_assoc($result)) {
+        $dados[] = $row;
+    }
+    mysqli_close($conn);
+    return $dados;
+}
 ?>
