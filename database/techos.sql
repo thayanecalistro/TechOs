@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Host: 127.0.0.1
--- Tempo de geração: 15/07/2026 às 02:24
+-- Tempo de geração: 17/07/2026 às 02:29
 -- Versão do servidor: 10.4.32-MariaDB
 -- Versão do PHP: 8.2.12
 
@@ -32,18 +32,18 @@ CREATE TABLE `aparelho` (
   `historicoAparelho` varchar(500) NOT NULL COMMENT 'histórico do aparelho',
   `Cliente_idCliente` int(11) NOT NULL COMMENT 'identificador do cliente cadastrado com esse aparelho',
   `imeiAparelho` varchar(50) NOT NULL COMMENT 'número do identificador do aparelho',
-  `Marca_idMarca` int(11) NOT NULL COMMENT 'identificador da marca cadastrada deste aparelho',
-  `Modelo_idModelo` int(11) NOT NULL COMMENT 'identificador do modelo cadastrado deste aparelho'
+  `Modelo_idModelo` varchar(25) NOT NULL COMMENT 'identificador do modelo cadastrado deste aparelho'
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
 
 --
 -- Despejando dados para a tabela `aparelho`
 --
 
-INSERT INTO `aparelho` (`idAparelho`, `historicoAparelho`, `Cliente_idCliente`, `imeiAparelho`, `Marca_idMarca`, `Modelo_idModelo`) VALUES
-(2, '', 6, '123456789098765', 2, 0),
-(3, '', 1, '1546545', 2, 0),
-(4, '', 1, '1546545', 2, 0);
+INSERT INTO `aparelho` (`idAparelho`, `historicoAparelho`, `Cliente_idCliente`, `imeiAparelho`, `Modelo_idModelo`) VALUES
+(2, '', 3, '1231435462462462', '2'),
+(3, '', 1, '1231435462462462', '1'),
+(4, '', 3, '89759857843', '4'),
+(5, '', 3, '45687565754', '5');
 
 -- --------------------------------------------------------
 
@@ -62,28 +62,14 @@ CREATE TABLE `atividade` (
 -- --------------------------------------------------------
 
 --
--- Estrutura para tabela `cliente`
---
-
-CREATE TABLE `cliente` (
-  `idCliente` int(11) NOT NULL COMMENT 'Chave primária de identificação do cliente',
-  `nomeCliente` varchar(150) NOT NULL COMMENT 'Nome completo do cliente',
-  `cpfCliente` varchar(20) NOT NULL COMMENT 'CPF do cliente',
-  `emailCliente` varchar(150) NOT NULL COMMENT 'Endereço de email principal para contato e notificações',
-  `telefoneCliente` varchar(30) NOT NULL COMMENT 'Telefone de contato',
-  `enderecoCliente` varchar(255) NOT NULL COMMENT 'Endereço residencial completo do cliente(rua, bairro, número, cidade)'
-) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
-
--- --------------------------------------------------------
-
---
 -- Estrutura para tabela `clientes`
 --
 
 CREATE TABLE `clientes` (
   `idCliente` int(11) NOT NULL COMMENT 'Número de identificação do cliente',
-  `nomeCliente` varchar(50) NOT NULL COMMENT 'Nome do cliente que será cadastrado ',
+  `nomeCliente` varchar(150) NOT NULL COMMENT 'Nome do cliente que será cadastrado ',
   `cpfCliente` varchar(15) NOT NULL COMMENT 'CPF completo do cliente',
+  `emailCliente` varchar(150) NOT NULL COMMENT 'Endereço de email principal para contato e notificações',
   `telefoneCliente` varchar(20) NOT NULL COMMENT 'O número para contato com o cliente',
   `cepCliente` varchar(10) NOT NULL COMMENT 'O CEP para identificar o endereço do cliente',
   `enderecoCliente` varchar(30) NOT NULL COMMENT 'O nome da rua em que mora',
@@ -98,10 +84,9 @@ CREATE TABLE `clientes` (
 -- Despejando dados para a tabela `clientes`
 --
 
-INSERT INTO `clientes` (`idCliente`, `nomeCliente`, `cpfCliente`, `telefoneCliente`, `cepCliente`, `enderecoCliente`, `numeroCliente`, `complementoCliente`, `bairroCliente`, `cidadeCliente`, `estadoCliente`) VALUES
-(1, 'Nicolly Fernanda', '09657885454', '999999999', '77777777', 'Rua jacupiranga', '77', 'Sobrado', 'Aventureiro', 'Joinville', 'Santa catarina'),
-(2, 'Nicolly Fernanda Aureliano Pereira', '054900', '999437521', '054289', 'Rua jacupiranga', '55555555', 'sobrado', 'Morro do meio', 'Itajaí', 'RJ'),
-(3, 'Dérik Patrik ', '1444521', '1548789', '159458', 'Rua Marilnada', '1254', 'De frente ao posto', 'Aventureiro', 'Joinville', 'SC');
+INSERT INTO `clientes` (`idCliente`, `nomeCliente`, `cpfCliente`, `emailCliente`, `telefoneCliente`, `cepCliente`, `enderecoCliente`, `numeroCliente`, `complementoCliente`, `bairroCliente`, `cidadeCliente`, `estadoCliente`) VALUES
+(1, 'Nicolly Fernanda', '09657885454', '', '999999999', '77777777', 'Rua jacupiranga', '1343', 'Sobrado', 'Aventureiro', 'Joinville', 'Santa catarina'),
+(2, 'Nicolly Fernanda Aureliano Pereira', '054900', '', '999437521', '054289', 'Rua jacupiranga', '55555555', 'sobrado', 'Morro do meio', 'Itajaí', 'SC');
 
 -- --------------------------------------------------------
 
@@ -118,6 +103,19 @@ CREATE TABLE `estoque` (
   `total` decimal(10,2) DEFAULT NULL COMMENT 'valor total acumulado(cauculado  multiplicando valor unitário por quantidade)'
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
 
+--
+-- Despejando dados para a tabela `estoque`
+--
+
+INSERT INTO `estoque` (`idEstoque`, `NomeFornecedor`, `peca`, `valor`, `quantidade`, `total`) VALUES
+(1, 'X3 Distribuidora', 'Bateria Xiaomi Mi 11 Lite (BP42) Deji', 75.00, 5, 300.00),
+(2, 'X3 Distribuidora', 'Frontal Tela Display Samsung S23 Ultra S918 Com Aro Original', 1899.00, 4, 7596.00),
+(3, 'X3 Distribuidora', 'Bateria Samsung A23 / M23 / M33 / M52 / M53 / A73 (M526) Original', 85.00, 4, 255.00),
+(4, 'X3 Distribuidora', 'Cabo Samsung Tipo C para Tipo C (1 Metro) Original', 29.00, 15, 435.00),
+(5, 'X3 Distribuidora', 'Frontal Tela Display Samsung A26 5G A266 Com Aro Original', 460.00, 3, 1380.00),
+(6, 'Central Peças', 'Tela Display Lcd Frontal Iphone 17 Pro Oled WEKEEP CI', 830.00, 3, 2490.00),
+(7, 'Central Peças', 'Bateria Iphone 15 Pro Modelo Vip', 125.00, 4, 500.00);
+
 -- --------------------------------------------------------
 
 --
@@ -129,26 +127,27 @@ CREATE TABLE `funcionario` (
   `tipoFuncionario` varchar(50) DEFAULT NULL COMMENT 'Cargo, nível de acesso ou perfil do funcionário',
   `nomeFuncionario` varchar(150) NOT NULL COMMENT 'Nome completo do funcionário',
   `cpfFuncionario` varchar(20) DEFAULT NULL COMMENT 'CPF do funcionário',
-  `telefoneFuncionario` varchar(20) NOT NULL,
+  `telefoneFuncionario` int(20) NOT NULL,
   `emailFuncionario` varchar(150) DEFAULT NULL COMMENT 'E-mail para contato e comunicação interna',
-  `cepfuncionario` int(11) NOT NULL,
+  `cepFuncionario` int(11) NOT NULL,
   `enderecoFuncionario` varchar(255) DEFAULT NULL COMMENT 'Endereço residencial completo do funcionário',
-  `numeroFuncionario` int(11) NOT NULL COMMENT 'Número da casa do colaborador',
-  `complementoFuncionario` varchar(50) NOT NULL COMMENT 'Referência para o endereço cadastro',
-  `bairroFuncionario` varchar(30) NOT NULL COMMENT 'Bairro em que o colaborador mora',
-  `cidadeFuncionario` varchar(30) NOT NULL COMMENT 'Cidade que o colaborador reside',
-  `estadoFuncionario` int(30) NOT NULL COMMENT 'Estado em que o colaborador reside',
+  `numeroFuncionario` int(11) NOT NULL,
+  `complementoFuncionario` varchar(50) NOT NULL,
+  `bairroFuncionario` varchar(30) NOT NULL,
+  `cidadeFuncionario` varchar(30) NOT NULL,
+  `estadoFuncionario` varchar(30) NOT NULL,
   `login` varchar(100) DEFAULT NULL COMMENT 'Nome do usuário utilizado para autentificação no sistema',
-  `senha` varchar(255) DEFAULT NULL COMMENT 'Senha de acesso criptografada do funcionário para login no sistema'
+  `senha` varchar(255) DEFAULT NULL COMMENT 'Senha de acesso criptografada do funcionário para login no sistema',
+  `foto` varchar(120) DEFAULT NULL COMMENT 'Foto do funcionário'
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
 
 --
 -- Despejando dados para a tabela `funcionario`
 --
 
-INSERT INTO `funcionario` (`idFuncionario`, `tipoFuncionario`, `nomeFuncionario`, `cpfFuncionario`, `telefoneFuncionario`, `emailFuncionario`, `cepfuncionario`, `enderecoFuncionario`, `numeroFuncionario`, `complementoFuncionario`, `bairroFuncionario`, `cidadeFuncionario`, `estadoFuncionario`, `login`, `senha`) VALUES
-(1, '1', 'Nicolly Fernanda', '05490056165', '', 'Nico@gmail ', 0, 'Rua jacupiranga', 0, '', '', '', 0, 'nicolly.pereira', '123'),
-(2, '', 'Nicolly Fernanda Aureliano Pereira', '', '', 'nicolly_f_pereira@estudante.sesisenai.org.br', 123654, 'rua ', 145, 'Sobrado', 'bairro', 'cidade', 0, 'nicolly.pereira', '123');
+INSERT INTO `funcionario` (`idFuncionario`, `tipoFuncionario`, `nomeFuncionario`, `cpfFuncionario`, `telefoneFuncionario`, `emailFuncionario`, `cepFuncionario`, `enderecoFuncionario`, `numeroFuncionario`, `complementoFuncionario`, `bairroFuncionario`, `cidadeFuncionario`, `estadoFuncionario`, `login`, `senha`, `foto`) VALUES
+(1, 'Administrador', 'Nicolly Fernanda', '05490056165', 78945678, 'Nico@gmail ', 44444444, 'Rua Via Coletora B', 456, '', 'Nossa Senhora das Graças', 'Santo Antônio de Jesus', 'BA', 'nicolly.pereira', '123', NULL),
+(2, 'Administrador', 'thayane Calistro', '12345678988', 0, 'thayane@teste.com', 44444444, 'Rua Via Coletora B', 0, '', 'Nossa Senhora das Graças', 'Santo Antônio de Jesus', 'BA', 'Thay.teste', '123', '6a4d77932f29b.jpg');
 
 -- --------------------------------------------------------
 
@@ -172,22 +171,21 @@ CREATE TABLE `gastos` (
 
 CREATE TABLE `marca` (
   `idMarca` int(11) NOT NULL COMMENT 'Chave primária de identificação da marca',
-  `nomeMarca` varchar(100) NOT NULL COMMENT 'Marca do produto',
-  `Modelo_idModelo` int(11) DEFAULT NULL COMMENT 'Chave estrangeira. Vincula a marca a um modelo específico cadastrado no sistema'
+  `nomeMarca` varchar(100) NOT NULL COMMENT 'Marca do produto'
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
 
 --
 -- Despejando dados para a tabela `marca`
 --
 
-INSERT INTO `marca` (`idMarca`, `nomeMarca`, `Modelo_idModelo`) VALUES
-(1, 'Samsung', NULL),
-(2, 'Apple', NULL),
-(3, 'Xiaomi', NULL),
-(4, 'Motorola', NULL),
-(5, 'LG', NULL),
-(6, 'Asus', NULL),
-(7, 'Realme', NULL);
+INSERT INTO `marca` (`idMarca`, `nomeMarca`) VALUES
+(1, 'Samsung'),
+(2, 'Apple'),
+(3, 'Xiaomi'),
+(4, 'Motorola'),
+(5, 'LG'),
+(6, 'Asus'),
+(7, 'Realme');
 
 -- --------------------------------------------------------
 
@@ -197,16 +195,20 @@ INSERT INTO `marca` (`idMarca`, `nomeMarca`, `Modelo_idModelo`) VALUES
 
 CREATE TABLE `modelo` (
   `idModelo` int(11) NOT NULL COMMENT 'Chave primária de identificação do modelo do aparelho',
-  `nomeModelo` varchar(100) NOT NULL COMMENT 'nome do modelo do aparelho'
+  `nomeModelo` varchar(100) NOT NULL COMMENT 'nome do modelo do aparelho',
+  `Marca_idMarca` int(11) NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
 
 --
 -- Despejando dados para a tabela `modelo`
 --
 
-INSERT INTO `modelo` (`idModelo`, `nomeModelo`) VALUES
-(1, '16 pro max'),
-(2, '16');
+INSERT INTO `modelo` (`idModelo`, `nomeModelo`, `Marca_idMarca`) VALUES
+(1, 'Galaxy S26', 1),
+(2, '16', 2),
+(3, 'S23', 1),
+(4, '14', 2),
+(5, 'Galaxy A15', 1);
 
 -- --------------------------------------------------------
 
@@ -228,6 +230,15 @@ CREATE TABLE `orcamento` (
   `dataOrcamento` datetime DEFAULT current_timestamp() COMMENT 'Data e hora de criação ou registro do orçamento no sistema'
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
 
+--
+-- Despejando dados para a tabela `orcamento`
+--
+
+INSERT INTO `orcamento` (`idOrcamento`, `diagnostico`, `peca`, `valorUni`, `maoObra`, `valorTotal`, `status`, `OS_idOS`, `Cliente_idCliente`, `Aparelho_idAparelho`, `dataOrcamento`) VALUES
+(1, 'Bateria inchada e tela quebrada', 'Múltiplas Peças', 955.00, 50.00, 1005.00, 'aprovado', 1, 3, 2, '2026-07-07 19:33:24'),
+(2, 'tela trocada 2 vezes, original', 'Frontal Tela Display Samsung S23 Ultra S918 Com Aro Original', 1899.00, 75.00, 1974.00, 'reprovado', NULL, 1, 3, '2026-07-07 19:36:50'),
+(3, '', 'Bateria Samsung A23 / M23 / M33 / M52 / M53 / A73 (M526) Original', 85.00, 50.00, 135.00, 'aprovado', 2, 3, 5, '2026-07-13 19:20:15');
+
 -- --------------------------------------------------------
 
 --
@@ -243,6 +254,16 @@ CREATE TABLE `orcamento_peca` (
   `valorUnitario` decimal(10,2) NOT NULL COMMENT 'Preço de uma unidade da peça no momento da criação do orçamento',
   `total` decimal(10,2) NOT NULL COMMENT 'Valor total deste item(multiplicação da quantidade pelo valor unitário)'
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
+
+--
+-- Despejando dados para a tabela `orcamento_peca`
+--
+
+INSERT INTO `orcamento_peca` (`idOrcamentoPeca`, `Orcamento_idOrcamento`, `Estoque_idEstoque`, `peca`, `quantidade`, `valorUnitario`, `total`) VALUES
+(16, 3, 3, 'Bateria Samsung A23 / M23 / M33 / M52 / M53 / A73 (M526) Original', 1, 85.00, 85.00),
+(17, 2, 2, 'Frontal Tela Display Samsung S23 Ultra S918 Com Aro Original', 1, 1899.00, 1899.00),
+(19, 1, 7, 'Bateria Iphone 15 Pro Modelo Vip', 1, 125.00, 125.00),
+(20, 1, 6, 'Tela Display Lcd Frontal Iphone 17 Pro Oled WEKEEP CI', 1, 830.00, 830.00);
 
 -- --------------------------------------------------------
 
@@ -265,6 +286,14 @@ CREATE TABLE `os` (
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
 
 --
+-- Despejando dados para a tabela `os`
+--
+
+INSERT INTO `os` (`idOS`, `aberturaOS`, `fechamentoOS`, `descricaoOS`, `servicoOS`, `valorOS`, `observacoesOS`, `status`, `Aparelho_idAparelho`, `Funcionario_idFuncionario`, `Cliente_idCliente`) VALUES
+(1, '2026-07-07 19:33:32', NULL, 'OS automática gerada a partir do Orçamento número #1. Diagnóstico: ', NULL, 125.00, NULL, 'pronto', 2, NULL, 3),
+(2, '2026-07-16 20:52:15', NULL, 'OS automática gerada a partir do Orçamento número #3. Diagnóstico: ', NULL, 135.00, NULL, 'em andamento', 5, NULL, 3);
+
+--
 -- Índices para tabelas despejadas
 --
 
@@ -280,12 +309,6 @@ ALTER TABLE `aparelho`
 ALTER TABLE `atividade`
   ADD PRIMARY KEY (`idAtividade`),
   ADD KEY `idx_Atividade_OS` (`OS_idOS`);
-
---
--- Índices de tabela `cliente`
---
-ALTER TABLE `cliente`
-  ADD PRIMARY KEY (`idCliente`);
 
 --
 -- Índices de tabela `clientes`
@@ -358,7 +381,7 @@ ALTER TABLE `os`
 -- AUTO_INCREMENT de tabela `aparelho`
 --
 ALTER TABLE `aparelho`
-  MODIFY `idAparelho` int(11) NOT NULL AUTO_INCREMENT COMMENT 'Número identificador do aparelho dentro do sistema', AUTO_INCREMENT=5;
+  MODIFY `idAparelho` int(11) NOT NULL AUTO_INCREMENT COMMENT 'Número identificador do aparelho dentro do sistema', AUTO_INCREMENT=6;
 
 --
 -- AUTO_INCREMENT de tabela `atividade`
@@ -367,22 +390,16 @@ ALTER TABLE `atividade`
   MODIFY `idAtividade` int(11) NOT NULL AUTO_INCREMENT COMMENT 'chave primária de identificação da atividade';
 
 --
--- AUTO_INCREMENT de tabela `cliente`
---
-ALTER TABLE `cliente`
-  MODIFY `idCliente` int(11) NOT NULL AUTO_INCREMENT COMMENT 'Chave primária de identificação do cliente';
-
---
 -- AUTO_INCREMENT de tabela `clientes`
 --
 ALTER TABLE `clientes`
-  MODIFY `idCliente` int(11) NOT NULL AUTO_INCREMENT COMMENT 'Número de identificação do cliente', AUTO_INCREMENT=8;
+  MODIFY `idCliente` int(11) NOT NULL AUTO_INCREMENT COMMENT 'Número de identificação do cliente', AUTO_INCREMENT=10;
 
 --
 -- AUTO_INCREMENT de tabela `estoque`
 --
 ALTER TABLE `estoque`
-  MODIFY `idEstoque` int(11) NOT NULL AUTO_INCREMENT COMMENT 'Chave primária de identificaçãodo registro de estoque';
+  MODIFY `idEstoque` int(11) NOT NULL AUTO_INCREMENT COMMENT 'Chave primária de identificaçãodo registro de estoque', AUTO_INCREMENT=8;
 
 --
 -- AUTO_INCREMENT de tabela `funcionario`
@@ -406,25 +423,25 @@ ALTER TABLE `marca`
 -- AUTO_INCREMENT de tabela `modelo`
 --
 ALTER TABLE `modelo`
-  MODIFY `idModelo` int(11) NOT NULL AUTO_INCREMENT COMMENT 'Chave primária de identificação do modelo do aparelho', AUTO_INCREMENT=3;
+  MODIFY `idModelo` int(11) NOT NULL AUTO_INCREMENT COMMENT 'Chave primária de identificação do modelo do aparelho', AUTO_INCREMENT=6;
 
 --
 -- AUTO_INCREMENT de tabela `orcamento`
 --
 ALTER TABLE `orcamento`
-  MODIFY `idOrcamento` int(11) NOT NULL AUTO_INCREMENT COMMENT 'Chave primária de identificação do orçamento';
+  MODIFY `idOrcamento` int(11) NOT NULL AUTO_INCREMENT COMMENT 'Chave primária de identificação do orçamento', AUTO_INCREMENT=4;
 
 --
 -- AUTO_INCREMENT de tabela `orcamento_peca`
 --
 ALTER TABLE `orcamento_peca`
-  MODIFY `idOrcamentoPeca` int(11) NOT NULL AUTO_INCREMENT COMMENT 'Chave primária de identificação do item do orçamento';
+  MODIFY `idOrcamentoPeca` int(11) NOT NULL AUTO_INCREMENT COMMENT 'Chave primária de identificação do item do orçamento', AUTO_INCREMENT=21;
 
 --
 -- AUTO_INCREMENT de tabela `os`
 --
 ALTER TABLE `os`
-  MODIFY `idOS` int(11) NOT NULL AUTO_INCREMENT COMMENT 'Chave primária de identificação da Ordem de Serviço';
+  MODIFY `idOS` int(11) NOT NULL AUTO_INCREMENT COMMENT 'Chave primária de identificação da Ordem de Serviço', AUTO_INCREMENT=3;
 
 --
 -- Restrições para tabelas despejadas
@@ -443,27 +460,11 @@ ALTER TABLE `gastos`
   ADD CONSTRAINT `fk_Gastos_Orcamento` FOREIGN KEY (`Orcamento_idOrcamento`) REFERENCES `orcamento` (`idOrcamento`) ON DELETE CASCADE ON UPDATE CASCADE;
 
 --
--- Restrições para tabelas `orcamento`
---
-ALTER TABLE `orcamento`
-  ADD CONSTRAINT `fk_Orcamento_Aparelho` FOREIGN KEY (`Aparelho_idAparelho`) REFERENCES `aparelho` (`idAparelho`) ON UPDATE CASCADE,
-  ADD CONSTRAINT `fk_Orcamento_Cliente` FOREIGN KEY (`Cliente_idCliente`) REFERENCES `cliente` (`idCliente`) ON UPDATE CASCADE,
-  ADD CONSTRAINT `fk_Orcamento_OS` FOREIGN KEY (`OS_idOS`) REFERENCES `os` (`idOS`) ON DELETE CASCADE ON UPDATE CASCADE;
-
---
 -- Restrições para tabelas `orcamento_peca`
 --
 ALTER TABLE `orcamento_peca`
   ADD CONSTRAINT `fk_OP_Estoque` FOREIGN KEY (`Estoque_idEstoque`) REFERENCES `estoque` (`idEstoque`) ON UPDATE CASCADE,
   ADD CONSTRAINT `fk_OP_Orcamento` FOREIGN KEY (`Orcamento_idOrcamento`) REFERENCES `orcamento` (`idOrcamento`) ON DELETE CASCADE ON UPDATE CASCADE;
-
---
--- Restrições para tabelas `os`
---
-ALTER TABLE `os`
-  ADD CONSTRAINT `fk_OS_Aparelho` FOREIGN KEY (`Aparelho_idAparelho`) REFERENCES `aparelho` (`idAparelho`) ON UPDATE CASCADE,
-  ADD CONSTRAINT `fk_OS_Cliente` FOREIGN KEY (`Cliente_idCliente`) REFERENCES `cliente` (`idCliente`) ON UPDATE CASCADE,
-  ADD CONSTRAINT `fk_OS_Funcionario` FOREIGN KEY (`Funcionario_idFuncionario`) REFERENCES `funcionario` (`idFuncionario`) ON DELETE SET NULL ON UPDATE CASCADE;
 COMMIT;
 
 /*!40101 SET CHARACTER_SET_CLIENT=@OLD_CHARACTER_SET_CLIENT */;
