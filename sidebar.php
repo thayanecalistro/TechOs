@@ -1,3 +1,9 @@
+<?php
+if (session_status() === PHP_SESSION_NONE) {
+    session_start();
+}
+?>
+
 <link rel= "stylesheet" href="css/sidebar.css">
 
 <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
@@ -48,23 +54,15 @@
             <a href="cliente.php"><i class="fas fa-users"></i> <span>Cliente</span></a>
         </li>
 
-    <!--<li class="menu-item dropdown = ($currentPage == 'cliente') ? 'open active' : ''; ?>" id="clienteMenu">
-            <div class="menu-dropdown-toggle" onclick="toggleDropdown(event)">
-                <i class="fas fa-users"></i> <span>Cliente</span>
-                <i class="arrow"></i>
-            </div>
-            <ul class="submenu">
-                <li class="menu-item"><a href="cadastroCliente.php"><i class="far fa-circle"></i> <span>Gerenciar</span></a></li>
-            </ul>
-        </li>-->
-
         <li class="menu-item <?= ($currentPage == 'aparelho') ? 'active' : ''; ?>">
             <a href="cadastroAparelho.php"><i class="fas fa-laptop"></i> <span>Aparelho</span></a>
         </li>
 
-        <li class="menu-item <?= ($currentPage == 'funcionario') ? 'active' : ''; ?>">
-            <a href="funcionario.php"><i class="fas fa-user-tie"></i> <span>Funcionário</span></a>
-        </li>
+        <?php if (isset ($_SESSION['tipoFuncionario']) && $_SESSION['tipoFuncionario'] === 'Administrador') : ?>
+            <li class="menu-item <?= ($currentPage == 'funcionario') ? 'active' : ''; ?>">
+                <a href="funcionario.php"><i class="fas fa-user-tie"></i> <span>Colaboradores</span></a>
+            </li>
+         <?php endif; ?>
 
         <li class="menu-item <?= ($currentPage == 'estoque') ? 'active' : ''; ?>">
     

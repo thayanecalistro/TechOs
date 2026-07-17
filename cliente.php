@@ -190,6 +190,88 @@ $currentPage = 'cliente';
   </div>
 </div>
 
+<!--                     SUBTELA PARA VISUALIZAR INFORMAÇÕES       -->
+<div id="meuModalVisualizar" class="modal">
+  <div class="modal-conteudo">
+   <span class="botaoFecharVisualizar">&times;</span>
+    <h2>Dados do Cliente</h2>
+
+    <div class="linhaFormulario">
+        <div class="grupo-input">
+           <label for=""><strong>ID: </strong></label>
+           <span id="txtId"></span>
+        </div>
+        <div class="grupo-input">
+           <label for=""><strong>Nome: </strong></label>
+           <span id="txtNome"></span>
+        </div>
+
+      </div>
+
+       <div class="linhaFormulario">
+
+         <div class="grupo-input">
+           <label for=""><strong>Telefone: </strong></label>
+           <span id="txtTelefone"></span>
+         </div>
+
+         <div class="grupo-input">
+           <label for=""><strong>CPF: </strong></label>
+           <span id="txtCpf"></span>
+        </div>
+       </div>
+
+       <div class="linhaFormulario">
+
+         <div class="grupo-input">
+           <label for=""><strong>CEP: </strong></label>
+           <span id="txtCep"></span>
+         </div>
+
+         <div class="grupo-input">
+           <label for=""><strong>Endereço: </strong></label>
+           <span id="txtEndereco"></span>
+         </div>
+       </div>
+
+       <div class="linhaFormulario">
+
+         <div class="grupo-input">
+           <label for=""><strong>Número: </strong></label>
+           <span id="txtNumero"></span>
+         </div>
+
+         <div class="grupo-input">
+           <label for=""><strong>Complemento: </strong></label>
+           <span id="txtComplemento"></span>
+         </div>
+       </div>
+
+       <div class="linhaFormulario">
+
+          <div class="grupo-input">
+            <label for=""><strong>Bairro: </strong></label>
+            <span id="txtBairro"></span>
+          </div>
+
+          <div class="grupo-input">
+            <label for=""><strong>Cidade: </strong></label>
+            <span id="txtCidade"></span>
+          </div>
+       </div>
+
+       <div class="linhaFormulario">
+
+        <div class="grupo-input">
+          <label for=""><strong>Estado: </strong></label>
+          <span id="txtEstado"></span>
+        </div>
+
+       </div>
+
+  </div>
+</div>
+
    <script src="js/scriptCliente.js"></script>
 </body>
 </html>
