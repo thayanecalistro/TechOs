@@ -1,7 +1,6 @@
 <?php
 
 include("php/funcoes.php");
-
 $currentPage = 'orcamento';
 ?>
 
@@ -11,16 +10,13 @@ $currentPage = 'orcamento';
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>TechOS - Orçamentos</title>
-
     <link rel="stylesheet" href="css/style_geral.css"> 
     <link rel="stylesheet" href="css/style_orcamento.css"> 
 </head>
 <body>
-
     <?php include('sidebar.php'); ?>
 
-    <div class="page-content">
-        
+    <div class="page-content">       
         <div class="os-header">
             <div>
                 <h2>Controle de Orçamentos</h2>
@@ -42,10 +38,6 @@ $currentPage = 'orcamento';
         </fieldset>
 
         <div class="section-card">
-        <!--<div class="footer-actions">
-                <button type="button" class="btn btn-light-blue" onclick="window.location.reload();">Atualizar Tabela</button>
-            </div>-->
-
             <div class="table-container">
                 <table class="os-table" id="orcamentoTable">
                     <thead>
@@ -73,7 +65,6 @@ $currentPage = 'orcamento';
             <h3>Cadastrar Novo Orçamento</h3>
             <form id="formOrcamento" action="php/salvarOrcamento.php?opcao=I" method="POST">
                 <div class="form-grid">
-
                     <div class="form-group">
                         <label for="cliente_busca">Nome do Cliente *</label>
                         <input type="text" id="cliente_busca" list="listaClientes" required placeholder="Digite o nome do cliente..." autocomplete="off">
@@ -82,19 +73,16 @@ $currentPage = 'orcamento';
                             <?php echo comboClientes(); ?>
                         </datalist>
                     </div>
-
                     <div class="form-group">
                         <label for="Aparelho_idAparelho">Aparelho *</label>
                         <select id="Aparelho_idAparelho" name="Aparelho_idAparelho" required style="width: 100%; height: 35px; border-radius: 4px; background-color: #0c1f32; color: white; border: 1px solid #2cb1bc;">
                             <option value="">Selecione primeiro o cliente...</option>
                         </select>
                     </div>
-
                     <div class="form-group full-width">
                         <label for="diagnostico">Diagnóstico Técnico</label>
                         <textarea id="diagnostico" name="nDiagnostico" rows="2" placeholder="Avaliação técnica inicial..."></textarea>
                     </div>
-
                     <div class="form-group full-width" style="border: 1px dashed #2cb1bc; padding: 15px; border-radius: 4px;">
                         <label style="font-weight: bold; margin-bottom: 10px; display: block;">Peças Necessárias</label>
                         <div id="container-pecas">
@@ -111,11 +99,18 @@ $currentPage = 'orcamento';
 
                     <datalist id="listaPecasEstoque">
                         <?php
-                        include("php/conexao.php");
-                        // Seleciona peças que tenham quantidade maior que zero no estoque
-                        $resEstoque = mysqli_query($conn, "SELECT idEstoque, peca, valor FROM estoque WHERE quantidade > 0");
-                        while($reg = mysqli_fetch_assoc($resEstoque)){
-                            echo "<option value='".htmlspecialchars($reg['peca'], ENT_QUOTES)."' data-id='".$reg['idEstoque']."' data-valor='".$reg['valor']."'>";
+                        // Caso a variável $conn não esteja disponível, incluímos a conexão correta:
+                        if (!isset($conn)) {
+                            include("includes/conexao.php"); // Ajuste para "php/conexao.php" se a sua pasta for "php"
+                        }
+
+                        if (isset($conn) && $conn) {
+                            $resEstoque = mysqli_query($conn, "SELECT idEstoque, peca, valor FROM estoque WHERE quantidade > 0");
+                            if ($resEstoque) {
+                                while($reg = mysqli_fetch_assoc($resEstoque)){
+                                    echo "<option value='".htmlspecialchars($reg['peca'], ENT_QUOTES)."' data-id='".$reg['idEstoque']."' data-valor='".$reg['valor']."'>";
+                                }
+                            }
                         }
                         ?>
                     </datalist>
@@ -124,7 +119,6 @@ $currentPage = 'orcamento';
                         <label for="maoObra">Mão de Obra (R$)</label>
                         <input type="number" id="maoObra" name="nMaoObra" step="0.01" value="0.00">
                     </div>
-
                     <div class="form-group">
                         <label for="status">Status</label>
                         <select id="status" name="nStatus">
@@ -134,13 +128,11 @@ $currentPage = 'orcamento';
                             <option value="finalizado">Finalizado</option>-->
                         </select>
                     </div>
-
                     <div class="form-group">
                         <label for="valorTotal">Valor Total (R$)</label>
                         <input type="number" id="valorTotal" name="nTotal" step="0.01" value="0.00" readonly style="background-color: #0c1f32; font-weight: bold; color: #2cb1bc;">
                     </div>
                 </div>
-
                 <div class="modal-buttons">
                     <button type="submit" class="btn btn-sucesso">Salvar Orçamento</button>
                     <button type="button" class="btn btn-red" id="btnFecharModal">Cancelar</button>
@@ -148,12 +140,11 @@ $currentPage = 'orcamento';
             </form>
         </div>
     </div>
-
                     <!--MODAL DE STATUS-->
     <div class="modal-overlay" id="statusModal" style="display: none; position: fixed; top: 0; left: 0; width: 100%; height: 100%; background: rgba(0,0,0,0.6); justify-content: center; align-items: center; z-index: 9999;">
         <div class="modal-content" style="background: #0c1f32; padding: 20px; border-radius: 6px; width: 350px; border: 1px solid #2cb1bc; color: white;">
             <h3 style="margin-top: 0; color: #62b6cb;">Alterar Status do Orçamento</h3>
-            <form action="php/atualizarStatus.php" method="GET">
+            <form action="php/atualizarStatusOrcamento.php" method="GET">
                 <input type="hidden" id="statusIdOrcamento" name="id">
                 
                 <div class="form-group" style="margin: 20px 0;">
@@ -170,7 +161,6 @@ $currentPage = 'orcamento';
             </form>
         </div>
     </div>
-
                     <!--MODAL DE VISUALIZAÇÃO-->
     <div class="modal-overlay" id="detalhesModal" style="display: none; position: fixed; top: 0; left: 0; width: 100%; height: 100%; background: rgba(0,0,0,0.6); justify-content: center; align-items: center; z-index: 9998;">
         <div class="modal-content" style="background: #1a304a; padding: 25px; border-radius: 6px; width: 500px; border: 1px solid #2cb1bc; color: white;">
@@ -218,7 +208,7 @@ $currentPage = 'orcamento';
             </div>
         </div>
     </div>
-
+                    <!--MODAL DE CONFIRMAÇÃO DE EXCLUSÃO-->
     <div class="modal-overlay" id="confirmarExcluirModal" style="display: none; position: fixed; top: 0; left: 0; width: 100%; height: 100%; background: rgba(0,0,0,0.75); justify-content: center; align-items: center; z-index: 9999;">
         <div class="modal-content" style="background: #0c1f32; padding: 25px; border-radius: 6px; width: 380px; border: 1px solid #ff4d4d; color: white; text-align: center;">
             <h3 style="margin-top: 0; color: #ff4d4d;">Atenção!</h3>
@@ -232,7 +222,6 @@ $currentPage = 'orcamento';
             </div>
         </div>
     </div>
-
     <script src="js/orcamento.js"></script>
 </body>
 </html>

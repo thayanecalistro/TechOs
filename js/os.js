@@ -1,5 +1,5 @@
 document.addEventListener('DOMContentLoaded', () => {
-    const searchInput = document.getElementById('pesquisar');
+    const campoPesquisar = document.getElementById('pesquisar');
     const btnBuscar = document.getElementById('btnBuscar');
     const ordenarSelect = document.getElementById('ordenarSelect');
     const tableBody = document.querySelector('#osTable tbody');
@@ -20,23 +20,31 @@ document.addEventListener('DOMContentLoaded', () => {
     let orderAsc = true;
 
     // 1. Pesquisa por ID ou Nome (Filtra ao clicar no botão ou dar enter)
+
     function filtrarTabela() {
-        const query = searchInput.value.toLowerCase().trim();
-        const rows = tableBody.querySelectorAll('tr');
+        const termo = campoPesquisar.value.toLowerCase().trim();
+        const linhasTabela = document.querySelectorAll("#orcamentoTable tbody tr");
 
-        rows.forEach(row => {
-            const id = row.cells[0].textContent.toLowerCase();
-            const cliente = row.cells[3].textContent.toLowerCase();
+        linhasTabela.forEach(linha => {
+            // Ignora linhas que sejam de "Nenhum orçamento cadastrado"
+            if (linha.cells.length < 2) return; 
 
-            if (id.includes(query) || cliente.includes(query)) {
-                row.style.display = '';
+            // Pega o texto do ID (Coluna 1) e do Cliente (Coluna 2)
+            const idTexto = linha.cells[0] ? linha.cells[0].innerText.toLowerCase().trim() : "";
+            const clienteTexto = linha.cells[1] ? linha.cells[1].innerText.toLowerCase().trim() : "";
+            
+            // Se o termo estiver contido no ID ou no Nome do Cliente, exibe a linha
+            if (idTexto.includes(termo) || clienteTexto.includes(termo)) {
+                linha.style.display = "";
             } else {
-                row.style.display = 'none';
+                linha.style.display = "none";
             }
         });
     }
-    btnBuscar.addEventListener('click', filtrarTabela);
-    searchInput.addEventListener('keypress', (e) => { if(e.key === 'Enter') filtrarTabela(); });
+
+    // Filtra tanto ao digitar (tempo real) quanto ao clicar no botão "Buscar"
+    if (campoPesquisar) campoPesquisar.addEventListener("input", filtrarTabela);
+    if (btnBuscar) btnBuscar.addEventListener("click", filtrarTabela);
 
     // 2. Ordenação Alternada por ID ou Nome
     ordenarSelect.addEventListener('change', () => {
