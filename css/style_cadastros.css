@@ -1,5 +1,5 @@
 
-.btn-sucesso {
+/*.btn-sucesso {
     background-color: #28a745;
     color: white;
     border: none;
@@ -10,8 +10,24 @@
     font-size: 14px;
     transition: background 0.2s;
     color: white;
+}*/
+
+.btn-alterar,
+.btn-apagar,
+.btn-visualizar{
+  border: none;
+  border-radius: 15px;
 }
 
+.btn-alterar{
+  background-color: rgb(255, 255, 0);
+}
+.btn-apagar{
+    background-color: rgb(255, 0, 0);
+}
+.btn-visualizar{
+    background-color: #003cff;
+}
 #botaoSalvar{
     padding: 6px 18px;
     border: none;
@@ -23,7 +39,7 @@
     color: white;
 }
 
-.btn-sucesso:hover { background-color: #218838; }
+/*.btn-sucesso:hover { background-color: #218838; }*/
 
 .botaoFechar {
     position: absolute;
