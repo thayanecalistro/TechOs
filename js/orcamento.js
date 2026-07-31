@@ -472,7 +472,7 @@ document.addEventListener("DOMContentLoaded", function () {
             if (containerPecas) {
                 containerPecas.innerHTML = ""; // Limpa campos de peças anteriores
 
-                fetch('php/buscarPecasOrcamento.php?id=${idOrcamento}')
+                fetch(`php/buscarPecasOrcamento.php?id=${idOrcamento}`)
                     .then(response => response.json())
                     .then(pecas => {
                         if (pecas && pecas.length > 0) {

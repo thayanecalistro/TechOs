@@ -1,6 +1,10 @@
 <?php
-$currentPage = 'dashboard';
+session_start();
+ini_set('display_errors', 1);
+error_reporting(E_ALL);
 
+$currentPage = 'dashboard';
+include_once("php/funcoes.php");
 include("php/funcaoDashboard.php");
 
 

@@ -1,4 +1,12 @@
 <?php
+session_start();
+
+// BOA PRÁTICA: Se o usuário tentar acessar a tela sem estar logado, redireciona para o Login
+if (!isset($_SESSION['idFuncionario'])) {
+    header("Location: login.php");
+    exit();
+}
+
 include("php/funcoes.php");
 $currentPage = 'aparelho';
 ?>
@@ -130,6 +138,6 @@ $currentPage = 'aparelho';
         </div>
     </div>
     
-    <script src="js/aparelho.js?v=2"></script>
+    <script src="js/aparelho.js?v=3"></script>
 </body>
 </html>

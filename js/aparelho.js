@@ -1,18 +1,31 @@
 document.addEventListener("DOMContentLoaded", function() {
     
     // --- LÓGICA DO MODAL: NOVO APARELHO ---
-    const modalNovo = document.getElementById("modalAparelho");
+    const modalAparelho = document.getElementById("modalAparelho");
     const btnAbrirNovo = document.getElementById("btnAbrirNovo");
     const btnFecharNovo = document.getElementById("btnFecharNovo");
     const btnCancelarNovo = document.getElementById("btnCancelarNovo");
 
-    if (btnAbrirNovo && modalNovo) {
-        btnAbrirNovo.addEventListener("click", () => modalNovo.style.display = "flex");
+    if (btnAbrirNovo && modalAparelho) {
+        btnAbrirNovo.addEventListener("click", function () {
+            modalAparelho.style.display = "flex"; // Usa 'flex' para alinhar com o CSS
+        });
     }
     
-    const fecharModalNovo = () => { if (modalNovo) modalNovo.style.display = "none"; };
+    // 3. Eventos para fechar o modal
+    function fecharModalNovo() {
+        if (modalAparelho) modalAparelho.style.display = "none";
+    }
+
     if (btnFecharNovo) btnFecharNovo.addEventListener("click", fecharModalNovo);
     if (btnCancelarNovo) btnCancelarNovo.addEventListener("click", fecharModalNovo);
+
+    // Fechar ao clicar fora da caixa do modal
+    window.addEventListener("click", function (e) {
+        if (e.target === modalAparelho) {
+            fecharModalNovo();
+        }
+    });
 
     // --- LÓGICA DO MODAL: ALTERAR APARELHO ---
     const modalAlterar = document.getElementById("modalAlterarAparelho");

@@ -1,4 +1,6 @@
 <?php
+session_start();
+
 include("php/funcoes.php");
 
 $currentPage = 'funcionario';
@@ -66,7 +68,7 @@ $currentPage = 'funcionario';
    <span class="botaoFechar">&times;</span>
     <h2>Cadastro de Colaboradores</h2>
 
-     <form method="POST" action="php/salvarFuncionario.php?opcao=I">
+     <form method="POST" action="php/salvarFuncionario.php?opcao=I" enctype="multipart/form-data">
 
        <div class="linhaFormulario">
          <input type="text" placeholder="Nome do Colaborador" name="nNome" required>
@@ -120,6 +122,12 @@ $currentPage = 'funcionario';
            <input type="text" placeholder="Login" name="nLogin" required>
            <input type="text" placeholder="Senha" name="nSenha" required>
          </div>
+
+         <div class="form-group">
+           <label for="fotoFuncionario">Foto do Perfil:</label>
+           <input type="file" name="nFoto" class="form-control-file" accept="image/*">
+         </div>
+
        <div class="botaoContainer"> <input type="submit" value="Salvar" id="botaoSalvar" ></div>
 
      </form>
@@ -134,7 +142,7 @@ $currentPage = 'funcionario';
    <span class="botaoFecharAlterar">&times;</span>
     <h2>Cadastro de Colaboradores</h2>
 
-     <form method="POST" action="php/salvarFuncionario.php?opcao=U">
+     <form method="POST" action="php/salvarFuncionario.php?opcao=U" enctype="multipart/form-data">
        
      <input type="hidden" name="idFuncionario" id="alterarId">
 
@@ -237,6 +245,15 @@ $currentPage = 'funcionario';
              <input type="text" placeholder="Senha" name="nSenha" id="alterarSenha" required>
            </div>
          </div>
+
+         <!-- ADICIONADO: Campo para Foto do Perfil -->
+         <div class="linhaFormulario">
+           <div class="grupo-input">
+             <label for="">Foto do Perfil (opcional)</label>
+             <input type="file" name="nFoto" accept="image/*">
+           </div>
+         </div>
+
        <div class="botaoContainer"> <input type="submit" value="Salvar" id="botaoSalvar" ></div>
 
      </form>

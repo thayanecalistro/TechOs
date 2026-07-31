@@ -20,10 +20,28 @@ include("funcoes.php");
     $login= isset($_POST['nLogin']) ? $_POST['nLogin'] : '';
     $senha= isset($_POST['nSenha']) ? $_POST['nSenha'] : '';
 
+    // ==========================================
+    // TRATAMENTO DO UPLOAD DA FOTO (ADICIONADO)
+    // ==========================================
+    $caminhoFoto = null;
+    if (isset($_FILES['nFoto']) && $_FILES['nFoto']['error'] === UPLOAD_ERR_OK) {
+        $extensao = strtolower(pathinfo($_FILES['nFoto']['name'], PATHINFO_EXTENSION));
+        $novoNome = uniqid("func_") . "." . $extensao;
+        $pastaDestino = "../img/";
+
+        if (!is_dir($pastaDestino)) {
+            mkdir($pastaDestino, 0777, true);
+        }
+
+        if (move_uploaded_file($_FILES['nFoto']['tmp_name'], $pastaDestino . $novoNome)) {
+            $caminhoFoto = "img/" . $novoNome;
+        }
+    }
+
      if ($opcao == "I"){
 
-         $sql = "INSERT INTO funcionario (tipoFuncionario, nomeFuncionario, cpfFuncionario, emailFuncionario, telefoneFuncionario, cepFuncionario, enderecoFuncionario, numeroFuncionario, complementoFuncionario, bairroFuncionario, cidadeFuncionario, estadoFuncionario, login, senha)
-         VALUES ('$tipo', '$nome', '$cpf', '$email', '$telefone', '$cep',  '$endereco', '$numero', '$complemento', '$bairro', '$cidade', '$estado', '$login', '$senha');";
+         $sql = "INSERT INTO funcionario (tipoFuncionario, nomeFuncionario, cpfFuncionario, emailFuncionario, telefoneFuncionario, cepFuncionario, enderecoFuncionario, numeroFuncionario, complementoFuncionario, bairroFuncionario, cidadeFuncionario, estadoFuncionario, login, senha, foto)
+         VALUES ('$tipo', '$nome', '$cpf', '$email', '$telefone', '$cep',  '$endereco', '$numero', '$complemento', '$bairro', '$cidade', '$estado', '$login', '$senha', '$caminhoFoto');";
 
      } elseif ($opcao == "U"){
        
@@ -41,9 +59,14 @@ include("funcoes.php");
               cidadeFuncionario = '$cidade',
               estadoFuncionario = '$estado',
               login = '$login',
-              senha = '$senha'
-              WHERE idFuncionario = '$id'; 
-              ";
+              senha = '$senha'";
+
+        // Se o usuário selecionou uma NOVA foto ao alterar, atualiza a fotoFuncionario no banco
+        if ($caminhoFoto) {
+          $sql .= ", foto = '$caminhoFoto'";
+        }
+
+        $sql .=" WHERE idFuncionario = '$id';";
 
      } elseif ($opcao == "D") {
 

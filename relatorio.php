@@ -1,5 +1,6 @@
 <?php
 session_start();
+
 $currentPage = 'relatorios';
 require_once('php/funcoes_relatorio.php');
 
