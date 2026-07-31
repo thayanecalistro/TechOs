@@ -123,6 +123,13 @@
     color: #62b6cb;
 }
 
+/* Alinha os botões da tabela à direita e dá o espaçamento */
+.card-actions {
+    display: flex;
+    justify-content: flex-end;
+    margin-bottom: 15px;
+}
+
 /* Container da tabela fluído */
 .table-container {
     border: 1px solid #486581 !important;

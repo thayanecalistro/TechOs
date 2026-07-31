@@ -40,7 +40,9 @@ $currentPage = 'cliente';
 
       <div class="section-card"> 
 
-      <button type="button" class="btn btn-sucesso" id="botaoAbrir">Novo Cliente</button>
+      <div class="footer-actions">
+        <button type="button" class="btn btn-sucesso" id="botaoAbrir">Novo</button>
+      </div>
       
         <div class="table-container"> 
             <table  class="os-table" >

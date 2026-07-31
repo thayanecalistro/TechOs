@@ -43,7 +43,9 @@ $currentPage = 'funcionario';
       
       <div class="section-card">
 
-       <input type="submit" class="btn btn-sucesso" value="Novo Colaborador" id="botaoAbrir" >
+      <div class="footer-actions">
+            <button type="button" class="btn btn-sucesso" id="botaoAbrir">Novo</button>
+        </div>
 
       <div class="table-container"> 
             <table  class="os-table">

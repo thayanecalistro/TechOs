@@ -11,6 +11,20 @@ function calcularTotal() {
     }
 }
 
+function abrirModalEstoque() {
+    const modal = document.getElementById('modalEstoque');
+    if (modal) {
+        modal.style.display = 'flex';
+    }
+}
+
+function fecharModalEstoque() {
+    const modal = document.getElementById('modalEstoque');
+    if (modal) {
+        modal.style.display = 'none';
+        document.getElementById('formEstoque').reset(); // Limpa os campos ao fechar
+    }
+}
 // 2. Controla o preenchimento dos campos assincronamente
 document.addEventListener('DOMContentLoaded', function() {
     
@@ -54,4 +68,6 @@ document.addEventListener('DOMContentLoaded', function() {
             if(document.getElementById('total')) document.getElementById('total').value = "0.00";
         });
     }
+
+    
 });

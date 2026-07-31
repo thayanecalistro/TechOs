@@ -71,7 +71,7 @@ include("php/funcoes.php");
 
         <li class="menu-item <?= ($currentPage == 'estoque') ? 'active' : ''; ?>">
     
-            <a href="estoque.php"><i class="fas fa-boxes"></i> <span>Estoque</span></a>
+            <a href="novoEstoque.php"><i class="fas fa-boxes"></i> <span>Estoque</span></a>
         </li>
 
         <li class="menu-item <?= ($currentPage == 'relatorios') ? 'active' : ''; ?>">
