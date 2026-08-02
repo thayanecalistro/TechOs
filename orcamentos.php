@@ -1,4 +1,5 @@
 <?php
+session_start();
 
 include("php/funcoes.php");
 $currentPage = 'orcamento';
@@ -21,7 +22,6 @@ $currentPage = 'orcamento';
             <div>
                 <h2>Controle de Orçamentos</h2>
             </div>
-            <button type="button" class="btn btn-sucesso" id="btnNovoOrcamento">+ Novo</button>
         </div>
 
         <fieldset class="search-fieldset">
@@ -38,6 +38,12 @@ $currentPage = 'orcamento';
         </fieldset>
 
         <div class="section-card">
+
+        <div class="footer-actions">
+            <button type="button" class="btn btn-sucesso" id="btnNovoOrcamento">Novo</button>
+        </div>
+        
+
             <div class="table-container">
                 <table class="os-table" id="orcamentoTable">
                     <thead>

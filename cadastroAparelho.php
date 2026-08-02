@@ -1,4 +1,12 @@
 <?php
+session_start();
+
+// BOA PRÁTICA: Se o usuário tentar acessar a tela sem estar logado, redireciona para o Login
+if (!isset($_SESSION['idFuncionario'])) {
+    header("Location: login.php");
+    exit();
+}
+
 include("php/funcoes.php");
 $currentPage = 'aparelho';
 ?>
@@ -21,7 +29,6 @@ $currentPage = 'aparelho';
 
         <div class="header-table-section">
             <h2>Gerenciamento de Aparelhos</h2>
-            <button id="btnAbrirNovo" class="btn-novo">+ Novo</button>
         </div>
 
         <fieldset class="search-fieldset">
@@ -32,22 +39,29 @@ $currentPage = 'aparelho';
             </div>
         </fieldset>
 
-        <div class="table-container">
-            <table class="dashboard-table">
-                <thead>
-                    <tr>
-                        <th>ID</th>
-                        <th>Cliente</th>
-                        <th>Marca</th>
-                        <th>Modelo</th>
-                        <th>IMEI</th>
-                        <th>Ações</th>
-                    </tr>
-                </thead>
-                <tbody>
-                <?php echo listaAparelho(); ?> 
-                </tbody>
-            </table>
+        <div class="section-card">
+
+        <div class="footer-actions">
+            <button type="button" class="btn btn-sucesso" id="btnAbrirNovo">Novo</button>
+        </div>
+
+            <div class="table-container">
+                <table class="dashboard-table">
+                    <thead>
+                        <tr>
+                            <th>ID</th>
+                            <th>Cliente</th>
+                            <th>Marca</th>
+                            <th>Modelo</th>
+                            <th>IMEI</th>
+                            <th>Ações</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                    <?php echo listaAparelho(); ?> 
+                    </tbody>
+                </table>
+            </div>
         </div>
     </div>
 
@@ -130,6 +144,6 @@ $currentPage = 'aparelho';
         </div>
     </div>
     
-    <script src="js/aparelho.js?v=2"></script>
+    <script src="js/aparelho.js?v=3"></script>
 </body>
 </html>

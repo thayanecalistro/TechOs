@@ -76,7 +76,7 @@ function comboClientes() {
     // ATENÇÃO: Verifique se o caminho da conexão está correto. 
     // Se o arquivo de funções está na pasta "php/", o caminho correto geralmente é "conexao.php" 
     // ou "../includes/conexao.php". Ajuste conforme a estrutura das suas pastas.
-    include("conexao.php"); 
+    include("includes/conexao.php"); 
 
     if (!$conn) {
         return "<option value='Erro de Conexão'></option>";
