@@ -60,8 +60,7 @@ body.collapsed {
     color: #fff;
     font-size: 20px;
     cursor: pointer;
-    width: 100%;
-    text-align: right;
+    padding: 0 5px;
 }
 .sidebar.collapsed .btn-toggle-menu {
     text-align: center;
@@ -72,7 +71,7 @@ body.collapsed {
     display: flex;
     align-items: center;
     gap: 10px;
-    padding: 15px;
+    padding: 0;
 }
 .brand-icon {
     width: 35px;
@@ -207,8 +206,9 @@ body.collapsed {
 }
 
 /* Esconder textos e elementos extras quando colapsado */
-.sidebar.collapsed .sidebar-brand span,
+.sidebar.collapsed .sidebar-brand,
 .sidebar.collapsed .user-name,
+.sidebar.collapsed .sidebar-user .info,
 .sidebar.collapsed .menu-item a span,
 .sidebar.collapsed .menu-item .arrow,
 .sidebar.collapsed .menu-dropdown-toggle span,
@@ -216,6 +216,19 @@ body.collapsed {
 .sidebar.collapsed .submenu {
     display: none !important;
 }
+
+/* Quando recolhido, centraliza a header e força o botão a aparecer no topo */
+.sidebar.collapsed .sidebar-header {
+    justify-content: center !important;
+    padding: 15px 0 !important;
+}
+
+.sidebar.collapsed .btn-toggle-menu {
+    display: block !important;
+    text-align: center !important;
+    margin: 0 auto !important;
+}
+
 
 /* Ajustar margem dos ícones quando fechado para ficarem centralizados */
 .sidebar.collapsed .menu-item i,

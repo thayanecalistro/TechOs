@@ -3,7 +3,11 @@ if (session_status() === PHP_SESSION_NONE) {
     session_start();
 }
 
+<<<<<<< HEAD
 $idLogado = $_SESSION['idFuncionario'] ?? null;
+=======
+include("php/funcoes.php");
+>>>>>>> 93ec3f2cca87e227cfb4927644bce229abf9dc19
 ?>
 
 <link rel= "stylesheet" href="css/sidebar.css">
@@ -12,22 +16,19 @@ $idLogado = $_SESSION['idFuncionario'] ?? null;
 <div class="sidebar" id="mySidebar">
 
     <div class="sidebar-header">
-    <!--<div class="sidebar-brand" style="display: flex; align-items: center; gap: 10px; padding: 15px;">
+        <!-- LOGO E NOME (Agrupados para o CSS controlar juntos) -->
+        <div class="sidebar-brand">
             <div class="brand-icon">
-                <img src="img/techOs.png" alt="Logo TechOS" style="width: 35px !important; height: 35px !important; object-fit: contain !important; display: block;">
+                <img src="img/techOs.png" alt="Logo TechOS">
             </div>
-            <span style="font-size: 1.1rem; font-weight: bold; color: #62b6cb; white-space: nowrap;">TECH OS</span>
-        </div>-->
+            <span>TECH OS</span>
+        </div>
         
+        <!-- BOTÃO DAS TRÊS BARRINHAS -->
         <button class="btn-toggle-menu" onclick="toggleSidebar()">
             <i class="fas fa-bars"></i>
         </button>
     </div>
-
-    <div class="sidebar-brand" style="display: flex; align-items: center; gap: 10px; padding: 15px;">
-        <span style="font-size: 1.1rem; font-weight: bold; color: #62b6cb; white-space: nowrap;">Administrador </span>
-    </div>
-    
 
     <div class="sidebar-user">
     <div class="image">
