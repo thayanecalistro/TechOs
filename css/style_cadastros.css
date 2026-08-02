@@ -24,7 +24,6 @@
 .btn-visualizar{
     border: none;
     border-radius: 4px;
-    color: #ffffff;
     cursor: pointer;
     padding: 6px 12px;
     font-size: 12px;
@@ -32,25 +31,27 @@
     margin-right: 4px;
     transition: all 0.2s ease-in-out;
     display: inline-block;
+    font-weight: bold;
+    color:black;
 }
 
 .btn-alterar{
   background-color: #f0ad4e;
-  color: #ffffff;
+  color:black;
 }
 .btn-alterar:hover {
     background-color: #ec971f;
 }
 .btn-apagar{
     background-color: #d9534f;
-    color: #ffffff;
+    color: black;
 }
 .btn-apagar:hover {
     background-color: #c9302c;
 }
 .btn-visualizar{
     background-color: #0275d8;
-    color: #ffffff;
+    color: black;
 }
 .btn-visualizar:hover {
     background-color: #025aa5;

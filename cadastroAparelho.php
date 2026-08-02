@@ -1,7 +1,6 @@
 <?php
 session_start();
 
-// BOA PRÁTICA: Se o usuário tentar acessar a tela sem estar logado, redireciona para o Login
 if (!isset($_SESSION['idFuncionario'])) {
     header("Location: login.php");
     exit();
@@ -9,6 +8,9 @@ if (!isset($_SESSION['idFuncionario'])) {
 
 include("php/funcoes.php");
 $currentPage = 'aparelho';
+
+// Pega o termo pesquisado via formulário/GET
+$termoPesquisado = $_GET['pesquisar'] ?? null;
 ?>
 
 <!DOCTYPE html>
@@ -33,17 +35,17 @@ $currentPage = 'aparelho';
 
         <fieldset class="search-fieldset">
             <legend>Pesquisar</legend>
-            <div class="search-box"> 
-                <input type="text" id="pesquisar" name="pesquisar" placeholder="ID ou Nome...">
-                <button type="button" class="btn btn-blue" id="btnBuscar">Buscar</button>             
-            </div>
+            <form method="GET" action="cadastroAparelho.php" class="search-box"> 
+                <input type="text" id="pesquisar" name="pesquisar" placeholder="ID ou Nome..." value="<?php echo htmlspecialchars($termoPesquisado ?? ''); ?>">
+                <button type="submit" class="btn btn-blue" id="btnBuscar">Buscar</button>
+            </form>
         </fieldset>
 
         <div class="section-card">
 
-        <div class="footer-actions">
-            <button type="button" class="btn btn-sucesso" id="btnAbrirNovo">Novo</button>
-        </div>
+            <div class="footer-actions">
+                <button type="button" class="btn btn-sucesso" id="btnAbrirNovo">Novo</button>
+            </div>
 
             <div class="table-container">
                 <table class="dashboard-table">
@@ -58,45 +60,47 @@ $currentPage = 'aparelho';
                         </tr>
                     </thead>
                     <tbody>
-                    <?php echo listaAparelho(); ?> 
+                        <?php echo listaAparelho($termoPesquisado); ?> 
                     </tbody>
                 </table>
             </div>
         </div>
     </div>
 
+    <!-- MODAL: CADASTRAR -->
     <div id="modalAparelho" class="modal">
         <div class="modal-conteudo">
             <span id="btnFecharNovo" class="botaoFechar">&times;</span>
             <h3>Cadastrar Novo Aparelho</h3>
 
             <form action="php/salvarAparelho.php?opcao=I" method="POST" class="modal-form">
-                <label>Nome:</label> <!---->
+                <label>Cliente:</label>
                 <select name="nCliente" required>
                     <option value="">Selecione o Cliente</option>
                     <?php echo listaOpcoesClientes(); ?>
                 </select>
 
-                <label>Marca:</label> <!---->
+                <label>Marca:</label>
                 <select name="nMarca" required>
                     <option value="">Selecione a Marca</option>
                     <?php echo listaOpcoesMarcas(); ?>
                 </select>
 
-                <label>Modelo:</label> <!---->
+                <label>Modelo:</label>
                 <input type="text" name="nModelo" placeholder="Digite o nome do modelo" required>
 
-                <label>IMEI:</label> <!---->
+                <label>IMEI:</label>
                 <input type="text" name="nImei" placeholder="Somente números" required>
 
                 <div class="form-actions">
-                    <button type="button" id="btnCancelarNovo" class="btn-perigo">Cancelar</button>
+                    <button type="button" id="btnCancelarNovo" class="btn-novo" style="background-color: #6c757d;">Cancelar</button>
                     <button type="submit" class="btn-sucesso">Cadastrar</button>
                 </div>
             </form>
         </div>
     </div>
 
+    <!-- MODAL: ALTERAR -->
     <div id="modalAlterarAparelho" class="modal">
         <div class="modal-conteudo">
             <span id="btnFecharModalAlterar" class="botaoFechar">&times;</span>
@@ -105,32 +109,33 @@ $currentPage = 'aparelho';
             <form id="formAlterar" method="POST" class="modal-form">
                 <input type="hidden" name="idAparelho" id="alt_id">
                 
-                <label>Nome:</label> <!---->
+                <label>Cliente:</label>
                 <select name="nCliente" id="alt_cliente" required>
                     <option value="">Selecione o Cliente</option>
                     <?php echo listaOpcoesClientes(); ?>
                 </select>
 
-                <label>Marca:</label> <!---->
+                <label>Marca:</label>
                 <select name="nMarca" id="alt_marca" required>
                     <option value="">Selecione a Marca</option>
                     <?php echo listaOpcoesMarcas(); ?>
                 </select>
 
-                <label>Modelo:</label> <!---->
+                <label>Modelo:</label>
                 <input type="text" name="nModelo" id="alt_modelo" placeholder="Digite o nome do modelo" required>
 
-                <label>IMEI:</label> <!---->
-                <input type="number" name="nImei" id="alt_imei" required>
+                <label>IMEI:</label>
+                <input type="text" name="nImei" id="alt_imei" required>
 
                 <div class="form-actions">
-                    <button type="button" id="btnCancelarAlterar" class="btn-perigo">Fechar</button>
+                    <button type="button" id="btnCancelarAlterar" class="btn-novo" style="background-color: #6c757d;">Cancelar</button>
                     <button type="submit" class="btn-sucesso">Salvar Alterações</button>
                 </div>
             </form>
         </div>
     </div>
 
+    <!-- MODAL: EXCLUIR -->
     <div id="modalExcluirAparelho" class="modal">
         <div class="modal-conteudo" style="text-align: center; width: 350px;">
             <span id="btnFecharModalExcluir" class="botaoFechar">&times;</span>
@@ -144,6 +149,6 @@ $currentPage = 'aparelho';
         </div>
     </div>
     
-    <script src="js/aparelho.js?v=3"></script>
+    <script src="js/aparelho.js?v=4"></script>
 </body>
 </html>

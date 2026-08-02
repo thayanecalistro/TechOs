@@ -1,13 +1,12 @@
 <?php
 
     $opcao = $_GET['opcao'] ?? null;
-    $id = $_POST['idAparelho'] ?? $_GET['id'] ?? null; // Ajustado para pegar do formulário de Alterar também
-    $cliente = $_POST['nCliente'] ?? null;
+    $id = $_POST['idAparelho'] ?? $_GET['id'] ?? null; 
     $marca = $_POST['nMarca'] ?? null;
     $modeloNome = $_POST['nModelo'] ?? null;
     $imei = $_POST['nImei'] ?? null;
     
-    include("includes/conexao.php"); 
+    include("../includes/conexao.php"); 
 
     $idModelo = null;
 
@@ -22,18 +21,16 @@
             $row = mysqli_fetch_assoc($resCheck);
             $idModelo = $row['idModelo'];
         } else {
-            // Se o modelo não existir, tenta inserir baseado na estrutura da tabela modelo
             $sqlInsModelo = "INSERT INTO modelo (nomeModelo, Marca_idMarca) VALUES ('$modeloNomeClean', $marcaClean)";
             mysqli_query($conn, $sqlInsModelo);
             $idModelo = mysqli_insert_id($conn);
         }
     }
 
-    $sql = "";
-
     $cliente = intval($cliente);
     $idModelo = intval($idModelo);
     $id = intval($id);
+    $sql = "";
 
     if($opcao == 'I'){
         $sql = "INSERT INTO aparelho(Cliente_idCliente, Modelo_idModelo, imeiAparelho, historicoAparelho)

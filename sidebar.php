@@ -3,11 +3,7 @@ if (session_status() === PHP_SESSION_NONE) {
     session_start();
 }
 
-<<<<<<< HEAD
 $idLogado = $_SESSION['idFuncionario'] ?? null;
-=======
-include("php/funcoes.php");
->>>>>>> 93ec3f2cca87e227cfb4927644bce229abf9dc19
 ?>
 
 <link rel= "stylesheet" href="css/sidebar.css">
