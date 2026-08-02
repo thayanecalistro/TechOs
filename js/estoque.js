@@ -69,5 +69,17 @@ document.addEventListener('DOMContentLoaded', function() {
         });
     }
 
+    // Ativa a tecla ENTER no campo de pesquisa
+    document.addEventListener('DOMContentLoaded', function() {
+        const inputPesquisar = document.getElementById('pesquisar');
+        if (inputPesquisar) {
+            inputPesquisar.addEventListener('keypress', function(e) {
+                if (e.key === 'Enter') {
+                    e.preventDefault();
+                    document.getElementById('formBusca').submit();
+                }
+            });
+        }
+    });
     
 });

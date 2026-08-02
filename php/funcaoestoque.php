@@ -100,4 +100,6 @@ function listarProdutosEstoque($conn, $pesquisa = '') {
 
     return $html;
 }
+
+
 ?>

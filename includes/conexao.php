@@ -1,6 +1,6 @@
 <?php
 //CONECTAR AO BANCO
-    $conn = mysqli_connect("localhost:3307",
+    $conn = mysqli_connect("localhost",
                            "root",
                            "",
                            "techos");
