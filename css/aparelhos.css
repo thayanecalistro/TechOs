@@ -80,7 +80,9 @@
     border-radius: 3px;
     font-weight: bold; 
     cursor: pointer; }
-
+.btn-perigo{
+    background-color: #dc3545;
+}
 .btn-alterar { 
     background-color: #ffc107; 
     color: #000; 

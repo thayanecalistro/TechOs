@@ -135,7 +135,7 @@ $busca = isset($_GET['busca']) ? $_GET['busca'] : '';
 
          <div class="linhaFormulario">
            <input type="text" placeholder="Login" name="nLogin" required>
-           <input type="text" placeholder="Senha" name="nSenha" required>
+           <input type="password" placeholder="Senha" name="nSenha" required>
          </div>
        <div class="botaoContainer"> <input type="submit" value="Salvar" id="botaoSalvar" ></div>
 
@@ -258,7 +258,7 @@ $busca = isset($_GET['busca']) ? $_GET['busca'] : '';
 
            <div class="grupo-input">
              <label for="">Senha</label>
-             <input type="text" placeholder="Senha" name="nSenha" id="alterarSenha" required>
+             <input type="password" placeholder="Senha" name="nSenha" id="alterarSenha" required>
            </div>
          </div>
        <div class="botaoContainer"> <input type="submit" value="Salvar" id="botaoSalvar" ></div>
