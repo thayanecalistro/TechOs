@@ -1,0 +1,292 @@
+
+/*.btn-sucesso {
+    background-color: #28a745;
+    color: white;
+    border: none;
+    padding: 10px 15px;
+    border-radius: 4px;
+    cursor: pointer;
+    font-weight: bold;
+    font-size: 14px;
+    transition: background 0.2s;
+    color: white;
+}*/
+
+.action-header {
+    display: flex;
+    justify-content: flex-end;
+    margin-bottom: 15px;
+    width: 100%;
+}
+
+.btn-alterar,
+.btn-apagar,
+.btn-visualizar{
+    border: none;
+    border-radius: 4px;
+    color: #ffffff;
+    cursor: pointer;
+    padding: 6px 12px;
+    font-size: 12px;
+    font-weight: 600;
+    margin-right: 4px;
+    transition: all 0.2s ease-in-out;
+    display: inline-block;
+}
+
+.btn-alterar{
+  background-color: #f0ad4e;
+  color: #ffffff;
+}
+.btn-alterar:hover {
+    background-color: #ec971f;
+}
+.btn-apagar{
+    background-color: #d9534f;
+    color: #ffffff;
+}
+.btn-apagar:hover {
+    background-color: #c9302c;
+}
+.btn-visualizar{
+    background-color: #0275d8;
+    color: #ffffff;
+}
+.btn-visualizar:hover {
+    background-color: #025aa5;
+}
+#botaoSalvar{
+    padding: 6px 18px;
+    border: none;
+    border-radius: 3px;
+    cursor: pointer;
+    font-size: 14px;
+    transition: background 0.2s;
+    background-color: #28a745;
+    color: white;
+}
+
+/*.btn-sucesso:hover { background-color: #218838; }*/
+
+.botaoFechar {
+    position: absolute;
+    right: 15px;
+    top: 10px;
+    font-size: 24px;
+    cursor: pointer;
+    color: #aaa;
+}
+
+.botaoFechar:hover{
+    color: black;
+}
+
+.botaoFecharAlterar{
+    position: absolute;
+    right: 15px;
+    top: 10px;
+    font-size: 24px;
+    cursor: pointer;
+    color: #aaa;
+}
+
+.botaoFecharAlterar:hover{
+    color: black;
+}
+
+.botaoFecharVisualizar{
+  position: absolute;
+    right: 15px;
+    top: 10px;
+    font-size: 24px;
+    cursor: pointer;
+    color: #aaa;
+}
+
+.botaoFecharVisualizar:hover{
+    color: black;
+}
+
+.botaoContainer{
+    display: flex;
+    justify-content: flex-end;
+    width: 100%;
+    margin-bottom: 15px;
+}
+                                                  /*  SUBTELA  */
+.modal{
+    display: none;
+    position: fixed;
+    z-index: 1000;
+    left: 0;
+    top: 0;
+    width: 100%;
+    height: 100%;
+    background-color: rgba(0, 0, 0, 0.6);
+    backdrop-filter: blur(3px);
+    align-items: center;
+    justify-content: center;
+}
+
+.modal[style*="display: block"],
+.modal[style*="display: flex"]{
+    display: flex !important;
+}
+
+.modal-conteudo {
+    background-color: #1a304a;
+    padding: 25px;
+    border-radius: 8px;
+    width: 90%;
+    max-width: 750px;
+    position: relative;
+    box-shadow: 0px 4px 8px rgba(0, 0, 0, 0.2);
+    color: white;
+    /*garante que a subtela não ultrapasse a tela e cria uma rolagem quando se é necessário */
+    max-height: 90vh;
+    overflow-y: auto;
+    -webkit-overflow-scrolling: touch;
+}
+
+                                             /*FORMULARIO*/
+
+#meuModalAlterar .linhaFormulario{
+    display: flex;
+    gap: 15px;
+    margin-bottom: 15px;
+}
+                       
+#meuModalAlterar .linhaFormulario > div, 
+#meuModalAlterar .grupo-input{
+    display: flex;
+    flex-direction: column;
+    flex: 1;
+}
+
+#meuModalAlterar label{
+    margin-top: 0;
+    font-size: 14px;
+    font-weight: bold;
+    color: #a0aec0
+}
+
+.modal-conteudo form{
+  width: 100%;
+}
+
+form {
+    display: flex;
+    flex-direction: column;
+}
+
+label{
+    margin-top: 10px;
+}
+
+input {
+    padding: 10px;
+    margin-top: 5px;
+    border: 1px solid #ccc;
+    border-radius: 4px;
+    box-sizing: border-box;
+}
+
+.linhaFormulario {
+    display: flex;
+    gap: 20px;
+    width: 100%;
+    margin-bottom: 15px;
+}
+
+.linhaFormulario input {
+   flex: 1;
+}
+
+.linhaFormulario input,
+.linhaFormulario select, 
+.linhaFormulario .grupo-input{
+    flex: 1;
+    width: 100%;
+}
+
+.linhaFormulario select {
+    padding: 10px;
+    margin-top: 5px;
+    border: 1px solid #ccc;
+    border-radius: 4px;
+    box-sizing: border-box;
+    font-size: 14px;
+    height: 40px;
+    background-color: #1a304a;
+    color: white;
+}
+.linhaFormulario select:focus{
+    outline: none;
+    border-color: #62b6cb;
+}
+
+                                        /*TABELA*/
+
+.tabelas{
+    width: 100%;
+    border-collapse: collapse;
+    text-align: left; 
+    color: #ffffff;
+}
+
+
+
+.tela-fundo{
+    background-color: #091018;
+    border-radius: 6px;
+    padding: 30px;
+    box-shadow: 0 4px 6px rgba(0, 0, 0, 0.15);
+}
+
+.tela-fundo h3{
+    margin: 0 0 15px 0;
+    font-size: 1.1rem;
+    color: #62b6cb;
+}
+
+.tabelas th{
+    background-color: #334e68;
+    color: #ffffff;
+    padding: 12px;
+    font-weight: 500;
+    border-bottom: 2px solid #486581;
+
+}
+
+.tabelas td{
+    padding: 12px;
+    border-bottom: 1px solid #243b53;
+    background-color: #1a304a; 
+    color: #e2e8f0;
+}
+
+.tabelas tbody tr:nth-of-type(even){
+    background-color: #243b53;
+    cursor: pointer;
+}
+
+.tabelas tbody tr{
+    border-bottom:1px solid #486581; /*Adiciona uma linha fina em cada linha*/
+}
+
+.tabelas tbody tr:hover{
+    background-color: #00000010; /*Adiciona o efeito que ao passar o mouse por cima da linha, a mesma muda de cor e o cursor de formato */
+    cursor: pointer;
+}
+
+.tabelas tbody tr:nth-child(odd) td {
+    background-color: #3b4f66;
+    color: #ffffff;
+}
+
+.tabelas tbody tr:nth-child(even) td {
+    background-color: #fffbc8;
+    color: #333333;
+}
+
+

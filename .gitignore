@@ -1,0 +1,6 @@
+# Ignorar arquivos de configuração local do sistema
+.DS_Store
+Thumbs.db
+
+# Se usarem alguma ferramenta de ambiente virtual ou senhas locais
+config.local.php

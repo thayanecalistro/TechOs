@@ -1,0 +1,256 @@
+/* ==========================================================================
+   CONFIGURAÇÕES GLOBAIS E INTEGRAÇÃO DE COMPORTAMENTO
+   ========================================================================== */
+
+.os-header {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    border-bottom: 1px solid #486581;
+    padding-bottom: 10px;
+    margin-bottom: 25px;
+    width: 100%;
+}
+
+.os-header h2 {
+    font-size: 1.8rem;
+    color: #62b6cb;
+    margin: 0;
+}
+
+/* ==========================================================================
+   BOTÕES PERSONALIZADOS DO ECOSSISTEMA
+   ========================================================================== */
+.btn-novo {
+    background-color: #28a745;
+    color: white;
+    border: none;
+    padding: 10px 18px;
+    border-radius: 4px;
+    cursor: pointer;
+    font-weight: bold;
+    font-size: 14px;
+    transition: background 0.2s;
+}
+.btn-novo:hover { background-color: #218838; }
+
+.btn-blue {
+    background-color: #486581;
+    color: white;
+    border: none;
+    padding: 6px 18px;
+    border-radius: 4px;
+    cursor: pointer;
+    font-size: 14px;
+    height: 34px;
+    font-weight: 500;
+}
+.btn-blue:hover { background-color: #627d98; }
+
+.btn-limpar {
+    background-color: #334e68;
+    color: #e2e8f0;
+    padding: 6px 18px;
+    border-radius: 4px;
+    text-decoration: none;
+    font-size: 14px;
+    height: 34px;
+    display: inline-flex;
+    align-items: center;
+    transition: background 0.2s;
+}
+.btn-limpar:hover { background-color: #2b425a; color: white; }
+
+/* ==========================================================================
+   BARRA DE PESQUISA ALINHADA
+   ========================================================================== */
+.table-section {
+    width: 100%;
+    display: flex;
+    flex-direction: column;
+    gap: 15px;
+}
+
+.search-fieldset {
+    border: 1px solid #334e68;
+    border-radius: 4px;
+    padding: 15px;
+    margin-bottom: 5px;
+    width: 100%;
+}
+
+.search-fieldset legend {
+    padding: 0 10px;
+    font-size: 14px;
+    color: #9fb3c8;
+    width: auto;
+    float: none;
+}
+
+.input-pesquisa {
+    background-color: #102a43;
+    border: 1px solid #334e68;
+    color: white;
+    padding: 6px 12px;
+    border-radius: 4px;
+    width: 280px;
+    outline: none;
+    height: 34px;
+}
+.input-pesquisa::placeholder { color: #9fb3c8; }
+
+/* ==========================================================================
+   TABELA ESTILO DASHBOARD TECHOS
+   ========================================================================== */
+.table-card-fundo {
+    background-color: #1a304a;
+    border-radius: 6px;
+    padding: 20px;
+    box-shadow: 0 4px 15px rgba(0, 0, 0, 0.3);
+    border: 1px solid #334e68;
+    width: 100%;
+}
+
+.table-container {
+    width: 100%;
+    overflow-x: auto;
+}
+
+.dashboard-table {
+    width: 100%;
+    border-collapse: collapse;
+    text-align: left;
+    font-size: 13px;
+}
+
+.dashboard-table th {
+    background-color: #334e68;
+    color: #ffffff;
+    padding: 12px;
+    font-weight: 500;
+    border-bottom: 2px solid #486581;
+}
+
+.dashboard-table td {
+    padding: 12px;
+    border-bottom: 1px solid #243b53;
+    color: #e2e8f0;
+    background-color: transparent !important;
+}
+
+.dashboard-table tbody tr:hover td {
+    background-color: #243b53 !important;
+}
+
+.col-total-destaque {
+    color: #2cb1bc !important;
+    font-weight: 600;
+}
+
+.sem-dados {
+    text-align: center;
+    padding: 25px !important;
+    color: #9fb3c8;
+    font-style: italic;
+}
+
+/* Links e Ações */
+.acao-editar {
+    color: #f1c40f;
+    background: none;
+    border: none;
+    font-weight: 600;
+    margin-right: 12px;
+    cursor: pointer;
+}
+.acao-editar:hover { text-decoration: underline; }
+
+.acao-excluir {
+    color: #ff6b6b;
+    text-decoration: none;
+    font-weight: 600;
+    cursor: pointer;
+}
+.acao-excluir:hover { text-decoration: underline; color: #ff4a4a; }
+
+/* ==========================================================================
+   MODAL PERSONALIZADO SINTONIZADO
+   ========================================================================== */
+.modal-content {
+    background-color: #1a304a !important;
+    border: 1px solid #334e68 !important;
+    border-radius: 8px !important;
+    color: white !important;
+    max-width: 700px !important; /* Modal mais largo para caber o formulário de forma organizada */
+    width: 95% !important;
+    text-align: left !important;
+}
+
+.modal-header {
+    border-bottom: 1px solid #334e68 !important;
+    padding: 18px 20px !important;
+}
+
+.modal-title {
+    color: #62b6cb !important;
+    font-size: 1.2rem !important;
+    font-weight: bold;
+}
+
+.modal-footer {
+    border-top: 1px solid #334e68 !important;
+    padding: 15px 20px !important;
+}
+
+.linhaFormulario {
+    display: flex;
+    gap: 15px;
+    margin-bottom: 14px;
+}
+
+.input-grupo {
+    display: flex;
+    flex-direction: column;
+    flex: 1;
+}
+
+.form-label {
+    font-size: 0.85rem;
+    color: #9fb3c8;
+    margin-bottom: 5px;
+}
+
+.linhaFormulario input {
+    background-color: #102a43 !important;
+    border: 1px solid #334e68 !important;
+    color: white !important;
+    padding: 8px 12px;
+    border-radius: 4px;
+    outline: none;
+}
+.linhaFormulario input:focus {
+    border-color: #62b6cb !important;
+    box-shadow: 0 0 0 2px rgba(98, 182, 203, 0.2) !important;
+}
+
+.btn-principal {
+    background-color: #28a745;
+    color: white;
+    border: none;
+    padding: 8px 20px;
+    border-radius: 4px;
+    font-weight: bold;
+    cursor: pointer;
+}
+.btn-principal:hover { background-color: #218838; }
+
+.btn-secundario {
+    background-color: #486581;
+    color: white;
+    border: none;
+    padding: 8px 20px;
+    border-radius: 4px;
+    font-weight: 500;
+    cursor: pointer;
+}
+.btn-secundario:hover { background-color: #627d98; }
