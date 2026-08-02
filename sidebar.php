@@ -2,10 +2,11 @@
 if (session_status() === PHP_SESSION_NONE) {
     session_start();
 }
+
+$idLogado = $_SESSION['idFuncionario'] ?? null;
 ?>
 
 <link rel= "stylesheet" href="css/sidebar.css">
-
 <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
 
 <div class="sidebar" id="mySidebar">
@@ -29,13 +30,13 @@ if (session_status() === PHP_SESSION_NONE) {
     
 
     <div class="sidebar-user">
-        <div class="image">
-          <img src="  echo foto($_SESSION['idFuncionario']); ?>" alt="Avatar" class="user-avatar">
-        </div>
-        <div class="info">
-          <a href="#" class="d-block">  echo nomeFuncionario($_SESSION['idFuncionario']); ?></a>
-        </div>
+    <div class="image">
+        <img src="<?= foto($idLogado); ?>" alt="Avatar" class="user-avatar">
     </div>
+    <div class="info">
+        <a href="#" class="d-block"><?= nomeFuncionario($idLogado); ?></a>
+    </div>
+</div>
 
     <ul class="sidebar-menu">
         <li class="menu-item <?= ($currentPage == 'dashboard') ? 'active' : ''; ?>">

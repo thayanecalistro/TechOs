@@ -27,9 +27,8 @@
 
     //trato o retorno
     if(mysqli_num_rows($result) > 0){
-        $contador = 1; // Criamos um contador começando em 1
+        $contador = 1;
         foreach($result as $coluna){
-      // Modifique a linha do link Alterar para ficar assim:
 
         $html .= "<tr>                         
                           <td>".$coluna['idFuncionario']."</td>
@@ -91,4 +90,6 @@
 
         return $html;
     }
+
+
     ?>

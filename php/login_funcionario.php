@@ -6,13 +6,13 @@ $login = $_POST["nLogin"];
 $senha = $_POST["nSenha"];
 //comando sql
 
-$sql = "SELECT idFuncionario, tipoFuncionario, nomeFuncionario FROM funcionario
+include ("../includes/conexao.php");
+
+$sql = "SELECT idFuncionario, tipoFuncionario, nomeFuncionario, fotoFuncionario FROM funcionario
         WHERE login = '$login'
         AND senha = '$senha'
         LIMIT 1;";
 
-
-include ("../includes/conexao.php");
 
 $resultado= mysqli_query($conn, $sql); 
 
@@ -23,6 +23,7 @@ if ($resultado){
       $_SESSION['idFuncionario'] = $coluna ['idFuncionario'];
       $_SESSION['tipoFuncionario'] = $coluna ['tipoFuncionario'];
       $_SESSION['nomeFuncionario'] = $coluna ['nomeFuncionario'];
+      $_SESSION['fotoFuncionario'] = $coluna['fotoFuncionario'];
       
       mysqli_close($conn);
 

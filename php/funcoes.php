@@ -38,3 +38,50 @@ function listaAparelhosGeral(){
     return $html;
 }
 
+function foto($id = null) {
+    if (session_status() === PHP_SESSION_NONE) {
+        session_start();
+    }
+
+    $caminhoPadrao = "img/usuarios/padrao.png";
+    $nomeFoto = "";
+
+    // 1. Tenta pegar a foto da Session se for o usuário logado
+    if ($id === null || (isset($_SESSION['idFuncionario']) && $_SESSION['idFuncionario'] == $id)) {
+        if (!empty($_SESSION['fotoFuncionario'])) {
+            $nomeFoto = $_SESSION['fotoFuncionario'];
+        }
+    }
+
+    // 2. Se não encontrou na Session e temos um ID, busca no banco de dados
+    if (empty($nomeFoto) && !empty($id)) {
+        include("includes/conexao.php");
+        if (isset($conn)) {
+            $idLimpo = mysqli_real_escape_string($conn, $id);
+            $query = "SELECT fotoFuncionario FROM funcionario WHERE idFuncionario = '$idLimpo' LIMIT 1";
+            $res = mysqli_query($conn, $query);
+            if ($res && $row = mysqli_fetch_assoc($res)) {
+                $nomeFoto = $row['fotoFuncionario'];
+            }
+        }
+    }
+
+    // 3. Monta o caminho e valida se o arquivo existe na pasta
+    if (!empty($nomeFoto)) {
+        $caminhoFoto = "img/usuarios/" . $nomeFoto;
+        if (file_exists($caminhoFoto)) {
+            return $caminhoFoto . "?v=" . time(); // Previne cache do navegador
+        }
+    }
+
+    return $caminhoPadrao;
+}
+
+function nomeFuncionario($id = null) {
+    if (session_status() === PHP_SESSION_NONE) {
+        session_start();
+    }
+
+    return $_SESSION['nomeFuncionario'] ?? "Colaborador";
+}
+?>

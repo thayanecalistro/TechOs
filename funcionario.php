@@ -76,7 +76,14 @@ $busca = isset($_GET['busca']) ? $_GET['busca'] : '';
    <span class="botaoFechar">&times;</span>
     <h2>Cadastro de Colaboradores</h2>
 
-     <form method="POST" action="php/salvarFuncionario.php?opcao=I">
+     <form method="POST" action="php/salvarFuncionario.php?opcao=I" enctype="multipart/form-data">
+
+       <div class="linhaFormulario">
+        <div class="grupo-input">
+         <label for="nFoto">Foto de Perfil: </label>
+         <input type="file" name="nFoto" id="nFoto" accept="image/*">
+        </div> 
+       </div>
 
        <div class="linhaFormulario">
          <input type="text" placeholder="Nome do Colaborador" name="nNome" required>
@@ -144,9 +151,16 @@ $busca = isset($_GET['busca']) ? $_GET['busca'] : '';
    <span class="botaoFecharAlterar">&times;</span>
     <h2>Cadastro de Colaboradores</h2>
 
-     <form method="POST" action="php/salvarFuncionario.php?opcao=U">
+     <form method="POST" action="php/salvarFuncionario.php?opcao=U" enctype="multipart/form-data">
        
      <input type="hidden" name="idFuncionario" id="alterarId">
+
+     <div class="linhaFormulario">
+        <div class="grupo-input">
+         <label for="nFoto">Foto de Perfil: </label>
+         <input type="file" name="nFoto" id="alterarFoto" accept="image/*">
+        </div> 
+       </div>
 
      <div class="linhaFormulario">
           <div class="grupo-input">

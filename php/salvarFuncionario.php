@@ -1,6 +1,11 @@
 <?php
 
 include("funcoes.php"); 
+include("../includes/conexao.php");
+
+if (session_status() === PHP_SESSION_NONE) {
+    session_start();
+}
 
     $opcao= $_GET['opcao'];
 
@@ -19,15 +24,66 @@ include("funcoes.php");
     $estado= isset($_POST['nEstado']) ? $_POST['nEstado'] : '';
     $login= isset($_POST['nLogin']) ? $_POST['nLogin'] : '';
     $senha= isset($_POST['nSenha']) ? $_POST['nSenha'] : '';
+    $novaFoto = false;
+    $nomeFoto = "padrao.png";
+
+    if (isset($_FILES['nFoto']) && $_FILES['nFoto']['error'] === UPLOAD_ERR_OK) {
+    $extensao = strtolower(pathinfo($_FILES['nFoto']['name'], PATHINFO_EXTENSION));
+    $extensoesPermitidas = ['jpg', 'jpeg', 'png', 'gif', 'webp'];
+
+    if (in_array($extensao, $extensoesPermitidas)) {
+        // Gera um nome único para o arquivo
+        $nomeFoto = "func_" . uniqid() . "." . $extensao;
+        $diretorioDestino = "../img/usuarios/" . $nomeFoto;
+
+        // Cria a pasta se ela não existir
+        if (!is_dir("../img/usuarios")) {
+            mkdir("../img/usuarios", 0777, true);
+        }
+
+        // Tenta mover o arquivo enviado para a pasta
+        if (move_uploaded_file($_FILES['nFoto']['tmp_name'], $diretorioDestino)) {
+            $novaFoto = true;
+        } else {
+            // Se falhar o upload físico, reverte para o nome padrão
+            $nomeFoto = "padrao.png";
+        }
+    }
+}
+ 
 
      if ($opcao == "I"){
 
-         $sql = "INSERT INTO funcionario (tipoFuncionario, nomeFuncionario, cpfFuncionario, emailFuncionario, telefoneFuncionario, cepFuncionario, enderecoFuncionario, numeroFuncionario, complementoFuncionario, bairroFuncionario, cidadeFuncionario, estadoFuncionario, login, senha)
-         VALUES ('$tipo', '$nome', '$cpf', '$email', '$telefone', '$cep',  '$endereco', '$numero', '$complemento', '$bairro', '$cidade', '$estado', '$login', '$senha');";
+         $sql = "INSERT INTO funcionario (tipoFuncionario, nomeFuncionario, cpfFuncionario, emailFuncionario, telefoneFuncionario, cepFuncionario, enderecoFuncionario, numeroFuncionario, complementoFuncionario, bairroFuncionario, cidadeFuncionario, estadoFuncionario, login, senha, fotoFuncionario)
+         VALUES ('$tipo', '$nome', '$cpf', '$email', '$telefone', '$cep',  '$endereco', '$numero', '$complemento', '$bairro', '$cidade', '$estado', '$login', '$senha', '$nomeFoto');";
 
      } elseif ($opcao == "U"){
        
-        $sql="UPDATE funcionario SET 
+       if ($novaFoto) {
+        $sql = "UPDATE funcionario SET 
+              tipoFuncionario = '$tipo',
+              nomeFuncionario = '$nome',
+              cpfFuncionario = '$cpf',
+              emailFuncionario = '$email',
+              telefoneFuncionario = '$telefone',
+              cepFuncionario = '$cep',
+              enderecoFuncionario = '$endereco',
+              numeroFuncionario = '$numero',
+              complementoFuncionario = '$complemento',
+              bairroFuncionario = '$bairro',
+              cidadeFuncionario = '$cidade',
+              estadoFuncionario = '$estado',
+              login = '$login',
+              senha = '$senha',
+              fotoFuncionario = '$nomeFoto'
+              WHERE idFuncionario = '$id';";
+
+            if (isset($_SESSION['idFuncionario']) && $_SESSION['idFuncionario'] == $id) {
+            $_SESSION['fotoFuncionario'] = $nomeFoto;
+        }
+    } else {
+        // Atualiza mantendo a foto antiga
+        $sql = "UPDATE funcionario SET 
               tipoFuncionario = '$tipo',
               nomeFuncionario = '$nome',
               cpfFuncionario = '$cpf',
@@ -42,9 +98,8 @@ include("funcoes.php");
               estadoFuncionario = '$estado',
               login = '$login',
               senha = '$senha'
-              WHERE idFuncionario = '$id'; 
-              ";
-
+              WHERE idFuncionario = '$id';";
+    }
      } elseif ($opcao == "D") {
 
        $sql = "DELETE FROM funcionario WHERE idFuncionario = '$id';";
