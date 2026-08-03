@@ -40,8 +40,8 @@ CREATE TABLE `aparelho` (
 --
 
 INSERT INTO `aparelho` (`idAparelho`, `historicoAparelho`, `Cliente_idCliente`, `imeiAparelho`, `Modelo_idModelo`) VALUES
-(3, '', 1, '2460', '7'),
-(6, '', 10, '123', '6');
+(3, '', 1, '1231435462462462', '1'),
+(6, '', 10, '87586754632', '2');
 
 -- --------------------------------------------------------
 
@@ -86,6 +86,8 @@ INSERT INTO `clientes` (`idCliente`, `nomeCliente`, `cpfCliente`, `emailCliente`
 (1, 'Nicolly Fernanda', '09657885454', '', '999999999', '77777777', 'Rua jacupiranga', '1343', 'Sobrado', 'Aventureiro', 'Joinville', 'Santa catarina'),
 (2, 'Nicolly Fernanda Aureliano Pereira', '054900', '', '999437521', '054289', 'Rua jacupiranga', '55555555', 'sobrado', 'Morro do meio', 'Itajaí', 'SC'),
 (10, 'Lucas Berto', '31265479890', '', '299999999999', '44444444', 'Rua Via Coletora B', '123', '', 'Nossa Senhora das Graças', 'Santo Antônio de Jesus', 'BA');
+(11, 'Ana Luiza ramos', '12345678988', '', '47998765432', '89218180', 'Rua Iguaçu', '562', 'apto', 'Santo Antônio', 'Joinville', 'SC'),
+(12, 'Carlos Gabriel', '56748356736', '', '47964578347', '89219510', 'Rua Arno Waldemar Dohler', '957', 'casa', 'Zona Industrial Norte', 'Joinville', 'SC');
 
 -- --------------------------------------------------------
 
@@ -114,6 +116,7 @@ INSERT INTO `estoque` (`idEstoque`, `NomeFornecedor`, `peca`, `valor`, `quantida
 (5, 'X3 Distribuidora', 'Frontal Tela Display Samsung A26 5G A266 Com Aro Original', 460.00, 3, 1380.00),
 (6, 'Central Peças', 'Tela Display Lcd Frontal Iphone 17 Pro Oled WEKEEP CI', 830.00, 3, 2490.00),
 (7, 'Central Peças', 'Bateria Iphone 15 Pro Modelo Vip', 125.00, 4, 500.00);
+(8, 'X3 Distribuidora', 'Frontal Tela Display Samsung A25 5G A256 Com Aro Original', 450.00, 2, 900.00);
 
 -- --------------------------------------------------------
 
@@ -239,6 +242,7 @@ INSERT INTO `orcamento` (`idOrcamento`, `diagnostico`, `peca`, `valorUni`, `maoO
 (1, 'Bateria inchada e tela quebrada', 'Múltiplas Peças', 955.00, 50.00, 1005.00, 'aprovado', 1, 3, 2, '2026-07-07 19:33:24'),
 (2, 'tela trocada 2 vezes, original', 'Frontal Tela Display Samsung S23 Ultra S918 Com Aro Original', 1899.00, 75.00, 1974.00, 'reprovado', NULL, 1, 3, '2026-07-07 19:36:50'),
 (3, '', 'Bateria Samsung A23 / M23 / M33 / M52 / M53 / A73 (M526) Original', 85.00, 50.00, 135.00, 'aprovado', 2, 3, 5, '2026-07-13 19:20:15');
+(4, 'trocar tela', 'Tela Display Lcd Frontal Iphone 17 Pro Oled WEKEEP CI', 830.00, 50.00, 880.00, 'aprovado', 3, 10, 6, '2026-08-02 20:11:03');
 
 -- --------------------------------------------------------
 
@@ -265,6 +269,7 @@ INSERT INTO `orcamento_peca` (`idOrcamentoPeca`, `Orcamento_idOrcamento`, `Estoq
 (17, 2, 2, 'Frontal Tela Display Samsung S23 Ultra S918 Com Aro Original', 1, 1899.00, 1899.00),
 (19, 1, 7, 'Bateria Iphone 15 Pro Modelo Vip', 1, 125.00, 125.00),
 (20, 1, 6, 'Tela Display Lcd Frontal Iphone 17 Pro Oled WEKEEP CI', 1, 830.00, 830.00);
+(21, 4, 6, 'Tela Display Lcd Frontal Iphone 17 Pro Oled WEKEEP CI', 1, 830.00, 830.00);
 
 -- --------------------------------------------------------
 
@@ -293,6 +298,7 @@ CREATE TABLE `os` (
 INSERT INTO `os` (`idOS`, `aberturaOS`, `fechamentoOS`, `descricaoOS`, `servicoOS`, `valorOS`, `observacoesOS`, `status`, `Aparelho_idAparelho`, `Funcionario_idFuncionario`, `Cliente_idCliente`) VALUES
 (1, '2026-07-07 19:33:32', NULL, 'OS automática gerada a partir do Orçamento número #1. Diagnóstico: ', NULL, 125.00, NULL, 'pronto', 2, NULL, 3),
 (2, '2026-07-16 20:52:15', NULL, 'OS automática gerada a partir do Orçamento número #3. Diagnóstico: ', NULL, 135.00, NULL, 'em andamento', 5, NULL, 3);
+(3, '2026-08-02 20:11:43', NULL, 'OS automática gerada a partir do Orçamento número #4. Diagnóstico: trocar tela', NULL, 880.00, NULL, 'em andamento', 6, NULL, 10);
 
 --
 -- Índices para tabelas despejadas

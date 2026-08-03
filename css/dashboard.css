@@ -160,3 +160,9 @@
     .cards-grid { grid-template-columns: 1fr; }
     .page-content { padding: 15px; }
 }
+
+@media (max-width: 992px) {
+    .charts-container {
+        flex-direction: column;
+    }
+}

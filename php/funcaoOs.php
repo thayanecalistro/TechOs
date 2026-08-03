@@ -3,20 +3,20 @@
 function listarOS() {
     $html = "";
 
-    // INNER JOIN idêntico ao do orçamento, mas focado na tabela ordem_servico
+    // Trocamos INNER JOIN por LEFT JOIN e tratamos campos vazios (NULL) com COALESCE
     $sql = "SELECT os.idOS, 
                    os.aberturaOS, 
                    os.fechamentoOS, 
                    os.valorOS, 
                    os.status,
-                   c.nomeCliente, 
-                   m.nomeMarca, 
-                   mo.nomeModelo
+                   COALESCE(c.nomeCliente, 'Cliente Não Identificado') AS nomeCliente, 
+                   COALESCE(m.nomeMarca, '') AS nomeMarca, 
+                   COALESCE(mo.nomeModelo, 'Sem Modelo') AS nomeModelo
             FROM os os
-            INNER JOIN clientes c ON os.Cliente_idCliente = c.idCliente
-            INNER JOIN aparelho a ON os.Aparelho_idAparelho = a.idAparelho
-            INNER JOIN modelo mo ON a.Modelo_idModelo = mo.idModelo
-            INNER JOIN marca m ON mo.Marca_idMarca = m.idMarca
+            LEFT JOIN clientes c ON os.Cliente_idCliente = c.idCliente
+            LEFT JOIN aparelho a ON os.Aparelho_idAparelho = a.idAparelho
+            LEFT JOIN modelo mo ON a.Modelo_idModelo = mo.idModelo
+            LEFT JOIN marca m ON mo.Marca_idMarca = m.idMarca
             ORDER BY os.idOS DESC";
 
     // Inclui a conexão igualzinho à função de orçamentos
@@ -41,13 +41,16 @@ function listarOS() {
                 ? date('d/m/Y H:i', strtotime($coluna['fechamentoOS'])) 
                 : "---";
 
+            // Monta o aparelho unindo Marca e Modelo de forma limpa
+            $aparelhoExibicao = trim($coluna['nomeMarca'] . " " . $coluna['nomeModelo']);
+
             // Monta a linha seguindo o cabeçalho exato do seu arquivo Os.php
             $html .= "<tr data-id='" . $coluna['idOS'] . "' data-status='" . $statusValor . "'>
                         <td>" . $coluna['idOS'] . "</td>
                         <td>" . $abertura . "</td>
                         <td>" . $fechamento . "</td>
                         <td>" . htmlspecialchars($coluna['nomeCliente'], ENT_QUOTES) . "</td>
-                        <td>" . htmlspecialchars($coluna['nomeMarca'] . " " . $coluna['nomeModelo'], ENT_QUOTES) . "</td>
+                        <td>" . htmlspecialchars($aparelhoExibicao, ENT_QUOTES) . "</td>
                         <td><strong>R$ " . number_format($coluna['valorOS'], 2, ',', '.') . "</strong></td>
                         <td><span class='badge " . $classeBadge . " badge-status-btn' style='cursor: pointer;'>" . $statusFormatado . "</span></td>
                       </tr>";

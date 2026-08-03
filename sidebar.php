@@ -3,6 +3,8 @@ if (session_status() === PHP_SESSION_NONE) {
     session_start();
 }
 
+include_once("php/funcoes.php");
+
 $idLogado = $_SESSION['idFuncionario'] ?? null;
 ?>
 
@@ -31,8 +33,9 @@ $idLogado = $_SESSION['idFuncionario'] ?? null;
         <img src="<?= foto($idLogado); ?>" alt="Avatar" class="user-avatar">
     </div>
     <div class="info">
-        <a href="#" class="d-block"><?= nomeFuncionario($idLogado); ?></a>
+        <span class="d-block text-white"><?= nomeFuncionario($idLogado); ?></span>
     </div>
+    
 </div>
 
     <ul class="sidebar-menu">

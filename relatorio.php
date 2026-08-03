@@ -1,7 +1,8 @@
 <?php
 session_start();
-$currentPage = 'relatorios';
+
 require_once('php/funcoes_relatorio.php');
+$currentPage = 'relatorios';
 
 $dados = getDadosRelatorio(
     $_GET['status'] ?? '', 
@@ -9,6 +10,9 @@ $dados = getDadosRelatorio(
     $_GET['data_fim'] ?? '', 
     $_GET['busca'] ?? ''
 );
+
+// Pega a lista tratada vinda da função
+$atividades_recentes = $dados['atividades'];
 ?>
 <!DOCTYPE html>
 <html lang="pt-br">
@@ -48,35 +52,63 @@ $dados = getDadosRelatorio(
         <fieldset class="search-fieldset" style="margin-top: 30px; background-color: #1a304a; border: 1px solid #62b6cb;">
             <legend style="color: #62b6cb; font-weight: bold; padding: 0 10px;">Filtros e Pesquisa Rápida</legend>
             <form method="GET" class="search-box-relatorio" style="display: flex; gap: 15px; align-items: flex-end;">
-                <div class="filter-group"><label class="filter-label">Pesquisar Cliente</label><input type="text" name="busca" class="btn-select" value="<?= $_GET['busca']??'' ?>"></div>
-                <div class="filter-group"><label class="filter-label">Status</label><input type="text" name="status" class="btn-select" value="<?= $_GET['status']??'' ?>"></div>
+                <div class="filter-group"><label class="filter-label">Pesquisar Cliente</label><input type="text" name="busca" class="btn-select" value="<?= htmlspecialchars($_GET['busca']??'', ENT_QUOTES) ?>"></div>
+                <div class="filter-group"><label class="filter-label">Status</label><input type="text" name="status" class="btn-select" value="<?= htmlspecialchars($_GET['status']??'', ENT_QUOTES) ?>"></div>
                 <div class="filter-group"><label class="filter-label">De:</label><input type="date" name="data_inicio" class="input-data" value="<?= $_GET['data_inicio']??'' ?>"></div>
                 <div class="filter-group"><label class="filter-label">Até:</label><input type="date" name="data_fim" class="input-data" value="<?= $_GET['data_fim']??'' ?>"></div>
                 <button type="submit" class="btn btn-blue" style="background-color: #62b6cb; color: #102a43; font-weight:bold; height:34px; padding:0 20px;">Filtrar</button>
             </form>
         </fieldset>
 
-        <!-- TABELA -->
-        <div class="table-card-fundo" style="margin-top: 25px;">
-            <div class="table-container">
-                <table class="dashboard-table">
-                    <thead>
-                        <tr><th>ID</th><th>Cliente</th><th>Data</th><th>Status</th><th>Valor</th></tr>
-                    </thead>
-                    <tbody>
-                        <?php foreach ($dados['lista'] as $os): ?>
-                        <tr>
-                            <td>#<?= $os['idOS'] ?></td>
-                            <td><?= $os['nomeCliente'] ?></td>
-                            <td><?= date('d/m/Y', strtotime($os['aberturaOS'])) ?></td>
-                            <td><span class="badge" style="background-color: #62b6cb; color: #102a43; padding: 2px 8px; border-radius: 4px; font-weight:bold;"><?= $os['status'] ?></span></td>
-                            <td>R$ <?= number_format($os['valorOS'], 2, ',', '.') ?></td>
-                        </tr>
-                        <?php endforeach; ?>
-                    </tbody>
-                </table>
+        <!-- SEÇÃO DA TABELA -->
+        <div class="dashboard-section">
+            <div class="section-card">
+                <h3>Relatório de Atividades Registradas</h3>
+                
+                <div class="table-container">
+                    <table class="dashboard-table">
+                        <thead>
+                            <tr>
+                                <th>ID</th>
+                                <th>Cliente</th>
+                                <th>Tipo</th>
+                                <th>Data</th>
+                                <th>Status</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            <?php if(count($atividades_recentes) > 0): ?>
+                                <?php foreach ($atividades_recentes as $atividade): ?>
+                                    <tr>
+                                        <td>#<?php echo $atividade['id']; ?></td>
+                                        <td><?php echo htmlspecialchars($atividade['cliente'], ENT_QUOTES); ?></td>
+                                        <td><?php echo $atividade['tipo']; ?></td>
+                                        <td><?php echo $atividade['data']; ?></td>
+                                        <td>
+                                            <?php 
+                                                $statusClass = 'badge-aberto';
+                                                $status = strtolower($atividade['status']);
+                                                if ($status == 'aberta' || $status == 'aberto' || $status == 'em andamento') $statusClass = 'badge-aberto';
+                                                elseif ($status == 'aprovado' || $status == 'concluída' || $status == 'concluido' || $status == 'finalizado' || $status == 'pronto') $statusClass = 'badge-aprovado';
+                                                elseif ($status == 'recusado' || $status == 'reprovado' || $status == 'cancelado') $statusClass = 'badge-recusado';
+                                            ?>
+                                            <span class="badge <?php echo $statusClass; ?>">
+                                                <?php echo ucfirst($atividade['status']); ?>
+                                            </span>
+                                        </td>
+                                    </tr>
+                                <?php endforeach; ?>
+                            <?php else: ?>
+                                <tr>
+                                    <td colspan="5" style="text-align:center; color:#829ab1;">Nenhum registro encontrado com os filtros aplicados.</td>
+                                </tr>
+                            <?php endif; ?>
+                        </tbody>
+                    </table>
+                </div>
             </div>
         </div>
+        
     </div>
 
     <script src="https://cdnjs.cloudflare.com/ajax/libs/html2pdf.js/0.10.1/html2pdf.bundle.min.js"></script>
