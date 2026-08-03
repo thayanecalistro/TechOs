@@ -1,3 +1,16 @@
+#pesquisar, 
+#status,
+#data_inicio, 
+#data_final{
+    background-color: #102a43;
+    border: 1px solid #334e68;
+    color: white;
+    padding: 6px 10px;
+    border-radius: 4px;
+    width: 200px;
+    outline: none;
+}
+
 .page-content {
     display: flex;
     flex-direction: column;

@@ -59,10 +59,10 @@ $atividades_recentes = $dados['atividades'];
         <fieldset class="search-fieldset" style="margin-top: 30px; background-color: #1a304a; border: 1px solid #62b6cb;">
             <legend style="color: #62b6cb; font-weight: bold; padding: 0 10px;">Filtros e Pesquisa Rápida</legend>
             <form method="GET" class="search-box-relatorio" style="display: flex; gap: 15px; align-items: flex-end;">
-                <div class="filter-group"><label class="filter-label">Pesquisar Cliente</label><input type="text" name="busca" class="btn-select" value="<?= htmlspecialchars($_GET['busca']??'', ENT_QUOTES) ?>"></div>
-                <div class="filter-group"><label class="filter-label">Status</label><input type="text" name="status" class="btn-select" value="<?= htmlspecialchars($_GET['status']??'', ENT_QUOTES) ?>"></div>
-                <div class="filter-group"><label class="filter-label">De:</label><input type="date" name="data_inicio" class="input-data" value="<?= $_GET['data_inicio']??'' ?>"></div>
-                <div class="filter-group"><label class="filter-label">Até:</label><input type="date" name="data_fim" class="input-data" value="<?= $_GET['data_fim']??'' ?>"></div>
+                <div class="filter-group"><label class="filter-label">Pesquisar Cliente: </label><input type="text" id="pesquisar" name="busca" class="btn-select" value="<?= htmlspecialchars($_GET['busca']??'', ENT_QUOTES) ?>"></div>
+                <div class="filter-group"><label class="filter-label">Status: </label><input type="text" id="status" name="status" class="btn-select" value="<?= htmlspecialchars($_GET['status']??'', ENT_QUOTES) ?>"></div>
+                <div class="filter-group"><label class="filter-label">De:</label><input type="date" id="data_inicio" name="data_inicio" class="input-data" value="<?= $_GET['data_inicio']??'' ?>"></div>
+                <div class="filter-group"><label class="filter-label">Até:</label><input type="date" id="data_final" name="data_fim" class="input-data" value="<?= $_GET['data_fim']??'' ?>"></div>
                 <button type="submit" class="btn btn-blue" style="background-color: #62b6cb; color: #102a43; font-weight:bold; height:34px; padding:0 20px;">Filtrar</button>
             </form>
         </fieldset>
