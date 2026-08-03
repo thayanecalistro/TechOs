@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Host: 127.0.0.1
--- Tempo de geração: 03/08/2026 às 03:01
+-- Tempo de geração: 04/08/2026 às 00:42
 -- Versão do servidor: 10.4.32-MariaDB
 -- Versão do PHP: 8.2.12
 
@@ -46,20 +46,6 @@ INSERT INTO `aparelho` (`idAparelho`, `historicoAparelho`, `Cliente_idCliente`, 
 -- --------------------------------------------------------
 
 --
--- Estrutura para tabela `atividade`
---
-
-CREATE TABLE `atividade` (
-  `idAtividade` int(11) NOT NULL COMMENT 'chave primária de identificação da atividade',
-  `observacaoAtividade` varchar(1000) DEFAULT NULL COMMENT 'Detalhes, descrição ou observações gerais sobre a atividade realizada.',
-  `dataAtividade` date DEFAULT NULL COMMENT 'Data em que a atividade foi ou será realizada',
-  `horaAtividade` time DEFAULT NULL COMMENT 'Horário de registro da atividade',
-  `OS_idOS` int(11) NOT NULL COMMENT 'Chave estrangeira. Vincula esta atividade a uma Ordem de Serviço'
-) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
-
--- --------------------------------------------------------
-
---
 -- Estrutura para tabela `clientes`
 --
 
@@ -85,9 +71,9 @@ CREATE TABLE `clientes` (
 INSERT INTO `clientes` (`idCliente`, `nomeCliente`, `cpfCliente`, `emailCliente`, `telefoneCliente`, `cepCliente`, `enderecoCliente`, `numeroCliente`, `complementoCliente`, `bairroCliente`, `cidadeCliente`, `estadoCliente`) VALUES
 (1, 'Nicolly Fernanda', '09657885454', '', '999999999', '77777777', 'Rua jacupiranga', '1343', 'Sobrado', 'Aventureiro', 'Joinville', 'Santa catarina'),
 (2, 'Nicolly Fernanda Aureliano Pereira', '054900', '', '999437521', '054289', 'Rua jacupiranga', '55555555', 'sobrado', 'Morro do meio', 'Itajaí', 'SC'),
-(10, 'Lucas Berto', '31265479890', '', '299999999999', '44444444', 'Rua Via Coletora B', '123', '', 'Nossa Senhora das Graças', 'Santo Antônio de Jesus', 'BA');
-(11, 'Ana Luiza ramos', '12345678988', '', '47998765432', '89218180', 'Rua Iguaçu', '562', 'apto', 'Santo Antônio', 'Joinville', 'SC'),
-(12, 'Carlos Gabriel', '56748356736', '', '47964578347', '89219510', 'Rua Arno Waldemar Dohler', '957', 'casa', 'Zona Industrial Norte', 'Joinville', 'SC');
+(10, 'Lucas Berto', '31265479890', '', '299999999999', '44444444', 'Rua Via Coletora B', '123', '', 'Nossa Senhora das Graças', 'Santo Antônio de Jesus', 'BA'),
+(11, 'ana luiza camargo', '98765432132', '', '479876543213', '44444444', 'Rua Via Coletora B', '654', 'apto 101', 'Nossa Senhora das Graças', 'Santo Antônio de Jesus', 'BA'),
+(12, 'Vinicis Luz', '98765786745', '', '47976543234', '44444444', 'Rua Via Coletora B', '543', 'casa ', 'Nossa Senhora das Graças', 'Santo Antônio de Jesus', 'BA');
 
 -- --------------------------------------------------------
 
@@ -116,7 +102,6 @@ INSERT INTO `estoque` (`idEstoque`, `NomeFornecedor`, `peca`, `valor`, `quantida
 (5, 'X3 Distribuidora', 'Frontal Tela Display Samsung A26 5G A266 Com Aro Original', 460.00, 3, 1380.00),
 (6, 'Central Peças', 'Tela Display Lcd Frontal Iphone 17 Pro Oled WEKEEP CI', 830.00, 3, 2490.00),
 (7, 'Central Peças', 'Bateria Iphone 15 Pro Modelo Vip', 125.00, 4, 500.00);
-(8, 'X3 Distribuidora', 'Frontal Tela Display Samsung A25 5G A256 Com Aro Original', 450.00, 2, 900.00);
 
 -- --------------------------------------------------------
 
@@ -149,21 +134,8 @@ CREATE TABLE `funcionario` (
 
 INSERT INTO `funcionario` (`idFuncionario`, `tipoFuncionario`, `nomeFuncionario`, `cpfFuncionario`, `telefoneFuncionario`, `emailFuncionario`, `cepFuncionario`, `enderecoFuncionario`, `numeroFuncionario`, `complementoFuncionario`, `bairroFuncionario`, `cidadeFuncionario`, `estadoFuncionario`, `login`, `senha`, `fotoFuncionario`) VALUES
 (4, 'Atendente', 'Maria Clara', '12345678990', 99437521, 'maria@gmail', 44444444, 'Rua Via Coletora B', 1343, 'Sobrado', 'Nossa Senhora das Graças', 'Santo Antônio de Jesus', 'BA', 'maria.clara', '202cb962ac59075b964b07152d234b70', 'func_6a6fde00b30b1.png'),
-(6, 'Administrador', 'Nicolly Fernanda Aureliano Pereira', '05490056165', 99437521, 'nicolly@fernanda', 44444444, 'Rua Via Coletora B', 1343, 'Sobrado', 'Nossa Senhora das Graças', 'Santo Antônio de Jesus', 'BA', 'nicolly.pereira', '202cb962ac59075b964b07152d234b70', 'padrao.png');
-
--- --------------------------------------------------------
-
---
--- Estrutura para tabela `gastos`
---
-
-CREATE TABLE `gastos` (
-  `idGastos` int(11) NOT NULL COMMENT 'Chave primária de identificação do gasto',
-  `descricaoGastos` varchar(500) DEFAULT NULL COMMENT 'Detalhes ou descrição do que foi comprado ou pago com este recurso',
-  `valorGastos` decimal(10,2) NOT NULL COMMENT 'Valor monetário total da despesa',
-  `dataGastos` datetime NOT NULL DEFAULT current_timestamp() COMMENT 'Data e hora em que a despesa foi registrada ou realizada',
-  `Orcamento_idOrcamento` int(11) DEFAULT NULL COMMENT 'Chave estrangeira. Vincula este gasto a um Orçamento especifico'
-) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
+(6, 'Administrador', 'Nicolly Fernanda Aureliano Pereira', '05490056165', 99437521, 'nicolly@fernanda', 44444444, 'Rua Via Coletora B', 1343, 'Sobrado', 'Nossa Senhora das Graças', 'Santo Antônio de Jesus', 'BA', 'nicolly.pereira', '202cb962ac59075b964b07152d234b70', 'padrao.png'),
+(7, 'Administrador', 'thayane', '12345678098', 2147483647, 'thyaane@teste.com', 44444444, 'Rua Via Coletora B', 678, 'casa', 'Nossa Senhora das Graças', 'Santo Antônio de Jesus', 'BA', 'thay.teste', '202cb962ac59075b964b07152d234b70', 'func_6a7115d4194d0.png');
 
 -- --------------------------------------------------------
 
@@ -234,16 +206,6 @@ CREATE TABLE `orcamento` (
   `dataOrcamento` datetime DEFAULT current_timestamp() COMMENT 'Data e hora de criação ou registro do orçamento no sistema'
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
 
---
--- Despejando dados para a tabela `orcamento`
---
-
-INSERT INTO `orcamento` (`idOrcamento`, `diagnostico`, `peca`, `valorUni`, `maoObra`, `valorTotal`, `status`, `OS_idOS`, `Cliente_idCliente`, `Aparelho_idAparelho`, `dataOrcamento`) VALUES
-(1, 'Bateria inchada e tela quebrada', 'Múltiplas Peças', 955.00, 50.00, 1005.00, 'aprovado', 1, 3, 2, '2026-07-07 19:33:24'),
-(2, 'tela trocada 2 vezes, original', 'Frontal Tela Display Samsung S23 Ultra S918 Com Aro Original', 1899.00, 75.00, 1974.00, 'reprovado', NULL, 1, 3, '2026-07-07 19:36:50'),
-(3, '', 'Bateria Samsung A23 / M23 / M33 / M52 / M53 / A73 (M526) Original', 85.00, 50.00, 135.00, 'aprovado', 2, 3, 5, '2026-07-13 19:20:15');
-(4, 'trocar tela', 'Tela Display Lcd Frontal Iphone 17 Pro Oled WEKEEP CI', 830.00, 50.00, 880.00, 'aprovado', 3, 10, 6, '2026-08-02 20:11:03');
-
 -- --------------------------------------------------------
 
 --
@@ -259,17 +221,6 @@ CREATE TABLE `orcamento_peca` (
   `valorUnitario` decimal(10,2) NOT NULL COMMENT 'Preço de uma unidade da peça no momento da criação do orçamento',
   `total` decimal(10,2) NOT NULL COMMENT 'Valor total deste item(multiplicação da quantidade pelo valor unitário)'
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
-
---
--- Despejando dados para a tabela `orcamento_peca`
---
-
-INSERT INTO `orcamento_peca` (`idOrcamentoPeca`, `Orcamento_idOrcamento`, `Estoque_idEstoque`, `peca`, `quantidade`, `valorUnitario`, `total`) VALUES
-(16, 3, 3, 'Bateria Samsung A23 / M23 / M33 / M52 / M53 / A73 (M526) Original', 1, 85.00, 85.00),
-(17, 2, 2, 'Frontal Tela Display Samsung S23 Ultra S918 Com Aro Original', 1, 1899.00, 1899.00),
-(19, 1, 7, 'Bateria Iphone 15 Pro Modelo Vip', 1, 125.00, 125.00),
-(20, 1, 6, 'Tela Display Lcd Frontal Iphone 17 Pro Oled WEKEEP CI', 1, 830.00, 830.00);
-(21, 4, 6, 'Tela Display Lcd Frontal Iphone 17 Pro Oled WEKEEP CI', 1, 830.00, 830.00);
 
 -- --------------------------------------------------------
 
@@ -292,15 +243,6 @@ CREATE TABLE `os` (
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
 
 --
--- Despejando dados para a tabela `os`
---
-
-INSERT INTO `os` (`idOS`, `aberturaOS`, `fechamentoOS`, `descricaoOS`, `servicoOS`, `valorOS`, `observacoesOS`, `status`, `Aparelho_idAparelho`, `Funcionario_idFuncionario`, `Cliente_idCliente`) VALUES
-(1, '2026-07-07 19:33:32', NULL, 'OS automática gerada a partir do Orçamento número #1. Diagnóstico: ', NULL, 125.00, NULL, 'pronto', 2, NULL, 3),
-(2, '2026-07-16 20:52:15', NULL, 'OS automática gerada a partir do Orçamento número #3. Diagnóstico: ', NULL, 135.00, NULL, 'em andamento', 5, NULL, 3);
-(3, '2026-08-02 20:11:43', NULL, 'OS automática gerada a partir do Orçamento número #4. Diagnóstico: trocar tela', NULL, 880.00, NULL, 'em andamento', 6, NULL, 10);
-
---
 -- Índices para tabelas despejadas
 --
 
@@ -309,13 +251,6 @@ INSERT INTO `os` (`idOS`, `aberturaOS`, `fechamentoOS`, `descricaoOS`, `servicoO
 --
 ALTER TABLE `aparelho`
   ADD PRIMARY KEY (`idAparelho`);
-
---
--- Índices de tabela `atividade`
---
-ALTER TABLE `atividade`
-  ADD PRIMARY KEY (`idAtividade`),
-  ADD KEY `idx_Atividade_OS` (`OS_idOS`);
 
 --
 -- Índices de tabela `clientes`
@@ -334,13 +269,6 @@ ALTER TABLE `estoque`
 --
 ALTER TABLE `funcionario`
   ADD PRIMARY KEY (`idFuncionario`);
-
---
--- Índices de tabela `gastos`
---
-ALTER TABLE `gastos`
-  ADD PRIMARY KEY (`idGastos`),
-  ADD KEY `idx_Gastos_Orcamento` (`Orcamento_idOrcamento`);
 
 --
 -- Índices de tabela `marca`
@@ -391,16 +319,10 @@ ALTER TABLE `aparelho`
   MODIFY `idAparelho` int(11) NOT NULL AUTO_INCREMENT COMMENT 'Número identificador do aparelho dentro do sistema', AUTO_INCREMENT=7;
 
 --
--- AUTO_INCREMENT de tabela `atividade`
---
-ALTER TABLE `atividade`
-  MODIFY `idAtividade` int(11) NOT NULL AUTO_INCREMENT COMMENT 'chave primária de identificação da atividade';
-
---
 -- AUTO_INCREMENT de tabela `clientes`
 --
 ALTER TABLE `clientes`
-  MODIFY `idCliente` int(11) NOT NULL AUTO_INCREMENT COMMENT 'Número de identificação do cliente', AUTO_INCREMENT=11;
+  MODIFY `idCliente` int(11) NOT NULL AUTO_INCREMENT COMMENT 'Número de identificação do cliente', AUTO_INCREMENT=13;
 
 --
 -- AUTO_INCREMENT de tabela `estoque`
@@ -412,13 +334,7 @@ ALTER TABLE `estoque`
 -- AUTO_INCREMENT de tabela `funcionario`
 --
 ALTER TABLE `funcionario`
-  MODIFY `idFuncionario` int(11) NOT NULL AUTO_INCREMENT COMMENT 'Chave primária de identificação do funcionário', AUTO_INCREMENT=7;
-
---
--- AUTO_INCREMENT de tabela `gastos`
---
-ALTER TABLE `gastos`
-  MODIFY `idGastos` int(11) NOT NULL AUTO_INCREMENT COMMENT 'Chave primária de identificação do gasto';
+  MODIFY `idFuncionario` int(11) NOT NULL AUTO_INCREMENT COMMENT 'Chave primária de identificação do funcionário', AUTO_INCREMENT=8;
 
 --
 -- AUTO_INCREMENT de tabela `marca`
@@ -431,47 +347,6 @@ ALTER TABLE `marca`
 --
 ALTER TABLE `modelo`
   MODIFY `idModelo` int(11) NOT NULL AUTO_INCREMENT COMMENT 'Chave primária de identificação do modelo do aparelho', AUTO_INCREMENT=8;
-
---
--- AUTO_INCREMENT de tabela `orcamento`
---
-ALTER TABLE `orcamento`
-  MODIFY `idOrcamento` int(11) NOT NULL AUTO_INCREMENT COMMENT 'Chave primária de identificação do orçamento', AUTO_INCREMENT=4;
-
---
--- AUTO_INCREMENT de tabela `orcamento_peca`
---
-ALTER TABLE `orcamento_peca`
-  MODIFY `idOrcamentoPeca` int(11) NOT NULL AUTO_INCREMENT COMMENT 'Chave primária de identificação do item do orçamento', AUTO_INCREMENT=21;
-
---
--- AUTO_INCREMENT de tabela `os`
---
-ALTER TABLE `os`
-  MODIFY `idOS` int(11) NOT NULL AUTO_INCREMENT COMMENT 'Chave primária de identificação da Ordem de Serviço', AUTO_INCREMENT=3;
-
---
--- Restrições para tabelas despejadas
---
-
---
--- Restrições para tabelas `atividade`
---
-ALTER TABLE `atividade`
-  ADD CONSTRAINT `fk_Atividade_OS` FOREIGN KEY (`OS_idOS`) REFERENCES `os` (`idOS`) ON DELETE CASCADE ON UPDATE CASCADE;
-
---
--- Restrições para tabelas `gastos`
---
-ALTER TABLE `gastos`
-  ADD CONSTRAINT `fk_Gastos_Orcamento` FOREIGN KEY (`Orcamento_idOrcamento`) REFERENCES `orcamento` (`idOrcamento`) ON DELETE CASCADE ON UPDATE CASCADE;
-
---
--- Restrições para tabelas `orcamento_peca`
---
-ALTER TABLE `orcamento_peca`
-  ADD CONSTRAINT `fk_OP_Estoque` FOREIGN KEY (`Estoque_idEstoque`) REFERENCES `estoque` (`idEstoque`) ON UPDATE CASCADE,
-  ADD CONSTRAINT `fk_OP_Orcamento` FOREIGN KEY (`Orcamento_idOrcamento`) REFERENCES `orcamento` (`idOrcamento`) ON DELETE CASCADE ON UPDATE CASCADE;
 COMMIT;
 
 /*!40101 SET CHARACTER_SET_CLIENT=@OLD_CHARACTER_SET_CLIENT */;
