@@ -111,7 +111,7 @@ $busca = isset($_GET['busca']) ? $_GET['busca'] : '';
         </div>
       </div>
 
-<!--         MODAL PARA ALTERAÇÃO DE DADOS DO COLABORADOR -->
+<!--         TELA PARA ALTERAÇÃO -->
 <div id="meuModalAlterar" class="modal">
   <div class="modal-conteudo">
    <span class="botaoFecharAlterar">&times;</span>
@@ -198,7 +198,7 @@ $busca = isset($_GET['busca']) ? $_GET['busca'] : '';
   </div>
 </div>
 
-<!--                     SUBTELA PARA VISUALIZAR INFORMAÇÕES       -->
+<!--                     TELA PARA VISUALIZAR INFORMAÇÕES       -->
 <div id="meuModalVisualizar" class="modal">
   <div class="modal-conteudo">
    <span class="botaoFecharVisualizar">&times;</span>

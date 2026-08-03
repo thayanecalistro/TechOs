@@ -146,6 +146,10 @@
     box-shadow: 0 4px 6px rgba(0, 0, 0, 0.15);
 }
 
+#cadastroModal{
+    overflow-y: auto;
+    -webkit-overflow-scrolling: touch;
+}
 .section-card h3 {
     margin: 0 0 15px 0;
     font-size: 1.1rem;
