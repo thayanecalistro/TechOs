@@ -67,4 +67,24 @@ function nomeFuncionario($id = null) {
 
     return $_SESSION['nomeFuncionario'] ?? "Colaborador";
 }
+
+function registrarLog($acao, $descricao, $idFuncionario = null) {
+    include("includes/conexao.php");
+    
+    // Garante que a sessão esteja iniciada para ler a variável $_SESSION
+    if (session_status() === PHP_SESSION_NONE) {
+        session_start();
+    }
+    
+    $usuario = $_SESSION['nomeFuncionario'] ?? 'Sistema';
+    if (!$idFuncionario && isset($_SESSION['idFuncionario'])) {
+        $idFuncionario = $_SESSION['idFuncionario'];
+    }
+
+    $stmt = $conn->prepare("INSERT INTO logs_sistema (usuarioLog, Funcionario_idFuncionario, acaoLog, descricaoLog) VALUES (?, ?, ?, ?)");
+    $stmt->bind_param("siss", $usuario, $idFuncionario, $acao, $descricao);
+    $stmt->execute();
+    $stmt->close();
+    mysqli_close($conn);
+}
 ?>
