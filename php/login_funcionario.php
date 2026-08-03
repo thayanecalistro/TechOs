@@ -3,14 +3,15 @@
 session_start();
 //dados no banco
 $login = $_POST["nLogin"];
-$senha = $_POST["nSenha"];
-//comando sql
+$senhaDigitada= $_POST["nSenha"];
+
+$senhaCriptografada = md5($senhaDigitada);
 
 include ("../includes/conexao.php");
 
 $sql = "SELECT idFuncionario, tipoFuncionario, nomeFuncionario, fotoFuncionario FROM funcionario
         WHERE login = '$login'
-        AND senha = '$senha'
+        AND senha = '$senhaCriptografada'
         LIMIT 1;";
 
 

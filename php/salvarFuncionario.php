@@ -23,7 +23,7 @@ if (session_status() === PHP_SESSION_NONE) {
     $cidade= isset($_POST['nCidade']) ? $_POST['nCidade'] : '' ;
     $estado= isset($_POST['nEstado']) ? $_POST['nEstado'] : '';
     $login= isset($_POST['nLogin']) ? $_POST['nLogin'] : '';
-    $senha= isset($_POST['nSenha']) ? $_POST['nSenha'] : '';
+    $senhaInput= isset($_POST['nSenha']) ? $_POST['nSenha'] : '';
     $novaFoto = false;
     $nomeFoto = "padrao.png";
 
@@ -54,11 +54,31 @@ if (session_status() === PHP_SESSION_NONE) {
 
      if ($opcao == "I"){
 
+     $senhaHash = md5($senhaInput);
+
          $sql = "INSERT INTO funcionario (tipoFuncionario, nomeFuncionario, cpfFuncionario, emailFuncionario, telefoneFuncionario, cepFuncionario, enderecoFuncionario, numeroFuncionario, complementoFuncionario, bairroFuncionario, cidadeFuncionario, estadoFuncionario, login, senha, fotoFuncionario)
-         VALUES ('$tipo', '$nome', '$cpf', '$email', '$telefone', '$cep',  '$endereco', '$numero', '$complemento', '$bairro', '$cidade', '$estado', '$login', '$senha', '$nomeFoto');";
+         VALUES ('$tipo', '$nome', '$cpf', '$email', '$telefone', '$cep',  '$endereco', '$numero', '$complemento', '$bairro', '$cidade', '$estado', '$login', '$senhaHash', '$nomeFoto');";
 
      } elseif ($opcao == "U"){
        
+      $senhaFinal = "";
+    $sqlBusca = "SELECT senha FROM funcionario WHERE idFuncionario = '$id' LIMIT 1";
+    $resBusca = mysqli_query($conn, $sqlBusca);
+
+    if ($resBusca && $row = mysqli_fetch_assoc($resBusca)) {
+        $senhaAtualBanco = $row['senha'];
+        
+        // Se a senha enviada do formulário for diferente da do banco (ou não for um hash MD5 de 32 chars), criptografa
+        if ($senhaInput !== $senhaAtualBanco) {
+            $senhaFinal = md5($senhaInput);
+        } else {
+            // Mantém a senha como já está no banco
+            $senhaFinal = $senhaAtualBanco;
+        }
+    } else {
+        $senhaFinal = md5($senhaInput);
+    }
+
        if ($novaFoto) {
         $sql = "UPDATE funcionario SET 
               tipoFuncionario = '$tipo',
@@ -74,7 +94,7 @@ if (session_status() === PHP_SESSION_NONE) {
               cidadeFuncionario = '$cidade',
               estadoFuncionario = '$estado',
               login = '$login',
-              senha = '$senha',
+              senha = '$senhaFinal',
               fotoFuncionario = '$nomeFoto'
               WHERE idFuncionario = '$id';";
 
@@ -97,7 +117,7 @@ if (session_status() === PHP_SESSION_NONE) {
               cidadeFuncionario = '$cidade',
               estadoFuncionario = '$estado',
               login = '$login',
-              senha = '$senha'
+              senha = '$senhaFinal'
               WHERE idFuncionario = '$id';";
     }
      } elseif ($opcao == "D") {
