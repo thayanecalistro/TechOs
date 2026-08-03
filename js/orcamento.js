@@ -164,10 +164,15 @@ document.addEventListener("DOMContentLoaded", function () {
                 inputEscondido.value = idCliente;
                 selectAparelho.innerHTML = "<option value=''>Carregando aparelhos...</option>";
 
-                fetch('php/buscar_aparelhos.php?cliente_id=' + idCliente)
-                    .then(res => res.text())
-                    .then(html => { selectAparelho.innerHTML = html; })
-                    .catch(() => { selectAparelho.innerHTML = "<option value=''>Erro ao carregar</option>"; });
+                fetch('php/buscar_aparelhos.php?idCliente=' + encodeURIComponent(idCliente))
+                    .then(function(res) { return res.text(); })
+                    .then(function(html) {
+                        selectAparelho.innerHTML = html;
+                    })
+                    .catch(function(err) {
+                        console.error('Erro na requisição:', err);
+                        selectAparelho.innerHTML = "<option value=''>Erro ao carregar</option>";
+                    });
             } else {
                 inputEscondido.value = "";
                 selectAparelho.innerHTML = "<option value=''>Selecione primeiro o cliente...</option>";

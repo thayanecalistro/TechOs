@@ -73,7 +73,7 @@ function listarProdutosEstoque($conn, $pesquisa = '') {
             $valor = number_format($prod['valor'], 2, ',', '.');
             $quantidade = $prod['quantidade'];
             $total = number_format($prod['total'], 2, ',', '.');
-
+    
             $html .= "<tr>
                         <td>{$id}</td>
                         <td>{$fornecedor}</td>
@@ -81,16 +81,28 @@ function listarProdutosEstoque($conn, $pesquisa = '') {
                         <td>R$ {$valor}</td>
                         <td>{$quantidade}</td>
                         <td>R$ {$total}</td>
-                        <td>
-                            <button type='button' class='acao-editar btn btn-sm btn-warning' 
-                                data-id='{$id}'
-                                data-fornecedor='{$fornecedor}'
-                                data-peca='{$peca}'
-                                data-valor='{$prod['valor']}'
-                                data-quantidade='{$quantidade}'
-                                data-total='{$prod['total']}'>Editar</button>
-                            
-                            <a href='php/salvarEstoque.php?excluir_id={$id}' class='btn btn-sm btn-danger' onclick=\"return confirm('Deseja realmente excluir?')\">Excluir</a>
+                        <td style='white-space: nowrap;'>
+                            <div style='display: flex; gap: 4px; align-items: center;'>
+                                <button type='button' class='btn-visualizar-tabela btn-visualizar' title='Visualizar'
+                                    data-id='{$id}'
+                                    data-fornecedor='{$fornecedor}'
+                                    data-peca='{$peca}'
+                                    data-valor='{$prod['valor']}'
+                                    data-quantidade='{$quantidade}'
+                                    data-total='{$prod['total']}'>Visualizar</button>
+    
+                                <button type='button' class='acao-editar btn-alterar-tabela btn-alterar' title='Editar' 
+                                    data-id='{$id}'
+                                    data-fornecedor='{$fornecedor}'
+                                    data-peca='{$peca}'
+                                    data-valor='{$prod['valor']}'
+                                    data-quantidade='{$quantidade}'
+                                    data-total='{$prod['total']}'>Editar</button>
+                                
+                                <button type='button' class='btn-apagar-tabela btn-apagar' title='Excluir'
+                                    data-id='{$id}'
+                                    onclick=\"if(confirm('Deseja realmente excluir?')) { window.location.href='php/salvarEstoque.php?excluir_id={$id}'; }\">Excluir</button>
+                            </div>
                         </td>
                       </tr>";
         }

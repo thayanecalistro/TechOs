@@ -22,6 +22,7 @@ $linhasTabelaEstoque = listarProdutosEstoque($conn, $pesquisa);
     <title>TechOS - Estoque</title>
     <link rel="stylesheet" href="css/style_geral.css"> 
     <link rel="stylesheet" href="css/estoque.css">
+    <link rel="stylesheet" href="css/style_cadastros.css">
 </head>
 <body>
     <?php include('sidebar.php'); ?>
@@ -73,51 +74,88 @@ $linhasTabelaEstoque = listarProdutosEstoque($conn, $pesquisa);
     </div>
 
     <!-- MODAL DE CADASTRO / EDIÇÃO DE ESTOQUE -->
-    <div class="modal-overlay" id="modalEstoque">
-        <div class="modal-content modal-estoque-content">
-            <div class="modal-header-custom">
-                <h3 id="tituloModalEstoque">Novo Item</h3>
-                <button type="button" class="btn-close-custom" onclick="fecharModalEstoque()">&times;</button>
-            </div>
-            
+    <div id="modalEstoque" class="modal">
+        <div class="modal-conteudo">
+            <span class="botaoFechar" onclick="fecharModalEstoque()">&times;</span>
+            <h2 id="tituloModalEstoque">Cadastro de Item</h2>
+
             <form id="formEstoque" method="POST" action="php/salvarEstoque.php">
-                <div class="modal-body-custom">
-                    <input type="hidden" name="idEstoque" id="idEstoque" value="">
-                    
-                    <div class="form-grid">
-                        <div class="form-group">
-                            <label>Fornecedor</label>
-                            <input type="text" name="NomeFornecedor" id="NomeFornecedor" required>
-                        </div>
+                <input type="hidden" name="idEstoque" id="idEstoque" value="">
 
-                        <div class="form-group">
-                            <label>Peça</label>
-                            <input type="text" name="peca" id="peca" required>
-                        </div>
-
-                        <div class="form-row">
-                            <div class="form-group">
-                                <label>Valor Unitário (R$)</label>
-                                <input type="number" step="0.01" id="valor" name="valor" oninput="calcularTotal()" required>
-                            </div>
-                            <div class="form-group">
-                                <label>Quantidade</label>
-                                <input type="number" id="qtd" name="quantidade" oninput="calcularTotal()" required>
-                            </div>
-                        </div>
-
-                        <div class="form-group">
-                            <label>Total (R$)</label>
-                            <input type="number" step="0.01" id="total" name="total" class="input-total" readonly>
-                        </div>
+                <div class="linhaFormulario">
+                    <div class="grupo-input">
+                        <label for="NomeFornecedor">Fornecedor</label>
+                        <input type="text" name="NomeFornecedor" id="NomeFornecedor" required>
+                    </div>
+                    <div class="grupo-input">
+                        <label for="peca">Peça</label>
+                        <input type="text" name="peca" id="peca" required>
                     </div>
                 </div>
 
-                <div class="modal-buttons modal-footer-custom">
-                    <button type="button" class="btn btn-red" onclick="fecharModalEstoque()">Cancelar</button>
-                    <button type="submit" class="btn btn-sucesso">Salvar</button>
+                <div class="linhaFormulario">
+                    <div class="grupo-input">
+                        <label for="valor">Valor Unitário (R$)</label>
+                        <input type="number" step="0.01" id="valor" name="valor" oninput="calcularTotal()" required>
+                    </div>
+                    <div class="grupo-input">
+                        <label for="qtd">Quantidade</label>
+                        <input type="number" id="qtd" name="quantidade" oninput="calcularTotal()" required>
+                    </div>
+                </div>
+
+                <div class="linhaFormulario">
+                    <div class="grupo-input">
+                        <label for="total">Total (R$)</label>
+                        <input type="number" step="0.01" id="total" name="total" readonly>
+                    </div>
+                </div>
+
+                <div class="botaoContainer">
+                    <input type="submit" value="Salvar" id="botaoSalvar">
                 </div>
             </form>
+        </div>
+    </div>
+
+    <!-- MODAL DE VISUALIZAR ESTOQUE -->
+    <div id="modalEstoqueVisualizar" class="modal">
+        <div class="modal-conteudo">
+            <span class="botaoFechar" onclick="fecharModalVisualizarEstoque()">&times;</span>
+            <h2>Dados do Item do Estoque</h2>
+
+            <div class="linhaFormulario">
+                <div class="grupo-input">
+                    <label><strong>ID: </strong></label>
+                    <span id="txtIdEstoque"></span>
+                </div>
+                <div class="grupo-input">
+                    <label><strong>Fornecedor: </strong></label>
+                    <span id="txtFornecedorEstoque"></span>
+                </div>
+            </div>
+
+            <div class="linhaFormulario">
+                <div class="grupo-input">
+                    <label><strong>Peça: </strong></label>
+                    <span id="txtPecaEstoque"></span>
+                </div>
+                <div class="grupo-input">
+                    <label><strong>Valor Unitário: </strong></label>
+                    <span id="txtValorEstoque"></span>
+                </div>
+            </div>
+
+            <div class="linhaFormulario">
+                <div class="grupo-input">
+                    <label><strong>Quantidade: </strong></label>
+                    <span id="txtQtdEstoque"></span>
+                </div>
+                <div class="grupo-input">
+                    <label><strong>Total: </strong></label>
+                    <span id="txtTotalEstoque"></span>
+                </div>
+            </div>
         </div>
     </div>
         

@@ -20,6 +20,7 @@ $atividades_recentes = $dados['atividades'];
     <meta charset="UTF-8">
     <title>Relatório Gerencial - TechOS</title>
     <link rel="stylesheet" href="css/sidebar.css">
+    <link rel="stylesheet" href="css/style_geral.css">
     <link rel="stylesheet" href="css/dashboard.css">
     <link rel="stylesheet" href="css/relatorio.css">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
@@ -29,14 +30,20 @@ $atividades_recentes = $dados['atividades'];
 
     <div class="page-content">
         <!-- HEADER -->
-        <div class="relatorio-header">
+        <div class="os-header">
             <div>
-                <h2>Relatório Gerencial</h2>
-                <p style="color:#9fb3c8; margin-top:5px;">Análise detalhada de ordens de serviço</p>
+                <h2>Controle de Estoque</h2>
+                
+            </button>
             </div>
             <button id="btnExportar" class="btn-sucesso" style="background-color: #28a745; border:none; padding:12px 20px; border-radius:4px; color:white; cursor:pointer;">
                 <i class="fas fa-file-pdf"></i> Exportar PDF
-            </button>
+        </div>
+        <div class="relatorio-header">
+            <div>
+                <p style="color:#9fb3c8; margin-top:5px;">Análise detalhada de ordens de serviço</p>
+            </div>
+            
         </div>
 
         <!-- CARDS -->

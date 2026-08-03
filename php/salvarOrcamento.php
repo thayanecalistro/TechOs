@@ -1,5 +1,5 @@
 <?php
-include("includes/conexao.php");
+include("../includes/conexao.php");
 
 if ($_SERVER['REQUEST_METHOD'] == 'POST') {
     $cliente = intval($_POST['Cliente_idCliente']);
@@ -49,9 +49,9 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST') {
 
         // 2. Itera gravando os itens vinculados ao estoque físico na tabela orcamento_peca
         for ($i = 0; $i < count($arrIdsEstoque); $i++) {
-            $idEstoque = !empty($arrIdsEstoque[$i]) ? intval($arrIdsEstoque[$i]) : null;
+            $idEstoque = !empty($arrIdsEstoque[$i]) ? intval($arrIdsEstoque[$i]) : 0;
             
-            if ($idEstoque) {
+            if ($idEstoque > 0) {
                 $valUnitario = floatval($arrValores[$i]);
                 $quantidade = intval($arrQtds[$i]);
                 $totalItem = $valUnitario * $quantidade;
@@ -66,7 +66,10 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST') {
                 $sqlPeca = "INSERT INTO orcamento_peca (Orcamento_idOrcamento, Estoque_idEstoque, peca, quantidade, valorUnitario, total) 
                             VALUES ($idOrcamentoCriado, $idEstoque, '$nomePeca', $quantidade, $valUnitario, $totalItem)";
                     
-                mysqli_query($conn, $sqlPeca);
+                if (!mysqli_query($conn, $sqlPeca)) {
+                    echo "Erro ao salvar item do estoque na tabela orcamento_peca: " . mysqli_error($conn);
+                    exit;
+                }
             }
         }
     } else {

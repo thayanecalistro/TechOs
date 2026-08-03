@@ -82,9 +82,6 @@ function comboClientes() {
     $html = ""; 
     $sql = "SELECT idCliente, nomeCliente FROM clientes ORDER BY nomeCliente ASC";
     
-    // ATENÇÃO: Verifique se o caminho da conexão está correto. 
-    // Se o arquivo de funções está na pasta "php/", o caminho correto geralmente é "conexao.php" 
-    // ou "../includes/conexao.php". Ajuste conforme a estrutura das suas pastas.
     include("includes/conexao.php"); 
 
     if (!$conn) {
@@ -93,7 +90,7 @@ function comboClientes() {
 
     $result = mysqli_query($conn, $sql);
 
-    // Se a query der erro, isso vai te ajudar a descobrir o motivo técnico:
+    // Se a query der erro, isso vai ajudar a descobrir o motivo técnico:
     if (!$result) {
         return "<option value='Erro no SQL: " . mysqli_error($conn) . "'></option>";
     }
