@@ -63,6 +63,7 @@ if (!empty($sql)) {
     }
 }
 
+
 mysqli_close($conn);
 
 header("Location: ../cadastroAparelho.php");

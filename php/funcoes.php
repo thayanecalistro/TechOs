@@ -68,23 +68,64 @@ function nomeFuncionario($id = null) {
     return $_SESSION['nomeFuncionario'] ?? "Colaborador";
 }
 
-function registrarLog($acao, $descricao, $idFuncionario = null) {
-    include("includes/conexao.php");
-    
-    // Garante que a sessão esteja iniciada para ler a variável $_SESSION
-    if (session_status() === PHP_SESSION_NONE) {
-        session_start();
-    }
-    
-    $usuario = $_SESSION['nomeFuncionario'] ?? 'Sistema';
-    if (!$idFuncionario && isset($_SESSION['idFuncionario'])) {
-        $idFuncionario = $_SESSION['idFuncionario'];
+/**
+ * Registra logs de ações efetuadas no sistema TechOS.
+ * Aceita tanto: registrarLog($conn, 'Ação', 'Descrição') 
+ * quanto:       registrarLog('Ação', 'Descrição')
+ */
+function registrarLog($param1, $param2 = '', $param3 = '', $param4 = null) {
+    global $conn;
+
+    // 1. Identifica se o 1º parâmetro é uma conexão válida MySQLi
+    if ($param1 instanceof mysqli) {
+        $conexao   = $param1;
+        $acao      = $param2;
+        $descricao = $param3;
+        $usuario   = $param4;
+    } else {
+        $conexao   = $conn;
+        $acao      = $param1;
+        $descricao = $param2;
+        $usuario   = $param3;
     }
 
-    $stmt = $conn->prepare("INSERT INTO logs_sistema (usuarioLog, Funcionario_idFuncionario, acaoLog, descricaoLog) VALUES (?, ?, ?, ?)");
-    $stmt->bind_param("siss", $usuario, $idFuncionario, $acao, $descricao);
-    $stmt->execute();
-    $stmt->close();
-    mysqli_close($conn);
+    // 2. Se a conexão for nula, inclui o conexao.php usando o caminho absoluto correto (__DIR__)
+    if (!$conexao) {
+        $caminhoConexao = __DIR__ . '/../includes/conexao.php';
+        if (file_exists($caminhoConexao)) {
+            include_once($caminhoConexao);
+            $conexao = $conn; // Pega a variável $conn gerada pelo conexao.php
+        }
+    }
+
+    // 3. Trava de segurança: se mesmo assim não conectar, cancela para não dar Fatal Error
+    if (!$conexao) {
+        return false; 
+    }
+
+    // 4. Captura do usuário logado via Sessão
+    if (empty($usuario)) {
+        if (session_status() === PHP_SESSION_NONE) {
+            @session_start();
+        }
+        $usuario = $_SESSION['usuario_nome'] ?? $_SESSION['usuario'] ?? 'Sistema';
+    }
+
+    // 5. Captura do IP do cliente
+    $ip = $_SERVER['REMOTE_ADDR'] ?? '127.0.0.1';
+
+    // 6. Grava no banco de dados
+    $sql = "INSERT INTO logs (usuario, acao, descricao, dataHora, ip) VALUES (?, ?, ?, NOW(), ?)";
+    $stmt = mysqli_prepare($conexao, $sql);
+
+    if ($stmt) {
+        mysqli_stmt_bind_param($stmt, "ssss", $usuario, $acao, $descricao, $ip);
+        $sucesso = mysqli_stmt_execute($stmt);
+        mysqli_stmt_close($stmt);
+        return $sucesso;
+    }
+
+    return false;
 }
+
 ?>

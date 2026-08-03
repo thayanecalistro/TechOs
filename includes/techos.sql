@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Host: 127.0.0.1
--- Tempo de geração: 04/08/2026 às 00:42
+-- Tempo de geração: 04/08/2026 às 01:19
 -- Versão do servidor: 10.4.32-MariaDB
 -- Versão do PHP: 8.2.12
 
@@ -41,7 +41,9 @@ CREATE TABLE `aparelho` (
 
 INSERT INTO `aparelho` (`idAparelho`, `historicoAparelho`, `Cliente_idCliente`, `imeiAparelho`, `Modelo_idModelo`) VALUES
 (3, '', 1, '1231435462462462', '1'),
-(6, '', 10, '87586754632', '2');
+(6, '', 10, '87586754632', '2'),
+(12, '', 12, '76567435735764', '8'),
+(13, '', 11, '53673587537257253', '9');
 
 -- --------------------------------------------------------
 
@@ -101,7 +103,11 @@ INSERT INTO `estoque` (`idEstoque`, `NomeFornecedor`, `peca`, `valor`, `quantida
 (4, 'X3 Distribuidora', 'Cabo Samsung Tipo C para Tipo C (1 Metro) Original', 29.00, 15, 435.00),
 (5, 'X3 Distribuidora', 'Frontal Tela Display Samsung A26 5G A266 Com Aro Original', 460.00, 3, 1380.00),
 (6, 'Central Peças', 'Tela Display Lcd Frontal Iphone 17 Pro Oled WEKEEP CI', 830.00, 3, 2490.00),
-(7, 'Central Peças', 'Bateria Iphone 15 Pro Modelo Vip', 125.00, 4, 500.00);
+(7, 'Central Peças', 'Bateria Iphone 15 Pro Modelo Vip', 125.00, 4, 500.00),
+(8, 'Central Peças', 'Tela Display Lcd Samsung A10 A105 Incell', 48.00, 10, 480.00),
+(9, 'Central Peças', 'Tela Display Lcd Samsung A12 Original Retirada', 105.00, 4, 420.00),
+(10, 'Central Peças', 'Tela Display Lcd Motorola Moto G10 G20 G30 Xt2127 Xt2129 Com Aro', 58.00, 7, 406.00),
+(11, 'Central Peças', 'Tela Display Lcd Xiaomi Redmi Note 8', 52.00, 6, 312.00);
 
 -- --------------------------------------------------------
 
@@ -136,6 +142,30 @@ INSERT INTO `funcionario` (`idFuncionario`, `tipoFuncionario`, `nomeFuncionario`
 (4, 'Atendente', 'Maria Clara', '12345678990', 99437521, 'maria@gmail', 44444444, 'Rua Via Coletora B', 1343, 'Sobrado', 'Nossa Senhora das Graças', 'Santo Antônio de Jesus', 'BA', 'maria.clara', '202cb962ac59075b964b07152d234b70', 'func_6a6fde00b30b1.png'),
 (6, 'Administrador', 'Nicolly Fernanda Aureliano Pereira', '05490056165', 99437521, 'nicolly@fernanda', 44444444, 'Rua Via Coletora B', 1343, 'Sobrado', 'Nossa Senhora das Graças', 'Santo Antônio de Jesus', 'BA', 'nicolly.pereira', '202cb962ac59075b964b07152d234b70', 'padrao.png'),
 (7, 'Administrador', 'thayane', '12345678098', 2147483647, 'thyaane@teste.com', 44444444, 'Rua Via Coletora B', 678, 'casa', 'Nossa Senhora das Graças', 'Santo Antônio de Jesus', 'BA', 'thay.teste', '202cb962ac59075b964b07152d234b70', 'func_6a7115d4194d0.png');
+
+-- --------------------------------------------------------
+
+--
+-- Estrutura para tabela `logs`
+--
+
+CREATE TABLE `logs` (
+  `idLog` int(11) NOT NULL,
+  `usuario` varchar(100) NOT NULL,
+  `acao` varchar(100) NOT NULL,
+  `descricao` text DEFAULT NULL,
+  `dataHora` datetime DEFAULT current_timestamp(),
+  `ip` varchar(45) DEFAULT NULL
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
+
+--
+-- Despejando dados para a tabela `logs`
+--
+
+INSERT INTO `logs` (`idLog`, `usuario`, `acao`, `descricao`, `dataHora`, `ip`) VALUES
+(1, 'Sistema', 'Novo Aparelho', 'Cadastrou o aparelho IMEI: 76567435735764', '2026-08-03 20:09:07', '::1'),
+(2, 'Sistema', 'Exclusão de Aparelho', 'Excluiu o aparelho ID: #7', '2026-08-03 20:09:10', '::1'),
+(3, 'Sistema', 'Novo Aparelho', 'Cadastrou o aparelho IMEI: 53673587537257253', '2026-08-03 20:10:05', '::1');
 
 -- --------------------------------------------------------
 
@@ -184,7 +214,9 @@ INSERT INTO `modelo` (`idModelo`, `nomeModelo`, `Marca_idMarca`) VALUES
 (4, '14', 2),
 (5, 'Galaxy A15', 1),
 (6, 'modelo', 1),
-(7, 'Galaxy S26', 2);
+(7, 'Galaxy S26', 2),
+(8, 'A12', 1),
+(9, 'Moto G10', 4);
 
 -- --------------------------------------------------------
 
@@ -206,6 +238,15 @@ CREATE TABLE `orcamento` (
   `dataOrcamento` datetime DEFAULT current_timestamp() COMMENT 'Data e hora de criação ou registro do orçamento no sistema'
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
 
+--
+-- Despejando dados para a tabela `orcamento`
+--
+
+INSERT INTO `orcamento` (`idOrcamento`, `diagnostico`, `peca`, `valorUni`, `maoObra`, `valorTotal`, `status`, `OS_idOS`, `Cliente_idCliente`, `Aparelho_idAparelho`, `dataOrcamento`) VALUES
+(3, 'trocar tela e bateria', 'Múltiplas Peças', 1984.00, 50.00, 2034.00, 'aberto', NULL, 1, 3, '2026-08-03 20:17:57'),
+(4, 'trocar tela', 'Tela Display Lcd Motorola Moto G10 G20 G30 Xt2127 Xt2129 Com Aro', 58.00, 50.00, 108.00, 'aberto', NULL, 11, 13, '2026-08-03 20:18:20'),
+(5, 'tela com defeito no display', 'Tela Display Lcd Frontal Iphone 17 Pro Oled WEKEEP CI', 830.00, 50.00, 880.00, 'aberto', NULL, 10, 6, '2026-08-03 20:19:06');
+
 -- --------------------------------------------------------
 
 --
@@ -221,6 +262,16 @@ CREATE TABLE `orcamento_peca` (
   `valorUnitario` decimal(10,2) NOT NULL COMMENT 'Preço de uma unidade da peça no momento da criação do orçamento',
   `total` decimal(10,2) NOT NULL COMMENT 'Valor total deste item(multiplicação da quantidade pelo valor unitário)'
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
+
+--
+-- Despejando dados para a tabela `orcamento_peca`
+--
+
+INSERT INTO `orcamento_peca` (`idOrcamentoPeca`, `Orcamento_idOrcamento`, `Estoque_idEstoque`, `peca`, `quantidade`, `valorUnitario`, `total`) VALUES
+(2, 3, 2, 'Frontal Tela Display Samsung S23 Ultra S918 Com Aro Original', 1, 1899.00, 1899.00),
+(3, 3, 3, 'Bateria Samsung A23 / M23 / M33 / M52 / M53 / A73 (M526) Original', 1, 85.00, 85.00),
+(4, 4, 10, 'Tela Display Lcd Motorola Moto G10 G20 G30 Xt2127 Xt2129 Com Aro', 1, 58.00, 58.00),
+(5, 5, 6, 'Tela Display Lcd Frontal Iphone 17 Pro Oled WEKEEP CI', 1, 830.00, 830.00);
 
 -- --------------------------------------------------------
 
@@ -271,6 +322,12 @@ ALTER TABLE `funcionario`
   ADD PRIMARY KEY (`idFuncionario`);
 
 --
+-- Índices de tabela `logs`
+--
+ALTER TABLE `logs`
+  ADD PRIMARY KEY (`idLog`);
+
+--
 -- Índices de tabela `marca`
 --
 ALTER TABLE `marca`
@@ -316,7 +373,7 @@ ALTER TABLE `os`
 -- AUTO_INCREMENT de tabela `aparelho`
 --
 ALTER TABLE `aparelho`
-  MODIFY `idAparelho` int(11) NOT NULL AUTO_INCREMENT COMMENT 'Número identificador do aparelho dentro do sistema', AUTO_INCREMENT=7;
+  MODIFY `idAparelho` int(11) NOT NULL AUTO_INCREMENT COMMENT 'Número identificador do aparelho dentro do sistema', AUTO_INCREMENT=14;
 
 --
 -- AUTO_INCREMENT de tabela `clientes`
@@ -328,13 +385,19 @@ ALTER TABLE `clientes`
 -- AUTO_INCREMENT de tabela `estoque`
 --
 ALTER TABLE `estoque`
-  MODIFY `idEstoque` int(11) NOT NULL AUTO_INCREMENT COMMENT 'Chave primária de identificaçãodo registro de estoque', AUTO_INCREMENT=8;
+  MODIFY `idEstoque` int(11) NOT NULL AUTO_INCREMENT COMMENT 'Chave primária de identificaçãodo registro de estoque', AUTO_INCREMENT=12;
 
 --
 -- AUTO_INCREMENT de tabela `funcionario`
 --
 ALTER TABLE `funcionario`
   MODIFY `idFuncionario` int(11) NOT NULL AUTO_INCREMENT COMMENT 'Chave primária de identificação do funcionário', AUTO_INCREMENT=8;
+
+--
+-- AUTO_INCREMENT de tabela `logs`
+--
+ALTER TABLE `logs`
+  MODIFY `idLog` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=4;
 
 --
 -- AUTO_INCREMENT de tabela `marca`
@@ -346,7 +409,19 @@ ALTER TABLE `marca`
 -- AUTO_INCREMENT de tabela `modelo`
 --
 ALTER TABLE `modelo`
-  MODIFY `idModelo` int(11) NOT NULL AUTO_INCREMENT COMMENT 'Chave primária de identificação do modelo do aparelho', AUTO_INCREMENT=8;
+  MODIFY `idModelo` int(11) NOT NULL AUTO_INCREMENT COMMENT 'Chave primária de identificação do modelo do aparelho', AUTO_INCREMENT=10;
+
+--
+-- AUTO_INCREMENT de tabela `orcamento`
+--
+ALTER TABLE `orcamento`
+  MODIFY `idOrcamento` int(11) NOT NULL AUTO_INCREMENT COMMENT 'Chave primária de identificação do orçamento', AUTO_INCREMENT=6;
+
+--
+-- AUTO_INCREMENT de tabela `orcamento_peca`
+--
+ALTER TABLE `orcamento_peca`
+  MODIFY `idOrcamentoPeca` int(11) NOT NULL AUTO_INCREMENT COMMENT 'Chave primária de identificação do item do orçamento', AUTO_INCREMENT=6;
 COMMIT;
 
 /*!40101 SET CHARACTER_SET_CLIENT=@OLD_CHARACTER_SET_CLIENT */;
