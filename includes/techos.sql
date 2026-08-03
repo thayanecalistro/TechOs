@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Host: 127.0.0.1
--- Tempo de geração: 17/07/2026 às 02:05
+-- Tempo de geração: 03/08/2026 às 03:01
 -- Versão do servidor: 10.4.32-MariaDB
 -- Versão do PHP: 8.2.12
 
@@ -40,10 +40,8 @@ CREATE TABLE `aparelho` (
 --
 
 INSERT INTO `aparelho` (`idAparelho`, `historicoAparelho`, `Cliente_idCliente`, `imeiAparelho`, `Modelo_idModelo`) VALUES
-(2, '', 3, '1231435462462462', '2'),
-(3, '', 1, '1231435462462462', '1'),
-(4, '', 3, '89759857843', '4'),
-(5, '', 3, '45687565754', '5');
+(3, '', 1, '2460', '7'),
+(6, '', 10, '123', '6');
 
 -- --------------------------------------------------------
 
@@ -87,7 +85,7 @@ CREATE TABLE `clientes` (
 INSERT INTO `clientes` (`idCliente`, `nomeCliente`, `cpfCliente`, `emailCliente`, `telefoneCliente`, `cepCliente`, `enderecoCliente`, `numeroCliente`, `complementoCliente`, `bairroCliente`, `cidadeCliente`, `estadoCliente`) VALUES
 (1, 'Nicolly Fernanda', '09657885454', '', '999999999', '77777777', 'Rua jacupiranga', '1343', 'Sobrado', 'Aventureiro', 'Joinville', 'Santa catarina'),
 (2, 'Nicolly Fernanda Aureliano Pereira', '054900', '', '999437521', '054289', 'Rua jacupiranga', '55555555', 'sobrado', 'Morro do meio', 'Itajaí', 'SC'),
-(3, 'Dérik Patrik ', '1444521', '', '1548789', '159458', 'Rua Marilnada', '1254', 'De frente ao posto', 'Aventureiro', 'Joinville', 'SC');
+(10, 'Lucas Berto', '31265479890', '', '299999999999', '44444444', 'Rua Via Coletora B', '123', '', 'Nossa Senhora das Graças', 'Santo Antônio de Jesus', 'BA');
 
 -- --------------------------------------------------------
 
@@ -128,21 +126,27 @@ CREATE TABLE `funcionario` (
   `tipoFuncionario` varchar(50) DEFAULT NULL COMMENT 'Cargo, nível de acesso ou perfil do funcionário',
   `nomeFuncionario` varchar(150) NOT NULL COMMENT 'Nome completo do funcionário',
   `cpfFuncionario` varchar(20) DEFAULT NULL COMMENT 'CPF do funcionário',
+  `telefoneFuncionario` int(20) NOT NULL,
   `emailFuncionario` varchar(150) DEFAULT NULL COMMENT 'E-mail para contato e comunicação interna',
-  `telefoneFuncionario` varchar(30) DEFAULT NULL COMMENT 'Telefone ou celular de contato do funcionário',
+  `cepFuncionario` int(11) NOT NULL,
   `enderecoFuncionario` varchar(255) DEFAULT NULL COMMENT 'Endereço residencial completo do funcionário',
+  `numeroFuncionario` int(11) NOT NULL,
+  `complementoFuncionario` varchar(50) NOT NULL,
+  `bairroFuncionario` varchar(30) NOT NULL,
+  `cidadeFuncionario` varchar(30) NOT NULL,
+  `estadoFuncionario` varchar(30) NOT NULL,
   `login` varchar(100) DEFAULT NULL COMMENT 'Nome do usuário utilizado para autentificação no sistema',
   `senha` varchar(255) DEFAULT NULL COMMENT 'Senha de acesso criptografada do funcionário para login no sistema',
-  `foto` varchar(120) DEFAULT NULL COMMENT 'Foto do funcionário'
+  `fotoFuncionario` varchar(225) DEFAULT NULL COMMENT 'Foto do funcionário'
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
 
 --
 -- Despejando dados para a tabela `funcionario`
 --
 
-INSERT INTO `funcionario` (`idFuncionario`, `tipoFuncionario`, `nomeFuncionario`, `cpfFuncionario`, `emailFuncionario`, `telefoneFuncionario`, `enderecoFuncionario`, `login`, `senha`, `foto`) VALUES
-(1, '1', 'Nicolly Fernanda', '05490056165', 'Nico@gmail ', '37999567564', 'Rua jacupiranga', 'nicolly.pereira', '123', NULL),
-(2, 'Administrador', 'thayane Calistro', '12345678988', 'thayane@teste.com', '47987654321', 'Rua Jaraguna, 764', 'Thay.teste', '$2y$10$1zcfHJSnacLFVemG4USHI.bZLrmRn3afdZM73sULfNtnAY29AU4ne', '6a4d77932f29b.jpg');
+INSERT INTO `funcionario` (`idFuncionario`, `tipoFuncionario`, `nomeFuncionario`, `cpfFuncionario`, `telefoneFuncionario`, `emailFuncionario`, `cepFuncionario`, `enderecoFuncionario`, `numeroFuncionario`, `complementoFuncionario`, `bairroFuncionario`, `cidadeFuncionario`, `estadoFuncionario`, `login`, `senha`, `fotoFuncionario`) VALUES
+(4, 'Atendente', 'Maria Clara', '12345678990', 99437521, 'maria@gmail', 44444444, 'Rua Via Coletora B', 1343, 'Sobrado', 'Nossa Senhora das Graças', 'Santo Antônio de Jesus', 'BA', 'maria.clara', '202cb962ac59075b964b07152d234b70', 'func_6a6fde00b30b1.png'),
+(6, 'Administrador', 'Nicolly Fernanda Aureliano Pereira', '05490056165', 99437521, 'nicolly@fernanda', 44444444, 'Rua Via Coletora B', 1343, 'Sobrado', 'Nossa Senhora das Graças', 'Santo Antônio de Jesus', 'BA', 'nicolly.pereira', '202cb962ac59075b964b07152d234b70', 'padrao.png');
 
 -- --------------------------------------------------------
 
@@ -203,7 +207,9 @@ INSERT INTO `modelo` (`idModelo`, `nomeModelo`, `Marca_idMarca`) VALUES
 (2, '16', 2),
 (3, 'S23', 1),
 (4, '14', 2),
-(5, 'Galaxy A15', 1);
+(5, 'Galaxy A15', 1),
+(6, 'modelo', 1),
+(7, 'Galaxy S26', 2);
 
 -- --------------------------------------------------------
 
@@ -376,7 +382,7 @@ ALTER TABLE `os`
 -- AUTO_INCREMENT de tabela `aparelho`
 --
 ALTER TABLE `aparelho`
-  MODIFY `idAparelho` int(11) NOT NULL AUTO_INCREMENT COMMENT 'Número identificador do aparelho dentro do sistema', AUTO_INCREMENT=6;
+  MODIFY `idAparelho` int(11) NOT NULL AUTO_INCREMENT COMMENT 'Número identificador do aparelho dentro do sistema', AUTO_INCREMENT=7;
 
 --
 -- AUTO_INCREMENT de tabela `atividade`
@@ -388,7 +394,7 @@ ALTER TABLE `atividade`
 -- AUTO_INCREMENT de tabela `clientes`
 --
 ALTER TABLE `clientes`
-  MODIFY `idCliente` int(11) NOT NULL AUTO_INCREMENT COMMENT 'Número de identificação do cliente', AUTO_INCREMENT=10;
+  MODIFY `idCliente` int(11) NOT NULL AUTO_INCREMENT COMMENT 'Número de identificação do cliente', AUTO_INCREMENT=11;
 
 --
 -- AUTO_INCREMENT de tabela `estoque`
@@ -400,7 +406,7 @@ ALTER TABLE `estoque`
 -- AUTO_INCREMENT de tabela `funcionario`
 --
 ALTER TABLE `funcionario`
-  MODIFY `idFuncionario` int(11) NOT NULL AUTO_INCREMENT COMMENT 'Chave primária de identificação do funcionário', AUTO_INCREMENT=3;
+  MODIFY `idFuncionario` int(11) NOT NULL AUTO_INCREMENT COMMENT 'Chave primária de identificação do funcionário', AUTO_INCREMENT=7;
 
 --
 -- AUTO_INCREMENT de tabela `gastos`
@@ -418,7 +424,7 @@ ALTER TABLE `marca`
 -- AUTO_INCREMENT de tabela `modelo`
 --
 ALTER TABLE `modelo`
-  MODIFY `idModelo` int(11) NOT NULL AUTO_INCREMENT COMMENT 'Chave primária de identificação do modelo do aparelho', AUTO_INCREMENT=6;
+  MODIFY `idModelo` int(11) NOT NULL AUTO_INCREMENT COMMENT 'Chave primária de identificação do modelo do aparelho', AUTO_INCREMENT=8;
 
 --
 -- AUTO_INCREMENT de tabela `orcamento`
