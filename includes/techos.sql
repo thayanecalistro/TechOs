@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Host: 127.0.0.1
--- Tempo de geração: 04/08/2026 às 01:19
+-- Tempo de geração: 05/08/2026 às 00:15
 -- Versão do servidor: 10.4.32-MariaDB
 -- Versão do PHP: 8.2.12
 
@@ -422,6 +422,12 @@ ALTER TABLE `orcamento`
 --
 ALTER TABLE `orcamento_peca`
   MODIFY `idOrcamentoPeca` int(11) NOT NULL AUTO_INCREMENT COMMENT 'Chave primária de identificação do item do orçamento', AUTO_INCREMENT=6;
+
+--
+-- AUTO_INCREMENT de tabela `os`
+--
+ALTER TABLE `os`
+  MODIFY `idOS` int(11) NOT NULL AUTO_INCREMENT COMMENT 'Chave primária de identificação da Ordem de Serviço';
 COMMIT;
 
 /*!40101 SET CHARACTER_SET_CLIENT=@OLD_CHARACTER_SET_CLIENT */;
