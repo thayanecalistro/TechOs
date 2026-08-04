@@ -56,7 +56,7 @@ $idLogado = $_SESSION['idFuncionario'] ?? null;
         </li>
 
         <li class="menu-item <?= ($currentPage == 'aparelho') ? 'active' : ''; ?>">
-            <a href="cadastroAparelho.php"><i class="fas fa-laptop"></i> <span>Aparelho</span></a>
+            <a href="aparelho.php"><i class="fas fa-laptop"></i> <span>Aparelho</span></a>
         </li>
 
         <?php if (isset ($_SESSION['tipoFuncionario']) && $_SESSION['tipoFuncionario'] === 'Administrador') : ?>

@@ -86,10 +86,10 @@ function getDadosRelatorio($status = '', $data_inicio = '', $data_fim = '', $bus
     $resFat = mysqli_query($conn, "SELECT SUM(valorOS) as total FROM os WHERE LOWER(status) IN ('finalizado', 'concluido', 'concluída')");
     $faturamento = mysqli_fetch_assoc($resFat)['total'] ?? 0.0;
 
-    $resPend = mysqli_query($conn, "SELECT COUNT(*) as total FROM os WHERE LOWER(status) IN ('aberta', 'aberto', 'em andamento', 'pendente')");
+    $resPend = mysqli_query($conn, "SELECT COUNT(*) as total FROM os WHERE LOWER(status) IN ('andamento')");
     $pendentes = mysqli_fetch_assoc($resPend)['total'] ?? 0;
 
-    $resConc = mysqli_query($conn, "SELECT COUNT(*) as total FROM os WHERE LOWER(status) IN ('finalizado', 'concluido', 'concluída')");
+    $resConc = mysqli_query($conn, "SELECT COUNT(*) as total FROM os WHERE LOWER(status) IN ('pronto', 'devolvido')");
     $concluidas = mysqli_fetch_assoc($resConc)['total'] ?? 0;
 
     $resCli = mysqli_query($conn, "SELECT COUNT(*) as total FROM clientes");
