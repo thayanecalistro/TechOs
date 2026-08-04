@@ -1,4 +1,4 @@
-// Selecionando elementos em html 
+// TELA DE CADASTRO
 const modal = document.getElementById("meuModal"); 
 const botaoAbrir = document.getElementById("botaoAbrir"); 
 const botaoFechar = document.querySelector(".botaoFechar"); 
