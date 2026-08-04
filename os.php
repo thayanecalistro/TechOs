@@ -45,7 +45,6 @@ $currentPage = 'os';
 
         <div class="section-card">
             <div class="footer-actions">
-                <button type="button" class="btn btn-red" id="btnExcluir">Excluir</button>
                 <button type="button" class="btn btn-light-blue" onclick="window.location.reload();">Atualizar Tabela</button>
             </div>
 
