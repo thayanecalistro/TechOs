@@ -3,7 +3,7 @@
 // 1. CONTA AS OSs ABERTAS / PENDENTES
 function d_totalOsAbertas() {
     include("includes/conexao.php");
-    $sql = "SELECT COUNT(*) AS total FROM os WHERE LOWER(status) IN ('aberta', 'aberto', 'pendente')";
+    $sql = "SELECT COUNT(*) AS total FROM os WHERE LOWER(status) IN ('andamento', 'pronto', 'devolvido');";
     $result = mysqli_query($conn, $sql);
     $row = mysqli_fetch_assoc($result);
     mysqli_close($conn);
