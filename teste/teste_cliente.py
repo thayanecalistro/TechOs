@@ -1,5 +1,5 @@
 """
-TESTE AUTOMATIZADO - CADASTRO DE CLIENTE (VERSÃO DASHBOARD)
+TESTE AUTOMATIZADO - CADASTRO DE CLIENTE (DADOS DINÂMICOS & VARIADOS)
 Sistema: TechOS
 Ferramenta: Selenium WebDriver com Python
 """
@@ -14,9 +14,19 @@ import random
 import os
 import webbrowser
 
+# Tenta importar a biblioteca Faker para dados ultras variados; se não houver, usa gerador interno
+try:
+    from faker import Faker
+    fake = Faker('pt_BR')
+    USA_FAKER = True
+except ImportError:
+    USA_FAKER = False
+
 class TesteAutomatizadoCliente:
-    def __init__(self, url_base="http://localhost:8080/techos/cliente.php"):
+    def __init__(self, url_base="http://localhost:8080/TechOs/"):
         self.url_base = url_base
+        self.url_login = url_base + "index.php"
+        self.url_cliente = url_base + "cliente.php"
         self.diretorio_teste = "TesteCadastroCliente"
         
         if not os.path.exists(self.diretorio_teste):
@@ -32,34 +42,65 @@ class TesteAutomatizadoCliente:
         
         print("✓ Ambiente preparado e pasta 'TesteCadastroCliente' verificada!")
 
+    def realizar_login(self, usuario="nicolly.pereira", senha="123"):
+        """Realiza o login para garantir acesso à área restrita."""
+        print("🔐 Efetuando login...")
+        self.driver.get(self.url_login)
+        
+        form_login = self.wait.until(EC.presence_of_element_located((By.XPATH, "//form[contains(@action, 'login_funcionario.php')]")))
+        
+        campo_usuario = form_login.find_element(By.NAME, "nLogin")
+        campo_senha = form_login.find_element(By.NAME, "nSenha")
+        
+        campo_usuario.clear()
+        campo_usuario.send_keys(usuario)
+        
+        campo_senha.clear()
+        campo_senha.send_keys(senha)
+        
+        form_login.submit()
+        time.sleep(2)
+        self.tratar_alerta_se_existir()
+
     def gerar_dados_aleatorios(self):
-        nomes = ["Ana Souza", "Carlos Eduardo", "Mariana Oliveira", "Roberto Santos", 
-                 "Fernanda Lima", "Lucas Mendes", "Patricia Rocha", "Gabriel Costa"]
+        # Lista de CEPs válidos para evitar travamento da API ViaCEP
+        ceps_validos = ["89201-000", "89218-000", "80010-000", "01001-000", "88010-000", "13010-000"]
         
-        # CEPs reais para a consulta de ViaCEP do script não falhar
-        ceps_validos = [
-            "89201-000", "89218-000", "80010-000", "01001-000", "88010-000"
-        ]
-        
-        nome = random.choice(nomes)
-        cpf = f"{random.randint(100, 999)}.{random.randint(100, 999)}.{random.randint(100, 999)}-{random.randint(10, 99)}"
-        telefone = f"4799{random.randint(1000, 9999)}1234"
-        
+        if USA_FAKER:
+            nome = fake.name()
+            cpf = fake.cpf()
+            telefone = f"479{random.randint(8000, 9999)}{random.randint(1000, 9999)}"
+            rua = fake.street_name()
+            bairro = fake.bairro()
+            cidade = fake.city()
+            uf = fake.state_abbr()
+        else:
+            # Fallback robusto com combinatória expandida
+            primeiros_nomes = ["Ana", "Carlos", "Mariana", "Roberto", "Fernanda", "Lucas", "Patricia", "Gabriel", "Beatriz", "Thiago", "Camila", "Rodrigo", "Juliana", "Felipe"]
+            sobrenomes = ["Souza", "Eduardo", "Oliveira", "Santos", "Lima", "Mendes", "Rocha", "Costa", "Almeida", "Ferreira", "Ribeiro", "Carvalho", "Gomes", "Martins"]
+            
+            nome = f"{random.choice(primeiros_nomes)} {random.choice(sobrenomes)} {random.choice(sobrenomes)}"
+            cpf = f"{random.randint(100, 999)}.{random.randint(100, 999)}.{random.randint(100, 999)}-{random.randint(10, 99)}"
+            telefone = f"479{random.randint(8000, 9999)}{random.randint(1000, 9999)}"
+            rua = f"Rua {random.choice(['das Flores', 'Brasil', 'Amazonas', 'São Paulo', 'XV de Novembro', 'Sete de Setembro'])}"
+            bairro = random.choice(["Centro", "America", "Anita Garibaldi", "Costa e Silva", "Saguaçu", "Floresta"])
+            cidade = "Joinville"
+            uf = "SC"
+
         return {
             "nome": nome,
             "cpf": cpf,
             "telefone": telefone,
             "cep": random.choice(ceps_validos),
-            "endereco": f"Rua das Flores, {random.randint(10, 500)}",
-            "numero": str(random.randint(1, 1000)),
-            "complemento": f"Apto {random.randint(101, 502)}",
-            "bairro": "Centro",
-            "cidade": "Joinville",
-            "estado": "SC"
+            "endereco": rua,
+            "numero": str(random.randint(1, 2000)),
+            "complemento": f"Apto {random.randint(101, 902)}" if random.choice([True, False]) else "",
+            "bairro": bairro,
+            "cidade": cidade,
+            "estado": uf
         }
 
     def tratar_alerta_se_existir(self):
-        """Fecha qualquer alert do navegador caso apareça."""
         try:
             WebDriverWait(self.driver, 2).until(EC.alert_is_present())
             alerta = self.driver.switch_to.alert
@@ -71,16 +112,13 @@ class TesteAutomatizadoCliente:
             return None
 
     def tirar_screenshot(self, nome_arquivo):
-        # Trata pop-ups antes de tirar a print
         self.tratar_alerta_se_existir()
-        
         caminho = os.path.join(self.diretorio_teste, nome_arquivo)
         self.driver.save_screenshot(caminho)
-        return nome_arquivo
+        return caminho
 
     def gerar_relatorio_html(self):
         caminho_html = os.path.join(self.diretorio_teste, "dashboard.html")
-        
         sucessos = sum(1 for r in self.resultados_testes if r['status'] == 'Sucesso')
         falhas = len(self.resultados_testes) - sucessos
 
@@ -119,6 +157,7 @@ class TesteAutomatizadoCliente:
                         <tr>
                             <th>ID</th>
                             <th>Cliente</th>
+                            <th>CPF</th>
                             <th>Status</th>
                             <th>Evidência</th>
                         </tr>
@@ -128,12 +167,14 @@ class TesteAutomatizadoCliente:
         
         for r in self.resultados_testes:
             cor_status = "status-sucesso" if r['status'] == 'Sucesso' else "status-falha"
+            nome_print_apenas = os.path.basename(r['screenshot'])
             html_content += f"""
                 <tr>
                     <td>{r['id']}</td>
                     <td>{r['nome']}</td>
+                    <td>{r['cpf']}</td>
                     <td class="{cor_status}">{r['status']}</td>
-                    <td><a class="img-link" href="{r['screenshot']}" target="_blank">Visualizar Screenshot</a></td>
+                    <td><a class="img-link" href="{nome_print_apenas}" target="_blank">Visualizar Screenshot</a></td>
                 </tr>
             """
 
@@ -151,40 +192,47 @@ class TesteAutomatizadoCliente:
         return caminho_html
 
     def executar_teste_completo(self, quantidade):
+        self.realizar_login()
+
         for i in range(quantidade):
-            print(f"\n🚀 Iniciando cadastro {i+1} de {quantidade}...")
             dados = self.gerar_dados_aleatorios()
+            print(f"\n🚀 Cadastrando cliente {i+1} de {quantidade}: {dados['nome']} | CPF: {dados['cpf']}")
             status = "Falha"
             
             try:
-                self.driver.get(self.url_base)
+                self.driver.get(self.url_cliente)
                 
-                # Clica em Novo Cliente
-                btn_novo = self.wait.until(EC.element_to_be_clickable((By.ID, "botaoAbrir")))
-                btn_novo.click()
+                # Clica em Novo Cliente via JS para evitar interrupções de layout
+                btn_novo = self.wait.until(EC.presence_of_element_located((By.ID, "botaoAbrir")))
+                self.driver.execute_script("arguments[0].click();", btn_novo)
                 
-                # Localiza formulário do modal
                 modal_form = self.wait.until(EC.visibility_of_element_located((By.CSS_SELECTOR, "#meuModal form")))
                 
+                modal_form.find_element(By.NAME, "nNome").clear()
                 modal_form.find_element(By.NAME, "nNome").send_keys(dados["nome"])
+                
+                modal_form.find_element(By.NAME, "nCpf").clear()
                 modal_form.find_element(By.NAME, "nCpf").send_keys(dados["cpf"])
+                
+                modal_form.find_element(By.NAME, "nTelefone").clear()
                 modal_form.find_element(By.NAME, "nTelefone").send_keys(dados["telefone"])
                 
-                # Insere o CEP
                 campo_cep = modal_form.find_element(By.NAME, "nCep")
+                campo_cep.clear()
                 campo_cep.send_keys(dados["cep"])
                 
-                # Simula mudança de foco para o JavaScript acionar a busca de CEP, caso haja evento blur/change
-                modal_form.find_element(By.NAME, "nEndereco").click()
+                # Dispara evento para o script da página preencher o endereço
+                self.driver.execute_script("arguments[0].dispatchEvent(new Event('blur'));", campo_cep)
                 time.sleep(1) 
-                
-                # Fecha algum alerta de CEP se tiver aparecido
                 self.tratar_alerta_se_existir()
 
                 modal_form.find_element(By.NAME, "nEndereco").clear()
                 modal_form.find_element(By.NAME, "nEndereco").send_keys(dados["endereco"])
                 
+                modal_form.find_element(By.NAME, "nNumero").clear()
                 modal_form.find_element(By.NAME, "nNumero").send_keys(dados["numero"])
+                
+                modal_form.find_element(By.NAME, "nComplemento").clear()
                 modal_form.find_element(By.NAME, "nComplemento").send_keys(dados["complemento"])
                 
                 modal_form.find_element(By.NAME, "nBairro").clear()
@@ -196,12 +244,10 @@ class TesteAutomatizadoCliente:
                 modal_form.find_element(By.NAME, "nEstado").clear()
                 modal_form.find_element(By.NAME, "nEstado").send_keys(dados["estado"])
                 
-                # Salva
-                modal_form.find_element(By.ID, "botaoSalvar").click()
+                btn_salvar = modal_form.find_element(By.ID, "botaoSalvar")
+                self.driver.execute_script("arguments[0].click();", btn_salvar)
                 
                 time.sleep(2)
-                
-                # Trata alerta caso salvar exiba alguma mensagem pop-up
                 self.tratar_alerta_se_existir()
 
                 if "cliente" in self.driver.current_url.lower():
@@ -214,6 +260,7 @@ class TesteAutomatizadoCliente:
             self.resultados_testes.append({
                 "id": i+1,
                 "nome": dados["nome"],
+                "cpf": dados["cpf"],
                 "status": status,
                 "screenshot": nome_print
             })
@@ -225,11 +272,11 @@ class TesteAutomatizadoCliente:
         webbrowser.open('file://' + os.path.realpath(caminho_report))
 
 if __name__ == "__main__":
-    print("--- SISTEMA DE AUTOMAÇÃO TECHOS ---")
+    print("--- SISTEMA DE AUTOMAÇÃO TECHOS (CLIENTES) ---")
     try:
         qtd = int(input("Quantos clientes você deseja cadastrar hoje? "))
         if qtd > 0:
-            URL_LOCAL = "http://localhost:8080/techos/cliente.php"
+            URL_LOCAL = "http://localhost:8080/TechOs/"
             teste = TesteAutomatizadoCliente(url_base=URL_LOCAL)
             teste.executar_teste_completo(qtd)
         else:
