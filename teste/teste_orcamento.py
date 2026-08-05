@@ -8,6 +8,7 @@ from selenium import webdriver
 from selenium.webdriver.common.by import By
 from selenium.webdriver.support.ui import WebDriverWait
 from selenium.webdriver.support import expected_conditions as EC
+from selenium.webdriver.support.ui import Select
 from selenium.webdriver.chrome.options import Options
 import time
 import random
@@ -15,7 +16,7 @@ import os
 import webbrowser
 
 class TesteAutomatizadoOrcamento:
-    def __init__(self, url_base="http://localhost:8080/techos/"):
+    def __init__(self, url_base="http://localhost:8080/TechOs/"):
         self.url_base = url_base
         self.url_login = url_base + "index.php"
         self.url_orcamento = url_base + "orcamentos.php"
@@ -84,7 +85,7 @@ class TesteAutomatizadoOrcamento:
         self.tratar_alerta_se_existir()
         caminho = os.path.join(self.diretorio_teste, nome_arquivo)
         self.driver.save_screenshot(caminho)
-        return nome_arquivo
+        return caminho
 
     def gerar_relatorio_html(self):
         caminho_html = os.path.join(self.diretorio_teste, "dashboard.html")
@@ -137,13 +138,14 @@ class TesteAutomatizadoOrcamento:
         
         for r in self.resultados_testes:
             cor_status = "status-sucesso" if r['status'] == 'Sucesso' else "status-falha"
+            nome_print_apenas = os.path.basename(r['screenshot'])
             html_content += f"""
                 <tr>
                     <td>{r['id']}</td>
                     <td>{r['diagnostico']}</td>
                     <td>R$ {r['mao_obra']}</td>
                     <td class="{cor_status}">{r['status']}</td>
-                    <td><a class="img-link" href="{r['screenshot']}" target="_blank">Visualizar Screenshot</a></td>
+                    <td><a class="img-link" href="{nome_print_apenas}" target="_blank">Visualizar Screenshot</a></td>
                 </tr>
             """
 
@@ -181,7 +183,70 @@ class TesteAutomatizadoOrcamento:
                 # 4. Aguarda a abertura do modal de orçamento
                 modal = self.wait.until(EC.visibility_of_element_located((By.ID, "cadastroModal")))
                 
-                # 5. Preenche os campos do formulário
+                # 5. Seleciona o cliente a partir do datalist disponível
+                opcoes_cliente = self.driver.find_elements(By.XPATH, "//datalist[@id='listaClientes']/option")
+                if opcoes_cliente:
+                    primeiro_cliente = opcoes_cliente[0]
+                    nome_cliente = primeiro_cliente.get_attribute("value")
+                    id_cliente = primeiro_cliente.get_attribute("data-id") or primeiro_cliente.get_attribute("value")
+                    
+                    input_cliente = modal.find_element(By.ID, "cliente_busca")
+                    input_cliente.clear()
+                    input_cliente.send_keys(nome_cliente)
+                    
+                    self.driver.execute_script(
+                        "document.getElementById('Cliente_idCliente').value = arguments[0];", id_cliente
+                    )
+                    self.driver.execute_script(
+                        "document.getElementById('cliente_busca').dispatchEvent(new Event('change'));"
+                    )
+                    time.sleep(1)
+                
+                # 6. Seleciona o Aparelho
+                select_aparelho_elem = modal.find_element(By.ID, "Aparelho_idAparelho")
+                select_aparelho = Select(select_aparelho_elem)
+                
+                if len(select_aparelho.options) > 1:
+                    select_aparelho.select_by_index(1)
+                else:
+                    self.driver.execute_script(
+                        "var sel = arguments[0]; var opt = document.createElement('option'); opt.value = '1'; opt.text = 'Aparelho Teste'; sel.add(opt); sel.value = '1';",
+                        select_aparelho_elem
+                    )
+
+                # 7. Seleciona uma peça válida do datalist listaPecasEstoque
+                opcoes_pecas = self.driver.find_elements(By.XPATH, "//datalist[@id='listaPecasEstoque']/option")
+                if opcoes_pecas:
+                    peca_selecionada = opcoes_pecas[0]
+                    nome_peca = peca_selecionada.get_attribute("value")
+                    id_peca = peca_selecionada.get_attribute("data-id") or "1"
+                    valor_peca = peca_selecionada.get_attribute("data-valor") or "50.00"
+
+                    # Preenche os inputs da primeira linha de peça
+                    input_nome_peca = modal.find_element(By.NAME, "nPeca[]")
+                    input_nome_peca.clear()
+                    input_nome_peca.send_keys(nome_peca)
+
+                    self.driver.execute_script(
+                        "document.querySelector('input[name=\"nIdEstoque[]\"]').value = arguments[0];", id_peca
+                    )
+                    self.driver.execute_script(
+                        "document.querySelector('input[name=\"nValorUni[]\"]').value = arguments[0];", valor_peca
+                    )
+                else:
+                    # Caso o estoque esteja sem peças cadastradas, insere valor fictício
+                    input_nome_peca = modal.find_element(By.NAME, "nPeca[]")
+                    input_nome_peca.clear()
+                    input_nome_peca.send_keys("Peça Genérica de Teste")
+
+                    self.driver.execute_script(
+                        "document.querySelector('input[name=\"nIdEstoque[]\"]').value = '1';"
+                    )
+                    self.driver.execute_script(
+                        "document.querySelector('input[name=\"nValorUni[]\"]').value = '50.00';"
+                    )
+
+                # 8. Preenche Diagnóstico Técnico e Mão de Obra
                 campo_diag = modal.find_element(By.ID, "diagnostico")
                 campo_diag.clear()
                 campo_diag.send_keys(dados["diagnostico"])
@@ -190,7 +255,7 @@ class TesteAutomatizadoOrcamento:
                 campo_mao_obra.clear()
                 campo_mao_obra.send_keys(dados["mao_obra"])
                 
-                # 6. Dispara o envio do formulário
+                # 9. Dispara o envio do formulário
                 form = modal.find_element(By.ID, "formOrcamento")
                 btn_salvar = form.find_element(By.XPATH, "//button[@type='submit']")
                 self.driver.execute_script("arguments[0].click();", btn_salvar)
@@ -198,8 +263,8 @@ class TesteAutomatizadoOrcamento:
                 time.sleep(2)
                 self.tratar_alerta_se_existir()
 
-                # 7. Validação
-                if "orcamento.php" in self.driver.current_url.lower():
+                # 10. Validação
+                if "orcamentos.php" in self.driver.current_url.lower():
                     status = "Sucesso"
                 
             except Exception as e:
@@ -225,7 +290,7 @@ if __name__ == "__main__":
     try:
         qtd = int(input("Quantos orçamentos você deseja cadastrar hoje? "))
         if qtd > 0:
-            URL_BASE = "http://localhost:8080/techos/"
+            URL_BASE = "http://localhost:8080/TechOs/"
             teste = TesteAutomatizadoOrcamento(url_base=URL_BASE)
             teste.executar_teste_completo(qtd)
         else:
