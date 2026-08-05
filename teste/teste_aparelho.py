@@ -1,5 +1,5 @@
 """
-TESTE AUTOMATIZADO - CADASTRO DE APARELHOS COM LOGIN AUTOMÁTICO (FIX CLICK)
+TESTE AUTOMATIZADO - CADASTRO DE APARELHOS COM LOGIN AUTOMÁTICO (FIX CLICK & DADOS DINÂMICOS)
 Sistema: TechOS
 Ferramenta: Selenium WebDriver com Python
 """
@@ -56,7 +56,8 @@ class TesteAutomatizadoAparelho:
         self.tratar_alerta_se_existir()
 
     def gerar_dados_aleatorios(self):
-        modelos = ["Galaxy S23", "iPhone 14", "Redmi Note 12", "Moto G84", "ZFlip 5", "Poco X5"]
+        # Aumentei a variedade de modelos
+        modelos = ["Galaxy S23", "iPhone 14", "Redmi Note 12", "Moto G84", "ZFlip 5", "Poco X5", "Galaxy A54", "iPhone 11", "Moto Edge 40"]
         imei = "".join([str(random.randint(0, 9)) for _ in range(15)])
         
         return {
@@ -163,6 +164,7 @@ class TesteAutomatizadoAparelho:
             print(f"\n🚀 Iniciando cadastro de aparelho {i+1} de {quantidade}...")
             dados = self.gerar_dados_aleatorios()
             status = "Falha"
+            texto_alerta = None
             
             try:
                 # 2. Navega até a página de aparelhos
@@ -177,29 +179,41 @@ class TesteAutomatizadoAparelho:
                 modal = self.wait.until(EC.visibility_of_element_located((By.ID, "modalAparelho")))
                 form_modal = modal.find_element(By.TAG_NAME, "form")
                 
-                # Preenche Cliente e Marca
+                # Preenche Cliente de forma ALEATÓRIA
                 select_cliente = Select(form_modal.find_element(By.NAME, "nCliente"))
-                if len(select_cliente.options) > 1:
-                    select_cliente.select_by_index(1)
+                qtd_clientes = len(select_cliente.options)
+                if qtd_clientes > 1:
+                    # Escolhe um índice entre 1 e a última opção (ignorando o 0 que costuma ser "Selecione")
+                    index_cliente = random.randint(1, qtd_clientes - 1)
+                    select_cliente.select_by_index(index_cliente)
                 
+                # Preenche Marca de forma ALEATÓRIA
                 select_marca = Select(form_modal.find_element(By.NAME, "nMarca"))
-                if len(select_marca.options) > 1:
-                    select_marca.select_by_index(1)
+                qtd_marcas = len(select_marca.options)
+                if qtd_marcas > 1:
+                    # Escolhe um índice entre 1 e a última opção
+                    index_marca = random.randint(1, qtd_marcas - 1)
+                    select_marca.select_by_index(index_marca)
 
-                # Preenche Modelo e IMEI
+                # Preenche Modelo e IMEI gerados aleatoriamente
                 form_modal.find_element(By.NAME, "nModelo").send_keys(dados["modelo"])
                 form_modal.find_element(By.NAME, "nImei").send_keys(dados["imei"])
                 
-                # 5. Clica no botão Cadastrar
-                btn_cadastrar = form_modal.find_element(By.XPATH, "//button[@type='submit']")
-                self.driver.execute_script("arguments[0].click();", btn_cadastrar)
+                # 5. Clica no botão Cadastrar enviando o formulário
+                form_modal.submit()
                 
                 time.sleep(2)
-                self.tratar_alerta_se_existir()
+                
+                # Armazena o texto do alerta (se houver) para validação
+                texto_alerta = self.tratar_alerta_se_existir()
 
-                # 6. Validação do cadastro
-                if "cadastroaparelho" in self.driver.current_url.lower():
+                # 6. Validação real do cadastro
+                if texto_alerta and "sucesso" in texto_alerta.lower():
                     status = "Sucesso"
+                elif dados["imei"] in self.driver.page_source:
+                    status = "Sucesso"
+                else:
+                    status = f"Falha (Alerta capturado: {texto_alerta})"
                 
             except Exception as e:
                 print(f"✗ Erro no processo: {e}")
