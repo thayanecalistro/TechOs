@@ -1,9 +1,9 @@
 <?php
-// Exibe erros do PHP na tela para depuração
+
 ini_set('display_errors', 1);
 error_reporting(E_ALL);
 
-include("../includes/conexao.php"); // Verifique se o caminho do conexao.php esta correto!
+include("../includes/conexao.php"); 
 
 if (isset($_GET['idCliente']) && !empty($_GET['idCliente'])) {
     $cliente_id = intval($_GET['idCliente']);
