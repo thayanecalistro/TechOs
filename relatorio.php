@@ -32,7 +32,7 @@ $atividades_recentes = $dados['atividades'];
         <!-- HEADER -->
         <div class="os-header">
             <div>
-                <h2>Controle de Estoque</h2>
+                <h2>Relatórios</h2>
                 
             </button>
             </div>
