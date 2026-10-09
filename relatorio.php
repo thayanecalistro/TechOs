@@ -19,7 +19,7 @@ $atividades_recentes = $dados['atividades'];
 <head>
     <meta charset="UTF-8">
     <title>Relatório Gerencial - TechOS</title>
-    <link rel="stylesheet" href="css/sidebar.css">
+    
     <link rel="stylesheet" href="css/style_geral.css">
     <link rel="stylesheet" href="css/dashboard.css">
     <link rel="stylesheet" href="css/relatorio.css">
