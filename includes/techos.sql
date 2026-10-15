@@ -2,8 +2,8 @@
 -- version 5.2.1
 -- https://www.phpmyadmin.net/
 --
--- Host: 127.0.0.1
--- Tempo de geração: 05/08/2026 às 00:15
+-- Host: 127.0.0.1:3307
+-- Tempo de geração: 16/10/2026 às 00:20
 -- Versão do servidor: 10.4.32-MariaDB
 -- Versão do PHP: 8.2.12
 
@@ -98,8 +98,8 @@ CREATE TABLE `estoque` (
 
 INSERT INTO `estoque` (`idEstoque`, `NomeFornecedor`, `peca`, `valor`, `quantidade`, `total`) VALUES
 (1, 'X3 Distribuidora', 'Bateria Xiaomi Mi 11 Lite (BP42) Deji', 75.00, 5, 300.00),
-(2, 'X3 Distribuidora', 'Frontal Tela Display Samsung S23 Ultra S918 Com Aro Original', 1899.00, 4, 7596.00),
-(3, 'X3 Distribuidora', 'Bateria Samsung A23 / M23 / M33 / M52 / M53 / A73 (M526) Original', 85.00, 4, 255.00),
+(2, 'X3 Distribuidora', 'Frontal Tela Display Samsung S23 Ultra S918 Com Aro Original', 1899.00, 3, 3798.00),
+(3, 'X3 Distribuidora', 'Bateria Samsung A23 / M23 / M33 / M52 / M53 / A73 (M526) Original', 85.00, 3, 170.00),
 (4, 'X3 Distribuidora', 'Cabo Samsung Tipo C para Tipo C (1 Metro) Original', 29.00, 15, 435.00),
 (5, 'X3 Distribuidora', 'Frontal Tela Display Samsung A26 5G A266 Com Aro Original', 460.00, 3, 1380.00),
 (6, 'Central Peças', 'Tela Display Lcd Frontal Iphone 17 Pro Oled WEKEEP CI', 830.00, 3, 2490.00),
@@ -141,7 +141,8 @@ CREATE TABLE `funcionario` (
 INSERT INTO `funcionario` (`idFuncionario`, `tipoFuncionario`, `nomeFuncionario`, `cpfFuncionario`, `telefoneFuncionario`, `emailFuncionario`, `cepFuncionario`, `enderecoFuncionario`, `numeroFuncionario`, `complementoFuncionario`, `bairroFuncionario`, `cidadeFuncionario`, `estadoFuncionario`, `login`, `senha`, `fotoFuncionario`) VALUES
 (4, 'Atendente', 'Maria Clara', '12345678990', 99437521, 'maria@gmail', 44444444, 'Rua Via Coletora B', 1343, 'Sobrado', 'Nossa Senhora das Graças', 'Santo Antônio de Jesus', 'BA', 'maria.clara', '202cb962ac59075b964b07152d234b70', 'func_6a6fde00b30b1.png'),
 (6, 'Administrador', 'Nicolly Fernanda Aureliano Pereira', '05490056165', 99437521, 'nicolly@fernanda', 44444444, 'Rua Via Coletora B', 1343, 'Sobrado', 'Nossa Senhora das Graças', 'Santo Antônio de Jesus', 'BA', 'nicolly.pereira', '202cb962ac59075b964b07152d234b70', 'padrao.png'),
-(7, 'Administrador', 'thayane', '12345678098', 2147483647, 'thyaane@teste.com', 44444444, 'Rua Via Coletora B', 678, 'casa', 'Nossa Senhora das Graças', 'Santo Antônio de Jesus', 'BA', 'thay.teste', '202cb962ac59075b964b07152d234b70', 'func_6a7115d4194d0.png');
+(7, 'Administrador', 'thayane', '12345678098', 2147483647, 'thyaane@teste.com', 44444444, 'Rua Via Coletora B', 678, 'casa', 'Nossa Senhora das Graças', 'Santo Antônio de Jesus', 'BA', 'thay.teste', '202cb962ac59075b964b07152d234b70', 'func_6a7115d4194d0.png'),
+(8, 'Administrador', 'victor', '12345678988', 2147483647, 'victor@gmail.com', 89218180, 'Rua Iguaçu', 123, 'casa', 'Santo Antônio', 'Joinville', 'SC', 'victor.teste', '81dc9bdb52d04dc20036dbd8313ed055', 'func_6ad1518e3ef47.png');
 
 -- --------------------------------------------------------
 
@@ -243,7 +244,7 @@ CREATE TABLE `orcamento` (
 --
 
 INSERT INTO `orcamento` (`idOrcamento`, `diagnostico`, `peca`, `valorUni`, `maoObra`, `valorTotal`, `status`, `OS_idOS`, `Cliente_idCliente`, `Aparelho_idAparelho`, `dataOrcamento`) VALUES
-(3, 'trocar tela e bateria', 'Múltiplas Peças', 1984.00, 50.00, 2034.00, 'aberto', NULL, 1, 3, '2026-08-03 20:17:57'),
+(3, 'trocar tela e bateria', 'Múltiplas Peças', 1984.00, 50.00, 2034.00, 'aprovado', 1, 1, 3, '2026-08-03 20:17:57'),
 (4, 'trocar tela', 'Tela Display Lcd Motorola Moto G10 G20 G30 Xt2127 Xt2129 Com Aro', 58.00, 50.00, 108.00, 'aberto', NULL, 11, 13, '2026-08-03 20:18:20'),
 (5, 'tela com defeito no display', 'Tela Display Lcd Frontal Iphone 17 Pro Oled WEKEEP CI', 830.00, 50.00, 880.00, 'aberto', NULL, 10, 6, '2026-08-03 20:19:06');
 
@@ -292,6 +293,13 @@ CREATE TABLE `os` (
   `Funcionario_idFuncionario` int(11) DEFAULT NULL COMMENT 'Chave estrangeira. Identifica o funcionário responsável por executar o serviço',
   `Cliente_idCliente` int(11) NOT NULL COMMENT 'Chave estrangeira. Identifica o cliente que solicitou a Ordem de Serviço'
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
+
+--
+-- Despejando dados para a tabela `os`
+--
+
+INSERT INTO `os` (`idOS`, `aberturaOS`, `fechamentoOS`, `descricaoOS`, `servicoOS`, `valorOS`, `observacoesOS`, `status`, `Aparelho_idAparelho`, `Funcionario_idFuncionario`, `Cliente_idCliente`) VALUES
+(1, '2026-10-08 21:39:02', NULL, 'OS automática gerada a partir do Orçamento número #3. Diagnóstico: trocar tela e bateria', NULL, 2034.00, NULL, 'em andamento', 3, NULL, 1);
 
 --
 -- Índices para tabelas despejadas
@@ -391,7 +399,7 @@ ALTER TABLE `estoque`
 -- AUTO_INCREMENT de tabela `funcionario`
 --
 ALTER TABLE `funcionario`
-  MODIFY `idFuncionario` int(11) NOT NULL AUTO_INCREMENT COMMENT 'Chave primária de identificação do funcionário', AUTO_INCREMENT=8;
+  MODIFY `idFuncionario` int(11) NOT NULL AUTO_INCREMENT COMMENT 'Chave primária de identificação do funcionário', AUTO_INCREMENT=9;
 
 --
 -- AUTO_INCREMENT de tabela `logs`
@@ -427,7 +435,7 @@ ALTER TABLE `orcamento_peca`
 -- AUTO_INCREMENT de tabela `os`
 --
 ALTER TABLE `os`
-  MODIFY `idOS` int(11) NOT NULL AUTO_INCREMENT COMMENT 'Chave primária de identificação da Ordem de Serviço';
+  MODIFY `idOS` int(11) NOT NULL AUTO_INCREMENT COMMENT 'Chave primária de identificação da Ordem de Serviço', AUTO_INCREMENT=2;
 COMMIT;
 
 /*!40101 SET CHARACTER_SET_CLIENT=@OLD_CHARACTER_SET_CLIENT */;
