@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Host: 127.0.0.1:3307
--- Tempo de geração: 16/10/2026 às 00:20
+-- Tempo de geração: 16/10/2026 às 02:29
 -- Versão do servidor: 10.4.32-MariaDB
 -- Versão do PHP: 8.2.12
 
@@ -190,7 +190,11 @@ INSERT INTO `marca` (`idMarca`, `nomeMarca`) VALUES
 (4, 'Motorola'),
 (5, 'LG'),
 (6, 'Asus'),
-(7, 'Realme');
+(7, 'Realme'),
+(8, 'Nokia'),
+(9, 'JOVI'),
+(10, 'GOOGLE'),
+(11, 'POSITIVO');
 
 -- --------------------------------------------------------
 
@@ -411,7 +415,7 @@ ALTER TABLE `logs`
 -- AUTO_INCREMENT de tabela `marca`
 --
 ALTER TABLE `marca`
-  MODIFY `idMarca` int(11) NOT NULL AUTO_INCREMENT COMMENT 'Chave primária de identificação da marca', AUTO_INCREMENT=8;
+  MODIFY `idMarca` int(11) NOT NULL AUTO_INCREMENT COMMENT 'Chave primária de identificação da marca', AUTO_INCREMENT=12;
 
 --
 -- AUTO_INCREMENT de tabela `modelo`

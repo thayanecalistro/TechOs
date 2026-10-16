@@ -47,6 +47,12 @@ function listaAparelho($pesquisa = null){
                     <td>".htmlspecialchars($modelo, ENT_QUOTES, 'UTF-8')."</td>
                     <td>".htmlspecialchars($imei, ENT_QUOTES, 'UTF-8')."</td>
                     <td>
+                        <button
+                            class='btn-visualizar-tabela btn-visualizar' title='Visualizar'
+
+                            >Visualizar                           
+                            </button>
+
                         <button type='button' class='btn-aviso btn-alterar' 
                                 data-id='{$id}' 
                                 data-cliente='{$idCliente}' 

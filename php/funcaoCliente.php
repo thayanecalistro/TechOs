@@ -35,25 +35,6 @@
                           <td >".$coluna['nomeCliente']."</td>
                           <td >".$coluna['telefoneCliente']."</td>
                           <td>
-                            <button class='btn-alterar-tabela btn-alterar' title='Alterar'
-                            data-id='".$coluna['idCliente']."'
-                            data-nome='".htmlspecialchars($coluna['nomeCliente'],ENT_QUOTES)."'
-                            data-cpf='".htmlspecialchars($coluna['cpfCliente'],ENT_QUOTES)."'
-                            data-telefone='".htmlspecialchars($coluna['telefoneCliente'],ENT_QUOTES)."'
-                            data-cep='".htmlspecialchars($coluna['cepCliente'],ENT_QUOTES)."'
-                            data-endereco='".htmlspecialchars($coluna['enderecoCliente'],ENT_QUOTES)."'
-                            data-numero='".htmlspecialchars($coluna['numeroCliente'],ENT_QUOTES)."'
-                            data-complemento='".htmlspecialchars($coluna['complementoCliente'],ENT_QUOTES)."'
-                            data-bairro='".htmlspecialchars($coluna['bairroCliente'],ENT_QUOTES)."'
-                            data-cidade='".htmlspecialchars($coluna['cidadeCliente'],ENT_QUOTES)."'
-                            data-estado='".htmlspecialchars($coluna['estadoCliente'],ENT_QUOTES)."'
-                            > Alterar
-                            </button> 
-                            
-                            <button class='btn-apagar-tabela btn-apagar' title='Apagar' data-id='".$coluna['idCliente']."'>
-                            Apagar
-                            </button>
-                            
                             <button
                             class='btn-visualizar-tabela btn-visualizar' title='Visualizar'
 
@@ -69,6 +50,25 @@
                             data-cidade='".htmlspecialchars($coluna['cidadeCliente'],ENT_QUOTES)."'
                             data-estado='".htmlspecialchars($coluna['estadoCliente'],ENT_QUOTES)."'
                             >Visualizar                           
+                            </button>
+                          
+                            <button class='btn-alterar-tabela btn-alterar' title='Alterar'
+                            data-id='".$coluna['idCliente']."'
+                            data-nome='".htmlspecialchars($coluna['nomeCliente'],ENT_QUOTES)."'
+                            data-cpf='".htmlspecialchars($coluna['cpfCliente'],ENT_QUOTES)."'
+                            data-telefone='".htmlspecialchars($coluna['telefoneCliente'],ENT_QUOTES)."'
+                            data-cep='".htmlspecialchars($coluna['cepCliente'],ENT_QUOTES)."'
+                            data-endereco='".htmlspecialchars($coluna['enderecoCliente'],ENT_QUOTES)."'
+                            data-numero='".htmlspecialchars($coluna['numeroCliente'],ENT_QUOTES)."'
+                            data-complemento='".htmlspecialchars($coluna['complementoCliente'],ENT_QUOTES)."'
+                            data-bairro='".htmlspecialchars($coluna['bairroCliente'],ENT_QUOTES)."'
+                            data-cidade='".htmlspecialchars($coluna['cidadeCliente'],ENT_QUOTES)."'
+                            data-estado='".htmlspecialchars($coluna['estadoCliente'],ENT_QUOTES)."'
+                            > Editar
+                            </button> 
+                            
+                            <button class='btn-apagar-tabela btn-apagar' title='Apagar' data-id='".$coluna['idCliente']."'>
+                            Excluir
                             </button>
                           </td>
 
